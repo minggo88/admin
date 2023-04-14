@@ -18,7 +18,7 @@ if(! defined ('__API_RUNMODE__')) {
 	if(strpos($_SERVER['HTTP_HOST'], 'loc.')!== false) {
 		$runmode = 'loc';
 	}
-	if(strpos($_SERVER['HTTP_HOST'], 'dev.')!== false) {
+	if(strpos($_SERVER['HTTP_HOST'], 'devadmin.')!== false) {
 		$runmode = 'dev';
 	}
 	if(strpos($_SERVER['HTTP_HOST'], 'stage.')!== false) {

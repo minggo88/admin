@@ -23,15 +23,15 @@ switch(__API_RUNMODE__) {
     break;
     case 'dev' :
         $db_master = array(
-            'db_host' => 'localhost',
-            'db_name' =>  'kkikda2',
+            'db_host' => 'kkikda-dev.catyypkt8dey.ap-northeast-2.rds.amazonaws.com',
+            'db_name' =>  'kkikda',
             'db_user' =>  'kkikda',
-            'db_pass' =>  'k$d^39@34',
-            'db_charset' =>  'utf8'
+            'db_pass' =>  'KKe8IuK28Due82A',
+            'db_charset' =>  'utf8mb4'
         );
         $db_slave = $db_master;
         $_memcache_info = array(
-            'host' => '127.0.0.1',
+            'host' => 'kkikdacache-dev.a12ygy.cfg.apn2.cache.amazonaws.com:11211',
             'port' => '11211',
         );
         $_gmail_account = array(
