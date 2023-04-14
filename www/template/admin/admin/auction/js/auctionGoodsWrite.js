@@ -13,8 +13,8 @@ $(function() {
             }
         }, 'json');
     });
-	/* 230131 mk 스크립트 오류 */
-    /*$('[name=owner_username]').typeahead({
+
+    $('[name=owner_username]').typeahead({
         source: function (query, result) {
             $.ajax({
                 url:  '//'+window.location.host.replace('admin.', 'api.')+'/v1.0/putAuction/owner_user_change.php',
@@ -52,7 +52,6 @@ $(function() {
         // userno set
         $('[name="owner_userno"]').val(c.id);
     });
-	*/
 
     if ($('[name="goods_upload"]').attr('disabled') == true )  $(this).attr('disabled', false);
     if ($('[name="goods_add_uplaod"]').attr('disabled') == true )  $(this).attr('disabled', false);

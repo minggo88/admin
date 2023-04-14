@@ -133,10 +133,9 @@ class Coins extends BASIC
 	 */
 	public function lists() {
 		$query = array();
-		$query['table_name'] = $this->config['table_name'].' t1 left join js_member t2 on t1.userno=t2.userno left join js_trade_currency t3 on t1.symbol=t3.symbol ';
 		$query['tool'] = 'select';
-
-		$query['fields'] = " t1.*, t2.userid, t2.nickname, t2.name user_name, t3.name symbol_name ";
+		$query['fields'] = " t1.*, IF(t2.userno IS NULL, 'Y', 'N') withdrawn, IFNULL(t2.userid, concat(mw.userid,'(탈퇴)')) userid, IFNULL(t2.nickname, concat(mw.nickname,'(탈퇴)')) nickname, IFNULL(t2.name, concat(mw.name,'(탈퇴)')) user_name, t2.mobile, t3.name symbol_name ";
+		$query['table_name'] = $this->config['table_name'].' t1 left join js_member t2 on t1.userno=t2.userno left join js_trade_currency t3 on t1.symbol=t3.symbol ';
 		$query['where'] = " WHERE 1 "; // AND t1.symbol<>'KRW'
 		if($_GET['searchval']) {
 			// $query['where'] .= " AND (symbol LIKE '%".$this->dbcon->escape($_GET['searchval'])."%' OR address LIKE '%".$this->dbcon->escape($_GET['searchval'])."%' OR userid LIKE '%".str_replace('010', '10', $this->dbcon->escape($_GET['searchval']))."%') ";

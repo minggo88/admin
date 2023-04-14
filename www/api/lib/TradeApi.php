@@ -1830,11 +1830,10 @@ SELECT
             $sql.= $sql_update;
             $r = $this->query($sql);
             if($r) {
-				/**무한대로 가격이 0으로 바뀌는 로직 수정***/
                 $sql = "UPDATE js_trade_currency SET price='{$this->escape($price->price_close)}' WHERE symbol='{$this->escape(strtoupper($symbol))}' ";
                 $this->query($sql);
             }
-            return 'err_sess';
+            return $r;
         }
 
         function get_max_buy_price($symbol, $exchange) {

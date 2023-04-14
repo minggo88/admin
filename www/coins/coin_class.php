@@ -207,7 +207,6 @@ class Coins extends BASIC
 				jsonMsg(0, '투자정보 이미지를 저장하지 못했습니다.');
 			}
 		}
-		
 		// manager_userno
 		if($_POST['manager_userid']!=$item_info['manager_userid']) {
 			if(trim($_POST['manager_userid']!='')) {
@@ -231,58 +230,11 @@ class Coins extends BASIC
 		}
 		if($r) {
             $goods = $this->dbcon->query_list_object("SELECT * FROM js_auction_goods WHERE idx='{$_POST['symbol']}'");
-			
-			$query = "SELECT * FROM js_trade_price WHERE symbol ='{$_POST['symbol']}'";
-			
-			// 초기 가격 저장하기 -> 변경
-			/*if(! $item_info) {
-				$query = "INSERT INTO js_trade_price SET symbol='".$this->dbcon->escape($_POST['symbol'])."', exchange='".$this->dbcon->escape($_POST['exchange'])."', volume='0', price_high='".$this->dbcon->escape($_POST['price'])."', price_low='".$this->dbcon->escape($_POST['price'])."', price_open='".$this->dbcon->escape($_POST['price'])."', price_close='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent='0', volume_12='0', price_high_12='".$this->dbcon->escape($_POST['price'])."', price_low_12='".$this->dbcon->escape($_POST['price'])."', price_open_12='".$this->dbcon->escape($_POST['price'])."', price_close_12='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent_12='0', volume_1='0', price_high_1='".$this->dbcon->escape($_POST['price'])."', price_low_1='".$this->dbcon->escape($_POST['price'])."', price_open_1='".$this->dbcon->escape($_POST['price'])."', price_close_1='".$this->dbcon->escape($_POST['price'])."', goods_grade='".$this->dbcon->escape($goods[0]->goods_grade)."' , price_chagne_percent_1='0'";
-				jsonMsg(0, '이게 맞나요???'.$query.'///'.$item_info);
-				$this->dbcon->query($query);
-			}*/
-			//jsonMsg(0, '이게 맞나요???'.$query.'///'.$this->query($query));
-			if(mysqli_num_rows($query) == 0) {
-				$query = "INSERT INTO js_trade_price SET symbol='{$_POST['symbol']}', exchange='".$this->dbcon->escape($_POST['exchange'])."', volume='0', price_high='".$this->dbcon->escape($_POST['price'])."', price_low='".$this->dbcon->escape($_POST['price'])."', price_open='".$this->dbcon->escape($_POST['price'])."', price_close='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent='0', volume_12='0', price_high_12='".$this->dbcon->escape($_POST['price'])."', price_low_12='".$this->dbcon->escape($_POST['price'])."', price_open_12='".$this->dbcon->escape($_POST['price'])."', price_close_12='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent_12='0', volume_1='0', price_high_1='".$this->dbcon->escape($_POST['price'])."', price_low_1='".$this->dbcon->escape($_POST['price'])."', price_open_1='".$this->dbcon->escape($_POST['price'])."', price_close_1='".$this->dbcon->escape($_POST['price'])."', goods_grade='".$this->dbcon->escape($goods[0]->goods_grade)."' , price_chagne_percent_1='0'";
-				$this->dbcon->query($query);
-				
-				$exchange = $this->dbcon->escape($_POST['exchange']);
-				$symbol = $this->dbcon->escape($_POST['symbol']);
-				$table_chart = 'js_trade_'.strtolower($symbol).strtolower($exchange).'_chart';
-				$price = $this->dbcon->escape($_POST['price']);
-				$grade = $this->dbcon->escape($goods[0]->goods_grade);
-				
-				$sql_chart = "INSERT INTO `kkikda`.`".$table_chart."` (`term`, `date`, `goods_grade`, `open`, `high`, `low`, `close`, `volume`) VALUES ";
-				$sql_chart .= "('1m', '2023-03-16 07:00:00', '".$grade."', '".$price."', '".$price."', '".$price."', '".$price."', '0'),";
-				$sql_chart .= "('1h', '2023-03-16 07:00:00', '".$grade."', '".$price."', '".$price."', '".$price."', '".$price."', '0'),";
-				$sql_chart .= "('12h', '2023-03-16 12:00:00', '".$grade."', '".$price."', '".$price."', '".$price."', '".$price."', '0'),";
-				$sql_chart .= "('1d', '2023-03-16 00:00:00', '".$grade."', '".$price."', '".$price."', '".$price."', '".$price."', '0');";
-				
-				//jsonMsg(0, '444444444'.$sql_chart.'///'.$price.'///'.$grade);
-				$this->dbcon->query($sql_chart);
 
-				//jsonMsg(0, '444444444'.$sql_chart.'///'.$item_info);
-			}else{
-				
-				//강제 차트 만들기
-				$table_txn = 'js_trade_'.strtolower($symbol).strtolower($exchange).'_txn';
-				$table_chart = 'js_trade_'.strtolower($symbol).strtolower($exchange).'_chart';
-				
-				if ($symbol && $exchange && $tradeapi->check_table_exists($table_txn) && $tradeapi->check_table_exists($table_chart)) {
-					$grades = array('S', 'A', 'B') ;
-					foreach($grades as $g) {
-						$tradeapi->set_current_price_data ($symbol, $exchange, $g);
-						$tradeapi->gen_chanrt_data ($symbol, $exchange, $g);
-					}
-				}
-				
-				$query = "UPDATE kkikda.js_trade_price SET volume=0, price_high=".$this->dbcon->escape($_POST['price']).", price_low=".$this->dbcon->escape($_POST['price']).", price_open=".$this->dbcon->escape($_POST['price']).", price_close=".$this->dbcon->escape($_POST['price']).", price_chagne_percent=".$this->dbcon->escape($_POST['price']).", volume_12='0', price_high_12=".$this->dbcon->escape($_POST['price']).", price_low_12=".$this->dbcon->escape($_POST['price']).", price_open_12=".$this->dbcon->escape($_POST['price']).", price_close_12=".$this->dbcon->escape($_POST['price']).", price_chagne_percent_12=".$this->dbcon->escape($_POST['price']).", volume_1='0', price_high_1=".$this->dbcon->escape($_POST['price']).", price_low_1=".$this->dbcon->escape($_POST['price']).", price_open_1=".$this->dbcon->escape($_POST['price']).", price_close_1=".$this->dbcon->escape($_POST['price']).", price_chagne_percent_1=".$this->dbcon->escape($_POST['price'])." WHERE symbol='{$_POST['symbol']}' AND exchange='".$this->dbcon->escape($_POST['exchange'])."' AND goods_grade='".$this->dbcon->escape($goods[0]->goods_grade)."';";
-				$this->dbcon->query($query);
-				//jsonMsg(0, '이2321321'.$query.'///'.$item_info);
-				
+			// 초기 가격 저장하기
+			if(! $item_info) {
+				$this->dbcon->query("INSERT INTO js_trade_price SET symbol='".$this->dbcon->escape($_POST['symbol'])."', exchange='".$this->dbcon->escape($_POST['exchange'])."', volume='0', price_high='".$this->dbcon->escape($_POST['price'])."', price_low='".$this->dbcon->escape($_POST['price'])."', price_open='".$this->dbcon->escape($_POST['price'])."', price_close='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent='0', volume_12='0', price_high_12='".$this->dbcon->escape($_POST['price'])."', price_low_12='".$this->dbcon->escape($_POST['price'])."', price_open_12='".$this->dbcon->escape($_POST['price'])."', price_close_12='".$this->dbcon->escape($_POST['price'])."', price_chagne_percent_12='0', volume_1='0', price_high_1='".$this->dbcon->escape($_POST['price'])."', price_low_1='".$this->dbcon->escape($_POST['price'])."', price_open_1='".$this->dbcon->escape($_POST['price'])."', price_close_1='".$this->dbcon->escape($_POST['price'])."', goods_grade='".$this->dbcon->escape($goods[0]->goods_grade)."' , price_chagne_percent_1='0'");
 			}
-			
-			/*$query = "SELECT * FROM ".$this->config['table_name']." WHERE symbol='".$this->dbcon->escape($_POST['symbol'])."'";
-			jsonMsg(0, '이2321321'.$query.'///'.$item_info);*/
 
             $manager_userno = 2;
             $manager_address = $this->dbcon->query_one("SELECT address FROM js_exchange_wallet WHERE userno='{$this->dbcon->escape($manager_userno)}' AND symbol='KRW'");

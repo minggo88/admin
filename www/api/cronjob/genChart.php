@@ -10,7 +10,7 @@
  * $ php genChart.php JIN USD stop
  */
 include(dirname(__file__) . '/../lib/TradeApi.php');
-/*
+
 ignore_user_abort(1);
 set_time_limit(0);
 
@@ -149,4 +149,3 @@ while (true) {
 }
 
 echo 'Process end.';
-*/
