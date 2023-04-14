@@ -1,0 +1,598 @@
+<script language="JavaScript">
+<!--
+function submitSuccess (data, statusText) {
+	if(data['bool']) {
+		alert('저장되었습니다.!');
+		location.replace('<!--{_SERVER.REQUEST_URI}-->');
+	}
+	else {
+		if(data['msg'] == 'err_access') {
+			alert('비정상적인 접근입니다.');
+		}
+		else if(data['msg'] == 'err_sess') {
+			location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+		}
+		else {
+			alert('재시도 해주세요.!');
+		}
+	}
+}
+
+$(function() {
+	$('#rsvform').submit(function() {
+		var chk_option = [
+			{ 'target':'rsv_name', 'name':'고객이름', 'type':'blank', 'msg':'받으시는 고객 이름을 입력하여 주세요.!' },
+			{ 'target':'rsv_phone', 'name':'전화번호', 'type':'blank', 'msg':'받으시는 고객 전화번호를 입력하여 주세요.!' },
+			{ 'target':'rsv_mobile', 'name':'휴대전화', 'type':'blank', 'msg':'받으시는 고객 휴대전화번호를 입력하여 주세요.!' },
+			{ 'target':'rsv_zipcode', 'name':'우편번호', 'type':'blank', 'msg':'받으시는 고객 우편번호를 입력하여 주세요.!' },
+			{ 'target':'rsv_address', 'name':'주소', 'type':'blank', 'msg':'받으시는 고객 주소를 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('수령자 정보를 수정하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: submitSuccess,
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('#paymentform').submit(function() {
+		var chk_option = [
+			{ 'target':'payment_name', 'name':'입금자명', 'type':'blank', 'msg':'입금자명을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('입금자명을 수정하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: submitSuccess,
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('#remarkform').submit(function() {
+		if(!confirm('특이사항을 저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this));
+		return false;
+	});
+
+	$('#processform').submit(function() {
+		<!--{? process == 'ac'}-->
+		<!--{? delivery_method == 'homedelivery'}-->
+		var select_idx = $('select#delivery_company')[0].selectedIndex;
+		var delivery_no = $('input[name=delivery_no]').val();
+		if(select_idx == 0) {
+			alert('배송회사를 선택하여 주세요.!');
+			return false;
+		}
+		if(!delivery_no) {
+			alert('운송장 번호를 입력하여 주세요.!');
+			return false;
+		}
+		<!--{: delivery_method == 'quick' || delivery_method == 'logis'}-->
+		var delivery_company = $('input[name=delivery_company]').val();
+		var delivery_no = $('input[name=delivery_no]').val();
+		if(!delivery_company) {
+			alert('운송차량 번호를 입력하여 주세요.!');
+			return false;
+		}
+		if(!delivery_no) {
+			alert('운송기사이름 및 전화번호를 입력하여 주세요.!');
+			return false;
+		}
+		<!--{/}-->
+		$('select[name=process]').val('ad');
+		<!--{/}-->
+
+		<!--{? process == 'ea' || process == 'eb'}-->
+		var select_idx = $('select#exchange_delivery_company')[0].selectedIndex;
+		var delivery_no = $('input[name=exchange_delivery_no]').val();	
+		if(select_idx > 0 || delivery_no) {
+			if(select_idx == 0) {
+				alert('배송회사를 선택하여 주세요.!');
+				$('select#exchange_delivery_company').focus();
+				return false;
+			}
+			if(!delivery_no) {
+				alert('운송장 번호를 입력하여 주세요.!');
+				$('input[name=exchange_delivery_no]').focus();
+				return false;
+			}
+			$('select[name=process]').val('ec');
+		}
+		<!--{/}-->
+		if(!confirm('진행상황을 저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: submitSuccess,
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('select[name=process]').val('<!--{process}-->');
+
+});
+
+function orderDel() {
+	if(!confirm("주문을 삭제하시겠습니까?")) {
+		return false;
+	}
+
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&order_code=<!--{_GET.order_code}-->',function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.');
+			location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->';
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+function orderPrint() {
+	openWin('/shop/admin/orderAdmin.php?order_code=<!--{_GET.order_code}-->&pg_mode=order_view_print','',700,560,'s',100,100);
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1>주문리스트</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 주문상세내역 (<span>현재 주문에 대한 상세한 내역을 조회하고 수정하실 수 있습니다</span>) <span class="button small black"><a href="javascript:;" onclick="orderPrint()">주문서인쇄</a></span></div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>주문번호</th>
+		<td class="emphasis" style="font-size:14px"><!--{order_code}--></td>
+		<th>주문시간</th>
+		<td style="font-size:14px"><!--{=date('Y-m-d H:m:i',regdate)}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 주문상품</div>
+
+<table class="list_table">
+	<colgroup>
+		<col width="40" /><!---->
+		<col width="70" /><!-- 상품명 사진-->
+		<col width="*" /><!-- 상품명 -->
+		<col width="100" /><!-- 판매가 -->
+		<col width="80" /><!--옵션 -->
+		<col width="50" /><!--수량1-->
+		<col width="80" /><!--합계-->
+		<col width="80" /><!--적립금-->
+	</colgroup>
+	<thead>
+	<tr>
+		<th>번호</th>
+		<th colspan="2">상품명</th>
+		<th class="right">판매가</th>
+		<th class="right">옵션</th>
+		<th>수량</th>
+		<th class="right">합계</th>
+		<th class="right">적립금</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_order}-->
+	<tr>
+		<td><!--{.index_+1}--></td>
+		<td><div class="goods_photo"><a href="/shop/shop.php?pg_mode=view_goods&goods_code=<!--{.goods_code}-->"><img src="/data/shop_a/<!--{.img_goods_a}-->" width="50" height="50" alt="<!--{.goods_name}-->" /></a></div></td>
+		<td style="text-align:left"><span class="subject"><!--{.goods_name}--></span>
+				<!--{? .cnt_option > 0}-->
+				<!--{.sel_option}-->
+				<!--{/}-->
+		</td> 
+		<td><!--{=number_format(.selling_price)}--> 원</td>
+		<td><!--{=number_format(.sub_total_option)}--> 원</td>
+		<td><!--{.order_qty}--></td>
+		<td><!--{=number_format(.sub_total)}--> 원</td>
+		<td><!--{=number_format(.emoney)}--> 원</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="8" class="ctext">선택한 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif"> 진행상황</div>
+<form method="post" name="processform" id="processform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="payment_method" value="<!--{payment_method}-->" />
+<input type="hidden" name="order_code" value="<!--{order_code}-->" />
+<input type="hidden" name="userid" value="<!--{userid}-->" />
+<input type="hidden" name="order_name" value="<!--{order_name}-->" />
+<input type="hidden" name="order_mobile" value="<!--{order_mobile}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>진행상황</th>
+		<td>
+			<select name="process">
+				<!--{? _GET.mode == 'a'}-->
+				<option value="">::::주문상태선택::::</option>
+				<option value="aa">결제대기</option>
+				<option value="ab">결제완료</option>
+				<option value="ac">배송대기</option>
+				<option value="ad">배송중</option>
+				<option value="ae">배송완료</option>
+				<option value="ax">주문취소</option>
+				<!--{: _GET.mode == 'b'}-->
+				<option value="">::::주문상태선택::::</option>
+				<option value="ba">반품요청</option>
+				<option value="bb">반품대기</option>
+				<option value="be">반품완료</option>
+				<option value="bx">반품취소</option>
+				<!--{: _GET.mode == 'e'}-->
+				<option value="">::::주문상태선택::::</option>
+				<option value="ea">교환요청</option>
+				<option value="eb">교환대기</option>
+				<option value="ec">교환배송</option>
+				<option value="ee">교환완료</option>
+				<option value="ex">교환취소</option>
+				<!--{:}-->
+				<option value="">::::주문상태선택::::</option>
+				<option value="aa">결제대기</option>
+				<option value="ab">결제완료</option>
+				<option value="ac">배송대기</option>
+				<option value="ad">배송중</option>
+				<option value="ae">배송완료</option>
+				<option value="ax">주문취소</option>
+				<option value="ba">반품요청</option>
+				<option value="bb">반품대기</option>
+				<option value="be">반품완료</option>
+				<option value="bx">반품취소</option>
+				<option value="ea">교환요청</option>
+				<option value="eb">교환대기</option>
+				<option value="ec">교환배송</option>
+				<option value="ee">교환완료</option>
+				<option value="ex">교환취소</option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<!--{? process == 'ac'}-->
+	<tr>
+		<th>배송방법</th>
+		<td><!--{delivery_method_desc}--></td>
+	</tr>
+	<!--{? delivery_method == 'homedelivery'}-->
+	<tr>
+		<th>배송회사</th>
+		<td>
+			<select name="delivery_company" id="delivery_company">
+				<option value="" selected="selected">::::배송회사선택::::</option>
+				<!--{@ loop_company}-->
+				<option value="<!--{.company_name}-->"><!--{.company_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>송장번호</th>
+		<td><input type="text" name="delivery_no" class="frm_input" style="width:150px" /></td>
+	</tr>
+	<!--{: delivery_method == 'quick' || delivery_method == 'logis'}-->
+	<tr>
+		<th>차량번호</th>
+		<td><input type="text" name="delivery_company" class="frm_input" style="width:150px" /></td>
+	</tr>
+	<tr>
+		<th>기사이름/전화번호</th>
+		<td><input type="text" name="delivery_no" class="frm_input" style="width:150px" /></td>
+	</tr>
+	<!--{/}-->
+	<!--{: process == 'ax'}-->
+	<tr>
+		<th>취소일자</th>
+		<td><!--{=date('Y-m-d H:m:i',cancel_date)}--></td>
+	</tr>
+	<!--{: process == 'ba' || process == 'bb' || process == 'be' || process == 'bx'}-->
+	<tr>
+		<th>반품요청일자</th>
+		<td><!--{=date('Y-m-d H:m:i',back_request_date)}--></td>
+	</tr>
+	<tr>
+		<th>반품사유</th>
+		<td><!--{back_reason}--></td>
+	</tr>
+	<!--{: process == 'ea' || process == 'eb' || process == 'ec' || process == 'ee' || process == 'ex'}-->
+	<tr>
+		<th>교환요청일자</th>
+		<td><!--{=date('Y-m-d H:m:i',exchange_request_date)}--></td>
+	</tr>
+	<tr>
+		<th>교환사유</th>
+		<td><!--{exchange_reason}--></td>
+	</tr>
+	<!--{? process == 'ec'}-->
+	<tr>
+		<th>배송정보</th>
+		<td> - 배송회사 : <!--{exchange_delivery_company}--> - 송장번호 : <!--{exchange_delivery_no}--> - 배송일자 : <!--{=date('Y-m-d H:m:i',exchange_delivery_date)}--></td>
+	</tr>
+	<!--{/}-->
+	<!--{? process == 'ea' || process == 'eb'}-->
+	<tr>
+		<th>배송회사</th>
+		<td>
+			<select name="exchange_delivery_company" id="exchange_delivery_company">
+				<option>::::배송회사선택::::</option>
+				<!--{@ loop_company}-->
+				<option value="<!--{.company_name}-->"><!--{.company_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>송장번호</th>
+		<td><input type="text" name="exchange_delivery_no" class="frm_input" style="width:150px" /></td>
+	</tr>
+	<!--{/}-->
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area">
+		<span class="button large black strong"><input type="submit" value=" 정보수정 " id="modifyButton"/></span>
+</div>
+</form>
+
+<div class="title_d2"><img src="../images/bullet.gif"> 결제금액정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>주문금액</th>
+		<td><!--{=number_format(order_amount)}--> 원</td>
+		<th>배송비용</th>
+		<td><!--{=number_format(delivery_charge)}--> 원</td>
+	</tr>
+	<tr>
+		<th>사용적립금</th>
+		<td><!--{=number_format(pay_emoney)}--> 원</td>
+		<th>사용쿠폰</th>
+		<td>
+			<!--{? empty(coupon_dc)}-->
+			쿠폰사용내역이 없습니다.
+			<!--{:}-->
+			쿠폰코드 : <!--{coupon_code}--> / 할인금액 : <!--{=number_format(coupon_dc)}--> 원
+			<!--{/}-->
+		</td>
+	</tr>
+	<tr>
+		<th>결제금액</th>
+		<td><!--{=number_format(pay_amount)}--> 원</td>
+		<th>발생적립금</th>
+		<td><!--{=number_format(emoney)}--> 원</td>
+	</tr>
+	</tbody>
+</table>
+	
+<div class="title_d2"><img src="../images/bullet.gif"> 주문자정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>이름</th>
+		<td><!--{order_name}--> ( <!--{userid}--> )</td>
+		<th>이메일</th>
+		<td><!--{order_email}--></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><!--{order_phone}--></td>
+		<th>휴대전화</th>
+		<td><!--{order_mobile}--></td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td colspan="3">( <!--{order_zipcode}--> ) <!--{order_address}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 수령자정보</div>
+<form method="post" name="rsvform" id="rsvform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="order_code" value="<!--{order_code}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="70%"></col>
+		<col width="15%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>수령자</th>
+		<td><input type="text" name="rsv_name" value="<!--{rsv_name}-->" class="frm_input" style="width:120px" /></td>
+		<td rowspan="5" class="pcenter"><span class="button large black strong"><input type="submit" value=" 정보수정 " id="modifyButton"/></span></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><input type="text" name="rsv_phone" value="<!--{rsv_phone}-->"  class="frm_input" style="width:120px" /></td>
+	</tr>
+	<tr>
+		<th>휴대전화</th>
+		<td><input type="text" name="rsv_mobile"  value="<!--{rsv_mobile}-->"  class="frm_input" style="width:120px" /></td>
+	</tr>
+	<tr>
+		<th>우편번호</th>
+		<td>
+			<input type="text" name="rsv_zipcode" id="rsv_zipcode" value="<!--{rsv_zipcode}-->" class="frm_input" style="width:100px" /> 
+			<span class="button small black"><button onclick="srchZipcode('rsv_zipcode','rsv_address')">우편번호검색</button></span>
+		</td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td><input type="text" name="rsv_address" id="rsv_address" value="<!--{rsv_address}-->" class="frm_input" style="width:230px" /></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="area_both">
+	<div class="area_child_left" style="width:48%">	
+		<div class="title_d2"><img src="../images/bullet.gif"> 결제정보</div>
+		<form method="post" name="paymentform" id="paymentform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="order_code" value="<!--{order_code}-->" />
+		<table class="form_table">
+			<colgroup>
+				<col width="30%"></col>
+				<col width="70%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>결제종류</th>
+				<td><!--{payment_method_desc}--></td>
+			</tr>
+			<!--{? payment_method == 'vbank'}-->
+			<tr>
+				<th>입금계좌</th>
+				<td><!--{payment_bank}--> / <!--{payment_account}--></td>
+			</tr>
+			<tr>
+				<th>입금기한</th>
+				<td><!--{vbank_payment_date}--></td>
+			</tr>
+			<!--{/}-->
+			<!--{? payment_method == 'cash'}-->
+			<tr>
+				<th>입금계좌</th>
+				<td><!--{payment_bank}--></td>
+			</tr>
+			<tr>
+				<th>입금자</th>
+				<td><input type="text" name="payment_name" value="<!--{payment_name}-->" class="frm_input" style="width:100px" /> <span class="button small black"><input type="submit" value="변경하기"/></span></td>
+			</tr>
+			<!--{/}-->
+			</tbody>
+		</table>
+		</form>
+	</div>
+	<div class="area_child_right" style="width:48%">
+		<div class="title_d2"><img src="../images/bullet.gif"> 배송정보</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="30%"></col>
+				<col width="70%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>배송방법</th>
+				<td><!--{delivery_method_desc}--></td>
+			</tr>
+			<tr>
+				<th>송장번호</th>
+				<td><!--{? empty(delivery_no)}-->-<!--{:}--><!--{delivery_no}--><!--{/}--></td>
+			</tr>
+			<tr>
+				<th>배송일(출고일)</th>
+				<td><!--{? empty(delivery_no)}-->-<!--{:}--><!--{=date('Y/m/d H:i:s',delivery_date)}--><!--{/}--></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="title_d2"><img src="../images/bullet.gif"> 고객요쳥사항</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>고객요청사항</th>
+		<td><!--{request_comment}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 특이사항</div>
+<form method="post" name="remarkform" id="remarkform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="order_code" value="<!--{order_code}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="70%"></col>
+		<col width="15%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>특이사항</th>
+		<td><textarea name="remark" class="frm_input" style="width:520px;height:150px;" ><!--{remark}--></textarea></td>
+		<td class="pcenter"><span class="button large black strong"><input type="submit" value="특이사항저장" id="modifyButton"/></span></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="button_area">
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록보기</a></span>
+	<span class="button large black strong"><a href="javascript:;" onclick="orderPrint()">주문서인쇄</a></span>
+	<span class="button large black strong"><a href="javascript:;" onclick="orderDel()">주문삭제</a></span>
+</div>
+</form>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_zipcode').dragPopup({
+		popup_id: 'drag_popup_zipcode',
+		popup_title: '우편번호검색',
+		popup_width: 350,
+		popup_height: 400,
+		bool_today_close:false
+	});
+});
+
+function srchZipcode(target_zipcode,target_addr) {
+	$('#iframe_zipcode').attr('src','/zipcode/zipcode.php?target_zipcode='+target_zipcode+'&target_addr='+target_addr);
+	showPopup('drag_popup_zipcode',{kind_pos:'center'});
+}
+//-->
+</script>
+
+<div id="popup_zipcode" style="display:none;padding:10px;">
+	<iframe id="iframe_zipcode"  frameborder="0" style="width:330px;height:350px;border:0px;"></iframe>
+</div>

@@ -1,0 +1,249 @@
+<div class="page body-sign">
+
+	<script>
+        /*window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '242170023096073',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));*/
+
+		/*(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/client:plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();*/
+
+	</script>
+
+	<div class="page-inner p-none no-border">
+
+		<section class="section-big" style="background:url(../img/new/corinne-kutz.jpg);background-size:cover">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+					<div class="smart-wrap">
+						<div class="smart-forms smart-container wrap-2 login">
+
+							<div class="form-header header-primary">
+								<h4><i class="fa fa-sign-in"></i><?=Lang::main_4;?></h4>
+							</div><!-- end .form-header section -->
+
+							<form method="post" name="authform" id="authform" action="<!--{config_basic.ssl_port}--><!--{_SERVER.SCRIPT_NAME}-->">
+							<input type="hidden" name="pg_mode" value="auth" />
+							<input type="hidden" name="ret_url" value="<!--{_GET.ret_url}-->" />
+							<input type="hidden" name="googleYn" value="N" />
+								<div class="form-body">
+
+								<div class="frm-row">
+
+									<!--<div class="colm colm6 pad-r30 bdr">
+
+										<div class="spacer-b30">
+											<div class="tagline"><span>Login  With </span></div>
+										</div>
+
+										<div class="section">
+
+											<a href="javascript:checkLoginState()" class="button btn-social facebook span-left block">
+											<span><i class="fa fa-facebook"></i></span> Facebook
+											</a>
+
+											<a href="javascript:loginTwitter()" class="button btn-social twitter span-left block">
+											<span><i class="fa fa-twitter"></i></span> Twitter
+											</a>
+
+											<a href="javascript:click('google');" class="button btn-social googleplus span-left block">
+											<span><i class="fa fa-google-plus"></i></span> Google+
+											<span id="signinButton" style="display:none;">
+												<span
+													class="g-signin"
+													data-callback="loginGoogle"
+													data-clientid="128675412519-t7hkklatelrevrqfpcm9gk45b7qjldcv.apps.googleusercontent.com"
+													data-cookiepolicy="single_host_origin"
+													data-requestvisibleactions="http://schemas.google.com/AddActivity"
+													data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
+												</span>
+											</span>
+											</a>
+											
+										</div>
+
+									</div>--><!-- end .colm section -->
+
+									<div class="colm colm12 pad-l30">
+
+										<div class="spacer-b30">
+											<div class="tagline"><span>Login </span></div><!-- .tagline -->
+										</div>
+
+										<!--{? _COOKIE.lang=='cn'}-->
+										<div class="section">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<select name="mobile_country_code" onChange="" class="custom-select input-group-text d-none d-sm-block" style="height: 42px;border-top-right-radius:0;border-bottom-right-radius:0;">
+														<option value="CN"><?=Lang::main_country3;?> +86</option>
+														<option value="KR"><?=Lang::main_country11;?> +82</option>
+														<option value="HK"><?=Lang::main_country4;?> +852</option>
+														<option value="MO"><?=Lang::main_country7;?> +853</option>
+														<option value="SG"><?=Lang::main_country10;?> +65</option>
+														<option value="MY"><?=Lang::main_country8;?> +60</option>
+														<option value="ID"><?=Lang::main_country5;?> +62</option>
+														<option value="MN"><?=Lang::main_country9;?> +976</option>
+														<option value="TH"><?=Lang::main_country12;?> +66</option>
+														<option value="AU"><?=Lang::main_country1;?> +61</option>
+														<option value="US"><?=Lang::main_country14;?> +1</option>
+														<option value="UK"><?=Lang::main_country13;?> +44</option>
+														<option value="CA"><?=Lang::main_country2;?> +1</option>
+														<option value="JP"><?=Lang::main_country6;?> +81</option>
+													</select>
+													<select name="mobile_country_code" onChange="" class="custom-select input-group-text d-block d-sm-none" style="height: 42px;border-top-right-radius:0;border-bottom-right-radius:0;">
+														<option value="CN">+86</option>
+														<option value="KR">+82</option>
+														<option value="HK">+852</option>
+														<option value="MO">+853</option>
+														<option value="SG">+65</option>
+														<option value="MY">+60</option>
+														<option value="ID">+62</option>
+														<option value="MN">+976</option>
+														<option value="TH">+66</option>
+														<option value="AU">+61</option>
+														<option value="US">+1</option>
+														<option value="UK">+44</option>
+														<option value="CA">+1</option>
+														<option value="JP">+81</option>
+													</select>
+												</div>
+												<input type="tel" value="" class="form-control text-muted" name="phone_number" placeholder="手机号">
+												<input type="hidden" name="userid" id="userid" >
+											</div>
+										</div><!-- end section -->
+										<!--{:}-->
+										<div class="section">
+											<label class="field prepend-icon">
+											<input type="text" name="userid" id="userid" class="gui-input" placeholder="Enter email">
+											<span class="field-icon"><i class="fa fa-user"></i></span>
+											</label>
+										</div><!-- end section -->
+										<!--{/}-->
+
+										<div class="section">
+											<label class="field prepend-icon">
+											<input type="password" name="userpw" id="userpw" class="gui-input" placeholder="Enter password">
+											<span class="field-icon"><i class="fa fa-lock"></i></span>
+											</label>
+										</div><!-- end section -->
+
+										<div class="section">
+											<label class="switch block">
+											<input type="checkbox" name="remember" id="remember" checked>
+											<span class="switch-label" data-on="<?=Lang::main_basic11;?>" data-off="<?=Lang::main_basic12;?>"></span>
+											<span> <?=Lang::main_52;?></span>
+											</label>
+										</div><!-- end section -->
+
+									</div><!-- end .colm section -->
+
+								</div><!-- end .frm-row section -->
+
+								</div><!-- end .form-body section -->
+								<div class="form-footer">
+
+									<div style="float:left;">
+										<button type="submit" class="button btn-primary"><?=Lang::main_4;?></button>
+									</div>
+									<div style="float:right;">
+										<a href="/join" class="text-right"><?=Lang::main_5;?></a> |
+										<a href="/findinfo" class="text-right"><?=Lang::main_53;?></a>
+									</div>
+
+								</div><!-- end .form-footer section -->
+							</form>
+
+						</div><!-- end .smart-forms section -->
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>
+
+<!--{*
+<div id="area_auth" class="area_both ">
+	<div class="area">
+		<div id="remark_auth">
+		<img src="../images/login/login_metapo.gif" alt="스마트코인 한국거래소를 방문해주셔서 감사합니다." /><br />
+		스마트코인 한국거래소를 방문해주셔서 감사합니다.
+		</div>
+	</div>
+	<div class="area_child_left">
+		<img src="../images/login/title_member.gif" alt="회원로그인" />
+		<form method="post" name="authform" id="authform" action="<!--{config_basic.ssl_port}--><!--{_SERVER.SCRIPT_NAME}-->">
+		<input type="hidden" name="pg_mode" value="auth" />
+		<input type="hidden" name="ret_url" value="<!--{_GET.ret_url}-->" />
+		<table id="auth_table">
+			<colgroup>
+				<col width="80"></col>
+				<col width="120"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>이메일</th>
+				<td><input type="text" name="userid" id="userid" class="frm_input" style="width:170px;" /></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="userpw" id="userpw" class="frm_input" style="width:170px" /></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="area_btn">
+			<input type="submit" value="로그인" class="grad" />
+		</div>
+		</form>
+	</div>
+	<div class="area_child_right">
+		<ul>
+			<li><span class="button small black"><a href="/realname_check">회원가입</a></span></li>
+			<li><span class="button small black"><a href="/findinfo">이메일 비밀번호 찾기</a></span></li>
+		</ul>
+	</div>
+</div>
+*}-->

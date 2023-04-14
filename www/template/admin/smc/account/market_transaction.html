@@ -1,0 +1,49 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+-->
+</script>
+
+
+<div>
+	<h1>시세</h1>
+</div>
+
+<div width="100%">
+	<div style="width:80%;float:left;">
+		<table class="list_table">
+			<colgroup>
+				<col width="50"></col>
+				<col width="50"></col>
+				<col width="50"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="pcenter">체결시각</th>
+					<th class="pcenter">체결가KRW</th>
+					<th class="pcenter">거래량BTC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--{@loop_mtom}-->
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<!--{:}-->
+				<tr>
+					<td colspan="3" class="pcenter">체결 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+		<div id="navipage"><!--{navi_page}--></div>
+	</div>
+</div>

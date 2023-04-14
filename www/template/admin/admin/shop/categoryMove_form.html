@@ -1,0 +1,155 @@
+<script type="text/javascript">
+<!--
+/*
+var cur_category_code;
+var cur_category_path;
+var cur_depth;
+var cur_parent;
+
+var target_category_code;
+var target_category_path;
+var target_depth;
+var target_parent;
+*/
+
+$(function() {
+	$('#categoryform').submit(function() {
+		var kind_target = $('input[name=kind_target]:checked').val();
+		if(kind_target == 'child') {
+			if(!checkTarget()) {
+				return false;
+			}
+			if(this.target_code.value == '') {
+				alert('이동할 카테고리를 선택하여 주세요.!');
+				return false;
+			}
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('선택한 카테고리가 정상적으로 이동되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+					}
+					else if(data['msg'] == 'err_depth') {
+						alert('4차 카테고리를 넘어서는 이동은 제한됩니다.!');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+function checkTarget() {
+	//자기 자신으로 이동 불가
+	if(target_category_code == '<!--{_GET.category_code}-->') {
+		alert('동일한 카테고리로 이동은 불가합니다.!');
+		return false;
+	}
+	//동일 카테고리 밑으로 이동 불가
+	if(target_category_code == '<!--{_GET.parent}-->') {
+		alert('이동할 카테고리를 다시 선택하여 주세요.!');
+		return false;
+	}
+	//자식카테고리도 이동 불가
+	var src_path = substr('<!--{_GET.category_path}-->',0,(4*<!--{_GET.depth}-->));
+	var target_path = substr(target_category_path,0,(4*<!--{_GET.depth}-->));
+	if(src_path == target_path) {
+		alert('선택한 카테고리의 하위카테고리로 이동은 불가합니다.!');
+		return false;
+	}
+	return true;
+}
+
+function targetSelect() {
+	var kind_target = $('input[name=kind_target]:checked').val();
+	if(kind_target == 'root') {
+		return false;
+	}
+
+	if(!checkTarget()) {
+		return false;
+	}
+
+	$.get('?pg_mode=category_info&category_code=<!--{_GET.category_code}-->&category_path=<!--{_GET.category_path}-->&target_path='+target_category_path,function(data) {
+		if(data['bool']) {
+			var child_depth = parseInt(data['msg1']);
+			target_depth = parseInt(target_depth);
+			var src_depth = (child_depth +1) - <!--{_GET.depth}-->;
+			if((target_depth + src_depth) > 4) {
+				alert('4차 카테고리를 넘어서는 이동은 제한됩니다.!');
+				return false;
+			}
+			$('span#target_path').html(data['msg']);
+			$('input[name=target_code]').val(target_category_code);
+			$('input[name=target_path]').val(target_category_path);
+			$('input[name=target_depth]').val(target_depth);
+			$('input[name=target_parent]').val(target_parent);
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">카테고리 이동</div>
+<div class="remark">설명이 들어가는 자리입니다.</div>
+<form method="post" name="categoryform" id="categoryform" action="?">
+<input type="hidden" name="pg_mode" value="move"/>
+<input type="hidden" name="category_code" value="<!--{_GET.category_code}-->"/>
+<input type="hidden" name="category_path" value="<!--{_GET.category_path}-->"/>
+<input type="hidden" name="depth" value="<!--{_GET.depth}-->"/>
+<input type="hidden" name="parent" value="<!--{_GET.parent}-->"/>
+<input type="hidden" name="target_code" value="" />
+<input type="hidden" name="target_path" value="" />
+<input type="hidden" name="target_depth" value="" />
+<input type="hidden" name="target_parent" value="" />
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>선택카테고리</th>
+		<td><!--{category_path_desc}--></td>
+	</tr>
+	<tr>
+		<th>이동대상</th>
+		<td>
+			<input type="radio" name="kind_target" id="kind_target_root" value="root" checked="checked" /> <label for="kind_target_root">일차카테고리로 이동</label>
+			<input type="radio" name="kind_target" id="kind_target_select" value="child" /> <label for="kind_target_select">선택 카테고리 하위로 이동</label> <span class="button small black"><input type="button" value="카테고리 선택" onclick="targetSelect()" /></span>
+		</td>
+	</tr>
+	<tr>
+		<th>대상카테고리</th>
+		<td><span id="target_path"></span></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value="카테고리 이동"/></span>
+</div>
+</form>

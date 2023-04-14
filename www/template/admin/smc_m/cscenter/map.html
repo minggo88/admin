@@ -1,0 +1,144 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	//첫번째 탭은 활성화
+	$('div.tab>ul>li').click(function(event){
+		$('div.tab>ul>li').removeClass("on");
+		$(this).addClass("on");
+		$('div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		$(this).blur();
+		return false;
+	});
+
+	$('#close_modal').click(function() {
+		$('#aw_table').hide();
+	});
+});
+
+//-->
+</script>
+
+<style>
+.tab_content {margin:32px 0px 20px 0px;}
+#map01 {border:1px solid #dcdcdc;width:748px;height:500px;padding:0px 0px 0px 0px;margin:32px auto 20px auto;clear:both;}
+
+/* 약도 */
+#map_tabs  {border:0px solid #dcdcdc;width:750px;text-align:center;padding:0px 0px 0px 0px;margin:0px auto 0px auto;clear:both;}
+#map_tabs .map {border:1px solid #dcdcdc;width:748px;height:500px;padding:0px 0px 0px 0px;margin:0px auto 5px auto;clear:both;}
+
+#map_tabs table {border:0px #EBEBEB solid;width:100%; border-collapse: collapse;padding: 0px 0px 0px 0px;margin:0px 0px 0px 0px;}
+#map_tabs thead th {border-top:2px solid #699EE6;padding:8px 0 7px;}
+#map_tabs thead td {border-top:2px solid #699EE6;padding:8px 0 7px;}
+
+#map_tabs tbody th {padding:8px 0 7px; }
+#map_tabs tbody td {padding:8px 0 7px;}
+#map_tabs th.tal, 
+#map_tabs td.tal {border-top:1px solid #ccc; padding-left:20px; text-align:left;}
+#map_tabs td {padding:10px 10px 10px 10px;text-align:left;}
+
+
+</style>
+<div class="tab">
+	<ul>
+		<li class="on"><a href="#map01">약도보기</a></li>
+		<li><a href="#map02">지도보기</a></li>
+	</ul>
+</div>
+<div id="map01" class="tab_content area_both">
+<!--{? !empty(config_basic.img_map)}--><img alt="Map" src="/data/design/<!--{config_basic.img_map}-->" /><!--{/}-->
+</div>
+<div id="map02"class="tab_content area_both" style="display:none">
+
+	
+	<div id="map_tabs">
+		<div class="map">
+			<div id="map"></div>
+		</div>
+		위 지도는 축소/확대가 가능하며 마우스 드래그로 위치 이동이 가능합니다.
+	</div>
+
+	<SCRIPT LANGUAGE="JavaScript" src="http://maps.naver.com/js/naverMap.naver?key=5970a77394e2bbec3ffe583f43b9ee78"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		/*지도 개체 생성 */
+		var opts = {
+			width:748,
+			height:500,
+			mapMode:0
+		};
+
+		var mapObj = new NMap(document.getElementById('map'),opts);
+
+		/* 지도 좌표, 축적 수 준 초기화 */
+		mapObj.setCenterAndZoom(new NPoint(305698,532003),1); //37.4767984, 126.9835538
+
+		/* 지도 컨트롤 생성 */
+		var zoom = new NZoomControl();
+
+		zoom.setAlign("right");
+		zoom.setValign("top");
+		mapObj.addControl(zoom);
+
+		/* 지도 모드 변경 버튼 생성 */
+		var mapBtns = new NMapBtns();
+		mapBtns.setAlign("right");
+		mapBtns.setValign("top");
+		mapObj.addControl(mapBtns);
+
+		var marker = new NMark(new NPoint(305618,532043),new NIcon('http://static.naver.com/maps/ic_spot.png',new NSize(50,42),new NSize(50,70)));
+		mapObj.addOverlay(marker);
+
+		var ak=new NInfoWindow();
+		var ap = new NPoint(305380,531898);
+		mapObj.addOverlay(ak);
+
+		ak.setOpacity(1.0);
+		var aw="<table id='aw_table' style='background:#e4f1fc;color:#663300; width:470px;border:solid 1px #dcdcdc;'>";
+		aw +=   "<tr>";
+		aw +=   "<td align='center' valign='top' style='color:#000000;line-height:20px;padding:10px 10px 10px 10px;'><b><!--{config_basic.license_company}--></b><br /><b><!--{config_basic.license_address}--></b><br /><b><a href='tel:<!--{config_basic.shop_phone}-->'><!--{config_basic.shop_phone}--></a></b></td><td valign='top' style='padding:10px 5px 0px 0px;'><img src='/template/user/images/btn_close_modal.gif' id='close_modal' style='cursor:pointer;' /></td></tr>";
+		aw +=   "<tr><td colspan='2' align='center' valign='top' style='color:#000000;padding:5px 10px 10px 10px;'><b>버스</b> : 이마트 앞 하차<br /><b>전철</b> : 1호선 산본역에서 하차하여 도보로 5분 (이마트방면, 국민은행 뒤)<br /></td>";
+		aw +=   "</tr></table>" ;
+		
+		ak.set(ap,aw);
+		ak.showWindow();
+
+
+	//-->
+	</SCRIPT>
+</div>
+
+<table class="form_table">
+	<colgroup>
+		<col width="120"></col>
+		<col width="*"></col>
+	<colgroup>
+	<tr>
+		<th class="pbold">전   철</th>
+		<td class="pleft pbold">1호선 산본역에서 하차하여 도보로 5분 (이마트방면, 국민은행 뒤)</td>
+	</tr>
+	<tr>
+		<th class="pbold">버   스</th>
+		<td class="pleft">
+			<span class="sub_title">군포시청 앞 하차</span><br />
+			일반 : 87, 15-2, 3-1, 5530<br />
+			직행 : 3030, 3101, 6501<br />
+		</td>
+	</tr>
+</table>
+
+<!--{* 
+
+지도API
+환경웹 URLwww.clayworld.co.kr/발급키4952dc42adfe0d5ed97a38c4b21709c7 2013.07.14 0 / 100000 
+      
+ 
+환경웹 URLshop.clayworld.co.kr/발급키f82d5abd3e2bb34870d801b4fc08bae5 2013.07.14 0 / 100000 
+      
+ 
+환경웹 URLmain.clayworld.co.kr/발급키5970a77394e2bbec3ffe583f43b9ee78 2013.07.14 0 / 100000 
+    	  
+ 
+환경웹 URLclayworld.co.kr/발급키55260f91c8addb8364e33dd5e7ad6383 2013.07.14 0 / 100000 
+
+*}-->

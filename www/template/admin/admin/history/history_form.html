@@ -1,0 +1,110 @@
+<script type="text/javascript">
+<!--
+var myeditor = new cheditor("myeditor");
+
+$(function() {
+	$('#jsform').submit(function() {
+		myeditor.outputBodyHTML();
+		/*
+		var chk_option = [
+			{ 'target':'name', 'name':'', 'type':'num', 'msg':'' },
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		*/
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list');
+					<!--{:}-->
+					if(confirm('계속 수정하시겠습니까?')) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '?pg_mode=list';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						//location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+						location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	//$('input[name=]').val(['<!--{}-->']);//radio,checkbox
+	//$('select[name=]').val('<!--{}-->');//select
+	$("#date_s, #date_e").kendoDatePicker({
+		culture: "ko-KR"
+	});
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">연혁관리</span></h1></div>
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode== 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />	
+<!--{? _GET.pg_mode== 'form_edit'}-->
+<input type="hidden" name="idx" value="<!--{idx}-->" />	
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>일자</th>
+		<td><input type="text" name="date_s" id="date_s" value="<!--{date_s}-->" style="width:150px" readonly="readonly" /></td>
+		<th>종료일</th>
+		<td><input type="text" name="date_e" id="date_e" value="<!--{date_e}-->" style="width:150px" readonly="readonly" /></td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td colspan="3">
+			<textarea name="contents" id="contents" style="width:100%;height:300px;"><!--{contents}--></textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>이미지</th>
+		<td colspan="3">	<input type="file" name="img"  class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button black"><input type="submit" value="확  인" /></span>
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록</a></span>
+</div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'contents';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>

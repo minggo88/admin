@@ -1,0 +1,122 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	//검색값 지정
+	$('select[name=phone_a]').val('<!--{_GET.phone_a}-->');
+	$('select[name=mobile_a]').val('<!--{_GET.mobile_a}-->');
+	$('select[name=member_level]').val('<!--{_GET.member_level}-->');
+	$('select[name=area1]').val('<!--{_GET.area1}-->');
+	$('select[name=area2]').val('<!--{_GET.area2}-->');
+	$('select[name=loop_scale]').val('<!--{_GET.loop_scale}-->');
+
+	$('input[name=start_regdate]').val('<!--{_GET.start_regdate}-->');
+	$('input[name=end_regdate]').val('<!--{_GET.end_regdate}-->');
+	$('input[name=start_visit_time]').val('<!--{_GET.start_visit_time}-->');
+	$('input[name=end_visit_time]').val('<!--{_GET.end_visit_time}-->');
+        
+        $('input[name=bool_facebook_join]').val(['<!--{_GET.bool_facebook_join}-->']);
+        $('input[name=bool_realname_check]').val(['<!--{_GET.bool_realname_check}-->']);
+
+
+	$('#srchform').submit(function() {
+		if($('*').is('select[name=loop_scale]')) {
+			var loop_scale = $('select[name=loop_scale]').val();
+			$('input[name=loop_scale]').val(loop_scale);
+		}
+	});
+
+	$('#area1').change(function() {
+		var area1 = $(this).val();
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=gugun&area1='+$(this).val(),function(data) {
+			data = '<option value="" selected="selected">::: 시/군/구 선택 :::</option>'+data;
+			$('#area2').html(data);
+		},'html');
+	});
+
+	$("input[name=start_regdate], input[name=end_regdate], input[name=start_visit_time], input[name=end_visit_time]").kendoDatePicker({
+		culture: "ko-KR"
+	});
+
+});
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_03.png') 0px 0px no-repeat;">회원관리</span> / <span class="title02"><!--{? mode == 'withdraw'}-->탈퇴회원목록<!--{:}-->회원관리<!--{/}--></h1></span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 회원검색폼</div>
+<form method="get" name="srchform" id="srchform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden"  name="loop_scale" value="" />
+<table class="form_table">
+	<colgroup>
+		<col width="140" />
+		<col width="37%" />
+		<col width="140" />
+		<col width="*" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>회원구분</th>
+		<td>
+			<select name="member_level">
+				<option value="" selected="selected">::레벨선택::</option>
+				<!--{@loop_level}-->
+				<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+		<th>닉네임</th>
+		<td><input type="text" name="nick" value="<!--{_GET.nick}-->" class="frm_input" style="width:100px;" /></td>
+	</tr>
+	<tr>
+		<th>회원아이디</th>
+		<td><input type="text" name="srch_userid" value="<!--{_GET.srch_userid}-->" class="frm_input" style="width:100px;" /></td>
+		<th>이름</th>
+		<td><input type="text" name="name" value="<!--{_GET.name}-->" class="frm_input" style="width:100px;" /></td>
+	</tr>
+	<tr>
+		<th>가입구분</th>
+		<td><input type="radio" name="bool_facebook_join" value="9" id="bool_facebook_join" /><label for="bool_facebook_join_all">All</label>&nbsp;  <input type="radio" name="bool_facebook_join" value="0" id="bool_facebook_join_0"/><label for="bool_facebook_join_0">일반</label>&nbsp;<input type="radio" name="bool_facebook_join" value="1" id="bool_facebook_join_1" /><label for="bool_facebook_join_1">Facebook 가입</label>&nbsp;<input type="radio" name="bool_facebook_join" value="2" id="bool_facebook_join_2" /><label for="bool_facebook_join_2">Email 가입</label></td>
+		<th>실명인증여부</th>
+		<td><input type="radio" name="bool_realname_check" value="9" id="bool_realname_check_all"/><label for="bool_realname_check_all">All</label>&nbsp;<input type="radio" name="bool_realname_check" value="0" id="bool_realname_check_0" /><label for="bool_realname_check_0">실명인증 전</label>&nbsp;<input type="radio" name="bool_realname_check" value="1" id="bool_realname_check_1" /><label for="bool_realname_check_1">실명인증 완료</label></td>
+	</tr>
+	<tr>
+		<th>휴대전화</th>
+		<td>
+			<select name="mobile_a" style="width:60px;">
+				<option value="">선택</option>
+				<option value='010'>010</option>
+				<option value='011'>011</option>
+				<option value='016'>016</option>
+				<option value='017'>017</option>
+				<option value='018'>018</option>
+				<option value='019'>019</option>
+				<option value='0130'>0130</option>
+			</select> - 
+			<input type="text" name="mobile_b" value="<!--{_GET.mobile_b}-->" class="frm_input" style="width:60px;" /> - 
+			<input type="text" name="mobile_c" value="<!--{_GET.mobile_c}-->" class="frm_input" style="width:60px;" />		
+		</td>
+		<th>지역</th>
+		<td>
+			<select name="area2" id="area2" class="area2" style="min-width:120px;">
+				<option value="" selected="selected">::: 시/군/구 선택 :::</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>등록일</th>
+		<td>
+			<input type="text" name="start_regdate" value="<!--{start_regdate}-->" readonly="readonly" style="width:150px;" /> ~ 
+			<input type="text" name="end_regdate" value="<!--{end_regdate}-->"  readonly="readonly" style="width:150px;" />
+		</td>
+		<th>최근접속일</th>
+		<td>
+			<input type="text" name="start_visit_time" value="<!--{start_visit_time}-->" readonly="readonly" style="width:150px;" /> ~ 
+			<input type="text" name="end_visit_time" value="<!--{end_visit_time}-->"  readonly="readonly" style="width:150px;" />
+		</td>
+	</tr>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="검색"/></span>
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">초기화</a></span>
+</div>
+</form>
+<div id="main_contents"><!--{# js_tpl_main_sub}--></div>

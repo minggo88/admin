@@ -1,0 +1,29 @@
+<!-- 1: style.basic.html -->
+<ul>
+	<!--{@ loop_bbs_recent}-->
+	<!--{? .bbscode=='RP584'}-->
+	<li>
+		<div class="subject">
+			<!--{? .bool_secret}-->
+			<a href="/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=list"><!--{=cutStr(.subject,11)}--></a>
+			<!--{:}-->
+			<a href="/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0"><!--{=cutStr(.subject,11)}--></a>
+			<!--{/}-->
+		</div>
+	</li>
+	<!--{:}-->
+	<li>
+		<div class="subject">
+			<!--{? .bool_secret}-->
+			<a href="/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=list"><!--{=cutStr(.subject,34)}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+			<!--{:}-->
+			<a href="/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0"><!--{=cutStr(.subject,34)}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+			<!--{/}-->
+		</div>
+		<div class="date"><!--{=date('m.d',.regdate)}--></div>
+	</li>
+	<!--{/}-->
+	<!--{:}-->
+	<li>등록된 글이 없습니다.</li>
+	<!--{/}-->
+</ul>

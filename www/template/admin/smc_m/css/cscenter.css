@@ -1,0 +1,116 @@
+@charset "utf-8"; 
+
+div.metapo {margin: 0 auto 0 auto;}
+
+div#fg_cscenter {border:0px #e6e6e6 solid;margin:14px auto 0px auto;}
+div#fg_csinfo {border:0px #e6e6e6 solid;margin:30px auto 0px auto;clear:both;}
+div#fg_csinfo ul {width:480px;height:310px;padding:0;margin:30px auto 0px auto;clear:both;}
+div#fg_csinfo ul li {width:150;height:150px;padding:0;margin:0;float:left;}
+div#fg_csinfo ul li.d_0 {width:150;height:150px;padding:0;margin:0px 0px 10px 0px;float:left;}
+div#fg_csinfo ul li.d_1 {width:150;height:150px;padding:0;margin:0px 0px 10px 10px;float:left;}
+div#fg_csinfo ul li.d_2 {width:150;height:150px;padding:0;margin:0px 0px 10px 10px;float:left;}
+
+
+div#fg_csinfo #csbank {width:205px;text-align:center;padding:5px;float:left;}
+div#fg_csinfo #csmyshop {width:205px;text-align:center;padding:5px;float:left;}
+div#fg_csinfo #csfaq {width:205px;text-align:center;padding:5px;float:left;}
+
+div#fg_csguide {border:1px #e6e6e6 solid;height:100px;text-align:center;margin:14px 0px 0px 0px;clear:both;}
+
+div#fg_company {border:0px #e6e6e6 solid;padding:0px;margin:0px;}
+	.section {border:0px #e6e6e6 solid;text-align:justify;padding:0px;margin:20px 0px 20px 0px;overflow:auto;}
+		.intro {line-height:1.7;font-size:9pt;color:#555;text-align:justify;}
+		.intro strong {font-size:10pt;color:#2F8EBD;font-weight:bold;}
+		.intro h2 {display:none;}
+
+		.biography {border:0px #e6e6e6 solid;line-height:18px;text-align:justify;padding:0px;margin:20px 0px 20px 0px;overflow:auto;}
+		.biography strong {font-size:10pt;color:#3398D5;font-weight:bold;}
+		.biography h2 {display:none;}
+		.biography ul > li {list-style-type:square;}
+
+		/* About Firstgleam */
+		#about {width:100%;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;clear:both;}
+		#about .about_info {width:100%;height:224px;background:url('http://www.firstgleam.com/template/user/images/company/about_con01.jpg') 0px 0px no-repeat;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;clear:both;}
+		#about .about_info .slogan {position:relative;top:184px;left:110px;width:560px;height:13px;line-height:12px;letter-spacing:-0.2px;color:#999;text-shadow:0px 0px 5px #fff;background:none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;clear:both;z-index:1000;vertical-align:middle;}
+		#about .about_info .slogan span.firstgleam{font-size:13px;line-height:12px;letter-spacing:-0.2px;color:#f47521;}
+
+		#about .professional {width:225px;padding:0px 15px 0px 0px;margin:30px 0px 30px 0px;float:left;}
+		#about .service {border:0px solid #d4d4d4;border-left:1px solid #e4e4e4;border-right:1px solid #e4e4e4;width:225px;height:160px;padding:0px 15px 0px 15px;margin:30px 0px 30px 0px;float:left;}
+		#about .manpower {width:225px;padding:0px 0px 0px 15px;margin:30px 0px 30px 0px;float:left;}
+
+		#about dl dt {font-weight:bold;font-size:14px;line-height:14px;color:#F26522;letter-spacing:-0.5px;text-shadow:1px 0 1px #ccc;padding:0px 0px 14px 0px;}
+		#about dl dd {line-height:16px;color:#777;letter-spacing:-0.1px;text-align:justify;}
+
+		#about .service dl>dd>ul {width:110px;padding:0px 0px 0px 0px;float:left;}
+		#about .service dl>dd>ul>li {width:100%;padding:0px 5px 0px 0px;float:left;}
+
+		#about .message {line-height:18px;color:#777;letter-spacing:0px;text-align:justify;padding:0px 15px 70px 0px;margin:10px 0px 0px 0px;clear:both;}
+		#about .message span {font-weight:bold;line-height:16px;color:#777;}
+
+
+
+	
+	.line {border-bottom:1px solid #e3e3e3;}
+
+div#fg_information {border:0px #e6e6e6 solid;width:750px;padding:0px;margin:0px;}
+	#info_accordion{color:#555;padding:20px 0px 0px 0px;}
+	#info_accordion #info_01,
+	#info_accordion #info_02,
+	#info_accordion #info_03,
+	#info_accordion #info_04,
+	#info_accordion #info_05,
+	#info_accordion #info_06,
+	#info_accordion #info_07
+	{border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-left:1px solid #ccc;color:#555;}
+
+	.information {line-height:18px;text-align:justify;}
+	.information strong {font-size:10pt;color:#3398D5;font-weight:bold;}
+	.information h2 {display:none;}
+	.information ul {padding-left:30px;}
+	.information ul > li {list-style-type:square;}
+
+div#fg_information .guide_title {border-bottom:0px #e6e6e6 solid;width:750px;line-height:18px;font-weight:bold;padding-left:0px;margin:20px 0px 0px 0px;float:left;}
+div#fg_information .guide_top {border-bottom:0px #e6e6e6 solid; width:40px;line-height:12px;text-align:right;margin:0px 0px 5px 0px;float:right;}
+div#fg_information .guide_top a{line-height:18px;color:#000;font-size:12px;}
+div#fg_information .guide_top a:hover{line-height:18px;color:#000;font-size:12px;font-weight:bold;}
+div#fg_information .guide_list {border:4px #F1F1F1 solid;width:640px; text-align:justify;padding:10px 20px 10px 20px;clear:both; line-height: 20px; color:#9b9b9b;}
+
+div#fg_agreement {border:0px #e6e6e6 solid;width:750px;padding:0px;margin:0px;}
+		.agreement {border:0px #e6e6e6 solid;line-height:18px;text-align:justify;padding:0px;margin:20px 0px 20px 0px;overflow:auto;}
+		.agreement strong {font-size:10pt;color:#3398D5;font-weight:bold;}
+		.agreement h2 {display:none;}
+		.agreement ul {padding-left:30px;}
+		.agreement ul > li {list-style-type:square;}
+
+div#fg_private {border:0px #e6e6e6 solid;width:750px;padding:0px;margin:0px;}
+		.private {border:0px #e6e6e6 solid;line-height:18px;text-align:justify;padding:0px;margin:20px 0px 20px 0px;overflow:auto;}
+		.private strong {font-size:10pt;color:#3398D5;font-weight:bold;}
+		.private h2 {display:none;}
+		.private ul {padding-left:30px;}
+		.private ul > li {list-style-type:square;}
+
+div#fg_refusal {border:0px #e6e6e6 solid;width:750px;padding:0px;margin:0px;}
+		.refusal {border:0px #e6e6e6 solid;line-height:18px;text-align:justify;padding:0px;margin:20px 0px 20px 0px;overflow:auto;}
+		.refusal strong {font-size:10pt;color:#3398D5;font-weight:bold;}
+		.refusal h2 {display:none;}
+		.refusal ul {padding-left:30px;}
+		.refusal ul > li {list-style-type:square;}
+
+div#fg_sitemap {border:0px #e6e6e6 solid; width:750px;padding:6px 0px 0px 0px;margin:0px auto 0px auto;}
+div#fg_sitemap div.d_0 {border:0px #e6e6e6 solid; width:230px;margin:0px 0px 30px 0px;float:left;}
+div#fg_sitemap div.d_1 {border:0px #e6e6e6 solid; width:230px;margin:0px 0px 30px 30px;float:left;}
+div#fg_sitemap div.d_2 {border:0px #e6e6e6 solid; width:230px;margin:0px 0px 30px 30px;float:left;}
+
+div#fg_sitemap dl dt {border-radius:10px 0px 0px 0px;border-top:1px #e6e6e6 solid;border-bottom:1px #d8d8d8 solid;background:#f5f5f5;padding:5px 5px 4px 15px;}
+div#fg_sitemap dl dt a {font-size:18px;color:#025A9A;letter-spacing:-1px;font-family: '나눔고딕','맑은 고딕',NanumGothicExtraBold,AppleGothic,sans-serif;}
+
+div#fg_sitemap dl dd {padding:5px 5px 5px 15px;}
+div#fg_sitemap dl dd ul {display:inline;padding:0px;margin:0px;clear:both;}
+div#fg_sitemap dl dd ul li {list-style-type:circle;padding:0px 0px 0px 0px;margin:0px 0px 0px 20px;}
+div#fg_sitemap dl dd ul li a {line-height:1.7;}
+div#fg_sitemap dl dd ul li a:hover {color:#00528c;line-height:1.7;}
+
+.p_agree span.agree_title_a{color: #0066CC;font-size: 14px;font-weight: 700;display:block;margin: 20px 0;}
+.p_agree span.agree_title_b{color: #000000;font-size: 13px;font-weight: 700;display:block;margin: 10px 0;}
+.p_agree ol.agree_num_a{display:block;padding:0 0 0 20px;}
+.p_agree .agree_num_a li{list-style-type:disc;}

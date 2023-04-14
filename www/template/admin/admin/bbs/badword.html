@@ -1,0 +1,96 @@
+<style type="text/css">
+<!--
+#list_badword {width:780px; background-color:#eeeeee; line-height:20px;margin:10px 0px; padding:10px;}	
+#list_badword input {vertical-align:middle;margin:0px 3px 0px 10px;; }	
+//-->
+</style>
+
+<script type="text/javascript">
+<!--
+
+function del() {
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.post('?',$('#listform').serialize(),function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			$('#list_badword').load('?pg_mode=list');
+		}
+		else {
+			alert('재시도 해주세요.!');
+		}
+	},'json');
+}
+
+$(function() {
+	$('#jsform').submit(function() {
+
+		var chk_option = [
+			{ 'target':'badword', 'name':'금칙어', 'type':'blank', 'msg':'금칙어를 입력하세요.!' }
+		];		
+		
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					$('#list_badword').load('?pg_mode=list');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		});
+		return false;
+	});
+});
+
+$(function() {
+	$('#list_badword').load('?pg_mode=list');
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/PanelBar.png') 0px 0px no-repeat;">커뮤니티</span> / <span class="title02">부정어관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">부정어 등록 - 게시판 필터링에 사용한 금칙어를 입력합니다.</div>
+<form name="jsform" id="jsform" method="post" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="write" />
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="50%"></col>
+		<col width="30%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>필터링 금칙어</th>
+		<td><input type="text" name="badword" class="frm_input" style="width:200px" /></td>
+		<td><span class="button black"><input type="submit" value="등 록" /></span></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<form name="listform" id="listform" action="<!--{_SERVER.SCRIPT_NAME}-->" onsubmit="return false;">
+<input type="hidden" name="pg_mode" value="del"/>
+<div id="list_badword"></div>
+<div class="button_area">
+	<span class="button large black"><a href="javascript:;" onclick="del()">선택삭제</a></span>
+</div>
+</form>

@@ -1,0 +1,91 @@
+<form name="jsform" id="jsform" action="<!--{config_basic.ssl_port}--><!--{_SERVER.SCRIPT_NAME}-->" method="post" enctype="multipart/form-data">
+<input type="hidden" name="bbscode" value="<!--{_GET.bbscode}-->" />
+<input type="hidden" name="pg_mode"  value="<!--{pg_mode}-->"/>
+<input type="hidden" name="start" value="<!--{_GET.start}-->" />
+<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+<!--{? info_bbs.bool_kisu}-->
+<input type="hidden" name="category" value="<!--{_SESSION.USER_KISU}-->" />
+<!--{/}-->
+<!--{? _GET.pg_mode == 'form_reply'}-->
+<input type="hidden" name="pos" value="<!--{pos}-->" />
+<input type="hidden" name="thread" value="<!--{thread}-->" /> 
+<input type="hidden" name="depth" value="<!--{depth}-->" />
+<!--{/}-->
+<input type="hidden" name="ret_url" value="" />
+<table summary="게시판 글쓰기폼">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th class="entry"><label for="author">이름</label></th>
+		<th class="data"><input name="author" id="author" type="text" value="<!--{author}-->" /></th>
+		<th class="entry"><label for="passwd">암호</label></th>
+		<th class="data"><input name="passwd" id="passwd" type="password" /></th>
+	</tr>
+	<!--{? info_bbs.bool_secret}-->
+	<tr>
+		<td class="entry"><label for="bool_secret_yes">비밀글</label></td>
+		<td colspan="3"><input type="radio" name="bool_secret" value="1" />&nbsp;예&nbsp;<input type="radio" name="bool_secret" value="0" checked="checked" />&nbsp;아니요</td>
+	</tr>
+	<!--{/}-->
+	<!--{? info_bbs.bool_kisu}-->
+	<!--{*
+	<tr>
+		<td class="entry"><label for="category">기수선택</label></td>
+		<td colspan="3">
+			<select name="category">
+				<option value="" selected="selected">::기수선택::</option>
+				<!--{@loop_select}-->
+				<option value="<!--{.select_val}-->"><!--{.select_text}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	*}-->
+	<!--{/}-->
+	<tr>
+		<td class="entry"><label for="email">이메일</label></td>
+		<td colspan="3"><input name="email" id="email" type="text" value="<!--{email}-->"  /></td>
+	</tr>
+	<!--{*
+	<tr> 
+		<td class="entry"><label for="link">홈페이지</label></td>
+		<td colspan="3"><input name="website" id="website" type="text" value="<!--{website}-->" /></td>
+	</tr>
+	*}-->
+	<tr>
+		<td class="entry"><label for="subject">제목</label></td>
+		<td colspan="3"><input name="subject" id="subject" type="text" maxlength="80" value="<!--{subject}-->" /></td>
+	</tr>
+	</tbody>
+</table>
+<div id="bbs_content_editor">
+	<textarea id="contents" name="contents" title="내용입력" style="width:100%;height:300px"><!--{contents}--></textarea>
+</div>
+<!--{? info_bbs.bool_file}-->
+<table>
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr> 
+		<td class="entry"><label for="file">첨부화일</label></td>
+		<td><input name="file" id="file" type="file" size="40" /></td>
+	</tr>
+	</tbody>
+</table>
+<!--{/}-->
+<div id="buttonArea">
+	<button class="grad_bbs"  id="btn_confirm" >확인</button>
+	<button class="grad_bbs"  id="btn_cancel" >취소</button>
+	{*
+	<input type="image" src="../images/button_ok.gif" alt="확인" />&nbsp;&nbsp;&nbsp;
+	<img src="../images/button_cancel.gif" alt="취소" id="btn_cancel" />
+	*}
+</div>
+</form>

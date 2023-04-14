@@ -1,0 +1,141 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><!--{info_bbs.title}--></h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="/bbs/admin/bbsAdmin.php?pg_mode=list&bbscode=PY395">게시판</a>
+            </li>
+            <li class="active">
+                <strong><!--{info_bbs.title}--></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight mb-50">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" name="bbsform" id="bbsform" action="?" enctype="multipart/form-data" class="form-horizontal">
+                        <input type="hidden" name="pg_mode" value="<!--{pg_mode}-->"/><!--{pg_mode}-->
+                        <input type="hidden" name="bbscode" value="<!--{_GET.bbscode}-->" />
+                        <!--{? _GET.pg_mode == 'form_edit'}-->
+                        <input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+                        <!--{/}-->
+                        <!--{? _GET.pg_mode == 'form_reply'}-->
+                        <input type="hidden" name="passwd" value="<!--{passwd}-->" />
+                        <input type="hidden" name="pos" value="<!--{pos}-->" />
+                        <input type="hidden" name="thread" value="<!--{thread}-->" /> 
+                        <input type="hidden" name="depth" value="<!--{depth}-->" />
+                        <input type="hidden" name="bool_secret" value="<!--{bool_secret}-->" />
+                        <!--{/}-->
+                    
+                        <div class="form-group"><label class="col-sm-2 control-label">게시판</label>
+                            <div class="col-lg-10"><p class="form-control-static"><!--{info_bbs.title}--></p></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">유형</label>
+                            
+                            <div class="col-sm-10">
+                                <div class="i-checks">
+                                    <label> <input type="radio" value="b" name="division" checked="checked" > <i></i> 일반 </label> &nbsp; 
+                                    <label> <input type="radio" value="a" name="division"> <i></i> 공지 </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--{? _GET.pg_mode != 'form_reply'}-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">비밀글</label>
+                            
+                            <div class="col-sm-10">
+                                <div class="i-checks">
+                                    <label> <input type="radio" value="1" name="bool_secret"> <i></i> 예 </label> &nbsp; 
+                                    <label> <input type="radio" value="0" name="bool_secret" checked="checked" > <i></i> 아니요 </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">비밀번호</label>
+
+                            <div class="col-sm-10"><input type="password" class="form-control" name="passwd"></div>
+
+                        </div>
+                        <!--{/}-->
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">이름</label>
+
+                            <div class="col-sm-10"><input type="text" name="author" value="<!--{author}-->" placeholder="이름" class="form-control"></div>
+                        </div>
+
+                        <!--{? info_bbs.bool_category}-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">구분선택</label>
+
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option value="" selected="selected">::구분선택::</option>
+                                    <!--{@loop_select}-->
+                                    <option value="<!--{.select_val}-->"><!--{.select_text}--></option>
+                                    <!--{/}-->
+                                </select>
+                            </div>
+
+                        </div>
+                        <!--{/}-->
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group has-success"><label class="col-sm-2 control-label">제목</label>
+
+                            <div class="col-sm-10"><input type="text" name="subject" value="<!--{subject}-->" class="form-control"></div>
+                        </div>
+                        
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group has-warning"><label class="col-sm-2 control-label">내용</label>
+
+                            <div class="col-sm-10">
+                                <textarea id="contents" name="contents" class="form-control" style="height:300px"><!--{contents}--></textarea>
+                            </div>
+                        </div>
+
+                        <!--{? info_bbs.bool_info_layer==0}-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">첨부화일</label>
+
+                            <div class="col-sm-10">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="file"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <!--{? !empty(file)}-->
+                            <div class="col-lg-10"><p class="form-control-static"><!--{file}--></p></div>
+                            <!--{/}-->
+
+                        </div>
+                        <!--{/}-->
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="button"  onclick="javascript:history.go(-1);" id="btn_cancel">취 소</button>
+                                <input class="btn btn-primary" type="submit" value="확 인" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

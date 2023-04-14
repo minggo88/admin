@@ -1,0 +1,165 @@
+<script type="text/javascript">
+<!--
+
+$(function () {
+	$('#mainform').submit(function() {
+		var chk_option = [
+			{ 'target':'name_div', 'name':'항목명', 'type':'blank', 'msg':'메인 항목명을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		var bool_grp = $('input[name=bool_grp]:checked').val();
+		if(bool_grp == 1) {
+			if(this.grp_code.selectedIndex == 0 ) {
+				alert('그룹을 선택하여 주세요.!');
+				this.grp_code.focus();
+				return false;
+			}
+		}
+
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('입력되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+					<!--{:}-->
+					if(confirm("입력되었습니다.!\n\n계속 수정하시겠습니까?")) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('input[name=bool_grp]').val(['<!--{bool_grp}-->']);
+	$('input[name=bool_display]').val(['<!--{bool_display}-->']);
+	$('input[name=type_display]').val(['<!--{type_display}-->']);
+	$('select[name=grp_code]').val('<!--{grp_code}-->');
+});
+
+
+$(function () {
+	$.get('?pg_mode=get_skin',function(data) {
+		var skin = $('select[name=shop_skin]');
+		var selected;
+		skin.empty();
+		skin.append('<option>::::스킨선택::::</option>');
+		$.each(data,function(i,v) {
+			if(i === '<!--{? empty(shop_skin)}-->shop_list_basic<!--{:}--><!--{shop_skin}--><!--{/}-->') {
+				selected = 'selected="selected"';
+			}
+			else {
+				selected = '';
+			}
+			skin.append('<option value="'+i+'" '+selected+'>'+v+'</option>');
+		});
+	},'json');
+
+	$('select[name=grp_code]').change(function() {
+		var select_idx = this.selectedIndex;
+		if(select_idx > 0) {
+			$('input[name=bool_grp]').val(['1']);
+		}
+		else {
+			$('input[name=bool_grp]').val(['0']);
+		}
+	});
+
+	$('input[name=bool_grp]').click(function() {
+		var bool_grp = $(this).val();
+		if(bool_grp == 0) {
+			$('select[name=grp_code]')[0].selectedIndex = 0;
+		}
+	});
+});
+
+//-->
+</script>
+<div class="title_d1"><h1>메인페이지진열</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">메인페이지 진열상품 관리</div>
+
+<form method="post" name="mainform" id="mainform" action="?" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" id="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+<!--{? _GET.pg_mode == 'form_edit'}-->
+<input type="hidden" name="main_code" value="<!--{main_code}-->" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>항목명</th>
+		<td><input type="text" name="name_div" value="<!--{name_div}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>사용여부</th>
+		<td>
+			<input type="radio" name="bool_display" id="bool_display_n" value="0" /><label for="bool_display_n">사용안함</label>
+			<input type="radio" name="bool_display" id="bool_display_y" value="1" /><label for="bool_display_y">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>그룹사용여부</th>
+		<td>
+			<input type="radio" name="bool_grp" id="bool_grp_n" value="0" /><label for="bool_grp_n">사용안함</label>
+			<input type="radio" name="bool_grp" id="bool_grp_y" value="1" /><label for="bool_grp_y">사용함</label>
+			<select name="grp_code">
+				<option value="">:::그룹선택:::</option>
+				<!--{@loop_grp}-->
+				<option value="<!--{.grp_code}-->"><!--{.grp_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>스킨선택</th>
+		<td><select name="shop_skin"></select></td>
+	</tr>
+	<tr>
+		<th>타이틀이미지</th>
+		<td><input type="file" name="img_title" class="frm_input"/><!--{? bool_img_title}--><img src="<!--{img_title}-->" /><!--{/}--></td>
+	</tr>
+	<tr>
+		<th>항목이미지</th>
+		<td><input type="file" name="img_div" class="frm_input"/><!--{? bool_img_title}--><img src="<!--{img_div}-->" /><!--{/}--></td>
+	</tr>
+	<tr>
+		<th>진열유형</th>
+		<td>
+			<input type="radio" name="type_display" id="type_display_gallery" value="gallery" /><label for="type_display_gallery">갤러리</label> <img src="type_display_gallery.jpg" width="140" />
+			<input type="radio" name="type_display" id="type_display_gallery_a" value="gallery_a" /><label for="type_display_gallery_a">대표이미지</label> <img src="type_display_gallery_a.jpg" width="140" />
+			<input type="radio" name="type_display" id="type_display_list" value="list" /><label for="type_display_list">목록형</label> <img src="type_display_list.jpg" width="140" />
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value=" 확 인 " class="button_save"/></span>
+	<span class="button large black strong"><input type="button" value=" 취 소 " onclick="location.href='<!--{_SERVER.SCRIPT_NAME}-->'" /></span>
+</div>
+</form>

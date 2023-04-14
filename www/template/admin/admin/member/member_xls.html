@@ -1,0 +1,82 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 12">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+x\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<style>
+table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.89in .33in .7in .33in;
+	mso-header-margin:.67in;
+	mso-footer-margin:.28in;
+	mso-horizontal-page-align:center;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:8.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:나눔고딕,맑은고딕, monospace;
+	mso-font-charset:129;
+	mso-char-type:none;
+	display:none;}
+
+table {border:1px dotted #ccc;border-collapse: collapse;}
+table thead tr th {border:1px dotted #ccc;height:30px;background:#c3c3c3;font-weight:bold;text-align:center;}
+table tbody tr td {border:1px dotted #ccc;height:24px;background:#ffffff;font-weight:normal;text-align:center;}
+table tbody tr td.pleft {text-align:left;}
+
+</style>
+
+</head>
+
+<table>
+	<colgroup>
+		<col width="80" /><!--{* 번호 *}-->
+		<col width="130" /><!--{* 아이디 *}-->
+		<col width="100" /><!--{* 이름 *}-->
+		<col width="100" /><!--{* 닉네임 *}-->
+		<col width="100" /><!--{* 휴대전화 *}-->
+		<col width="100" /><!--{* 회원레벨 *}-->
+		<col width="100" /><!--{* 회원가입일 *}-->
+		<col width="100" /><!--{* 비고 *}-->
+	</colgroup>
+	<thead>
+	<tr>
+		<th>번호</th>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>닉네임</th>
+		<th>휴대전화</th>
+		<th>회원레벨</th>
+		<th>회원가입일</th>
+		<th>비고</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td><!--{.index_+1}--></td>
+		<td><!--{.userid}--></td>
+		<td><!--{.name}--></td>
+		<td><!--{.nick}--></td>
+		<td><!--{.tel}--></td>
+		<td><!--{.member_level}--></td>
+		<td><!--{=date('Y-m-d H:i:s', .regdate)}--></td>
+		<td></td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>

@@ -1,0 +1,49 @@
+<!-- 2: style.gallery.html -->
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('div.figure:even').css("background-color", "<!--{config.color_even}-->");
+	$('div.figure:odd').css("background-color", "<!--{config.color_odd}-->");
+	$('div.figure').mouseover(function() { $(this).css("background-color", "<!--{config.color_rollover}-->"); });
+	$('div.figure').mouseout(function() { 
+		$('div.figure:even').css("background-color", "<!--{config.color_even}-->");
+		$('div.figure:odd').css("background-color", "<!--{config.color_odd}-->");
+	});
+});		
+//-->
+</script>
+
+<div id="gallery_list">
+  <div id="gallery">
+		<!--{@ loop_bbs_main}-->
+		<div class="figure d_<!--{.index_%4}-->">
+			<div class="photo">
+				<!--{? .bool_secret}-->
+				<a href="javascript:showBbsPopup('?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->')"><!--{? .bool_thumb}--><img src="<!--{.img}-->" alt="<!--{.img}-->" /><!--{:}--><img src="../../images/no_img.gif" alt="No Image" width="<!--{info_bbs.thumb_width}-->" height="<!--{info_bbs.thumb_height}-->" /><!--{/}--></a>
+				<!--{:}-->
+				<a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{? .bool_thumb}--><img src="<!--{.img}-->" alt="<!--{.img}-->" /><!--{:}--><img src="../../images/no_img.gif" alt="No Image" width="<!--{info_bbs.thumb_width}-->" height="<!--{info_bbs.thumb_height}-->" /><!--{/}--></a>
+				<!--{/}-->			
+			</div>
+			 <div class="subject">
+				<!--{? .bool_secret}-->
+				<a href="javascript:showBbsPopup('?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->')"><!--{=cutStr(.subject,9)}--></a>
+				<!--{:}-->
+				<a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{=cutStr(.subject,9)}--></a>
+				<!--{/}-->
+				<!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+			 </div>
+			<div class="author"><!--{.author}--></div>
+			<div class="date"><!--{=date('Y-m-d',.regdate)}--></div>
+			<div class="hit">조회수 <!--{.hit}--></div>
+		</div>
+		<!--{:}-->
+		<div class="figure">
+			<div class="photo">등록된 이미지가 없습니다.</div>
+		</div>
+		<!--{/}-->
+	</div>
+</div>
+
+<!--{? _GET.pg_mode == 'view'}-->
+<div id="navipage"><!--{navi_page}--></div>
+<!--{/}-->

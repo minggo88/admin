@@ -1,0 +1,313 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+
+	// 핸드폰 번호가 바뀌면 인증하라고 한다.
+	$('#btn_send_confirm_number').click(fnSendPhone);
+	$('#btn_confirm_mobile').click(fnConfirmPhone);
+
+});
+
+function setRequestBTC() {
+	if($('#request_bitcoin').val() == '') {
+		$('#amount').text(0);
+		return false;
+	}
+
+	if(!$.isNumeric($('#request_bitcoin').val())) {
+		alert('출금금액은 숫자만 입력하세요');
+		$('#request_bitcoin').val(0);
+		$('#request_bitcoin').focus();
+		return false;
+	}
+
+	var amount = $('#request_bitcoin').val() - $('#btc_trading_rate').val();
+	
+	if(amount <= 0) {
+		amount = 0;
+	}
+	
+	$('#amount').text(amount);
+}
+
+function requestBTC() {
+	
+	if(!window.confirm_sms){
+		alert('본인 확인을 위해 SMS 핸드폰인증을 해주세요.');
+		$('#btn_send_confirm_number').focus();
+		return false;
+	}
+	
+	if($.trim($('#request_bitcoin').val())=='') {
+		alert('출금금액을 입력하세요');
+		$('#request_bitcoin').focus();
+		return false;
+	}
+	if(!$.isNumeric($('#request_bitcoin').val())) {
+		alert('출금금액은 숫자만 입력하세요');
+		$('#request_bitcoin').focus();
+		return false;
+	}
+
+    if($('#request_bitcoin').val() > $('#my_btc_amount').val()) {
+		alert('보유중인 비트코인 출금가능액('+($('#my_btc_amount').val())+' BTC)보다 큽니다');
+		return false;
+    }
+
+	if($('#request_bitcoin').val() > $('#able_request_btc_amount').val()) {
+		alert('1일 비트코인 출금한도 잔액('+($('#able_request_btc_amount').val())+' BTC)보다 큽니다');
+		return false;
+	}
+	
+	if($('#request_bitcoin').val() < '<!--{MIN_BTC_WITHDRAW}-->') {
+		alert('비트코인 출금 최소 금액(<!--{MIN_BTC_WITHDRAW}--> BTC)보다 작습니다.');
+		return false;
+	}
+	
+	if($.trim($('#pin_number').val())=='') {
+		alert('거래비밀번호를 입력하세요');
+		return false;
+	}
+	
+	if(typeof check_bitcoin_addr == typeof undefined || check_bitcoin_addr != 1) {
+		alert('비트코인 출금 주소가 올바른지 "주소 확인하기"를 눌러주세요.');
+		return false;
+	}
+	
+	$.post("/account/request.php?type=D&request=btc", $( "#request_btc_form" ).serialize(), function(data){
+        if(data=='success'){
+			alert('비트코인 출금요청을 했습니다.');
+			window.location.href='/total';
+		} else {
+			alert(data);
+			//setTimeout(function(){location.reload();}, 0001);
+		}
+    });
+}
+
+function checkAddress() {
+	window.check_bitcoin_addr = 0;
+	if($('#bitcoin_addr').val() == '') {
+		alert('계좌주소를 입력하세요');
+		return false;
+	}
+	$.post("/account/request.php?type=addr&request="+$('#bitcoin_addr').val(), function(data) {
+		if(data.indexOf('계좌정보를 확인했습니다')==0){
+			window.check_bitcoin_addr = 1;
+		}
+		alert(data);
+	});
+}
+
+window.name ="Parent_window";
+function fnPopup(){
+	window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+	document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+	document.form_chk.target = "popupChk";
+	document.form_chk.submit();
+}
+function fnSendPhone(){
+	window.confirm_sms = false;
+	var mobilenumber = '<!--{user_info.mobile}-->';
+	if(mobilenumber==''){
+		alert('핸드폰 번호가 등록되지 않았습니다. 회원정보수정페이지에서 핸드폰 번호를 등록해주세요.');
+		return false;
+	}
+	$.post('/member/memberEdit.php', {'pg_mode':'send_confirm_number', 'phone_number':mobilenumber}, function(r){
+		if( typeof r!=typeof undefined && r.bool ) {
+			alert('핸드폰으로 인증번호를 발송했습니다. 인증번호를 입력해 주세요.');
+			$('#box_write_confirm_number').show();
+			$('#btn_send_confirm_number').hide();
+		}
+	},'json');
+	return false;
+}
+function fnConfirmPhone(){
+	var mobilenumber = '<!--{user_info.mobile}-->';
+	var confirm_number = $('#confirm_sms').val();
+	$.post('/member/memberEdit.php', {'pg_mode':'confirm_number', 'confirm_number':confirm_number}, function(r){
+		if( typeof r!=typeof undefined && r.bool ) {
+			alert('핸드폰으로 인증이 완료되었습니다.');
+			window.confirm_sms = true;
+			$('#box_write_confirm_number').hide();
+			$('#btn_send_confirm_number').hide();
+			$('#btn_confirmed_mobile').show();
+		}
+	},'json');
+	return false;
+}
+window.confirm_sms = false;
+
+-->
+</script>
+
+
+<div class="hide">
+	<h1>입출금</h1>
+</div>
+
+<div class="request">
+
+	<div class="ssub_nav">
+		<ul>
+			<li><a href="/krwdeposit">USD 입금</a></li>
+			<li><a href="/krwwithdraw">USD 출금</a></li>
+			<li><a href="/btcdeposit">비트코인 입금</a></li>
+			<li class="select last"><a href="/btcwithdraw">비트코인 출금</a></li>
+		</ul>
+	</div>
+
+	<div class="ssub_contents select">
+		<div class="ssub_contentsT">
+			<p>스마트코인거래소 계좌로부터 고객님의 외부 계좌로 비트코인을 출금(전송)합니다.<br/>출금 거래마다 0.0002 BTC Transaction Fee(수수료)가 비트코인 전산망에 납부되오니 실제 수령액은 이를 차감한 것입니다.</p>
+			<p>모든 출금은 관리자 확인 후 실행되며, 출금완료후 고객님의 이메일로 출금 내용이 전송되며, 이메일로 출금 사실을 확인하실 수 있습니다.</p>
+			<p>출금 수수료 : <!--{FEE_BTC_WITHDRAW_VIEW}--> BTC (비트코인 전산망에 납부)<br/>출금 최소 금액 : <!--{MIN_BTC_WITHDRAW_VIEW}--> BTC<br/>출금 최대 금액(1일 기준) : <!--{MAX_ABLE_BTC_AMOUNT_VIEW}--> BTC<br/>출금 시각 : <span class="co4">최대 1시간 이내 반영 (* 해킹이 의심되는 경우 추가적인 출금요청은 사전 통보없이 제한됩니다.)</span></p>
+		</div>
+		<div class="ssub_contentsB">
+			<table style="width:100%;"class="table1" summary="출금 정보">
+				<caption>출금 정보<caption>
+				<colgroup>
+					<col class="bit_table1_col1"/>
+				</colgroup>
+				<colgroup>
+					<col class="bit_table1_col2"/>
+				</colgroup>
+				<tbody><form id="request_btc_form">
+					<tr class="top">
+						<th scope="row">1일 출금한도</th>
+						<td><!--{ABLE_BTC_AMOUNT}--> BTC
+						<input type="hidden" id="able_request_btc_amount" name="able_request_btc_amount" value="<!--{ABLE_BTC_AMOUNT}-->" /></td>
+					</tr>
+					<tr>
+						<th scope="row">출금 가능액</th>
+						<td><!--{=clean_float_number(WALLET_BTC_AMOUNT,0)}--> BTC</td>
+                        <input type="hidden" id="my_btc_amount" name="my_btc_amount" value="<!--{=clean_float_number(WALLET_BTC_AMOUNT,0)}-->" />
+					</tr>
+					<tr>
+						<th scope="row"><label for="money4">출금요청액</label></th>
+						<td><input type="text" class="frm_input" id="request_bitcoin" name="request_bitcoin" onkeyup="setRequestBTC();" value=""/> <span class="co1">BTC</span>
+						<input type="hidden" id="btc_trading_rate" name="btc_trading_rate" value="<!--{BTC_TRADING_RATE}-->"/>
+						<input type="hidden" id="request_type" name="request_type" value="D"/></td>
+					</tr>
+					<tr>
+						<th scope="row">비트코인 전산망 수수료</th>
+						<td><!--{=number_format(BTC_TRADING_RATE, strlen(strrchr(BTC_TRADING_RATE, '.') * 1)-2)}--> BTC</td>
+					</tr>
+					<tr>
+						<th scope="row">비트코인 실제 출금액</th>
+						<td><span id="amount">0</span> BTC</td>
+					</tr>
+                    <tr>
+                        <th scope="row">거래비밀번호(<a href="/edit_pin">거래비밀번호설정</a>) </th>
+                        <td class="pright">
+                            <span id="pinNumber"><input type="password" class="frm_input" id="pin_number" name="pin_number"/></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">SMS인증번호</th>
+                        <td class="pright">
+							<span id="btn_confirmed_mobile" class="button middle blue" style="display:<!--{? bool_confirm_mobile}--><!--{:}-->none<!--{/}-->"><a >핸드폰인증완료</a></span>
+							<span id="btn_send_confirm_number" class="button middle red" <!--{? bool_confirm_mobile}-->style="display:none"<!--{/}-->><a href="#">핸드폰인증번호발송</a></span>
+							
+							<div id="box_write_confirm_number" style="display:none;text-align: right">핸드폰 인증번호: <input type='text' name='confirm_number' id='confirm_sms' value='' class="frm_input" style="width:80px;margin:0px 10px 0px 0px;" /><span class="button middle red"><a id="btn_confirm_mobile" href="#">핸드폰인증</a></span> </div>
+							
+                        </td>
+                    </tr>
+
+
+					<tr class="bottom">
+						<th scope="row"><label for="money5">비트코인 출금 주소</label></th>
+						<td><input type="text" class="frm_input" id="bitcoin_addr" name="bitcoin_addr" value="" onkeydown="window.check_bitcoin_addr = 0;" style="width:250px;" />
+							<input type="button" onclick="checkAddress();" value="주소 확인하기"></td>
+					</tr>
+				</form></tbody>
+			</table><br />
+			<div class="button_area">
+				<button onclick="requestBTC();" class="grad" />출금요청</button>
+			</div>
+
+		</div>
+	</div>
+
+<!--{*
+	<div class="content">
+		<P>
+			한국비트코인거래소 지갑으로부터 회원님의 외부 지갑으로 비트코인을 출급합니다. <br/>
+			출금 거래마다 0.0002 BTC Transaction Fee(수수료)가 비트코인 전산망에 납부되오니 실제 수령액은 <br/>
+			이를 차감한 것입니다. <br/>
+			모든 출금은 관리자 확인 후 실행됩니다. <br/>
+			출금 수수료 : 0.0002 BTC <br/>
+			출금 최소 금액 : 0.01 BTC <br/>
+			출금 최대 금액 (1일 기준) : 10.0 BTC <br/>
+			<strong>출금 시각 : </string><br/>
+				평일 오전 10시까지 신청/확인된 건에 대해 12시 이전 처리 <br/>
+				평일 오후 4시까지 신청/확인된 건에 대해 6시 이전 처리 <br/>
+				일요일 오전 10시까지 신청/확인 건에 대해 11시까지 처리
+		</P>
+	</div>
+
+	<div class="clear_box pcenter"></div>
+
+	<div style="float:left">
+		<table class="form_table">
+			<colgroup>
+				<col width="180"></col>
+				<col width="250"></col>
+			</colgroup>
+			<tbody><form id="request_btc_form">
+				<tr>
+					<td class="pright">출금가능액</td>
+					<td class="pright"><!--{WALLET_BTC_AMOUNT}--> BTC</td>
+				</tr>
+				<tr>
+					<td class="pright">1일 출금한도 여분액</td>
+					<td class="pright">
+						<!--{ABLE_BTC_AMOUNT}--> BTC
+						<input type="hidden" id="able_request_btc_amount" name="able_request_btc_amount" value="<!--{ABLE_BTC_AMOUNT}-->" />
+					</td>
+				</tr>
+				<tr>
+					<td class="pright">출금액</td>
+					<td class="pright">
+						<input type="text" class="frm_input" id="request_bitcoin" name="request_bitcoin" onkeyup="setRequestBTC();" value=""/>BTC
+						<input type="hidden" id="btc_trading_rate" name="btc_trading_rate" value="<!--{BTC_TRADING_RATE}-->"/>
+						<input type="hidden" id="request_type" name="request_type" value="D"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="pright">비트코인 전산망 수수료</td>
+					<td class="pright"><!--{BTC_TRADING_RATE}--> BTC</td>
+				</tr>
+				<tr>
+					<td class="pright">비트코인 실제 출금액</td>
+					<td class="pright">
+						<span id="amount"></span>
+					</td>
+				</tr>
+                <tr>
+                    <td class="pright">거래비밀번호 (거래비밀번호설정) </td>
+                    <td class="pright">
+                        <span id="pinNumber"><input type="password" class="frm_input" id="pin_number" name="pin_number" value="0"/></span>
+                    </td>
+                </tr>
+				<tr>
+					<td class="pright">비트코인 출금 주소</td>
+					<td class="pleft">
+						<input type="text" class="frm_input" id="bitcoin_addr" name="bitcoin_addr" value=""/>
+						<button onclick="checkAddress()">주소 확인하기</button>
+					</td>
+				</tr>
+			</form></tbody>
+		</table>
+		<div class="button_area">
+			<button onclick="requestBTC();" class="grad" />출금요청</button>
+		</div>
+	</div>
+	*}-->
+
+</div>

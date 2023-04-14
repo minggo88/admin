@@ -1,0 +1,120 @@
+<style type="text/css">
+div#loop_comment {margin:10px 0px; border-top:1px solid #999; text-align:right;}
+table.comment_table {width:100%;}
+table.comment_reply_table {width:90%;}
+.comment_info_row th,
+.comment_info_row td {height:18px; padding: 5px;border-bottom:1px dashed #999;}
+.comment_contents_row td {padding: 5px;border-bottom:1px solid #999;}
+
+div.comment_form {background:#f6f6f6; margin: 0px 0px 0px 0px; padding:5px 10px; border:0px solid #ccc; clear:both;}	
+</style>
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><!--{info_bbs.title}--></h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">Home</a>
+			</li>
+			<li>
+				<a>커뮤니티관리</a>
+			</li>
+			<li class="active">
+				<strong><!--{info_bbs.title}--></strong>
+			</li>
+		</ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-title">
+					<h5><!--{info_bbs.title}--></h5>
+				</div>
+				<div class="ibox-content m-b-lg">
+					
+					<table class="form_table table table-striped table-bordered table-hover">
+						<colgroup>
+							<col width="15%"></col>
+							<col width="35%"></col>
+							<col width="50%"></col>
+						</colgroup>
+						<tbody>
+						<tr>
+							<th>글제목</th>
+							<td colspan="2">
+								<h3>(한국어) <!--{subject_kr}--></h3>
+								<h3>(영어) <!--{subject_en}--></h3>
+								<h3>(중국어) <!--{subject_cn}--></h3>
+							</td>
+						</tr>
+						<tr>
+							<th>글쓴이</th>
+							<td><!--{author}--></td>
+							<td>날짜 : <!--{=date('Y-m-d H:m:i',regdate)}--> &nbsp; 조회 : <!--{hit}--> &nbsp; 추천 : <!--{recommand}--></td>
+						</tr>
+						<tr>
+							<th>첨부화일</th>
+							<td colspan="2">
+								<a href="<!--{file}-->"><!--{= str_replace('<img ','<img style="max-width:300px;" ',file_src_html)}--></a>
+							</td>
+						</tr>
+						<tr>
+							<th>한국어 내용</th>
+							<td colspan="2" style="padding:10px 20px;margin:0px;">
+								<!--{contents_kr}-->
+							</td>
+						</tr>
+						<tr>
+							<th>영어 내용</th>
+							<td colspan="2" style="padding:10px 20px;margin:0px;">
+								<!--{contents_en}-->
+							</td>
+						</tr>
+						<tr>
+							<th>중국어 내용</th>
+							<td colspan="2" style="padding:10px 20px;margin:0px;">
+								<!--{contents_cn}-->
+							</td>
+						</tr>
+						</tbody>
+					</table>
+
+					<div class="col-md-12 no-padding m-b-md">
+						<div class="col-md-6 no-padding text-let">
+							<a href="<!--{? !up_info.bool_no_list}--><!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&idx=<!--{up_info.idx}-->&list_cnt=<!--{up_info.list_cnt}-->&start=<!--{up_info.start}--><!--{up_info.srch_url}--><!--{/}-->" id="btn_bbs_up" class="btn btn-default" >이전</a>
+							<a href="<!--{? !down_info.bool_no_list}--><!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&idx=<!--{down_info.idx}-->&list_cnt=<!--{down_info.list_cnt}-->&start=<!--{down_info.start}--><!--{down_info.srch_url}--><!--{/}-->" id="btn_bbs_down" class="btn btn-default" >다음</a>
+
+
+
+						</div>
+						<div class="col-md-6 no-padding text-right">
+							<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->" class="btn btn-default">목록</a>
+							<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new<!--{srch_url}-->" class="btn btn-primary">새글</a>
+							<!--{*
+							<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_reply&idx=<!--{_GET.idx}--><!--{srch_url}-->" class="btn btn-info">답변</a>
+							*}-->
+							<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&idx=<!--{_GET.idx}-->&pos=<!--{pos}-->&thread=<!--{thread}-->&depth=<!--{depth}--><!--{srch_url}-->" class="btn btn-warning">수정</a>
+							<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&bbscode=<!--{_GET.bbscode}-->&idx=<!--{_GET.idx}-->&ret_url=<!--{ret_url}-->" class="btn btn-danger">삭제</a>
+						</div>
+					</div>
+
+
+					<!--{*
+					<div id="js_bbs_comment"></div>
+
+
+					<div id="js_bbs_comment_form"><!--{# js_tpl_main_comment_form}--></div>
+					<div id="js_bbs_comment_list"><!--{# js_tpl_main_comment_list}--></div>
+					<div id="js_bbs_relation"><!--{# js_tpl_main_sub_list}--></div>
+
+					*}-->
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

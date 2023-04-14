@@ -1,0 +1,33 @@
+<div id="graph_bw" style="width:100%;"></div>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	var plot_cfg6 = {
+		plot_id : 'graph_bw',
+		plot_data : [[<!--{bw_data}-->]],
+		plot_option : {
+			seriesColors: ["#2F93F7"],
+			legend:{show:false}, 
+			grid: {background:'#FFFFF7', gridLineColor:'#e1e1e1', color:'#555'},
+			series:[
+				//{label:'경로 분석',lineWidth:2, markerOptions:{style:'circle'}}
+				
+				{label:' 브라우져 분석',renderer:$.jqplot.BarRenderer,rendererOptions:{<!--{? size_bw < 8}-->barWidth:50,<!--{/}-->barPadding: 20, barMargin: 20}}
+			],
+			axesDefaults: { tickRenderer: $.jqplot.CanvasAxisTickRenderer, tickOptions: { angle: -30, fontSize: '10pt' }},
+			axes:{
+				xaxis:{renderer:$.jqplot.CategoryAxisRenderer,ticks: [<!--{bw_ticks}-->], tickOptions:{formatString:'%d'}}, 
+				yaxis:{showTicks:false}
+			}
+		}
+	};
+
+	$.jqplot(plot_cfg6.plot_id, plot_cfg6.plot_data,plot_cfg6.plot_option);
+
+	$("#tabs").tabs();
+
+});
+
+//-->
+</script>

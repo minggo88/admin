@@ -1,0 +1,145 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container  pl-50 pr-50">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					<?=Lang::main_member79;?>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+			<div class="row">
+
+				<div class="hidden-md-down col-lg-2 Rectangle-6-copy-8 hidden">
+					<!-- <div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text "><a href="/edit"><?=Lang::main_35;?></a></label>
+					</div>
+					<div class="layer"></div> -->
+					<div class="Rectangle-6-copy-4 ">
+						<label class="Rectangle-Text"><a href="/certification"><?=Lang::main_36;?></a></label>
+					</div>
+					<div class=" "></div>
+					<!-- <div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/editpin"  class="active"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer active"></div> -->
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/histories"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/withdraw"><?=Lang::main_member79;?></a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30">
+
+					<div class="row">
+						<div class="col-sm-12 mb-0 hidden">
+							<nav class="pull-right">
+								<ol class="breadcrumb">
+									<li><a href="/">Home</a></li>
+									<li><a href="/edit"><?=Lang::main_116;?></a></li>
+									<li class="active"><?=Lang::main_member79;?></li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-sm-12">
+
+							<h3 class="xspecial-heading v2 fs-18 hidden"><span><?=Lang::main_member79;?></span></h3>
+
+							<div class="smart-wrap">
+								<div class="smart-forms smart-container">
+
+									<form method="post" id="withdrawform" name="withdrawform" action="/withdraw">
+										<input type="hidden" name="pg_mode" value="withdraw" />
+										
+										<div class="form-body">
+
+											<div class="spacer-t30 spacer-b30">
+												<div class="tagline"><span class="fs-20"><?=Lang::main_member79;?> </span></div>
+											</div>
+
+											<div class="section">
+												<label class="field-label">
+													<span class="fs-18 lh-30"><?=Lang::main_member80;?>  <!--{? _SESSION.USER_NAME}--><!--{_SESSION.USER_NAME}--><!--{:}--><!--{_SESSION.USER_ID}--><!--{/}--><?=Lang::main_member81;?>!</span><br />
+													<span class="fs-14 lh-20"><?=Lang::main_member82;?></span><br />
+													<span class="fs-14 lh-20"><?=Lang::main_member83;?></span><br />
+													<span class="fs-14 lh-20"><?=Lang::main_member84;?></span>
+												</label>
+											</div>
+
+											<div class="frm-row">
+												
+												<div class="colm colm6">
+
+													<div class="section">
+														<label for="userid" class="field-label"><span class="fs-14 lh-20"><?=Lang::main_214;?></span></label>
+														<label class="field prepend-icon">
+															<input type="text" name="userid" id="userid" class="gui-input" placeholder="<!--{_SESSION.USER_ID}-->" readonly>
+															<span class="field-icon"><i class="fa fa-mail"></i></span>
+														</label>
+													</div><!-- end section -->
+
+												</div>
+												<div class="colm colm6">
+
+													<div class="section">
+
+														<div class="section">
+															<label for="name" class="field-label"><span class="fs-14 lh-20"><?=Lang::main_bbs11;?></span></label>
+															<label class="field prepend-icon">
+																<input type="text" name="name" id="name" class="gui-input" placeholder="<!--{_SESSION.USER_NAME}-->" readonly>
+																<span class="field-icon"><i class="fa fa-user"></i></span>
+															</label>
+														</div><!-- end section -->
+
+													</div><!-- end section -->
+
+												</div>
+												<div class="colm colm12">
+
+													<div class="section">
+
+														<div class="section">
+															<label for="contents" class="field-label"><span class="fs-14 lh-20"><?=Lang::main_member85;?></span></label>
+															<label class="field prepend-icon">
+																<textarea name="contents" id="contents" class="gui-input" placeholder="<?=Lang::main_member89;?>" style="height:100px"></textarea>
+																<span class="field-icon"><i class="fa fa fa-pencil"></i></span>
+															</label>
+														</div><!-- end section -->
+
+													</div><!-- end section -->
+
+												</div>
+											</div>
+
+										</div><!-- end .form-body section -->
+										
+										<div class="input-group pb-50" style="padding:0 20px">
+											<button type="submit" class="btn btn-gold fs-20"><?=Lang::main_member87;?></button>
+										</div><!-- end .form-footer section -->
+									</form>
+
+								</div><!-- end .smart-forms section -->
+							</div><!-- end .smart-wrap section -->
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+<!--{# js_tpl_footer}-->
+
+</div>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title><!--{config_basic.shop_ename}--></title>
+   <meta name="keywords" content="<!--{config_basic.site_keywords}-->" />
+   <meta name="description" content="" />
+   <meta name="author" content="scc" />
+   <meta name="copyright" content="Copyright ⓒ <!--{config_basic.shop_ename}-->  2020 All right reserved" />
+   <meta name="build" content="2018.07.17">
+   <meta name="content-language"content="en">
+   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+   <link rel="icon" type="image/png" href="/img/favicon.png">
+   <link rel="icon" type="image/png" href="/img/favicon_16.png" sizes="16x16">
+   <link rel="icon" type="image/png" href="/img/favicon_24.png" sizes="24x24">
+   <link rel="icon" type="image/png" href="/img/favicon_64.png" sizes="64x64">
+   <link rel="icon" type="image/png" href="/img/favicon_72.png" sizes="72x72">
+   <link rel="icon" type="image/png" href="/img/favicon_128.png" sizes="128x128">
+   <link rel="icon" type="image/png" href="/img/favicon_180.png" sizes="180x180">
+   <link rel="icon" type="image/png" href="/img/favicon_196.png" sizes="196x196">
+
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Cabin:400,600,700" rel="stylesheet">
+
+   <!-- Vendor CSS -->
+   <link rel="stylesheet" href="vendor/tether/tether.min.css" />
+   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/fonts/express-icons.css" />
+   <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php' || _SERVER.SCRIPT_NAME =='/member/memberJoin.php' || _SERVER.SCRIPT_NAME =='/member/memberEdit.php' || _SERVER.SCRIPT_NAME =='/ledger/ledger.php' }-->
+   <link rel="stylesheet" href="vendor/bootstrap/css/glyphicon.css" />
+   <!--{: _SERVER.SCRIPT_NAME =='/bbs/bbs.php' }-->
+   <link rel="stylesheet" href="css/fonts/express-icons.css" />
+   <!--{/}-->
+   <link rel="stylesheet" href="vendor/ion-icons/css/ionicons.min.css" />
+   <link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css" />
+   <link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css" />
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php' || _SERVER.SCRIPT_NAME =='/member/memberJoin.php' || _SERVER.SCRIPT_NAME =='/member/memberInfoFind.php' || _SERVER.SCRIPT_NAME =='/member/memberEdit.php' || _SERVER.SCRIPT_NAME =='/about/index.php' || _SERVER.SCRIPT_NAME =='/ledger/ledger.php'}-->
+   <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" />
+   <!--{: _SERVER.SCRIPT_NAME =='/bbs/bbs.php' }-->
+   <link rel="stylesheet" href="vendor/menuzord/css/menuzord-animations.css" />
+   <!--{/}-->
+   <link rel="stylesheet" href="vendor/lite-tooltip/css/litetooltip.css" />
+
+   <!--{? _SERVER.SCRIPT_NAME =='/bbs/bbs.php' }-->
+   <link href="vendor/dzsparallaxer/dzsparallaxer.css" rel="stylesheet" />
+   <link href="vendor/dzsparallaxer/dzsscroller/scroller.css" rel="stylesheet" />
+   <link href="vendor/dzsparallaxer/advancedscroller/plugin.css" rel="stylesheet" />
+   <!--{/}-->
+
+   <!-- Smart Forms CSS -->
+   <link href="smartforms/Templates/css/smart-loader.css" rel="stylesheet" />
+   <link href="smartforms/Templates/css/smart-addons.css" rel="stylesheet" />
+   <link href="smartforms/Templates/css/smart-forms.css" rel="stylesheet" />
+
+
+   <!-- Theme CSS -->
+   <link href="css/main.css" rel="stylesheet" />
+   <link href="css/main-shortcodes.css" rel="stylesheet" />
+   <link href="css/header.css" rel="stylesheet" />
+   <link href="css/form-element.css" rel="stylesheet" />
+   <link href="css/animation.css" rel="stylesheet" />
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->
+   <link href="css/streamline-icon.css" rel="stylesheet" />
+   <link href="css/font-icons.css" rel="stylesheet" />
+   <!--{: _SERVER.SCRIPT_NAME =='/bbs/bbs.php' }-->
+   <link href="css/font-icons.css" rel="stylesheet" />
+   <link href="css/blog.css" rel="stylesheet" />
+   <!--{/}-->
+   <!--{? _SERVER.SCRIPT_NAME =='/about/index.php'}-->
+   <link href="css/font-icons.css" rel="stylesheet" />
+   <!--{/}-->
+
+   <link href="css/responsive.css" rel="stylesheet" />
+   <link href="css/utilities.css" rel="stylesheet" />
+   <link href="css/skins/default.css" rel="stylesheet" />
+
+
+   <!-- Current Page CSS -->
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->
+   <link rel="stylesheet" href="vendor/rs-plugin/css/settings.css">
+   <link rel="stylesheet" href="vendor/rs-plugin/css/layers.css">
+   <link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css">
+   <!--{: _SERVER.SCRIPT_NAME =='/member/memberAuth.php'}-->
+   <link href="smartforms/Templates/css/smart-forms.css" rel="stylesheet" />
+   <!--{/}-->
+
+   <!-- Theme Custom CSS -->
+   <link rel="stylesheet" href="css/custom.css">
+
+   <!-- React datepicker CSS -->
+   <link rel="stylesheet" href="css/react-datepicker.css">
+
+   <!-- Style Swicher -->
+   <link href="vendor/style-switcher/style-switcher.css" rel="stylesheet" />
+   <link href="vendor/style-switcher/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet" />
+
+
+   <!-- SCC CSS -->
+   <link rel="stylesheet" href="css/scc_new.css">
+   <link rel="stylesheet" href="css/coin.css">
+
+</head>
+
+<body>
+
+   <div class="wrapper">
+   <!--{# js_tpl_contents}-->
+   </div>
+
+   <!-- Vendor -->
+   <script src="vendor/jquery/jquery.js"></script>
+   <script src="vendor/jquery/jquery.nav.js"></script>
+   <script src="vendor/jquery/jquery.validate.js"></script>
+   <script src="vendor/jquery.appear/jquery.appear.min.js"></script>
+   <script src="vendor/jquery.easing/jquery.easing.min.js"></script>
+   <script src="vendor/jquery-cookie/jquery-cookie.min.js"></script>
+   <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+   <script src="vendor/modernizr/modernizr.min.js"></script>
+   <script src="vendor/tether/tether.min.js"></script>
+   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+   <script src="vendor/menuzord/menuzord.js"></script>
+   <script src="vendor/sticky/jquery.sticky.min.js"></script>
+   <script src="vendor/isotope/jquery.isotope.min.js"></script>
+   <script src="vendor/respond/respond.js"></script>
+   <script src="vendor/images-loaded/imagesloaded.js"></script>
+   <script src="vendor/owl-carousel/owl.carousel.js"></script>
+   <script src="vendor/wow/wow.min.js"></script>
+   <script src="vendor/lite-tooltip/js/litetooltip.js"></script>
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->
+   <script src="vendor/smoothscroll/smooth.scroll.min.js"></script>
+   <!--{/}-->
+   <script src="js/theme-plugins.js"></script>
+
+
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->
+   <!-- Current Page Vendor and Views -->
+   <script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+   <script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+   <!--{: _SERVER.SCRIPT_NAME =='/about/index.php'}-->
+   <!-- Google Maps -->
+   <script src="vendor/jquery.gmap/map-styles.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIy24644w-ZBEOCfMfzYPYeULbuKJg_rs"></script>
+   <script src="vendor/jquery.gmap/jquery.gmap.min.js"></script>
+   <!--{: _SERVER.SCRIPT_NAME =='/bbs/bbs.php'}-->
+   <script src="vendor/fitvids/fitvids.js"></script>
+   <!--{/}-->
+
+   <!-- Theme Initialization -->
+   <script src="js/theme.js"></script>
+   <script src="js/custom.js"></script>
+   <!--<script src="js/ledger-react.js"></script>-->
+
+   <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->
+   <script src="js/main-react.js"></script>
+   <!--{/}-->
+
+   <!-- Sparkline -->
+   <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!--{? _SERVER.SCRIPT_NAME =='/member/memberJoin.php' && _GET.pg_mode=='form_join'}-->
+    <script src="js/registration.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/member/memberJoin.php'}-->
+    <script src="js/join.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/member/memberInfoFind.php' && _GET.pg_mode!='resetpw'}-->
+    <script src="js/findinfo.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/member/memberEdit.php' && _GET.pg_mode=='edit_pin'}-->
+    <script src="js/edit_pin_form.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/member/memberEdit.php'}-->
+   <script src="js/edit_form.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/ledger/ledger.php'}-->
+    <script src="js/ledger_form.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/mypage/mtom.php'}-->
+    <script src="js/mtom.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/cscenter/faq.php'}-->
+    <script src="js/faq.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/bbs/bbs.php'}-->
+    <script src="js/bbs.js"></script>
+    <!--{: _SERVER.SCRIPT_NAME =='/account/myinfo.php'}-->
+    <script src="js/myinfo.js"></script>
+    <!--{/}-->
+
+
+   <!--{@ loop_script}-->
+   <script src="<!--{.value_}-->" charset="utf-8" type="text/javascript"></script>
+   <!--{/}-->
+
+
+</body>
+</html>

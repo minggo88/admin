@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-05 11:17+0900\n"
+"PO-Revision-Date: 2019-08-05 11:21+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: lib/SimpleRestful.php:207 ../lib/SimpleRestful.php:255
+#: ../lib/SimpleRestful.php:260 ../lib/SimpleRestful.php:258
+#: ../lib/SimpleRestful.php:263 ../lib/SimpleRestful.php:276
+msgid "Failed to create folders. path: {dir}"
+msgstr "폴더를 생성하지 못했습니다. 경로: {dir}"
+
+#: lib/SimpleRestful.php:211 ../lib/SimpleRestful.php:259
+#: ../lib/SimpleRestful.php:264 ../lib/SimpleRestful.php:262
+#: ../lib/SimpleRestful.php:267 ../lib/SimpleRestful.php:280
+msgid ""
+"The folder does not have write permission. Please specify write permission. "
+"path: {dir}"
+msgstr "폴더에 쓰기 권한이 없습니다. 쓰기 권한을 지정하십시오. 경로: {dir}"
+
+#: lib/SimpleRestful.php:307 ../lib/SimpleRestful.php:355 ../lib/test.php:36
+#: ../lib/SimpleRestful.php:360 ../lib/SimpleRestful.php:358
+#: ../lib/SimpleRestful.php:363 ../lib/SimpleRestful.php:376
+msgid "Mysql Connection Error: Failed connecting to database server"
+msgstr "MySQL 연결 오류: 데이터베이스 서버에 연결하는데 실패 했습니다."
+
+#: lib/SimpleRestful.php:369 ../lib/SimpleRestful.php:417
+#: ../lib/SimpleRestful.php:422 ../lib/SimpleRestful.php:420
+#: ../lib/SimpleRestful.php:425 ../lib/SimpleRestful.php:438
+msgid "Mysql Query Error: Failed executing database query"
+msgstr "MySQL 쿼리 애러: 데이터베이스 쿼리 실행에 실패 했습니다."
+
+#: lib/SimpleRestful.php:1064 ../lib/SimpleRestful.php:1112 ../lib/test.php:39
+#: ../lib/SimpleRestful.php:1117 ../lib/SimpleRestful.php:1122
+#: ../lib/SimpleRestful.php:1129 ../lib/SimpleRestful.php:1142
+#: ../lib/SimpleRestful.php:1169 ../lib/SimpleRestful.php:1182
+msgid "Please fill in {name}."
+msgstr "{name} 항목을 입력해 주세요."
+
+#: lib/SimpleRestful.php:1072 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1125 ../lib/SimpleRestful.php:1130
+#: ../lib/SimpleRestful.php:1137 ../lib/SimpleRestful.php:1150
+#: ../lib/SimpleRestful.php:1177 ../lib/SimpleRestful.php:1190
+msgid "Please enter a number greater than zero."
+msgstr "0보다 큰 숫자를 입력해주세요."
+
+#: lib/SimpleRestful.php:1080 lib/TradeApi.php:514 lib/TradeApi.php:538
+#: ../lib/SimpleRestful.php:1128 ../lib/TradeApi.php:514
+#: ../lib/TradeApi.php:538 ../lib/SimpleRestful.php:1133
+#: ../lib/SimpleRestful.php:1138 ../lib/TradeApi.php:513
+#: ../lib/SimpleRestful.php:1145 ../lib/TradeApi.php:515
+#: ../lib/TradeApi.php:540 ../lib/SimpleRestful.php:1158
+#: ../lib/SimpleRestful.php:1185 ../lib/TradeApi.php:519
+#: ../lib/TradeApi.php:544 ../lib/SimpleRestful.php:1198
+#: ../lib/TradeApi.php:631 ../lib/TradeApi.php:656
+msgid "Please enter the number."
+msgstr "숫자를 입력해주세요."
+
+#: lib/TradeApi.php:161 ../lib/TradeApi.php:161 ../lib/TradeApi.php:163
+#: ../lib/TradeApi.php:213 ../lib/TradeApi.php:221
+msgid "Please login."
+msgstr "로그인 해주세요."
+
+#: lib/TradeApi.php:217 lib/TradeApi.php:227 lib/TradeApi.php:237
+#: lib/TradeApi.php:247 lib/TradeApi.php:258 lib/TradeApi.php:269
+#: lib/TradeApi.php:327 lib/TradeApi.php:337 ../lib/TradeApi.php:217
+#: ../lib/TradeApi.php:227 ../lib/TradeApi.php:237 ../lib/TradeApi.php:247
+#: ../lib/TradeApi.php:258 ../lib/TradeApi.php:269 ../lib/TradeApi.php:327
+#: ../lib/TradeApi.php:337 ../lib/TradeApi.php:219 ../lib/TradeApi.php:229
+#: ../lib/TradeApi.php:239 ../lib/TradeApi.php:249 ../lib/TradeApi.php:260
+#: ../lib/TradeApi.php:271 ../lib/TradeApi.php:329 ../lib/TradeApi.php:339
+#: ../lib/TradeApi.php:283 ../lib/TradeApi.php:293 ../lib/TradeApi.php:303
+#: ../lib/TradeApi.php:313 ../lib/TradeApi.php:324 ../lib/TradeApi.php:335
+#: ../lib/TradeApi.php:393 ../lib/TradeApi.php:403
+msgid "Failed to connect to coin server. details: "
+msgstr "코인 서버에 연결하지 못했습니다. 세부정보: "
+
+#: lib/TradeApi.php:1909 ../lib/TradeApi.php:1909 ../lib/TradeApi.php:1911
+#: ../lib/TradeApi.php:1921 ../lib/TradeApi.php:1957 ../lib/TradeApi.php:2111
+msgid "Please enter the correct return type."
+msgstr "올바른 반환 형식을 입력해주세요."
+
+#: lib/TradeApi.php:1916 lib/TradeApi.php:1951 ../lib/TradeApi.php:1916
+#: ../lib/TradeApi.php:1951 ../lib/TradeApi.php:1918 ../lib/TradeApi.php:1953
+#: ../lib/TradeApi.php:1928 ../lib/TradeApi.php:1963 ../lib/TradeApi.php:1964
+#: ../lib/TradeApi.php:1999 ../lib/TradeApi.php:2118 ../lib/TradeApi.php:2153
+msgid "Please enter the correct symbol."
+msgstr "올바른 심볼값을 입력해주세요."
+
+#: lib/TradeApi.php:1925 ../lib/TradeApi.php:1925 ../lib/TradeApi.php:1927
+#: ../lib/TradeApi.php:1937 ../lib/TradeApi.php:1973 ../lib/TradeApi.php:2127
+msgid "Please enter the correct action value."
+msgstr "올바른 값을 입력해주세요."
+
+#: lib/TradeApi.php:1931 ../lib/TradeApi.php:1931 ../lib/TradeApi.php:1933
+#: ../lib/TradeApi.php:1943 ../lib/TradeApi.php:1979 ../lib/TradeApi.php:2133
+msgid "You can only view your personal information."
+msgstr "본인 정보만 조회할 수 있습니다."
+
+#: lib/TradeApi.php:1942 ../lib/TradeApi.php:1942 ../lib/TradeApi.php:1944
+#: ../lib/TradeApi.php:1954 ../lib/TradeApi.php:1990 ../lib/TradeApi.php:2144
+msgid "Please enter the correct UUID."
+msgstr "올바른 UUID를 입력해주세요."
+
+#: lib/TradeApi.php:1960 ../lib/TradeApi.php:1960 ../lib/TradeApi.php:1962
+#: ../lib/TradeApi.php:1972 ../lib/TradeApi.php:2008 ../lib/TradeApi.php:2162
+msgid "Please enter the correct date."
+msgstr "올바를 날짜를 입력해주세요."
+
+#: lib/TradeApi.php:1970 ../lib/TradeApi.php:1970 ../lib/TradeApi.php:1972
+#: ../lib/TradeApi.php:1982 ../lib/TradeApi.php:2017 ../lib/TradeApi.php:2171
+msgid "Please enter the price according to the quotation unit({quote_unite})."
+msgstr "호가단위({quote_unite})에 맞게 가격을 입력해주세요."
+
+#: v1.0/buy/index.php:65 ../v1.0/buy/index.php:65 ../v1.0/buy/index.php:66
+#: ../v1.0/buy/index.php:68 ../v1.0/buy/index_bms.php:71
+#: ../v1.0/buy/index.php:72 ../v1.0/buy/index_static_price.php:68
+msgid "There is not enough balance to buy."
+msgstr "남은 잔액이 부족하여 구매할 수 없습니다."
+
+#: v1.0/buy/index.php:183 v1.0/cancel/index.php:56
+#: v1.0/checkReceive/index.php:109 v1.0/deposit/index.php:37
+#: v1.0/putFCM/index.php:32 v1.0/sell/index.php:170 ../v1.0/buy/index.php:183
+#: ../v1.0/cancel/index.php:56 ../v1.0/checkReceive/index.php:109
+#: ../v1.0/deposit/index.php:37 ../v1.0/putFCM/index.php:32
+#: ../v1.0/sell/index.php:170 ../v1.0/buy/index.php:184
+#: ../v1.0/checkReceive/index.php:117 ../v1.0/sell/index.php:171
+#: ../v1.0/buy/index.php:194 ../v1.0/buy/index_bms.php:234
+#: ../v1.0/sell/index.php:180 ../v1.0/sell/index_bms.php:216
+#: ../v1.0/buy/index.php:235 ../v1.0/buy/index_static_price.php:194
+#: ../v1.0/deposit/index.php:42 ../v1.0/sell/index.php:217
+#: ../v1.0/sell/index_static_price.php:180
+msgid "A system error has occurred."
+msgstr "시스템 오류가 발생했습니다."
+
+#: v1.0/cancel/index.php:23 ../v1.0/cancel/index.php:23
+msgid "You can only process your own orders."
+msgstr "본인의 주문만 처리할 수 있습니다."
+
+#: v1.0/cancel/index.php:28 ../v1.0/cancel/index.php:28
+msgid "You can not cancel because already completed an order."
+msgstr "거래가 완료되어 취소할 수 없습니다."
+
+#: v1.0/createNewAddress/index.php:30 ../v1.0/createNewAddress/index.php:30
+msgid "Failed to create new address. "
+msgstr "새 주소를 생성하지 못했습니다."
+
+#: v1.0/getTransactionList/index.php:23 ../v1.0/getTransactionList/index.php:23
+msgid "Wallet address is missing. Please create an address."
+msgstr "지갑 주소가 없습니다. 주소를 생성해주세요."
+
+#: v1.0/getTransactionList/index.php:26 ../v1.0/getTransactionList/index.php:26
+msgid "Please enter the correct address."
+msgstr "올바를 주소를 입력해주세요."
+
+#: v1.0/getVersion/index.php:20 ../v1.0/getVersion/index.php:20
+msgid "There is no version information."
+msgstr "버전 정보가 없습니다."
+
+#: v1.0/join/index.php:24 v1.0/join/index.php:29 v1.0/login/index.php:24
+#: v1.0/login/index.php:29 ../v1.0/join/index.php:24 ../v1.0/join/index.php:29
+#: ../v1.0/login/index.php:24 ../v1.0/login/index.php:29
+#: ../v1.0/login/index.php:28 ../v1.0/login/index.php:33
+#: ../v1.0/login/index.php:27 ../v1.0/login/index.php:32
+#: ../v1.0/loginAdmin/index.php:23
+msgid "The information does not match. Please check your ID!"
+msgstr "입력받은 정보가 맞지 않습니다. 아이디를 확인해주세요."
+
+#: v1.0/join/index.php:34 v1.0/login/index.php:34 ../v1.0/join/index.php:34
+#: ../v1.0/login/index.php:34 ../v1.0/login/index.php:38
+#: ../v1.0/login/index.php:37
+msgid "You did not verify your email. Please check your email verification!"
+msgstr "이메일이 인증되지 않았습니다. 이메일인증을 해주세요."
+
+#: v1.0/join/index.php:46 v1.0/login/index.php:46 ../v1.0/join/index.php:46
+#: ../v1.0/login/index.php:46 ../v1.0/login/index.php:50
+#: ../v1.0/login/index.php:49
+msgid "Login failed."
+msgstr "로그인 실패"
+
+#: v1.0/putFCM/index.php:22 ../v1.0/putFCM/index.php:22
+msgid "The UUID that is already registered."
+msgstr "이미 등록된 UUID 입니다."
+
+#: v1.0/sell/index.php:52 ../v1.0/sell/index.php:52 ../v1.0/sell/index.php:53
+#: ../v1.0/sell/index.php:55 ../v1.0/sell/index_bms.php:58
+#: ../v1.0/sell/index.php:59 ../v1.0/sell/index_static_price.php:55
+msgid "There is not enough balance to sell."
+msgstr "남은 잔액이 부족하여 판매할 수 없습니다."
+
+#: v1.0/withdraw/index.php:23 ../v1.0/withdraw/index.php:23
+msgid "Please enter a value larger than the minimum withdrawal amount."
+msgstr "출금하실 금액을 최소출금액보다 크게 입력해주세요."
+
+#: v1.0/withdraw/index.php:29 ../v1.0/withdraw/index.php:29
+msgid "Please enter the correct PIN number."
+msgstr "올바른 거래보안번호를 입력해주세요."
+
+#: v1.0/withdraw/index.php:37 ../v1.0/withdraw/index.php:37
+msgid "Please enter the member's withdrawal address."
+msgstr "회원 소유의 출금 주소를 입력해주세요."
+
+#: v1.0/withdraw/index.php:43 ../v1.0/withdraw/index.php:43
+msgid "You can not withdraw more than your balance."
+msgstr "잔액보다 많은 금액을 출금 할 수 없습니다."
+
+#: v1.0/withdraw/index.php:50 ../v1.0/withdraw/index.php:50
+msgid "Withdrawal amount is less than the fee."
+msgstr "출금하실 금액을 출금 수수료보다 크게 입력해주세요."
+
+#: v1.0/withdraw/index.php:55 ../v1.0/withdraw/index.php:55
+msgid "Member requested withdrawal."
+msgstr "회원이 출금 신청함."
+
+#: ../lib/SimpleRestful.php:1216 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1127 ../lib/SimpleRestful.php:1140
+#: ../lib/SimpleRestful.php:1167 ../lib/SimpleRestful.php:1180
+msgid "the required fields"
+msgstr "내용을 채워주세요."
+
+#: ../v1.0/checkReceive/index.php:28
+msgid "Symbole 정보가 없습니다."
+msgstr "Symbole 정보가 없습니다."
+
+#: ../v1.0/checkReceive/index.php:52
+msgid "이미 처리했습니다."
+msgstr "이미 처리했습니다."
+
+#: ../v1.0/checkReceive/index.php:70
+msgid "입금 정보에서 입금자와 입금액을 찾지 못했습니다."
+msgstr "입금 정보에서 입금자와 입금액을 찾지 못했습니다."
+
+#: ../v1.0/logout/index.php:10
+msgid "Please enter the token value."
+msgstr "token 값을 입력해주세요."
+
+#: ../v1.0/join/index.php:10
+msgid "Enter your first name!"
+msgstr "이름을 입력해 주세요."
+
+#: ../v1.0/join/index.php:14
+msgid "Enter your last name!"
+msgstr "성을 입력해 주세요."
+
+#: ../v1.0/join/index.php:21
+msgid "Please enter your member ID."
+msgstr "아이디를 입력해주세요."
+
+#: ../v1.0/join/index.php:34 ../v1.0/join/index.php:39
+#: ../v1.0/join/index.php:49
+msgid "Enter your password!"
+msgstr "비밀번호를 입력해 주세요."
+
+#: ../v1.0/join/index.php:51 ../v1.0/join/index.php:56
+#: ../v1.0/join/index.php:66
+msgid "Please enter another ID that is not duplicated."
+msgstr "중복되지 않는 아이디를 입력해주세요."
+
+#: ../v1.0/join/index.php:75 ../v1.0/join/index.php:79
+#: ../v1.0/join/index.php:88 ../v1.0/join/index.php:92
+#: ../v1.0/join/index.php:98 ../v1.0/join/index.php:102
+msgid ""
+"There was an error processing your subscription. Please contact "
+"administrator."
+msgstr "회원가입이 되지 않았습니다. 관리자에게 문의하시기 바랍니다."
+
+#: ../v1.0/buy/index_bms.php:77 ../v1.0/buy/index_bms.php:82
+#: ../v1.0/sell/index_bms.php:64 ../v1.0/sell/index_bms.php:69
+#: ../v1.0/buy/index.php:78 ../v1.0/buy/index.php:83 ../v1.0/sell/index.php:65
+#: ../v1.0/sell/index.php:70
+msgid "There is no fee account information."
+msgstr "수수료 관리자의 계정정보가 없습니다."
+
+#: ../v1.0/getCountry/index.php:12
+msgid "Korea (the Republic of)"
+msgstr "대한민국"
+
+#: ../v1.0/getCountry/index.php:13
+msgid "China"
+msgstr "중국"
+
+#: ../v1.0/getCountry/index.php:14
+msgid "Hong Kong"
+msgstr "홍콩"
+
+#: ../v1.0/getCountry/index.php:15
+msgid "Macau"
+msgstr "마카오"
+
+#: ../v1.0/getCountry/index.php:16
+msgid "Singapore"
+msgstr "싱가포르"
+
+#: ../v1.0/getCountry/index.php:17
+msgid "Malaysia"
+msgstr "말레이시아"
+
+#: ../v1.0/getCountry/index.php:18
+msgid "Indonesia"
+msgstr "인도네시아"
+
+#: ../v1.0/getCountry/index.php:19
+msgid "Mongolia"
+msgstr "몽골"
+
+#: ../v1.0/getCountry/index.php:20
+msgid "Thailand"
+msgstr "태국"
+
+#: ../v1.0/getCountry/index.php:21
+msgid "Australia"
+msgstr "오스트레일리아"
+
+#: ../v1.0/getCountry/index.php:22
+msgid "United States"
+msgstr "미국"
+
+#: ../v1.0/getCountry/index.php:23
+msgid "United Kingdom"
+msgstr "영국"
+
+#: ../v1.0/getCountry/index.php:24
+msgid "Canada"
+msgstr "캐나다"
+
+#: ../v1.0/getCountry/index.php:25
+msgid "Japan"
+msgstr "일본"
+
+#: ../lib/TradeApi.php:2025 ../lib/TradeApi.php:2179
+msgid "Please enter the correct email."
+msgstr "올바른 이메일을 입력해주세요."
+
+#: ../v1.0/join/index.php:26
+msgid "The member ID must contain a country code in uppercase letters."
+msgstr "회원아이디에는 대문자로 된 국가코드가 포함되어야 합니다."
+
+#: ../v1.0/join/index.php:30
+msgid "Please enter your phone number."
+msgstr "전화번호를 입력해주세요."
+
+#: ../v1.0/join/index.php:36
+msgid "Please enter the mobile value."
+msgstr "mobile 값을 입력해주세요."
+
+#: ../lib/TradeApi.php:228
+msgid "You do not have permission."
+msgstr "권한이 없습니다. 다시 로그인해주세요."
+
+#: ../v1.0/buy/index.php:18 ../v1.0/sell/index.php:18
+msgid "Please enter only 4 decimal places for quantity."
+msgstr "수량에는 소수점4자리까지 입력해주세요."
+
+#: ../v1.0/buy/index.php:57 ../v1.0/sell/index.php:54
+msgid "Your payment amount is too low. Please raise the quantity."
+msgstr "지불금액이 너무 낮습니다. 수량을 높여주세요."

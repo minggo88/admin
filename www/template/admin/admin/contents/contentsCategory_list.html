@@ -1,0 +1,193 @@
+<style type="text/css">
+ul.sub_cts li.underline {  border-bottom:1px solid #ccc;}
+.cts_name { display:inline-block; width:300px;font-weight:bold;padding:0;margin:0;}
+.cts_type {  display:inline-block; width:150px;text-align:center;padding:0;margin:0;}
+.cts_control { display:inline-block; width:100px;text-align:center;padding:0;margin:0;}
+
+.sub_cts li.underline:hover {background-color:#ddd;}
+
+</style>
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table.list_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function editForm(code) {
+	location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit<!--{srch_url}-->&code='+code;
+}
+
+function listDel(code,depth) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&cate_code='+code+'&depth='+depth,function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				//location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+
+//테이블 드래그
+$(function() {
+	$("#drag_table").tableDnD({
+		onDragClass: "dndover ",
+		dragHandle: "dragHandle"
+	});
+
+	$(".sub_cts").dragsort();
+});
+
+function saveRanking() {
+	if(!confirm('메뉴 순서를 적용하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=save_ranking<!--{srch_url}-->&'+$('#drag_table').tableDnDSerialize(),function(data) {
+		if(data['bool']) {
+			alert('순서가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				//location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}	
+
+ function saveSubRanking(target) {
+	if(!confirm('메뉴 순서를 적용하시겠습니까?')) {
+		return;
+	}
+	var code = $("#"+target+" li").map(function() { return $(this).attr('id'); }).get();
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=save_sub_ranking&drag_code='+code, function(data) {
+		if(data['bool']) {
+			alert('저장되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				//location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+  }
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TreeView.png') 0px 0px no-repeat;">컨텐츠관리</span> / <span class="title02">메뉴 관리</span></h1></div>
+<form id="list_form">
+<table id="drag_table" class="list_table">
+	<colgroup>
+		<col width="30" />
+		<col width="200" />
+		<col width="300" />
+		<col width="150" />
+		<col width="120" />
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th></th>
+		<th>GNB 메뉴명</th>
+		<th>LNB 메뉴명</th>
+		<th>페이지타입</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_gnb}-->
+	<tr class="tr_list" id="<!--{.cate_code}-->">
+		<td class="dragHandle">▲<br />▼</td>
+		<td>
+			<ul>
+				<li class="underline highlight pcenter"><!--{.contents_name}--></li>
+				<li class="underline pcenter">
+					<span class="button small"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&cate_code=<!--{.cate_code}--><!--{srch_url}-->">수 정</a></span>
+					<span class="button small"><a href="javascript:;" onclick="listDel('<!--{.cate_code}-->',1)">삭 제</a></span>
+					<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new&parent_code=<!--{.cate_code}-->&depth=2">서브페이지 생성</a></span>
+				</li>
+				<li class="underline pcenter"><!--{? .bool_display > 0}-->노출 (○)<!--{:}-->노출 (X)<!--{/}--></li>
+			</ul>
+		</td>
+		<td colspan="3">
+			<ul id="sub_<!--{.cate_code}-->" class="sub_cts">
+				<!--{@loop_lnb}-->
+				<li id="<!--{..cate_code}-->" class="underline">
+					<span class="cts_name"><!--{..contents_name}--> <!--{? ..bool_link > 0}--><span style="color:#E95E1A">(연결된 메뉴)</span><!--{/}--></span>
+					<span class="cts_type">
+						<!--{?..kinds_contents=='bbs'}-->게시판
+						<!--{:..kinds_contents=='cts'}-->컨텐츠
+						<!--{:..kinds_contents=='faq'}-->FAQ
+						<!--{:..kinds_contents=='faq2'}-->자주하는질문
+						<!--{:..kinds_contents=='curriculum'}-->과정
+						<!--{:..kinds_contents=='all_curriculum'}-->과정전체
+						<!--{:..kinds_contents=='history'}-->연혁
+						<!--{:..kinds_contents=='staff'}-->임직원안내
+						<!--{:..kinds_contents=='request'}-->신청
+						<!--{:..kinds_contents=='support'}-->지원
+						<!--{:..kinds_contents=='manual'}-->직접지정
+						<!--{/}-->
+					</span>
+					<span class="cts_control">
+						<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&cate_code=<!--{..cate_code}--><!--{srch_url}-->">수 정</a></span>
+						<span class="button small black"><a href="javascript:;" onclick="listDel('<!--{..cate_code}-->',2)">삭 제</a></span>
+					</span>
+				</li>
+				<!--{:}-->
+				<li>등록된 컨텐츠가 없습니다.</li>
+				<!--{/}-->
+			</ul>
+			<!--{? loop_lnb.size_ > 0}-->
+			<div style="padding:10px 10px 10px 10px; text-align:center; "><span class="button small black"><a href="javascript:;" onclick="saveSubRanking('sub_<!--{.cate_code}-->')">순서 저장</a></span></div>
+			<!--{/}-->
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="">등록된 글이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><a href="javascript:;" onclick="saveRanking()">순서저장</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new&depth=1">1차 메뉴 생성</a></span>
+	</div>
+</div>
+<div id="navipage"><!--{navi_page}--></div>

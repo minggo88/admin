@@ -1,0 +1,98 @@
+<div class="container">
+	<div class="row">
+		<div class="hidden-md-down Rectangle-6-copy-8">
+			<div class="Rectangle-6-copy-4 first">
+				<label class="Rectangle-Text"><a href="/faq"><?=Lang::main_31;?></a></label>
+			</div>
+			<div class="layer"></div>
+			<div class="Rectangle-6-copy-4 active">
+				<label class="Rectangle-Text active"><a href="/notice" class="active"><?=Lang::main_32;?></a></label>
+			</div>
+			<div class="layer active"></div>
+			<div class="Rectangle-6-copy-4">
+				<label class="Rectangle-Text"><a href="/mtom"><?=Lang::main_33;?></a></label>
+			</div>
+			<div class="layer"></div>
+		</div>
+		<div class="col-lg-9 col-md-12 col-sm-12 ">
+		   <div class="row">
+
+
+				<div class="col-sm-12 mb-0">
+				<nav class="pull-right">
+					<ol class="breadcrumb">
+					<li><a href="/">Home</a></li>
+					<li><a href="/faq">Support</a></li>
+					<li class="active"><?=Lang::main_6;?></li>
+					</ol>
+				</nav>
+				</div>
+
+				<div class="col-sm-12 right-side-sidebar">
+
+					<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_6;?></span></h3>
+
+					<div id="view_contents">
+						<div id="subject" class="align2"><!--{subject}--></div>
+						<div id="writer" class="align3 lh24">Author : <!--{author}--></div>
+						<div id="regdate" class="align lh24">Date : <!--{=date('Y-m-d',regdate)}--></div>
+						<div class="clearline"></div>
+						<!--{? bool_file}-->
+						<div id="attach"></div>
+						<!--{/}-->
+						<div id="bbs_contents" style="inherited:no;"><!--{=htmlspecialchars_decode(contents)}--></div>
+
+						<!--{*
+						<table summary="게시판 상세보기">
+						<tbody>
+							<tr>
+								<th class="align2" colspan="2"> <!--{subject}--></th>
+							</tr>
+							<tr>
+								<td class="align3 lh24">Author : <!--{author}--></td>
+								<td class="align lh24">Date : <!--{=date('Y-m-d',regdate)}--></td>
+							</tr>
+							<!--{? bool_file}-->
+							<tr>
+								<td colspan="2" class="lh24">Attache File : <a href="./bbs_download.php?file_name=<!--{file}-->&file_name_src=<!--{=urlencode(file_src)}-->"><!--{file_src}--></a> </td>
+							</tr>
+							<!--{/}-->
+							<tr>
+								<td colspan="2">
+									<div id="bbs_contents" ><!--{=htmlspecialchars_decode(contents)}--></div>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+						*}-->
+
+						<!--<div id="button_np">
+							<button class="grad_bbs"  id="btn_bbs_up" >이전</button>
+							<button class="grad_bbs"  id="btn_bbs_down" >다음</button>
+						</div>-->
+
+						<div class="row">
+							<div class="col-md-12">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item disabled">
+											<a class="page-link" href="#" tabindex="-1">Previous</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="/notice">List</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#">Next</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

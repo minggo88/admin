@@ -1,0 +1,223 @@
+<script type="text/javascript">
+<!-- 
+
+$(function() {
+	$('#jsform_adminpasswd').ajaxForm({
+		beforeSubmit: function (formData, jqForm, options) {	return true; },
+		success: function (data, statusText) {
+			if(data[0]) { alert('최고 관리자 비밀번호가 수정되었습니다.'); }
+			else { alert('재시도 해주세요'); }
+		},
+		dataType:'json',
+		resetForm: false
+	});
+
+	$('#jsform_admingroup').ajaxForm({
+		beforeSubmit: function (formData, jqForm, options) { return true; },
+		success: function (data, statusText) {
+			if(data[0]) { alert('수정되었습니다.'); }
+			else { alert('재시도 해주세요'); }
+		},
+		dataType:'json',
+		resetForm: false
+	});
+
+	$('table#table_admingroup tr td.del_btns').live('click',
+		function () {
+			var selected_td = $('table#table_admingroup tr td').index($(this)[0]);
+			var size_tr = $('table#table_admingroup tr').size();
+			var size_column = $('table#table_admingroup tr td').size()/size_tr;
+			var tr_idx = Math.floor(selected_td/size_column);
+			if(size_tr > 2) { if(confirm('삭제하시겠습니까?')) { $('table#table_admingroup tr:eq('+tr_idx+')').remove(); }}
+			else { alert('삭제가 안됩니다.'); }
+	});
+
+	$.getJSON('/admin/shopinfoEtc.php?pg_mode=get_value&info_code=<!--{_GET.info_code}-->&sub_code=admingroup',
+		function(data) {
+				$('table#table_admingroup tbody tr').remove();
+				for(var i =0;i<data['admin_groupname'].length;i++) {
+				
+					$('input:checkbox[name=admin_permit['+i+']]').val([<!--{? empty(admin_permit)}-->''<!--{:}-->'<!--{admin_permit}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit1['+i+']]').val([<!--{? empty(admin_permit1)}-->''<!--{:}-->'<!--{admin_permit1}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit2['+i+']]').val([<!--{? empty(admin_permit2)}-->''<!--{:}-->'<!--{admin_permit2}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit3['+i+']]').val([<!--{? empty(admin_permit3)}-->''<!--{:}-->'<!--{admin_permit3}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit4['+i+']]').val([<!--{? empty(admin_permit4)}-->''<!--{:}-->'<!--{admin_permit4}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit5['+i+']]').val([<!--{? empty(admin_permit5)}-->''<!--{:}-->'<!--{admin_permit5}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit6['+i+']]').val([<!--{? empty(admin_permit6)}-->''<!--{:}-->'<!--{admin_permit6}-->'<!--{/}-->]);
+					$('input:checkbox[name=admin_permit7['+i+']]').val([<!--{? empty(admin_permit7)}-->''<!--{:}-->'<!--{admin_permit7}-->'<!--{/}-->]);
+
+					var c = i + 1;
+					var info = '<tr>';
+					info += '<td>'+[c]+'</td>';
+					info += '<td><input type="text" name="admin_groupname[]" value="'+data['admin_groupname'][i]+'" class="admin_groupname" /></td>';
+					info += '<td><input type="text" name="admin_grouplevel[]" value="'+data['admin_grouplevel'][i]+'" "class="admin_grouplevel" /></td>';
+					info += '<td><input type="text" name="admin_groupdc[]" value="'+data['admin_groupdc'][i]+'" "class="admin_groupdc" /></td>';
+					info += '<td>';
+					info += '<input type="checkbox" name="admin_permit[]" "class="admin_permit" />몰기본관리';
+					info += '<input type="checkbox" name="admin_permit1[]" "class="admin_permit" />상품관리 &nbsp;&nbsp;';
+					info += '<input type="checkbox" name="admin_permit2[]" "class="admin_permit" />주문관리 &nbsp;&nbsp;';
+					info += '<input type="checkbox" name="admin_permit3[]" "class="admin_permit" />회원관리<br />';
+					info += '<input type="checkbox" name="admin_permit4[]" "class="admin_permit" />커뮤니티 &nbsp;&nbsp;';
+					info += '<input type="checkbox" name="admin_permit5[]" "class="admin_permit" />마케팅관리';
+					info += '<input type="checkbox" name="admin_permit6[]" "class="admin_permit" />데이터관리';
+					info += '<input type="checkbox" name="admin_permit7[]" "class="admin_permit" />디자인관리';
+					info += '</td>';
+					info += '<td><input type="text" name="admin_grouppointplus[]" value="'+data['admin_grouppointplus'][i]+'" "class="admin_grouppointplus" /></td>';
+					info += '<td class="del_btns">삭제</td></tr>';
+					$('table#table_admingroup tbody').append(info);
+				}
+		});
+
+	$("div#fg_basic_form").tabs({ 
+		event: 'click',
+		select: function(event, ui) {
+			var idx = ui.index;
+			var idx_no = idx + 1;
+			$('#fg_basic_form #etc_form_'+idx_no).show();
+		}
+	});
+
+	$(":button, input:submit").button();
+});
+
+function addadminGroup() {
+	$('table#table_admingroup>tbody>tr:last-child').clone().appendTo('table#table_admingroup>tbody');
+	$('table#table_admingroup>tbody>tr:last-child>td>input').val('');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">부가설정</span></h1></div>
+<div id="fg_basic">
+
+	<div id="basic_title"><img src="../images/bullet.gif">부가설정</div>
+	
+	<div id="fg_basic_form">
+
+		<ul>
+			<li><a href="#etc_form_1">실명인증설정</a></li>
+			<li><a href="#etc_form_2">보안서버설정</a></li>
+		</ul>
+
+		<div id="etc_form_1">
+			<form method="post" name="jsform_adminpasswd" id="jsform_adminpasswd" action="/admin/shopinfoEtc.php">
+			<input type="hidden" name="pg_mode" value="edit" />
+			<input type="hidden" name="info_code" value="<!--{_GET.info_code}-->" />
+			<input type="hidden" name="sub_code" value="adminpasswd" />
+
+			<div class="basic_info_title"><img src="../images/bullet.gif">실명인증설정</div>
+
+			<p class="buttonArea"><input type="submit" value=" 확 인 " class="button_ok"/></p>
+			</form>
+		</div>
+
+		<div id="etc_form_2">
+			<form method="post" name="jsform" id="jsform" action="/admin/shopinfoEtc.php">
+			<input type="hidden" name="pg_mode" value="write" />
+			<input type="hidden" name="depth" />
+			<input type="hidden" name="parent_code" />
+
+			<div class="basic_info_title"><img src="../images/bullet.gif">SSL 인증서 신청</div>
+			<table>
+				<colgroup>
+					<col width="150"></col>
+					<col></col>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th>SSL 인증서 선택</th>
+					<td>
+						<select name="ssltype" id="ssltype">
+							<option>:::SSL 선택:::</option>
+							<option value="alphassl">Alpha SSL(웹호스팅전용) / 1년</option>
+							<option value="domainssl">Domain SSL 1년</option>
+							<option value="outssl">외부 SSL / 1년</option>
+							<option value="kcp">KCP</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>설치비</th>
+					<td><input type="text" name="pg_id" id="pg_id" />	</td>
+				</tr>
+				<tr>
+					<th>서비스 사용료</th>
+					<td><input type="text" name="pg_key" id="pg_key" />	</td>
+				</tr>
+				<tr>
+					<th>결제금액</th>
+					<td><input type="text" name="pg_key" id="pg_key" /> (결제금액 = 설치비 + 사용료)</td>
+				</tr>
+				<tr>
+					<th>신청도메인</th>
+					<td><input type="text" name="pg_key" id="pg_key" /> 예)www.fgshop.co.kr	</td>
+				</tr>
+				<tr>
+					<th>승인이메일</th>
+					<td><input type="text" name="pg_key" id="pg_key" />	</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<p class="buttonArea"><input type="submit" value=" 확 인 " class="button_ok"/></p>
+			</form>	
+
+<!-- 
+			<div class="basic_info_title"><img src="../images/bullet.gif">SSL 인증서 관리</div>
+			<div id="basic_info_ssl">
+				<table>
+					<col width="50">
+					<col width="120">
+					<col>
+					<col width="80">
+					<col width="50">
+					<col width="50">
+					<thead>
+					<tr>
+						<th>번호</th>
+						<th>은행명</th>
+						<th>계좌번호</th>
+						<th>예금주</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>1</td>
+						<td>국민은행</td>
+						<td>965601-01-322003</td>
+						<td>황인석</td>
+						<td>수정</td>
+						<td>삭제</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<p class="buttonArea"><input type="submit" value="" class="button_ok"/></p>
+			</form>
+ -->
+		</div>
+	
+		<div class="info_guide">
+			
+			<div class="guide_title">GUIDE</div>
+			<div class="guide_desc">
+				<dl>
+					<dt><b>부가설정</b>
+					<dd>각 설정 항목을 설정 후 [확인]하시면 설정값이 저장 되어 사용자 페이지 해당 목록에 적용 되어 나타 납니다.
+					<dd>상단 탭메뉴를 클릭하여 각각의 설정값을 귀사에 맞게 설정 합니다.
+					<dd><span class="dd_title"> · 실명인증설정</span> : FGShop을 통하여 실명인증서비스를 계약 할 수 있습니다.
+					<dd><span class="dd_title"> · 보안서버설정</span> : FGShop을 통하여 SSL 서비스를 계약 할 수 있습니다.
+					<dd>FGShop 쇼핑몰 솔루션은 주문관련,회원관련에 SSL 보안이 적용 됩니다.
+					<dd class="tip_red">※ 확인 버튼을 클릭하시면 페이지 리로딩 없이 바로 입력내용이 변경됩니다.
+				</dl>
+			</div>
+			<div class="clearline"></div>
+
+		</div>
+
+	</div>
+</div>

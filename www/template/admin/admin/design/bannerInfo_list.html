@@ -1,0 +1,86 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$("#list_banner>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function delInfo(bannercode) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del_info&bannercode='+bannercode, function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else if(data['msg'] == 'err_exist_banner') {
+				alert("등록된 배너가 있습니다.!\n\n배너 삭제 후 재시도 해주세요.!");
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Slider.png') 0px 0px no-repeat;">디자인관리</span> / <span class="title02">배너항목관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 배너항목관리</div>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new_info">신규등록</a></span>
+</div>
+<table id="list_banner" class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="50"></col>
+		<col></col>
+		<col width="150"></col>
+		<col width="80"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+		<th>No</th>
+		<th>코드</th>
+		<th>타이틀</th>
+		<th>배너사이즈</th>
+		<th>슬라이드</th>
+		<th>관리</th>
+	</thead>
+	<tbody>
+	<!--{@loop_banner_info}-->
+	<tr>
+		<td rowspan="2"><!--{.no}--></td>
+		<td rowspan="2"><!--{.bannercode}--></td>
+		<td class="pleft pbold"><!--{.title}--></td>
+		<td><span class="emphasis">W</span> <!--{.size_x}-->px * <span class="emphasis">H</span> <!--{.size_y}-->px</td>
+		<td><!--{? .bool_slide > 0}--><span style="color:#FF6600">[사용함]</span><!--{:}--><span style="color: #555">[사용안함]</span><!--{/}--></td>
+		<td rowspan="2">
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit_info&bannercode=<!--{.bannercode}-->">수정</a></span>&nbsp;
+			<span class="button small red"><a href="javascript:;" onclick="delInfo('<!--{.bannercode}-->')">삭제</a></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="pleft"><!--{.remark}--></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="5">등록된 배너 항목이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new_info">신규등록</a></span>
+</div>

@@ -1,0 +1,125 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$('#searchform').submit(function() {
+		var s_val = $('input[name=s_val]').val();
+		if(s_val == '') {
+			alert('검색어를 입력하여 주세요');
+			return false;
+		}
+	});
+
+	$('#all_check').click(function() {
+		if(this.checked) {
+			$("#list_form table tbody :checkbox").attr('checked','checked');
+		}
+		else {
+			$("#list_form table tbody :checkbox").removeAttr('checked');
+		}
+	});
+
+	$("#list_form>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+
+	<!--{? !empty(_GET.s_val)}-->
+	$('select[name=s_target]').val('<!--{_GET.s_target}-->');
+	<!--{/}-->
+});
+
+function checkDel() {
+	var num_checked = $('#list_form input[name=idxs[]]:checked').length;
+	if(num_checked == 0) {
+		alert('선택된 항목이 없습니다.!');
+		return false;
+	}
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del_multi&'+$('#list_form').serialize(),function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+//-->
+</script>
+<div class="title_d1"><h1>상품후기 관리</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">상품후기관리</div>
+<div class="button_area_left">
+	<span class="button black"><a href="javascript:;" onclick="checkDel()">선택삭제</a></span>
+</div>
+<form id="list_form">
+<table class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="40"></col>
+		<col width="100"></col>
+		<col></col>
+		<col width="80"></col>
+		<col width="150"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th><input type="checkbox" id="all_check" /></th>
+		<th>번호</th>
+		<th>상품명</th>
+		<th>제목</th>
+		<th>아이디</th>
+		<th>날짜</th>
+		<th>점수</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_review}-->
+	<tr>
+		<td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" /></td>
+		<td><!--{.no}--></td>
+		<td><!--{.goods_name}--></td>
+		<td style="text-align: left;padding-left:10px"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&idx=<!--{.idx}--><!--{srch_url}-->"><!--{.subject}--></a></td>
+		<td><!--{.userid}--></td>
+		<td><!--{.regdate}--></td>
+		<td><span class="star_rating"><span style="width:<!--{.score}-->%"><!--{.score}-->점</span></span></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="7" class="ctext">등록된 사용후기가 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_left">
+	<span class="button black"><a href="javascript:;" onclick="checkDel()">선택삭제</a></span>
+</div>
+<form name="searchform" id="searchform" method="get" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<div class="search_area pcenter">
+	<form name="searchform" id="searchform" method="get">
+	<select name="s_target">
+		<option value="userid" selected="selected">사용자아이디</option>
+		<option value="goods_name">상품명</option>
+		<option value="subject">제목</option>
+		<option value="contents">내용</option>
+	</select>&nbsp;
+	<input type="text" name="s_val" value="<!--{_GET.s_val}-->" class="frm_input" style="width:100px">&nbsp;
+	<span class="button black"><input type="submit" value="검색"/></span>&nbsp;
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->">취소</a></span>
+	</form>
+</div>
+</form>
+<div id="navipage"><!--{navi_page}--></div>

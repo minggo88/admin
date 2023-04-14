@@ -1,0 +1,281 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#goods_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function listSort(sort_div, sort_method) {
+	sort_method = sort_method || 'asc';
+	$('input[name=sort_div]').val(sort_div);
+	$('input[name=sort_method]').val(sort_method);
+	if($('select#loop_scale')[0].selectedIndex > 0) {
+		$('input[name=loop_scale]').val($('select#loop_scale option:selected').val());
+	}
+	$('#frmSearch').submit();
+}
+
+$(function () {
+	$('#all_check').click(function() {
+		var obj = $("table#goods_table tbody :checkbox");
+		if(this.checked) {
+			obj.attr('checked','checked');
+		}
+		else {
+			obj.removeAttr('checked');
+		}
+	});
+});
+
+//검색폼 값지정
+$(function() {
+	<!--{? !empty(_GET.category_1)}-->
+	$('#category_1').val('<!--{_GET.category_1}-->');
+	categoryChange(1,'<!--{_GET.category_1}-->',select_category);
+	<!--{? !empty(_GET.category_2)}-->
+	$('#category_2').val('<!--{_GET.category_2}-->');
+	categoryChange(2,'<!--{_GET.category_1}--><!--{_GET.category_2}-->',select_category);	
+	<!--{? !empty(_GET.category_3)}-->
+	$('#category_3').val('<!--{_GET.category_3}-->');
+	categoryChange(3,'<!--{_GET.category_1}--><!--{_GET.category_2}--><!--{_GET.category_3}-->',select_category);	
+	<!--{? !empty(_GET.category_4)}-->
+	$('#category_4').val('<!--{_GET.category_4}-->');
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+
+	$('input[name=delivery_charge_method]').val(['<!--{_GET.delivery_charge_method}-->']);
+	$('select[name=sort_target]').val(['<!--{_GET.sort_target}-->']);
+	$('select[name=sort_method]').val(['<!--{_GET.sort_method}-->']);
+	$('select[name=loop_scale]').val(['<!--{_GET.loop_scale}-->']);
+});
+
+$(function() {
+	$('#frmprice').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+function showSearchForm() {
+	$.cookie('hide_frm_search',{ expires: -1});
+	$('#search_area').show();
+}
+
+function hideSearchForm() {
+	$.cookie('hide_frm_search', 'y', { expires: 1});
+	$('#search_area').hide();
+}
+
+$(function() {
+	if($.cookie('hide_frm_search') == 'y') {
+		$('#search_area').hide();
+	}
+});
+
+$(function() {
+	$('.img_goods').tooltip({
+		delay: 0,
+		showURL: false,
+		bodyHandler: function() {
+			return $("<img/>").attr("src", this.src);
+		}
+	});
+});
+//-->
+</script>
+<div class="title_d1"><h1>추천/인기 설정 관리</h1></div>
+<!--상품목록 시작-->
+<div class="title_d2"><img src="../images/bullet.gif">상품검색</div>
+<!-- goods_sort -->
+<div class="button_area_right">
+	<span class="button small black"><input type="button" value="보이기" onclick="showSearchForm()" /></span>
+	<span class="button small black"><input type="button" value="감추기" onclick="hideSearchForm()" /></span>
+</div>
+<div id="search_area">
+<form method="get" name="frmSearch" id="frmSearch"  action="?">
+<input type="hidden" name="pg_mode" value="list_item" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>카테고리	</th>
+		<td colspan="3">
+			<select id="category_1" name="category_1">
+				<option value="">:::1차카테고리:::</option>
+			</select> 
+			<select id="category_2" name="category_2">
+				<option value="">:::2차카테고리:::</option>
+			</select> 
+			<select id="category_3" name="category_3">
+				<option value="">:::3차카테고리:::</option>
+			</select> 
+			<select id="category_4" name="category_4">
+				<option value="">:::4차카테고리:::</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><input type="text" name="goods_name" value="<!--{_GET.goods_name}-->" class="frm_input" /></td>
+		<th>제조사명</th>
+		<td><input type="text" name="goods_maker" value="<!--{_GET.goods_maker}-->" class="frm_input" /></td>
+	</tr>
+	<tr>
+		<th>상품가격</th>
+		<td>
+			<input type="text" name="min_price" value="<!--{_GET.min_price}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE: disabled" /> ~ 
+			<input type="text" name="max_price" value="<!--{_GET.max_price}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE: disabled" /></td>
+		<th>적립금</th>
+		<td>
+			<input type="text" name="min_emoney" value="<!--{_GET.min_emoney}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE: disabled" /> ~ 
+			<input type="text" name="max_emoney" value="<!--{_GET.max_emoney}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE:disabled" />
+		</td>
+	</tr>
+	<tr>
+		<th>배송비</th>
+		<td colspan="3">
+			<input type="radio" name="delivery_charge_method" value="free" id="delivery_charge_method_free" /><label for="delivery_charge_method_free">무료배송</label>
+			<input type="radio" name="delivery_charge_method" value="charge" id="delivery_charge_method_charge" /><label for="delivery_charge_method_charge">선불</label>
+			<input type="radio" name="delivery_charge_method" value="arrival" id="delivery_charge_method_arrival" /><label for="delivery_charge_method_arrival">착불</label>
+		</td>
+	</tr>
+	<tr>
+		<th>정렬</th>
+		<td>
+			<select name="sort_target">
+				<option value="" selected="selected">::정렬대상::</option>
+				<option value="goods_name">상품명</option>
+				<option value="regdate">등록일</option>
+				<option value="selling_price">제품가격</option>
+				<option value="emony">적립금</option>
+				<option value="delivery_charge">운송비용</option>
+			</select>
+			<select name="sort_method">
+				<option value="" selected="selected">::정렬방법::</option>
+				<option value="asc">오름차순</option>
+				<option value="desc">내림차순</option>
+			</select>
+		</td>
+		<th>출력목록수</th>
+		<td>
+			<select name="loop_scale" id="loop_scale">
+				<option value="">:::출력목록수 선택:::</option>
+				<option value="10">10개출력</option>
+				<option value="20">20개출력</option>
+				<option value="30">30개출력</option>
+				<option value="40">40개출력</option>
+				<option value="60">60개출력</option>
+				<option value="100">100개출력</option>
+			</select>		
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="검 색" /></span>
+	<span class="button large black strong"><input type="button" value="초기화" onclick="location.href='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list_item'" /></span>
+</div>
+</form>
+</div>
+<div class="title_d2"><img src="../images/bullet.gif">상품목록 ( 검색된 상품수 : <span class="emphasis"><!--{total}--></span> 건 )</div>
+<form method="post" name="frmprice" id="frmprice" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="item_change" />
+<div class="button_area_right">
+	<span class="button large black strong"><input type="submit" value="설정저장" /></span>
+</div>
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="40"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="150"></col>
+		<col width="150"></col>
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th class="pcenter">No</th>
+		<th colspan="2" class="pcenter">상품명</th>
+		<th>판매가격/상태</th>
+		<th>추천상품</th>
+		<th>인기상품</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_goods}-->
+	<tr>
+		<td class="none_move"><input type="hidden" name="goods_code[]" value="<!--{.goods_code}-->" /><!--{.no}--></td>
+		<td>
+			<!--{? empty(.img_goods_a)}-->
+			<img src="/template/images/no_img.gif" width="40" height="40" />
+			<!--{:}-->
+			<img src="/data/shop_a/<!--{.img_goods_a}-->" width="40" height="40" class="img_goods" />
+			<!--{/}-->
+		</td>
+		<td><!--{.goods_name}--></td>
+		<td>
+			<ul>
+				<li class="underline dotted pcenter"><!--{=number_format(.selling_price)}--> 원</li>
+				<li class="underline none pcenter"><!--{? .bool_sold_out}-->품절<!--{:}-->판매중<!--{/}--></li>
+			</ul>
+		<td>
+			<select name="<!--{.goods_code}-->_hit_c_code">
+				<option value="" selected="selected">::카테고리 선택::</option>
+				<!--{@loop_goods_category}-->
+				<option value="<!--{..c_code}-->" <!--{? ..bool_hit > 0}--> selected="selected"<!--{/}-->><!--{..category_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+		<td>
+			<select name="<!--{.goods_code}-->_recom_c_code">
+				<option value="" selected="selected">::카테고리 선택::</option>
+				<!--{@loop_goods_category}-->
+				<option value="<!--{..c_code}-->" <!--{? ..bool_recom > 0}--> selected="selected"<!--{/}-->><!--{..category_name}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="6" class="ctext">등록된 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button large black strong"><input type="submit" value="설정저장" /></span>
+</div>
+</form>
+<div id="navipage"><!--{navi_page}--></div>

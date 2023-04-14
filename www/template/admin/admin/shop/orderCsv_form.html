@@ -1,0 +1,73 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#frmExcel').submit(function() {
+		var file_excel = $('input[name=file_excel]').val();
+		if(!file_excel) {
+			alert('csv파일을 선택하여 주세요.!');
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				alert(data);
+				/*
+				if(data['bool']) {
+					alert('상품수정이 완료되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+				*/
+			},
+			//dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+//-->
+</script>
+<div class="title_d1"><h1>엑셀배송정보관리</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">배송정보관리</div>
+<form method="post" name="frmExcel" id="frmExcel" action="<!--{_SERVER.SCRIPT_NAME}-->" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="edit_delivery_csv"/>
+<div class="area_remark">
+<ul>
+	<li class="underline highlight">* 관리방법</li>
+	<li class="underline dotted">1. 주문정보를 다운받는다 (배송대기 단계만 해당). <span class="button small black"><a href="/shop/admin/orderCsv.php">주문정보다운로드</a></span></li>
+	<li class="underline dotted">2. 파일형식 : CSV (쉼표로 분리)를 선택하여 저장합니다.</li>
+	<li class="underline dotted">3. 저장된 CSV파일을 아래 엑셀화일에서 찾아보기를 클릭하여 해당 CSV파일을 선택한 후 확인을 클릭하시면 배송정보가 저장됩니다.</li>
+</ul>
+<ul>
+	<li class="underline highlight">* 입력시 주의사항</li>
+	<li class="underline dotted">엑셀에서 데이터 입력시 , 를 입력하지 마셔야 합니다. csv파일은 , 로 항목을 구분합니다.</li>
+</ul>
+</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>엑셀화일</th>
+		<td><input type="file" name="file_excel" value="" class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>
+</div>
+</form>

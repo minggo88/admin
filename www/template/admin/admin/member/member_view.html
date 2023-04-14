@@ -1,0 +1,211 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('ul.tab_menu li:eq(0)').addClass('selected');
+});
+
+function memberDel(userid) {
+	if(!confirm('회원정보만 삭제되며 구매정보 및 게시판에 해당회원 글은 삭제 되지 않습니다.!\n\n삭제 하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&userid='+userid,function(data) {
+		if(data['bool']) {
+			alert('회원정보가 삭제되었습니다.');
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+<!--{? mode == 'withdraw'}-->
+function memberRollback(userid) {
+	if(!confirm('회원정보로 다시 복원하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=rollback&userid='+userid,function(data) {
+		if(data['bool']) {
+			alert('회원정보가 복원되었습니다.');
+			location.replace('/member/admin/memberAdmin.php');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+<!--{/}-->
+//-->
+</script>
+
+<!--{? mode != 'member'}-->
+<div class="title_d2"><img src="../images/bullet.gif">탈퇴사유 (<!--{userid}--> / <!--{name}-->)</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>탈퇴일자</th>
+		<td><!--{withdrawdate}--></td>
+	</tr>
+	<tr>
+		<th>탈퇴사유</th>
+		<td><!--{contents}--></td>
+	</tr>
+	</tbody>
+</table>
+<!--{/}-->
+<div class="title_d2"><img src="../images/bullet.gif"> 회원정보</div>
+<table class="form_table">
+    <colgroup>
+        <col width="140"></col>
+        <col width="37%"></col>
+        <col width="140"></col>
+        <col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>아이디</th>
+            <td><b><!--{userid}--></b> &nbsp;<span class="button small black"><a href="javascript:;" onclick="popupMail('<!--{email}-->','<!--{name}-->')">메일 전송</a></span></td>
+            <th>회원가입일</th>
+            <td><!--{regdate}--></td>
+	</tr>
+	<tr>
+            <th>성명</th>
+            <td><b><!--{name}--></b> (<!--{nick}-->)</td>
+            <th>회원레벨</th>
+            <td><!--{level_name}--></td>
+	</tr>
+	<tr>
+            <th>휴대전화</th>
+            <td><!--{tel}-->&nbsp;<span class="button small black"><a href="javascript:;"  onclick="popupSms('<!--{userid}-->','<!--{tel}-->')">SMS 전송</a></span></td>
+            <th>지역</th>
+            <td><!--{area1}--> <!--{area2}--></td>
+	</tr>
+    </tbody>
+</table>
+
+<!--{? member_level=='110' || member_level=='115' || member_level=='120' || member_level=='130' || member_level=='140' }-->
+<div class="title_d2"><img src="../images/bullet.gif">FC 정보</div>
+<table class="form_table" >
+    <colgroup>
+        <col width="140"></col>
+        <col width="37%"></col>
+        <col width="140"></col>
+        <col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>회원레벨</th>
+            <td><span class="font700"><!--{?member_level=='110'}-->White<!--{:member_level=='115'}-->Yellow<!--{:member_level=='120'}-->Green<!--{:member_level=='130'}-->Blue<!--{/}--></span></td>
+            <th>신청기간</th>
+            <td><!--{payment_day}--></td>
+	</tr>
+	<tr>
+            <th>기준금액</th>
+            <td colspan="3"><!--{=number_format(payment_vmoney)}-->원</td>
+	</tr>
+	<tr>
+            <th>결제금액</th>
+            <td><!--{=number_format(payment_money)}-->원</td>
+            <th>사용기간</th>
+            <td><span class="font700 red"><!--{=date('Y-m-d',expire_date)}--></span></td>
+	</tr>
+    </tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif">FC 추가정보</div>
+<table class="form_table" >
+    <colgroup>
+        <col width="140"></col>
+        <col width="37%"></col>
+        <col width="140"></col>
+        <col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>소속사 전화번호</th>
+            <td><!--{company_tel}--></td>
+            <th>소속사명</th>
+            <td><!--{company}--></td>
+	</tr>
+    </tbody>
+</table>
+<!--{/}-->
+
+<div class="button_area_both">
+    <div class="button_left">
+	<span class="button large black strong"><input type="button" value="회원정보삭제" onclick="memberDel('<!--{userid}-->')" /></span>&nbsp;
+	<!--{? mode == 'withdraw'}-->
+	<span class="button large black strong"><input type="button" value="회원정보복원" onclick="memberRollback('<!--{userid}-->')" /></span>&nbsp;
+	<!--{/}-->
+    </div>
+    <div class="button_right">
+	<!--{? mode == 'member'}-->
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&userid=<!--{_GET.userid}--><!--{srch_url}-->">정보수정</a></span>&nbsp;
+	<!--{/}-->
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록보기</a></span>
+    </div>
+</div>
+
+<!--상품목록 끝-->
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_email').dragPopup({
+		popup_id: 'drag_popup_email',
+		popup_title: '메일 전송',
+		popup_width: 650,
+		popup_height: 580,
+		bool_today_close:false
+	});
+});
+
+function popupMail(mail_to,mail_to_name) {
+	$('#iframe_email').attr('src','/admin/email.php?pg_mode=form_email&mail_to='+mail_to+'&mail_to_name='+encodeURIComponent(mail_to_name));
+	showPopup('drag_popup_email',{kind_pos:'center'});
+}
+
+$(function() {
+	$('#popup_sms').dragPopup({
+		popup_id: 'drag_popup_sms',
+		popup_title: '문자전송 전송',
+		popup_width: 300,
+		popup_height: 300,
+		bool_today_close:false
+	});
+});
+
+function popupSms(userid,tran_phone) {
+	$('#iframe_sms').attr('src','/admin/sms.php?pg_mode=form_sms&userid='+userid+'&tran_phone='+tran_phone);
+	showPopup('drag_popup_sms',{kind_pos:'center'});
+}
+
+//-->
+</script>
+
+<div id="popup_email" style="display:none;padding:10px;">
+	<iframe id="iframe_email"  frameborder="0" style="width:628px;height:528px;border:0px;"></iframe>
+</div>
+
+<div id="popup_sms" style="display:none;padding:10px;">
+	<iframe id="iframe_sms"  frameborder="0" style="width:280px;height:248px;border:0px;"></iframe>
+</div>

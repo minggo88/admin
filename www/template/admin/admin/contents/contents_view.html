@@ -1,0 +1,57 @@
+<script type="text/javascript">
+<!--
+function contentsDel(code) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&code='+code,function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&<!--{srch_url}-->';
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				//location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TreeView.png') 0px 0px no-repeat;">컨텐츠관리</span> / <span class="title02">컨텐츠관리</span></h1></div>
+<table class="form_table">
+	<colgroup>
+		<col width="" />
+		<col width="" />
+		<col width="" />
+		<col width="" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th></th>
+		<td><!--{title}--></td>
+		<th></th>
+		<td><!--{regdate}--></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td colspan="3"><!--{contents}-->contents</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><a href="javascript:;" onclick="contentsDel()">삭 제</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록</a></span>
+	</div>
+</div>

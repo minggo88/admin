@@ -1,0 +1,73 @@
+<script language="JavaScript">
+<!--
+
+$(function() {
+	$("#list_popup>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function delPopup(idx) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx='+idx,	function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			alert('재시도 해주세요!');
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">마케팅관리</span> / <span class="title02">팝업관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 팝업관리 </div>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">신규등록</a></span>
+</div>
+<table id="list_popup" class="list_table">
+	<colgroup>
+		<col width="50"></col>
+		<col></col>
+		<col width="100"></col>
+		<col width="100"></col>
+		<col width="80"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+		<th>No</th>
+		<th>제목</th>
+		<th>시작일</th>
+		<th>종료일</th>
+		<th>사용여부</th>
+		<th>관리</th>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr class="loop">
+		<td><!--{.no}--></td>
+		<td class="pleft"><!--{.title}--></td>
+		<td><!--{.start_date}--></td>
+		<td><!--{.end_date}--></td>
+		<td><!--{? .bool_popup== 1}--><img src="/template/admin/images/btn_use.gif" ><!--{:}--><img src="/template/admin/images/btn_no_use.gif" ><!--{/}--></td>
+		<td>
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&idx=<!--{.idx}-->">수정</a></span>&nbsp;
+			<span class="button small red"><a href="javascript:;" onclick="delPopup('<!--{.idx}-->')">삭제</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="6">등록된 팝업이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">신규등록</a></span>
+</div>

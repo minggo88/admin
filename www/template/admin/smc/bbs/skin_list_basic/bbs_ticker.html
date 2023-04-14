@@ -1,0 +1,33 @@
+<style>
+#ticker {border:0px solid #ccc;width:368px;height:12px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;_margin:0px 0px 0px 0px;z-index:4;overflow:hidden;}
+#ticker ul {width:365px;height:12px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;z-index:5;}
+#ticker ul li div a {font-family: "NanumGothic","나눔고딕","돋음","맑은 고딕",Malgun Gothic,Dotum,AppleGothic,sans-serif;color:#666666;}
+#ticker ul li div a:hover {font-family: "NanumGothicExtraBold","나눔고딕","돋음","맑은 고딕",Malgun Gothic,Dotum,AppleGothic,sans-serif;color:#f26522;}
+ul li div.ticker_title {border:0px solid #ccc;width:290px;height:12px;line-height:11px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;float:left;z-index:6;}
+ul li div.ticker_date {width:55px;height:12px;line-height:11px;text-align:right;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;float:left;z-index:7;}
+</style>
+<!-- 1: style.basic.html -->
+<div id="ticker">
+	<ul>
+	<!--{@ loop_bbs_recent}-->
+		<li>
+			<div class="ticker_title"><a href="/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0"><!--{=cutStr(.subject,24)}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></div>
+			<div class="ticker_date"><!--{=date('Y.m.d',.regdate)}--></div>
+		</li>
+	<!--{:}-->
+		<li>등록된 글이 없습니다.</li>
+	<!--{/}-->
+	</ul>
+</div>
+
+<script language="JavaScript">
+$(function() {
+	$("#ticker").jCarouselLite({
+        //mouseOver: true,
+		auto: 3000,
+		speed: 500,
+        mouseOver: true,
+		vertical: true
+	}).css({'width':'368px','height':'12px'});
+});
+</script>

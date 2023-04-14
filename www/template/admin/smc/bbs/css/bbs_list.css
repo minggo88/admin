@@ -1,0 +1,62 @@
+@charset "utf-8"; /* �ѱ� */
+
+/* ��� ��Ÿ�� �Խ��� ����Ʈ ���� */
+div#bbs_content_list table { border:0px #EBEBEB solid;width:100%;border-collapse: collapse;padding:0px;margin:0px;}
+div#bbs_content_list th { border-top:1px solid #469AAE; solid; border-bottom:1px #ccc solid; background:#F1F1F1; height:30px;line-height:30px;text-align:center;font-weight:bold;padding:0px 0px 0px 0px;margin:0px;}
+div#bbs_content_list td {height:26px; border-bottom:1px #E3E3E3 solid;text-align:center; line-height:18px; padding:2px 0px;}
+.tr_notice {background:#9a9a9a;color:#f9f9f9;}
+div#bbs_buttons{border:0px #e1e1e1 solid;text-align:right;}
+div#bbs_buttons button.grad_bbs{width:70px;height:24px;font-size:12px;padding:0px 0px 0px 0px;margin:0px;}
+
+
+div#searcharea {border:0px #e1e1e1 solid;text-align:center;  }
+div#searcharea #search_key {text-align:center;padding:0px;margin:10px 0px 0px 0px; }
+div#searcharea #search_key input{vertical-align:middle;}
+div#searcharea #search_key img{vertical-align:middle;}
+div#searcharea #search_key #s_val {border:1px solid #ccc;height:15px;line-height:15px;font-size:13px;}
+.rline{border-right:1px solid #ccc;}
+.lline{border-left:1px solid #ccc;}
+.none{display:none;}
+
+/* ������ �Խ��� ����Ʈ ���� */
+#gallery_list {width:100%;border:0px dotted #fff;padding:0px;margin:0;clear:both;}
+#gallery {width:100%;padding:0px;margin:0;}
+#gallery p {margin: 10px 0px;}
+
+#gallery .figure {width: auto;float: left;margin: 0px auto; min-height: 365px;}
+#gallery .figure div.subject { color:#777;white-space:nowrap;text-align:center;line-height:18px;}
+#gallery .figure div.subject a:hover { color:#777; text-decoration:underline;}
+#gallery .figure div.author {  color:#777; text-align:center;line-height:18px;}
+#gallery .figure div.date { color:#777;text-align:center;line-height:18px;}
+#gallery .figure div.hit { color:#777;text-align:center;line-height:18px;margin-bottom:10px;}
+#gallery .photo {max-height:280px; overflow: hidden;}
+
+#gallery .photo img {border:1px solid #aaa;background-color: #FFF;padding:0px;position: relative;cursor:pointer;}
+#gallery .photo img:hover {border:1px solid #ff0066;background-color: #FFF;padding:0px;position: relative;cursor:pointer;}
+#gallery .figure p {text-align: center;margin: 5px 0 0 0;height: 5em;}
+
+#gallery .d_0 {min-height: 270px;border:0px solid #555; width: 180px;float: left;margin: 0px 0px 20px 17px;}
+#gallery .d_1 {min-height: 270px;border:0px solid #555; width: 180px;float: left;margin: 0px 0px 20px 17px;}
+#gallery .d_2 {min-height: 270px;border:0px solid #555; width: 180px;float: left;margin: 0px 0px 20px 17px;}
+#gallery .d_3 {min-height: 270px;border:0px solid #555; width: 180px;float: left;margin: 0px 0px 20px 17px;}
+#gallery .d_4 {min-height: 270px;border:0px solid #555; width: 180px;float: left;margin: 0px 0px 20px 17px;}
+
+/* ���� ��Ÿ�� �Խ��� ����Ʈ ���� */
+#webzine_list {width:100%;border:0px solid #ccc;border-top:1px solid #469AAE;border-bottom:1px solid #ccc;color:#555;padding:0px 0px 0px 0px;margin:0px;}
+#webzine_list .webzine {width:100%;height:110px;border-bottom:0px dotted #ccc;padding:10px 0px 10px 0px;margin-bottom:0px;clear:both;}
+.webzine .figure {width:auto;margin: 0px 7px 10px 7px;border:0px #ccc solid; float: left;}
+.webzine .photo_{background: url(../images/drop_shadow.gif) no-repeat right bottom;}
+.webzine .photo img {	border: 1px solid #98843D;width:100px;height:100px;background-color: #FFF;padding:4px;position: relative; top: 0px;left:0px;cursor:pointer;}
+.webzine .figure2 {border:0px #ccc solid; width:510px;float:right;margin:0px;float:left;}
+.webzine .figure2 div.subject { color:#555;white-space:nowrap;text-align:left;line-height:18px;}
+.webzine .figure2 div.subject a { color:#555; text-decoration:none;}
+.webzine .figure2 div.author {color:#555; text-align:center;line-height:18px;float:left;}
+.webzine .figure2 div.date {color:#555;text-align:center;line-height:18px;float:left;padding-left:10px;}
+.webzine .figure2 div.hit {color:#555;text-align:center;line-height:18px;margin-bottom:5px;float:left;padding-left:10px;}
+.webzine .figure2 div.summary {color:#555;font-weight:normal;line-height:17px;text-align:justify;padding-right:10px;clear:both;border:0px #ccc solid; }
+.webzine .figure2 div.summary:hover {color:#877B29;font-weight:normal;line-height:17px;text-align:justify;padding-right:10px;clear:both;}
+#webzine_line { border-bottom:1px solid #ccc;margin:0px 0px 20px 0px;clear:both;}
+/* IE 5/6 border erase bug */
+* html #webzine {width: 100%;}
+/* IE 5 placement bug */
+* html #webzine img {width: 100%;}

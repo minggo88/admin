@@ -1,0 +1,67 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+
+$(function() {
+	$('#commentEditForm').submit(function() { 
+		var chk_option = [
+			{ 'target':'contents', 'name':'본문', 'type':'blank', 'msg':'댓글 내용을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) { 
+					location.replace('<!--{=base64_decode(_GET.ret_url)}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		}); 
+		return false; 
+	}); 
+
+	$('#btn_edit_cancel').click(function() {
+		location.replace('<!--{=base64_decode(_GET.ret_url)}-->');	
+	});
+});
+
+$(function  () {
+	$('#drag_popup').hide();
+});
+
+
+//-->
+</script>
+<div class="comment_form">
+<form name="commentEditForm" id="commentEditForm" action="/bbs/comment.php" method="post">
+<input type="hidden" name="pg_mode" id="pg_mode" value="edit" />
+<input type="hidden" name="idx" id="idx" value="<!--{idx}-->" />
+<div class="comment_form_edit">
+	<table>
+		<tr>
+			<td><textarea name="contents" rows="" cols="" id="contents"><!--{contents}--></textarea></td>
+		</tr>
+	</table>
+	<div id="view_button">
+		<button class="grad_bbs"  id="btn_edit_confirm" >댓글등록</button>
+		<button class="grad_bbs"  id="btn_edit_cancel" >댓글등록취소</button>
+		{*
+		<input type="image" src="images/button_ok.gif" alt="댓글등록" />&nbsp;&nbsp;&nbsp;
+		<img src="images/button_cancel.gif" border="0" id="btn_edit_cancel" alt="댓글등록취소" /></div>
+		*}
+</div>
+
+</form>
+</div>

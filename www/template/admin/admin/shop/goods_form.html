@@ -1,0 +1,813 @@
+<style type="text/css">
+div#category_select_form {height:30px;line-height:30px;}
+ul#ul_loop_category > li {width:100%; padding:0; border-bottom:1px dotted #ccc;}
+ul#ul_loop_category > li > ul > li {float:left; height:25px;line-height:25px; margin-right:2px;}
+ul#ul_loop_category > li > ul > li.category_path {width:290px;}
+ul#ul_loop_category > li > ul > li.category_price {width:100px;}
+ul#ul_loop_category > li > ul > li.category_recom {width:70px;}
+ul#ul_loop_category > li > ul > li.category_hit {width:70px;}
+ul#ul_loop_category > li > ul > li.category_btn {width:80px;}
+
+.option_name {font-weight:bold;}
+.option_price {font-weight:bold;}
+
+ul.option_ul li {width:100%; padding:5px; border:0px solid #ccc; border-bottom:1px solid #ccc;}
+.dragHandle {background: url("/template/admin/images/arrow_over.gif") center center no-repeat; cursor:move;}	
+</style>
+
+<script type="text/javascript">
+<!--
+
+var myeditor = new cheditor("myeditor");
+
+//var homedelivery_pre_fee = <!--{homedelivery_pre_fee}-->;
+//var homedelivery_post_fee = <!--{homedelivery_post_fee}-->;
+
+<!--{? empty(_GET.category_code)}-->
+var cur_category = '<!--{category_code}-->';
+<!--{:}-->
+var cur_category = '<!--{_GET.category_code}-->';
+<!--{/}-->
+<!--{? empty(selling_price)}-->
+var selling_price = 0;
+<!--{:}-->
+var selling_price = <!--{selling_price}-->;
+<!--{/}-->
+var tmp_c_code = 1;
+
+//카테고리 추가하기
+function addCategory() {
+	var cnt = $('ul#ul_loop_category li').size();
+	var select_category;
+	var arr_category_code = [];
+	var arr_category_name = [];
+	var index_a = $('#category_1')[0].selectedIndex;
+	var index_b = $('#category_2')[0].selectedIndex;
+	var index_c = $('#category_3')[0].selectedIndex;
+	var index_d = $('#category_4')[0].selectedIndex;
+
+	if((index_a+index_b+index_c+index_d) == 0) {
+		alert('카테고리를 선택하여 주세요.!');
+		return false;
+	}
+
+	if(index_a > 0) {
+		select_category = $('#category_1 option:selected').val();
+		array_push(arr_category_code,$('#category_1 option:selected').val());
+		array_push(arr_category_name,$('#category_1 option:selected').text());
+	}
+	if(index_b > 0) {
+		select_category = $('#category_2 option:selected').val();
+		array_push(arr_category_code,$('#category_2 option:selected').val());
+		array_push(arr_category_name,$('#category_2 option:selected').text());
+	}
+	if(index_c > 0) {
+		select_category = $('#category_3 option:selected').val();
+		array_push(arr_category_code,$('#category_3 option:selected').val());
+		array_push(arr_category_name,$('#category_3 option:selected').text());
+	}
+	if(index_d > 0) {
+		select_category = $('#category_4 option:selected').val();
+		array_push(arr_category_code,$('#category_4 option:selected').val());
+		array_push(arr_category_name,$('#category_4 option:selected').text());
+	}
+	//등록여부를 체크한다.
+	$('#ul_loop_category li').each(function(index) {
+		if($(this).prop('id') == select_category) {
+			alert('이미 등록된 카테고리입니다.!');
+			return false;
+		}
+		else {
+			//하위카테고리가 존재하는 여부를 확인한다.
+			var category_path = implode('',arr_category_code);
+			var obj = eval("category_object['"+category_path+"']");
+			if(typeof(obj) == 'object') {
+				if(sizeof(obj['code']) > 1) {
+					alert('하위카테고리가 존재합니다.!');
+					return false;
+				}
+			}
+			var category_path_desc = implode(' > ',arr_category_name);
+			var size_li = $('ul#ul_loop_category li.li_loop_category').size();
+			if(size_li == 0) {
+				$('ul#ul_loop_category').empty();
+			}
+
+			var c_code = getTmpCcode();
+
+			var category_info = '<li id="'+select_category+'" class="li_loop_category">'
+			+ '<input type="hidden" name="c_codes[]" value="'+c_code+'" />'
+			+'<input type="hidden" name="category_codes[]" value="'+select_category+'" />'
+			+ '<ul>'
+			+'<li class="category_path"> · '+category_path_desc+'</li>'
+			+'<li class="category_price"><input type="text" name="selling_prices[]" value="" class="frm_input" style="width:60px" />&nbsp;원</li>'
+			+'<li class="category_recom"><input type="checkbox" name="bool_recom_'+c_code+'" class="bool_recom" value="'+c_code+'" /> 추천</li>'
+			+'<li class="category_hit"><input type="checkbox" name="bool_hit_'+c_code+'" class="bool_hit" value="'+c_code+'" /> 인기</li>'
+			+'<li class="category_btn"><span class="button small black"><button class="btn_del_loop_category">삭제</button></span></li>'
+			+ '</ul>'
+			+ '</li>';
+
+			$('ul#ul_loop_category').append(category_info);
+			$('ul#ul_loop_category li:last-child button.btn_del_loop_category').click(function() {
+				var obj = $(this).parent().parent().parent().parent();
+				categoryDel(obj);
+			}).css('cursor','pointer');
+
+			$('ul#ul_loop_category li:last-child input.bool_recom').click(function() {
+				if(this.checked) {
+					$('.bool_recom').prop('checked',null);
+					$(this).prop('checked','checked');
+				}
+			}).css('cursor','pointer');
+
+			$('ul#ul_loop_category li:last-child input.bool_hit').click(function() {
+				if(this.checked) {
+					$('.bool_hit').prop('checked',null);
+					$(this).prop('checked','checked');
+				}
+			}).css('cursor','pointer');
+			return false;
+		}
+	});
+}
+
+function getTmpCcode()
+{
+	var code;
+	code = 'aa'+ tmp_c_code;
+	tmp_c_code = tmp_c_code + 1;
+	return code;
+}
+
+$(function() {
+	$('ul#ul_loop_category li button.btn_del_loop_category').click(function() {
+		var obj = $(this).parent().parent().parent().parent();
+		categoryDel(obj);
+	}).css('cursor','pointer');
+
+	$('.bool_recom').click(function() {
+		if(this.checked) {
+			$('.bool_recom').prop('checked',null);
+			$(this).prop('checked','checked');
+		}
+	});
+
+	$('.bool_hit').click(function() {
+		if(this.checked) {
+			$('.bool_hit').prop('checked',null);
+			$(this).prop('checked','checked');
+		}
+	});
+});
+
+function categoryDel(obj) {
+	obj.remove();
+	var size_li = $('ul#ul_loop_category li.li_loop_category').size();
+	if(size_li == 0) {
+		$('ul#ul_loop_category').append('<li><span class="category_path">등록된 카테고리가 없습니다.</span></li>');
+	}	
+}
+
+//ajax 폼전송 관련 스크립트
+$(function() {
+	//기본설정
+	$('#goodsform').submit(function() {
+		myeditor.outputBodyHTML();
+		var chk_option = [
+			{ 'target':'goods_name', 'name':'상품명', 'type':'blank', 'msg':'상품명은 필수 입력사항입니다.!' },
+			{ 'target':'selling_price', 'name':'판매가격', 'type':'blank', 'msg':'판매가격을 입력하여 주세요.!' }
+		];
+
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('입력하신 내용을 저장하시겠습니까?')) {
+			return false;
+		}
+
+		try
+		{
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('저장되었습니다.!');
+					location.replace('?pg_mode=list<!--{srch_url}-->');
+					<!--{:}-->
+					if(confirm("저장되었습니다.!\n\n계속 수정하시겠습니까?")) {
+						location.replace('?pg_mode=form_edit&goods_code=<!--{_GET.goods_code}--><!--{srch_url}-->');
+					}
+					else {
+						location.href = '?pg_mode=list&<!--{srch_url}-->';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+			
+		}
+		catch (err)
+		{
+		alert(err);
+		}
+
+		return false;
+	});
+});
+
+//폼 설정값 유지
+$(function() {
+
+	//가격사용여부에 따른 스크립트
+	$('input[name=bool_price]').val(['<!--{bool_price}-->']);
+	<!--{? bool_price>0}-->
+	$('input[name=replace_price_word]').prop('disabled','disabled').css('background-color','#d1d1d1');
+	$('input[name=suggest_price]').prop('disabled',null).css('background-color','');
+	$('input[name=selling_price]').prop('disabled',null).css('background-color','');
+	<!--{:}-->
+	$('input[name=replace_price_word]').prop('disabled',null).css('background-color','');
+	$('input[name=suggest_price]').prop('disabled','disabled').css('background-color','#d1d1d1');
+	$('input[name=selling_price]').prop('disabled','disabled').css('background-color','#d1d1d1');
+	<!--{/}-->
+	$('input[name=bool_price]').click(function() {
+		var check_val = $(this).val();
+		if(check_val > 0) {
+			$('input[name=replace_price_word]').prop('disabled','disabled').css('background-color','#d1d1d1');
+			$('input[name=suggest_price]').prop('disabled',null).css('background-color','');
+			$('input[name=selling_price]').val(selling_price).prop('disabled',null).css('background-color','');
+		}
+		else {
+			$('input[name=replace_price_word]').prop('disabled',null).css('background-color','');
+			$('input[name=suggest_price]').prop('disabled','disabled').css('background-color','#d1d1d1');
+			$('input[name=selling_price]').val('0').prop('disabled','disabled').css('background-color','#d1d1d1');
+		}
+	});
+
+	$('input[name=bool_emoney]').val(['<!--{bool_emoney}-->']);
+	<!--{? bool_emoney}-->
+	$('input[name=emoney]').prop('disabled',null).css('background-color','');
+	<!--{:}-->
+	$('input[name=emoney]').prop('disabled','disabled').css('background-color','#d1d1d1');
+	<!--{/}-->
+
+	$('input[name=bool_emoney]').click(function() {
+		var check_val = $(this).val();
+		if(check_val > 0) {
+			$('input[name=emoney]').prop('disabled',null).css('background-color','');
+		}
+		else {
+			$('input[name=emoney]').prop('disabled','disabled').css('background-color','#d1d1d1');
+		}
+	});
+
+	$('input[name=bool_basic_qty]').val(['<!--{bool_basic_qty}-->']);
+	$('input[name=set_option_method]').val(['<!--{set_option_method}-->']);
+	$('input[name=bool_option_price]').val(['<!--{bool_option_price}-->']);
+	$('input[name=bool_option_stock]').val(['<!--{bool_option_stock}-->']);
+	$('input[name=bool_option]').val(['<!--{bool_option}-->']);
+	$('input[name=bool_stock]').val(['<!--{bool_stock}-->']);
+	$('input[name=bool_option_qty]').val(['<!--{bool_option_qty}-->']);
+	$('input[name=bool_sold_out]').val(['<!--{bool_sold_out}-->']);
+
+	//배송비설정
+	$('input[name=delivery_charge_method]').val(['<!--{delivery_charge_method}-->']);
+	<!--{? delivery_charge_method != 'charge'}-->
+	$('#delivery_charge').prop('disabled','disabled').css('background-color','#d1d1d1');
+	<!--{:}-->
+	<!--{/}-->
+	$('input[name=delivery_charge_method], #btn_delivery_fee').click(function() {
+		var check_val = $('input[name=delivery_charge_method]:checked').val();
+		if(check_val == 'charge') {
+			$('#delivery_charge').val(homedelivery_pre_fee);
+			$('#delivery_charge').prop('disabled',null).css('background-color','');
+		}
+		else {
+			$('#delivery_charge').val('0');
+			$('#delivery_charge').prop('disabled','disabled').css('background-color','#d1d1d1');
+		}
+	});
+
+	$('input[name=bool_delivery_info]').val(['<!--{bool_delivery_info}-->']);
+	$('input[name=bool_exchange_info]').val(['<!--{bool_exchange_info}-->']);
+	$('input[name=set_relation_method]').val(['<!--{set_relation_method}-->']);
+	//추천상품, 인기상품
+	/*
+	$('input[name=bool_hit]').val(['<!--{bool_hit}-->']);
+	$('input[name=bool_recom]').val(['<!--{bool_recom}-->']);
+	*/
+	//아이콘설정 값 세팅
+	$('input[name=bool_icon_new]').val(['<!--{bool_icon_new}-->']);
+	$('input[name=bool_icon_recomm]').val(['<!--{bool_icon_recomm}-->']);
+	$('input[name=bool_icon_special]').val(['<!--{bool_icon_special}-->']);
+	$('input[name=bool_icon_event]').val(['<!--{bool_icon_event}-->']);
+	$('input[name=bool_icon_regv]').val(['<!--{bool_icon_regv}-->']);
+	$('input[name=bool_icon_best]').val(['<!--{bool_icon_best}-->']);
+	$('input[name=bool_icon_sale]').val(['<!--{bool_icon_sale}-->']);
+
+	$('#weight_delivery_charge').keyup(function() {
+		var v = parseInt($(this).val());
+		if(v > 10) {
+			alert('배송 비용 가중치는 10을 초과할 수 없습니다.!');
+			$(this).val('10');
+			return;
+		}
+	});
+});
+
+//상품 이미지 툴팁 보여주기
+var tooltip_option = {
+	delay:0,
+    showURL: false,
+    bodyHandler: function() { 
+		return $("<img/>").prop("src", '/data/shop_a/'+$(this).html());
+    }
+};
+
+$(function() {
+	<!--{? !empty(img_goods_a)}-->$('#img_a').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_b)}-->$('#img_b').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_c)}-->$('#img_c').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_d)}-->$('#img_d').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_e)}-->$('#img_e').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_f)}-->$('#img_f').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_g)}-->$('#img_g').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_h)}-->$('#img_h').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_i)}-->$('#img_i').tooltip(tooltip_option);<!--{/}-->
+	<!--{? !empty(img_goods_j)}-->$('#img_j').tooltip(tooltip_option);<!--{/}-->
+});
+
+//항목추가
+function addArticle() {
+	$.get('?pg_mode=get_code',function(data) {
+		if(data['bool']) {
+			var code = data['msg'];
+			var option_html = 
+			'<tr id="tr_option_'+code+'">'+
+				'<td class="dragHandle dndover state-default">&nbsp;</td>'+
+				'<th style="vertical-align:top">'+
+					'<input type="hidden" name="option_idx[]" value="'+code+'" />'+
+					'<input type="hidden" name="title_code_'+code+'" value="none" />'+
+					'<input type="text" name="option_title_'+code+'" class="frm_input" /> <a href="javascript:addOption(\''+code+'\')"><img src="../images/icon_plus.gif" alt="[+]"></a><a href="javascript:delOption(\''+code+'\')"><img src="../images/icon_minus.gif" alt="[-]"></a>'+
+					'<p><input type="checkbox" name="bool_option_staple_'+code+'" value="1" /> 필수항목 <span class="button small black"><input type="button" value="항목삭제" onclick="delArticle(\'tr\',\''+code+'\')" /></span></p>'+
+				'</th>'+
+				'<td style="vertical-align:top">'+
+					'<ul id="option_ul_'+code+'" class="option_ul">'+
+						'<li class="loop_option">'+
+							'<span class="option_name">옵션명</span> <input type="text" name="option_name_'+code+'[]" class="frm_input" /> <span class="option_price">가격</span> <input type="text" name="option_price_'+code+'[]" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:60px;IME-MODE: disabled" />원 <input type="checkbox" name="bool_option_soldout_'+code+'[]" value="1" />품절 <span class="button small black"><input type="button" value="옵션삭제" class="btn_sub_option_del" /></span>'+
+						'</li>'+
+					'</ul>'+
+				'</td>'+
+			'</tr>';
+			$('table#goods_option').append(option_html);
+
+			$("#goods_option").tableDnD({
+				onDragClass: "dndover",
+				dragHandle: "dragHandle"
+			});
+
+			$("#option_ul_"+code+" li:last-child input:button").click(function(){
+				subOptionDel($(this));
+			});
+		}
+	},'json');
+}
+
+//항목삭제
+function delArticle(v,code) {
+	var size_tr = $('table#goods_option tr').size();
+	if(size_tr > 1) {
+		if(v == 'last') {
+			$('table#goods_option tr:last-child').remove();
+		}
+		else {
+			$('#tr_option_'+code).remove();
+		}
+	}
+	else {
+		alert('삭제할 수 없습니다.');
+	}
+}
+
+//옵션추가
+function addOption(code) {
+	var li_html = 
+	'<li class="loop_option">'+
+		'<input type="hidden" name="option_code_'+code+'[]" value="none" />'+
+		'<span class="option_name">옵션명</span> <input type="text" name="option_name_'+code+'[]" class="frm_input" /> <span class="option_price">가격</span> <input type="text" name="option_price_'+code+'[]" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:60px;IME-MODE: disabled" />원 <input type="checkbox" name="bool_option_soldout_'+code+'[]" value="1" />품절 <span class="button small black"><input type="button" value="옵션삭제" class="btn_sub_option_del" /></span>'+
+	'</li>';
+	$('ul#option_ul_'+code).append(li_html);
+	$("#option_ul_"+code+" li:last-child input:button").click(function(){
+		subOptionDel($(this));
+	});
+}
+
+//옵션삭제
+function delOption(code) {
+	var li_size = $('ul#option_ul_'+code+' li').size();
+	if(li_size > 1) {
+		$('ul#option_ul_'+code+' li:last-child').remove();
+	}
+	else {
+		alert('삭제할 수 없습니다.');
+	}
+}
+
+function subOptionDel(obj) {
+	var li_size = obj.parent().parent().siblings().size();
+	if(li_size > 0) {
+		obj.parent().parent().remove();
+	}
+	else {
+		alert('삭제할 수 없습니다.');
+	}
+}
+
+$(function() {
+	$('.btn_sub_option_del').click(function(){
+		subOptionDel($(this));
+	});
+});
+
+$(function() {
+	$('.btn_go_list').click(function () {
+		location.href = '?pg_mode=list<!--{srch_url}-->';
+	});
+
+	//옵션 순서 드래그
+	$("#goods_option").tableDnD({
+		onDragClass: "dndover",
+		dragHandle: "dragHandle"
+	});
+
+	$("ul.option_ul").dragsort();
+});
+
+function delGoodsImg(target) {
+	if(!confirm('선택한 이미지를 삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('?pg_mode=del_goods_img&goods_code=<!--{_GET.goods_code}-->&target='+target,function(data) {
+		if(data['bool']) {
+			alert('이미지가 삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			alert('재시도 해주세요.!');
+		}
+	},'json');
+}
+
+$(function() {
+	$('#selling_price').focusout(function() {
+		/*
+		var selling_price = parseInt($(this).val());
+		var emoney_ratio = <!--{emoney_ratio}-->;
+		$('input[name=emoney]').val(parseInt(selling_price*(emoney_ratio/100)));	
+		*/
+	});
+
+	$('select#goods_maker, select#goods_model, select#goods_brand, select#goods_origin').change(function() {
+		var select_idx = this.selectedIndex;
+		if(select_idx > 0) {
+			var id = $(this).prop('id');
+			$('input[name='+id+']').val($('option:selected',this).val());
+		}
+	});
+});
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_02.png') 0px 0px no-repeat;">상품관리</span> / <span class="title02">상품관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">상품등록</div>
+<form method="post" name="goodsform" id="goodsform" action="<!--{_SERVER.SCRIPT_NAME}-->" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" id="pg_mode" value="<!--{pg_mode}-->"/>
+<!--{? _GET.pg_mode=='form_edit'}--><input type="hidden" name="goods_code"  value="<!--{_GET.goods_code}-->" /><!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="36%"></col>
+		<col width="140"></col>
+		<col width="*"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>카테고리</th>
+		<td class="editable_area" colspan="3">
+			<div id="category_select_form">
+				<select id="category_1" class="select">
+					<option>:::1차카테고리:::</option>
+				</select>&nbsp;
+				<select id="category_2" class="select">
+					<option>:::2차카테고리:::</option>
+				</select>&nbsp;
+				<select id="category_3" class="select">
+					<option>:::3차카테고리:::</option>
+				</select>&nbsp;
+				<select id="category_4" class="select">
+					<option>:::4차카테고리:::</option>
+				</select>							
+				<span class="button small black"><a href="javascript:;" onclick="addCategory()" >추가</a></span>
+			</div>
+			<div id="editable_category">
+				<ul id="ul_loop_category">
+					<!--{@ loop_select_category}-->
+					<li id="<!--{.category_code}-->" class="li_loop_category">
+					<input type="hidden" name="c_codes[]" value="<!--{.c_code}-->" />
+					<input type="hidden" name="category_codes[]" value="<!--{.category_code}-->" />
+						<ul>
+							<li class="category_path"> · <!--{.category_path}--></li>
+							<li class="category_price"><input type="text" name="selling_prices[]" value="<!--{.selling_price}-->" class="frm_input" style="width:60px" />&nbsp;원</li>
+							<li class="category_recom"><input type="checkbox" name="bool_recom_<!--{.c_code}-->" value="<!--{.c_code}-->" class="bool_recom" <!--{? .bool_recom > 0}-->checked="checked"<!--{/}--> /> 추천</li>
+							<li class="category_hit"><input type="checkbox" name="bool_hit_<!--{.c_code}-->" value="<!--{.c_code}-->" class="bool_hit" <!--{? .bool_hit > 0}-->checked="checked"<!--{/}-->  /> 인기</li>
+							<li class="category_btn"><span class="button small black"><button class="btn_del_loop_category">삭제</button></span></li>
+						</ul>
+					</li>
+					<!--{:}-->
+					<li><span class="category_path">등록된 카테고리가 없습니다.</span></li>
+					<!--{/}-->
+				</ul>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td colspan="3"><input type="text" name="goods_name" value="<!--{goods_name}-->" class="frm_input" style="width:400px" /></td>
+	</tr>
+	<tr>
+		<th>메이커</th>
+		<td>
+			<input type="text" name="goods_maker" value="<!--{goods_maker}-->" class="frm_input" style="width:100px" />
+			<select id="goods_maker">
+				<option value="" selected="selected">::메이커::</option>
+				<!--{@loop_maker}-->
+				<option value="<!--{.goods_maker}-->"><!--{.goods_maker}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+		<th>브랜드</th>
+		<td>
+			<input type="text" name="goods_brand" value="<!--{goods_brand}-->" class="frm_input" style="width:100px" />
+			<select id="goods_brand">
+				<option value="" selected="selected">::브랜드::</option>
+				<!--{@loop_brand}-->
+				<option value="<!--{.goods_brand}-->"><!--{.goods_brand}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>모델명</th>
+		<td>
+			<input type="text" name="goods_model" value="<!--{goods_model}-->" class="frm_input" style="width:100px" />
+			<select id="goods_model">
+				<option value="" selected="selected">::모델명::</option>
+				<!--{@loop_model}-->
+				<option value="<!--{.goods_model}-->"><!--{.goods_model}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+		<th>원산지</th>
+		<td>
+			<input type="text" name="goods_origin" value="<!--{goods_origin}-->" class="frm_input" style="width:100px" />
+			<select id="goods_origin">
+				<option value="" selected="selected">::원산지::</option>
+				<!--{@loop_origin}-->
+				<option value="<!--{.goods_origin}-->"><!--{.goods_origin}--></option>
+				<!--{/}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>가격사용여부</th>
+		<td colspan="3">
+			<input type="radio" name="bool_price" value="1"  id="bool_price_y" /> <label for="bool_price_y">사용함</label>
+			<input type="radio" name="bool_price" value="0" id="bool_price_n" /> <label for="bool_price_n">사용안함</label> 
+			/ 가격대체문구 : <input type="text" name="replace_price_word" value="<!--{replace_price_word}-->" class="frm_input" style="width:100px" />
+		</td>
+	</tr>
+	<tr>
+		<th>권장소비자가격</th>
+		<td><input type="text" name="suggest_price" value="<!--{suggest_price}-->" onKeyDown = "onlyNumber(event)"  class="frm_input" style="width:80px;IME-MODE: disabled" /> 원</td>
+		<th>판매가격</th>
+		<td><input type="text" name="selling_price" value="<!--{selling_price}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE: disabled" /> 원</td>
+	</tr>
+	<tr>
+		<th>구매수량제한</th>
+		<td colspan="3"> 구매수량 <input type="text" name="max_orderqty" value="<!--{max_orderqty}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:50px;IME-MODE: disabled" /> 개 까지 허용 ( 0을 입력하면 수량제한이 적용되지 않습니다.)</td>
+	</tr>
+	<tr>
+		<th>재고연동</th>
+		<td>
+			<input type="radio" name="bool_stock" id="bool_stock_y" value="1"/> <label for="bool_stock_y">사용함</label>
+			<input type="radio" name="bool_stock" id="bool_stock_y" value="0"/> <label for="bool_stock_n">사용안함</label>
+		</td>
+		<th>재고수량</th>
+		<td><input type="text" name="stock" value="<!--{stock}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:50px;IME-MODE: disabled" />
+		</td>
+	</tr>
+	<tr>
+		<th>적립금지급여부</th>
+		<td>
+			<input type="radio" name="bool_emoney" value="1" id="bool_emoney_y" /> <label for="bool_emoney_y">지급함</label>
+			<input type="radio" name="bool_emoney" value="0" id="bool_emoney_n"  /> <label for="bool_emoney_n">지급안함</label>
+		</td>
+		<th>지급적립금</th>
+		<td><input type="text" name="emoney" value="<!--{emoney}-->" class="frm_input" style="width:80px" /></td>
+	</tr>
+	<tr>
+		<th>배송비용적용방법</th>
+		<td colspan="3">
+			<input type="radio" name="delivery_charge_method" value="free" id="delivery_charge_method_free" /> <label for="delivery_charge_method_free">무료배송</label>
+			<input type="radio" name="delivery_charge_method" value="charge" id="delivery_charge_method_charge" /> <label for="delivery_charge_method_charge">선불</label> (주문 결제시 배송비를 포함해서 결제)
+			<input type="radio" name="delivery_charge_method" value="arrival" id="delivery_charge_method_arrival" /> <label for="delivery_charge_method_arrival">착불</label> (주문자 도착 결제조건)
+		</td>
+	</tr>
+	<tr>
+		<th>배송비설정</th>
+		<td><input type="text" name="delivery_charge" value="<!--{delivery_charge}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:80px;IME-MODE: disabled" /> 원 <span class="button"><input type="button" value="기본설정적용" id="btn_delivery_fee" /></span></td>
+		<th>포장 가중치</th>
+		<td><input type="text" name="weight_delivery_charge" value="<!--{? empty(weight_delivery_charge)}-->10<!--{:}--><!--{weight_delivery_charge}--><!--{/}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:50px;IME-MODE: disabled" /></td>
+	</tr>
+	<tr>
+		<th>품절여부</th>
+		<td colspan="3">
+			<input type="radio" name="bool_sold_out" value="1" id="bool_sold_out_y" /><label for="bool_sold_out_y">품절표시</label>
+			<input type="radio" name="bool_sold_out" value="0" id="bool_sold_out_n" /><label for="bool_sold_out_n">판매중</label>
+		</td>
+	</tr>
+	<!--{*
+	<tr>
+		<th>인기상품</th>
+		<td>
+			<input type="radio" name="bool_hit" value="1" id="bool_hit_y" /><label for="bool_hit_y">예</label>
+			<input type="radio" name="bool_hit" value="0" id="bool_hit_n" /><label for="bool_hit_n">아니요</label>
+		</td>
+		<th>추천상품</th>
+		<td>
+			<input type="radio" name="bool_recom" value="1" id="bool_recom_y" /><label for="bool_recom_y">예</label>
+			<input type="radio" name="bool_recom" value="0" id="bool_recom_n" /><label for="bool_recom_n">아니요</label>
+		</td>
+	</tr>
+	*}-->
+	<tr>
+		<th>아이콘설정</th>
+		<td colspan="3">
+			<input type="checkbox" name="bool_icon_new" value="1" id="bool_icon_new" /><label for="bool_icon_new"><img src="/data/icon/icon_new.gif" /></label>
+			<input type="checkbox" name="bool_icon_recomm" value="1" id="bool_icon_recomm" /><label for="bool_icon_recomm"><img src="/data/icon/icon_recomm.gif" /></label>
+			<input type="checkbox" name="bool_icon_special" value="1" id="bool_icon_special" /><label for="bool_icon_special"><img src="/data/icon/icon_special.gif" /></label>
+			<input type="checkbox" name="bool_icon_event" value="1" id="bool_icon_event" /><label for="bool_icon_event"><img src="/data/icon/icon_event.gif" /></label>
+			<input type="checkbox" name="bool_icon_regv" value="1" id="bool_icon_regv" /><label for="bool_icon_regv"><img src="/data/icon/icon_regv.gif" /></label>
+			<input type="checkbox" name="bool_icon_best" value="1" id="bool_icon_best" /><label for="bool_icon_best"><img src="/data/icon/icon_best.gif" /></label>
+			<input type="checkbox" name="bool_icon_sale" value="1" id="bool_icon_sale" /><label for="bool_icon_sale"><img src="/data/icon/icon_sale.gif" /></label>
+		</td>
+	</tr>
+	<tr>
+		<th>검색어</th>
+		<td colspan="3"><input type="text" name="s_word" value="<!--{s_word}-->" class="frm_input" style="width:500px" /></td>
+	</tr>
+
+	<tr>
+		<th>상품간락설명</th>
+		<td colspan="3"><input type="text" name="goods_summary" value="<!--{goods_summary}-->" class="frm_input" style="width:500px" /></td>
+	</tr>
+	</tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif">상품상세설명</div>
+<div class="wrap_detail_product">
+<textarea name="goods_detail" id="goods_detail"><!--{goods_detail}--></textarea>
+</div>
+
+<table class="form_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="36%"></col>
+		<col width="140"></col>
+		<col width="*"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>상품이미지</th>
+		<td colspan="3">
+			<div id="frm_img_goods">
+				<div id="input_img_goods_a"><input type="file" name="img_goods_a" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_a)}--><a href="javascript:;" id="img_a" class="img_a"><!--{img_goods_a}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_a')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_b"><input type="file" name="img_goods_b" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_b)}--><a href="javascript:;" id="img_b" class="img_b"><!--{img_goods_b}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_b')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_c"><input type="file" name="img_goods_c" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_c)}--><a href="javascript:;" id="img_c" class="img_c"><!--{img_goods_c}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_c')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_d"><input type="file" name="img_goods_d" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_d)}--><a href="javascript:;" id="img_d" class="img_d"><!--{img_goods_d}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_d')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_e"><input type="file" name="img_goods_e" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_e)}--><a href="javascript:;" id="img_e" class="img_e"><!--{img_goods_e}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_e')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_f"><input type="file" name="img_goods_f" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_f)}--><a href="javascript:;" id="img_f" class="img_f"><!--{img_goods_f}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_f')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_g"><input type="file" name="img_goods_g" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_g)}--><a href="javascript:;" id="img_g" class="img_g"><!--{img_goods_g}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_g')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_h"><input type="file" name="img_goods_h" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_h)}--><a href="javascript:;" id="img_h" class="img_h"><!--{img_goods_h}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_h')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_i"><input type="file" name="img_goods_i" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_i)}--><a href="javascript:;" id="img_i" class="img_i"><!--{img_goods_i}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_i')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+				<div id="input_img_goods_j"><input type="file" name="img_goods_j" class="frm_input" style="width:300px" /><!--{? !empty(img_goods_j)}--><a href="javascript:;" id="img_j" class="img_j"><!--{img_goods_j}--></a>&nbsp;<a href="javascript:delGoodsImg('img_goods_j')"><img src="../images/prod_delete.jpg" class="btn_delete" alt="삭제" /></a><!--{/}--></div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<th>상품옵션</th>
+		<td colspan="3">
+			<input type="radio" name="bool_option" value="1"  id="bool_option_y" /> <label for="bool_option_y">사용함</label>
+			<input type="radio" name="bool_option" value="0"  id="bool_option_n" /> <label for="bool_option_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<div>
+				<div>
+					<a href="javascript:;" onclick="addArticle()"><img src="../images/icon_add.gif" alt="[add]" /></a>
+					<a href="javascript:;" onclick="delArticle('last')"> <img src="../images/icon_del2.gif" alt="[del]" /></a>
+				</div>
+				<table id="goods_option" class="list_table">
+				<colgroup>
+					<col width="5%"></col>
+					<col width="25%"></col>
+					<col width="70%"></col>
+				</colgroup>
+				<tbody>
+					<!--{@ loop_option_title}-->
+					<tr id="tr_option_<!--{.option_code}-->">
+						<td class="dragHandle dndover state-default">&nbsp;</td>
+						<th style="vertical-align:top">
+							<input type="hidden" name="option_idx[]" value="<!--{.option_code}-->"  />
+							<input type="hidden" name="title_code_<!--{.option_code}-->" value="<!--{.option_code}-->" />
+							<input type="text" name="option_title_<!--{.option_code}-->" value="<!--{.option_title}-->" class="frm_input" /> <a href="javascript:addOption('<!--{.option_code}-->')"><img src="../images/icon_plus.gif" alt="[+]"></a><a href="javascript:delOption('<!--{.option_code}-->')"><img src="../images/icon_minus.gif" alt="[-]"></a>
+							<p><input type="checkbox" name="bool_option_staple_<!--{.option_code}-->" value='1' <!--{? .bool_option_staple > 0}-->checked="checked"<!--{/}--> />필수항목 <span class="button small black"><input type="button" value="항목삭제" onclick="delArticle('tr','<!--{.option_code}-->')" /></span></p>
+						</th>
+						<td style="vertical-align:top">
+							<ul id="option_ul_<!--{.option_code}-->" class="option_ul">
+								<!--{@ loop_option}-->
+								<li class="loop_option">
+									<input type="hidden" name="option_code_<!--{.option_code}-->[]" value="<!--{..option_code}-->" />
+									<span class="option_name">옵션명</span> <input type="text" name="option_name_<!--{.option_code}-->[]" value="<!--{..option_name}-->" class="frm_input" /> <span class="option_price">가격</span> <input type="text" name="option_price_<!--{.option_code}-->[]" value="<!--{..option_price}-->" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:60px;IME-MODE: disabled" />원 <input type="checkbox" name="bool_option_soldout_<!--{.option_code}-->[]" value="1" <!--{? ..bool_option_soldout > 0}-->checked="checked"<!--{/}-->/>품절 <span class="button small black"><input type="button" value="옵션삭제" class="btn_sub_option_del" /></span>
+								</li>
+								<!--{:}-->
+								<li class="loop_option">
+									<input type="hidden" name="option_code_<!--{.option_code}-->[]" value="" />
+									<span class="option_name">옵션명</span> <input type="text" name="option_name_<!--{.option_code}-->[]" value="" class="frm_input" /> <span class="option_price">가격</span> <input type="text" name="option_price_<!--{.option_code}-->[]" value="" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:60px;IME-MODE: disabled" />원 <input type="checkbox" name="bool_option_soldout_<!--{.option_code}-->[]" value="1" />품절 <span class="button small black"><input type="button" value="옵션삭제" class="btn_sub_option_del" /></span>
+								</li>
+								<!--{/}-->
+							</ul>
+						</td>
+					</tr>
+					<!--{:}-->
+					<tr id="tr_option_1">
+						<td class="dragHandle dndover state-default">&nbsp;</td> 
+						<th style="vertical-align:top">
+							<input type="hidden" name="option_idx[]" value="<!--{option_tr_code}-->" />
+							<input type="hidden" name="title_code_<!--{option_tr_code}-->" value="none" />
+							<input type="text" name="option_title_<!--{option_tr_code}-->" class="frm_input" /> <a href="javascript:addOption('<!--{option_tr_code}-->')"><img src="../images/icon_plus.gif" alt="[+]"></a><a href="javascript:delOption('<!--{option_tr_code}-->')"><img src="../images/icon_minus.gif" alt="[-]"></a>
+							<p><input type="checkbox" name="bool_option_staple_<!--{option_tr_code}-->" /> 필수항목</p>
+						</th>
+						<td style="vertical-align:top">
+							<ul id="option_ul_<!--{option_tr_code}-->" class="option_ul">
+								<li class="loop_option">
+									<input type="hidden" name="option_code_<!--{option_tr_code}-->[]" value="none" />
+									<span class="option_name">옵션명</span> <input type="text" name="option_name_<!--{option_tr_code}-->[]" class="frm_input" /> <span class="option_price">가격</span> <input type="text" name="option_price_<!--{option_tr_code}-->[]" onKeyDown = "onlyNumber(event)" class="frm_input" style="width:60px;IME-MODE: disabled"/>원 <input type="checkbox" name="bool_option_soldout_<!--{option_tr_code}-->[]" value="1" />품절 <span class="button small black"><input type="button" value="옵션삭제" class="btn_sub_option_del" /></span>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<!--{/}-->
+				</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<th>배송안내</th>
+		<td>
+			<input type="radio" name="bool_delivery_info" value="1" id="bool_delivery_info_y" /> <label for="bool_delivery_info_y">사용함</label>
+			<input type="radio" name="bool_delivery_info" value="0" id="bool_delivery_info_n" /> <label for="bool_delivery_info_n">사용안함</label>
+		</td>
+		<th>교환안내</th>
+		<td>
+			<input type="radio" name="bool_exchange_info" value="1" id="bool_exchange_info_y" /> <label for="bool_exchange_info_y">사용함</label>
+			<input type="radio" name="bool_exchange_info" value="0" id="bool_exchange_info_n" /> <label for="bool_exchange_info_n">사용안함</label>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>
+	<span class="button large black strong"><input type="button" value="목 록" class="btn_go_list" /></span>
+</div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'goods_detail';
+myeditor.config.imgMaxWidth = 770;
+myeditor.run();
+//-->
+</script>

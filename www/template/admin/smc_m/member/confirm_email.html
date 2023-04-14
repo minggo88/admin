@@ -1,0 +1,32 @@
+<style type="text/css">
+#join_thanks {font-size:13px; font-weight:bold; color:#646464; text-align:left; line-height:20px;}
+</style>
+
+<div class="area" style="margin:5px 0;">
+	<img src="../images/member_step3.gif"  style="margin:5px 0;float:right;"/>
+</div>
+<!--{? confirm_ok}-->
+<div class="title_h2"><img src="../images/bullet.gif">이메일 인증 완료</div>
+<div class="area_remark" style="line-height:200%; text-align:left;padding:30px;">
+	<span class="sub_title_b"><!--{config_basic.shop_name}-->의 회원으로 가입해 주셔서 감사합니다.</span><br />
+	<span class="sub_title_b">이메일 인증이 완료되었습니다. 이제 로그인을 하시고 서비스를 이용하실수 있습니다.</span><br />
+	<!--{?member_info.bool_confirm_mobile!=1}-->
+	<span class="sub_title_b">비트코인거래서비스를 이용하시려면 <a href="/member/memberAuth.php?ret_url=L2VkaXQ=">본인인증</a>을 해주세요.</span><br />
+	<!--{/}-->
+</div>
+<div class="button_area">
+	<!--{?member_info.bool_confirm_mobile!=1}-->
+	<button onclick="javascript:location.href=('/member/memberAuth.php?ret_url=L2VkaXQ=');" class="grad">본인인증하기</button>
+	<!--{:}-->
+	<button onclick="javascript:location.href=('/member/memberAuth.php');" class="grad">로그인하기</button>
+	<!--{/}-->
+</div>
+<!--{:}-->
+<div class="title_h2"><img src="../images/bullet.gif">이메일 인증 오류</div>
+<div class="area_remark" style="line-height:200%; text-align:left;padding:30px;">
+	<span class="sub_title_b">이메일 인증시 오류가 발생하였습니다.</span><br />
+</div>
+<div class="button_area">
+	<button onclick="javascript:location.href=('/');" class="grad">확인</button>
+</div>
+<!--{/}-->

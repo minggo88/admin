@@ -1,0 +1,22 @@
+<form name="ff" method="post">
+  <input type="hidden" name="id" value="0">
+  <div align="center"><center>
+  <table cellSpacing="1" bgcolor="#008000" cellpadding="4" width="1100">
+    <tr align="center">
+      <th align="center" bgcolor="#94CE94" colSpan="5"><strong>시스템에 등록된 작업 목록</strong></th>
+    </tr>
+    <tr>
+      <th align="center" bgcolor="#FFFFFF" width="452">작업 이름과 실행파일 위치</th>
+      <th align="center" bgcolor="#FFFFFF" width="108">상태</th>
+      <th align="center" bgcolor="#FFFFFF" width="108">마지막 실행 일시</th>
+      <th align="center" bgcolor="#FFFFFF" width="120">다음 실행 일시<font color="#FF8000">*</font></th>
+      <th align="center" bgcolor="#FFFFFF" width="95">실행 간격</th>
+    </tr>
+
+<?php show_jobs(); ?>
+  </table>
+  <div style="width:1100px;text-align:left;padding:10px;"><font color="#FF8000">* 다음 실행 일시는 최소 <strong><?php echo (TIME_WINDOW/60)." "; ?>분</strong> 간격으로 갱신됩니다. </font></div>
+  </center></div>
+</form>
+
+

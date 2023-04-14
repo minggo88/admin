@@ -1,0 +1,41 @@
+<div id="js_layout_wrap">
+	<div id="js_layout_header">
+	<!--{# js_tpl_header}-->
+	</div>
+	<div id="js_layout_main">
+		<div id="js_layout_left">
+		<!--{# js_tpl_left}-->
+		</div>
+		<div id="js_layout_content">
+			<div class="title_h_right"><!--{link}--></div>
+			<div class="title_d1">
+			<!--{? empty(_GET.cate_code)}-->
+				<!--{? _SERVER.SCRIPT_NAME=='/member/memberAuth.php'}-->
+					로그인
+				<!--{: _SERVER.SCRIPT_NAME=='/member/memberJoin.php'}-->
+					회원가입
+				<!--{: _SERVER.SCRIPT_NAME=='/member/memberInfoFind.php'}-->
+					이메일/비밀번호 찾기
+				<!--{: _SERVER.SCRIPT_NAME=='/member/memberEdit.php'}-->
+					회원정보
+				<!--{: _SERVER.SCRIPT_NAME=='/member/memberWithdraw.php'}-->
+					회원탈퇴
+				<!--{: _SERVER.SCRIPT_NAME=='/mypage/mtom.php'}-->
+					1:1 문의상담
+				<!--{: _SERVER.SCRIPT_NAME=='/bbs/bbs_nopermission.php'}-->			
+					이용권한확인
+				<!--{/}-->
+			<!--{:}-->
+				<!--{contents_name}-->
+				<!--{? _SERVER.SCRIPT_NAME=='/curriculum/curriculum.php' && _GET.pg_mode!='list_all'}-->
+				<!--{: _SERVER.SCRIPT_NAME=='/curriculum/lecture.php'}--> ( <!--{category_name}--> )
+				<!--{/}-->				
+			<!--{/}-->
+			</div>
+			<!--{# js_tpl_main}-->
+		</div>
+	</div>
+	<div id="js_layout_footer">
+	<!--{# js_tpl_footer}-->
+	</div>
+</div>

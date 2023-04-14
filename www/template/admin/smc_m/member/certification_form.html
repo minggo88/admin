@@ -1,0 +1,323 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header myacc-edit" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_3;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text "><a href="/edit" ><?=Lang::main_35;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/certification" class="active"><?=Lang::main_36;?></a></label>
+					</div>
+					<div class="layer active"></div>
+					<div class="Rectangle-6-copy-4 large">
+						<label class="Rectangle-Text small"><a href="/editpin"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/histories"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+		
+
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+
+				<div class="row">
+					<div class="col-sm-12 mb-0">
+						<nav class="pull-right">
+							<ol class="breadcrumb">
+								<li><a href="/"><?=Lang::main_213;?></a></li>
+								<li><a href="/edit"><?=Lang::main_3;?></a></li>
+								<li class="active"><?=Lang::main_36;?></li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-sm-12 right-side-sidebar">
+						<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_36;?></span><div class="subject_small"><?=Lang::main_member65;?></div></h3>
+
+						<div class="smart-wrap">
+							<div class="smart-forms smart-forms-ledger smart-container wrap">
+								<div class="form-body smart-steps steps-progress">
+									<form method="post" action="#" id="smart-form" role="application" class="wizard clearfix" novalidate="novalidate" enctype="multipart/form-data" autocomplete="off">
+										<input type="hidden" name="init_idx" value="1" />
+										<input type="hidden" name="current_idx" value="1" />
+										<input type="hidden" name="max_idx" value="1" />
+										<input type="hidden" name="pg_mode" value="" />
+										<input type="hidden" name="token" value="" />
+										<input type="hidden" name="phoneRegYn" value="0" />
+										<input type="hidden" name="displayType" value="C" />
+										<div class="steps clearfix">
+											<ul role="tablist">
+												<li role="tab" class="first current" aria-disabled="false" aria-selected="true"><a id="smart-form-t-0" href="javascript:direct(0);" aria-controls="smart-form-p-0"><span class="current-info audible">current step: </span><span class="number">1</span> <span class="spanTxt"><?=Lang::main_58;?></span></a></li>
+												<li role="tab" class="disabled" aria-disabled="true"><a id="smart-form-t-1" href="javascript:direct(1);" aria-controls="smart-form-p-1"><span class="number">2</span> <span class="spanTxt"><?=Lang::main_59;?></span></a></li>
+												<li role="tab" class="disabled" aria-disabled="true"><a id="smart-form-t-2" class="spanBank" href="javascript:direct(2);" aria-controls="smart-form-p-2"><span class="number">3</span> <span class="spanTxt"><?=Lang::main_60;?></span></a></li>
+												<li role="tab" class="disabled last" aria-disabled="true"><a id="smart-form-t-3" href="#" aria-controls="smart-form-p-3"><span class="number">4</span> <span class="spanTxt"><?=Lang::main_61;?></span></a></li>
+											</ul>
+										</div>
+										<div class="content clearfix">
+
+										<!-- 휴대푠-->
+										<h2 id="smart-form-h-0" tabindex="-1" class="title current"><?=Lang::main_58;?></h2>
+										<fieldset id="smart-form-p-0" role="tabpanel" aria-labelledby="smart-form-h-0" class="body current" aria-hidden="false">
+											<div class="frm-row">
+												<div class="spacer-t30 spacer-b30">
+													<div class="tagline"><span><?=Lang::main_62;?></span></div>
+												</div>
+												<div class="section colm colm12">
+													<h4 class="mb-10"><?=Lang::main_63;?></h4>
+													<div class="input-group">
+														<div class="input-group">
+															<div class="input-group-prepend">
+																<select name="mobile_country_code" onChange="changeCountry();" class="custom-select input-group-text d-none d-sm-block" style="height: 42px;border-top-right-radius:0;border-bottom-right-radius:0;">
+																	<option value="AU"><?=Lang::main_country1;?> +61</option>
+																	<option value="CA"><?=Lang::main_country2;?> +1</option>
+																	<option value="CN"><?=Lang::main_country3;?> +86</option>
+																	<option value="HK"><?=Lang::main_country4;?> +852</option>
+																	<option value="ID"><?=Lang::main_country5;?> +62</option>
+																	<option value="JP"><?=Lang::main_country6;?> +81</option>
+																	<option value="MO"><?=Lang::main_country7;?> +853</option>
+																	<option value="MY"><?=Lang::main_country8;?> +60</option>
+																	<option value="MN"><?=Lang::main_country9;?> +976</option>
+																	<option value="SG"><?=Lang::main_country10;?> +65</option>
+																	<option value="KR"><?=Lang::main_country11;?> +82</option>
+																	<option value="TH"><?=Lang::main_country12;?> +66</option>
+																	<option value="UK"><?=Lang::main_country13;?> +44</option>
+																	<option value="US"><?=Lang::main_country14;?> +1</option>
+																</select>
+																<select name="mobile_country_code" onChange="changeCountry();" class="custom-select input-group-text d-block d-sm-none" style="height: 42px;border-top-right-radius:0;border-bottom-right-radius:0;">
+																	<option value="AU">+61</option>
+																	<option value="CA">+1</option>
+																	<option value="CN">+86</option>
+																	<option value="HK">+852</option>
+																	<option value="ID">+62</option>
+																	<option value="JP">+81</option>
+																	<option value="MO">+853</option>
+																	<option value="MY">+60</option>
+																	<option value="MN">+976</option>
+																	<option value="SG">+65</option>
+																	<option value="KR">+82</option>
+																	<option value="TH">+66</option>
+																	<option value="UK">+44</option>
+																	<option value="US">+1</option>
+															</select>
+															</div>
+															<input type="hidden" value="" name="mobile_country_code_origin">
+															<input type="tel" value="<!--{realname_info.mobile_origin}-->" class="form-control text-muted" name="phone_number" placeholder="<?=Lang::main_92;?>">
+															<span class="input-group-btn">
+																<button type="button" id="sendBtn" class="btn btn-primary" onClick="sendNumber()"><?=Lang::main_64;?></button>
+															</span>
+														</div>
+													</div>
+												</div><!-- end section -->
+											</div><!-- end .frm-row section -->
+											<div class="frm-row">
+												<div class="section colm colm12">
+													<h4 class="mb-10 mt-10"><?=Lang::main_65;?></h4>
+													<div class="input-group">
+														<div class="input-group">
+															<input type="number" value="" class="form-control text-muted" name="confirm_number" placeholder="<?=Lang::main_66;?>">
+														</div>
+													</div>
+												</div><!-- end section -->
+											</div><!-- end .frm-row section -->
+											<div class="container mt-10 text-primary" id="phoneVerify" style="display:none;">
+												<span style="font-size:16px;"><strong><?=Lang::main_member73;?></strong></span>
+												<div class="left_time">
+													<ul class="countdown" style="margin-bottom:0; padding-top: 5px; text-align:center;">
+														<li>
+															<span>( </span>
+															<span class="minutes">00</span>
+														</li>
+														<li class="seperator">:</li>
+														<li>
+															<span class="seconds">00</span>
+															<span> )</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</fieldset>
+
+										<!-- 사진 -->
+										<h2 id="smart-form-h-1" tabindex="-1" class="title"><?=Lang::main_59;?></h2>
+										<fieldset id="smart-form-p-1" role="tabpanel" aria-labelledby="smart-form-h-1" class="body" aria-hidden="true" style="display: none;">
+											<input type="hidden" name="pg_mode" value="edit" />
+											<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+											<input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+											<div class="frm-row">
+												<div class="spacer-t30 spacer-b30">
+													<div class="tagline"><span><?=Lang::main_208;?></span></div>
+												</div>
+												<!--{? realname_info.image_identify_url && realname_info.image_mix_url }-->
+												<div class="colm colm12 text-center" id="reviewDiv">
+													<!--{? realname_info.bool_confirm_idimage!='1' }-->
+													<strong><?=Lang::main_97;?></strong><br/>
+													<strong><?=Lang::main_99;?></strong><br/>
+													<!--{:}-->
+													<strong><?=Lang::main_209;?></strong><br/>
+													<!--{/}-->
+												</div>
+												<!--{:}-->
+												<div class="colm colm12 text-center" style="min-height:37px;">
+													<strong>
+															<?=Lang::main_98;?>
+														<div style="height: 10px;"></div>
+														<span style="font-style: italic; color: #999;"><?=Lang::main_99;?></span>
+													</strong>
+												</div>
+												<!--{/}-->
+												<div class="colm colm6">
+													<div class="avatar-edit" style="min-height:37px;">
+														<!--{? realname_info.bool_confirm_idimage!='1' }-->
+														<!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+														<input type='file' name="file_data[]" id="imageIdentify" />
+														<input type="hidden" name="image_identify_url_new" value=""/>
+														<input type="hidden" name="image_identify_url_old" value="<!--{realname_info.image_identify_url}-->"/>
+														<label for="imageIdentify"></label>
+														<!--{/}-->
+													</div>
+													<div class="avatar-preview">
+														<!--{? !realname_info.image_identify_url }-->
+														<div id="imagePreview1">
+															<div class="text-center imageEmpty">
+															</div>
+														</div>
+														<!--{:}-->
+														<div id="imagePreview1" style="background-image: url('<!--{realname_info.image_identify_url}-->')">
+															<div class="text-center imageEmpty" style="display:none;">
+																<p><?=Lang::main_96;?></p>
+															</div>
+														</div>
+														<!--{/}-->
+													</div>
+												</div>
+												<div class="colm colm6">
+													<div class="avatar-edit" style="min-height:37px;">
+														<!--{? realname_info.bool_confirm_idimage!='1' }-->
+														<!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+														<input type='file' name="file_data[]" id="imageMix" />
+														<input type="hidden" name="image_mix_url_new" value=""/>
+														<input type="hidden" name="image_mix_url_old" value="<!--{realname_info.image_mix_url}-->"/>
+														<label for="imageMix"></label>
+														<!--{/}-->
+													</div>
+													<div class="avatar-preview">
+														<!--{? !realname_info.image_mix_url }-->
+														<div id="imagePreview2">
+															<div class="text-center imageEmpty mix">
+															</div>
+														</div>
+														<!--{:}-->
+														<div id="imagePreview2" style="background-image: url('<!--{realname_info.image_mix_url}-->')">
+															<div class="text-center imageEmpty mix" style="display:none;">
+																<p><?=Lang::main_96;?></p>
+															</div>
+														</div>
+														<!--{/}-->
+													</div>
+												</div>
+
+												<div class="colm colm12 text-center" style="min-height:37px;">
+													<strong>
+															<?=Lang::main_119;?>
+														<div style="height: 10px;"></div>
+														<span style="font-style: italic; color: #999;"><?=Lang::main_120;?></span>
+													</strong>
+												</div>
+											</div>
+										</fieldset>
+
+										<!-- 은행계좌 -->
+										<h2 id="smart-form-h-2" tabindex="-1" class="title"><?=Lang::main_60;?></h2>
+										<fieldset id="smart-form-p-2" role="tabpanel" aria-labelledby="smart-form-h-2" class="body" aria-hidden="true" style="display: none;">
+											<div class="frm-row">
+												<div class="spacer-t30 spacer-b30">
+													<div class="tagline"><span><?=Lang::main_70;?></span></div>
+												</div>
+												<div class="section colm colm12">
+													<h4 class="mb-10"><?=Lang::main_71;?></h4>
+													<div class="input-group">
+														<div class="input-group">
+															<input type="text" value="<!--{realname_info.bank_name}-->" class="form-control text-muted" name="bank_name" placeholder="<?=Lang::main_210;?>">
+														</div>
+													</div>
+												</div><!-- end section -->
+											</div><!-- end .frm-row section -->
+											<div class="frm-row">
+												<div class="section colm colm12">
+													<h4 class="mb-10 mt-10"><?=Lang::main_72;?></h4>
+													<div class="input-group">
+														<div class="input-group">
+															<input type="text" value="<!--{realname_info.bank_account}-->" class="form-control text-muted" name="bank_account" placeholder="<?=Lang::main_211;?>">
+														</div>
+													</div>
+												</div><!-- end section -->
+											</div><!-- end .frm-row section -->
+											<div class="frm-row">
+												<div class="section colm colm12">
+													<h4 class="mb-10 mt-10"><?=Lang::main_73;?></h4>
+													<div class="input-group">
+														<div class="input-group">
+															<input type="text" value="<!--{realname_info.bank_owner}-->" class="form-control text-muted" name="bank_owner" placeholder="<?=Lang::main_212;?>">
+														</div>
+													</div>
+												</div><!-- end section -->
+											</div><!-- end .frm-row section -->
+										</fieldset>
+
+										<!-- 완료 -->
+										<h2 id="smart-form-h-3" tabindex="-1" class="title"><?=Lang::main_61;?></h2>
+										<fieldset id="smart-form-p-3" role="tabpanel" aria-labelledby="smart-form-h-3" class="body" aria-hidden="true" style="display: none;">
+											<div class="spacer-t30 spacer-b30">
+												<div class="tagline"><span><?=Lang::main_74;?></span></div>
+											</div>
+
+											<div class="section">
+												<div class="notification alert-info text-center">
+														<?=Lang::main_100;?>
+												</div>
+											</div><!-- end section -->
+											<div class="result"></div>
+										</fieldset>
+									</div>
+									<div class="actions clearfix mt-20">
+										<ul role="menu" aria-label="Pagination">
+											<li class="disabled" aria-disabled="true" id="previousLi"><a href="#" role="menuitem" onClick="pre()"><?=Lang::main_68;?></a></li>
+											<li class="disabled" aria-disabled="true" id="saveLi"><a href="#" role="menuitem" onClick="save_certify('R');"><?=Lang::main_69;?></a></li>
+											<li aria-hidden="false" aria-disabled="false" id="nextLi"><a href="#" role="menuitem" onClick="next();"><?=Lang::main_67;?></a></li>
+											<!--<li class="disabled" aria-disabled="true" id="backLi"><a href="#" role="menuitem" onClick="back();">Current Step</a></li>-->
+										</ul>
+									</div>
+									</form>
+								</div>
+							</div><!-- end .smart-forms section -->
+						</div><!-- end .smart-wrap section -->
+
+						<div></div><!-- end section -->
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

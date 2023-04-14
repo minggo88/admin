@@ -1,0 +1,99 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$("#list_sms>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#all_check').click(function() {
+		if(this.checked) {
+			$("table.list_table tbody :checkbox").attr('checked','checked');
+		}
+		else {
+			$("table.list_table tbody :checkbox").removeAttr('checked');
+		}
+	});
+});
+
+function checkDel() {
+	var num_checked = $('#list_form input[name=idxs[]]:checked').length;
+	if(num_checked == 0) {
+		alert('선택된 항목이 없습니다.!');
+		return false;
+	}
+	if(!confirm('선택하신 전송 내역을 삭제하시겠습니까?')) {
+		return false;
+	}
+
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?'+$('#list_form').serialize(),function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">마케팅관리</span> / <span class="title02">SMS 전송 리스트</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">SMS 전송 리스트</div>
+<form id="list_form">
+<input type="hidden" name="pg_mode" value="del_multi" />
+<div class="button_area_left">
+	<span class="button black"><a href="javascript:;" onclick="checkDel()">선택삭제</a></span>
+</div>
+<table id="list_sms" class="list_table">
+	<colgroup>
+	<col width="30"></col>
+	<col width="180"></col>
+	<col width="*"></col>
+	<col width="135"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th><input type="checkbox" id="all_check" /></th>
+		<th>전화번호/전송결과</th>
+		<th>전송내용</th>
+		<th>전송일자</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td class="sms_check"><!--{.no}--><br /><input type="checkbox" name="idxs[]" value="<!--{.idx}-->"></td>
+		<td >
+			<ul>
+				<li class="underline dotted pcenter pred"><!--{.tran_phone}--></li>
+				<li class="underline pcenter pbold">전송결과 : <!--{.tran_result}--></li>
+			</ul>
+		</td>
+		<td class="pleft"><!--{.tran_msg}--></td>
+		<td><!--{.regdate}--></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="4">SMS전송 내역이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_left">
+	<span class="button black"><a href="javascript:;" onclick="checkDel();">선택삭제</a></span>
+</div>
+<div id="navipage"><!--{navi_page}--></div>

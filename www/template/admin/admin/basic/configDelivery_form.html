@@ -1,0 +1,277 @@
+<script type="text/javascript">
+<!--
+var myeditor = new cheditor("myeditor");
+
+function adminAjaxSubmit(obj,tabs_idx) {
+	obj.ajaxSubmit({
+		success: function (data, statusText) {
+			if(data['bool']) {
+				alert('저장되었습니다.!');
+				location.replace('?tabs_idx='+tabs_idx);
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},
+		dataType:'json',
+		resetForm: false
+	});
+}
+
+$(function() {
+
+
+
+	$('#jsform1').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsform2').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsform3').submit(function() {
+		myeditor.outputBodyHTML();
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	//control region form
+	$('#add_region_btn').click(function() {
+		var region_size = $('ul#region_form_ul li').size();
+		var region = '<li>'
+			+'<span class="delivery_region">지 역 명 : <input type="text" name="delivery_region[]"  class="frm_input" style="width:100px" /></span>'
+			+'<span class="delivery_region_fee"> 추가비용 : <input type="text" name="delivery_region_fee[]"  class="frm_input" style="width:100px" />원</span>&nbsp;'
+			+'<span class="button small"><button class="btn_del_region" >삭제</button></span>'
+			+'</li>';
+		$('ul#region_form_ul').append(region);
+		$('ul#region_form_ul li:last-child>span.button>button.btn_del_region').bind('click',function (event) {
+			$(this).parent().parent().remove();
+		});
+	}).css('cursor','hand');
+
+	$('ul#region_form_ul li button.btn_del_region').click(function() {
+		$(this).parent().parent().remove();
+	});
+
+	//control company form
+	$('#btn_add_delivery_company').click(function() {
+		var company_size = $('table#homedelivery_company_form tbody tr').size();
+		if(company_size < 5 ) {
+			$('table#homedelivery_company_form>tbody>tr:last-child').clone().appendTo('table#homedelivery_company_form>tbody');
+			$('table#homedelivery_company_form>tbody>tr:last-child input').val('');	
+			$('table#homedelivery_company_form>tbody>tr>td:last-child>span>button.btn_del_company').bind('click',function() {
+				var company_size = $('table#homedelivery_company_form tbody tr').size();
+				if(company_size == 1) {
+					alert('1개 이상의 배송업체는 등록하여야 합니다.');
+				}
+				else {
+					$(this).parent().parent().parent().remove();	
+				}
+			});
+		}
+		else {
+			alert('5개업체를 초과할 수 없습니다.');
+		}
+	}).css('cursor','hand');
+
+	$('table#homedelivery_company_form button.btn_del_company').click(function() {
+		
+		var company_size = $('table#homedelivery_company_form tbody tr').size();
+		if(company_size == 1) {
+			alert('1개 이상의 배송업체는 등록하여야 합니다.');
+		}
+		else {
+			$(this).parent().parent().parent().remove();
+		}
+	});
+
+	$('input[name=bool_homedelivery]').val(['<!--{bool_homedelivery}-->']);
+	$('input[name=bool_quick]').val(['<!--{bool_quick}-->']);
+	$('input[name=bool_selfdelivery]').val(['<!--{bool_selfdelivery}-->']);
+	$('input[name=kind_fee]').val(['<!--{kind_fee}-->']);
+	$('input[name=bool_box_weight]').val(['<!--{bool_box_weight}-->']);
+});
+
+$(function() {
+	//첫번째 탭은 활성화
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_01.png') 0px 0px no-repeat;">몰기본관리</span> / <span class="title02">배송정책설정</span></h1></div>
+<ul class="tab_menu">
+	<li <!--{? empty(_GET.tabs_idx)}-->class="selected"<!--{/}-->><a href="#delivery_form_1">배송비용설정</a></li>
+	<li <!--{? _GET.tabs_idx ==1}-->class="selected"<!--{/}-->><a href="#delivery_form_2">배송업체설정</a></li>
+	<li <!--{? _GET.tabs_idx ==2}-->class="selected"<!--{/}-->><a href="#delivery_form_3">배송정책설정</a></li>
+</ul>
+<div class="tab_container">
+	<div id="delivery_form_1" class="tab_content" <!--{? !empty(_GET.tabs_idx)}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">배송비용 설정</div>
+		<form method="post" name="jsform1" id="jsform1" action="?">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="tabs_idx" value="0" />
+		<table class="form_table">
+			<colgroup>
+				<col width="140"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>배송방법선택</th>
+				<td>
+					<input type="checkbox" name="bool_homedelivery" id="bool_homedelivery" value="1" /> <label for="bool_homedelivery">택배</label>
+					<input type="checkbox" name="bool_quick" id="bool_quick" value="1" /> <label for="bool_quick">퀵배송 (퀵배송료는 착불만 적용됩니다.)</label>
+					<input type="checkbox" name="bool_selfdelivery" id="bool_selfdelivery" value="1" /> <label for="bool_selfdelivery">직접수령</label></td>
+			</tr>
+			<tr>
+				<th>배송료설정</th>
+				<td>
+					<input type="radio" name="kind_fee" id="kind_fee_free" value="free"/> <label for="kind_fee_free">무료</label>
+					<input type="radio" name="kind_fee" id="kind_fee_charge" value="charge"/> <label for="kind_fee_charge">유료</label> ( 선불 
+					<input type="text" name="homedelivery_pre_fee" value="<!--{homedelivery_pre_fee}-->" class="frm_input" style="width:50px" /> 원 / 착불<input type="text" name="homedelivery_post_fee" value="<!--{homedelivery_post_fee}-->" class="frm_input" style="width:50px" /> 원 )
+				</td>
+			</tr>
+			<tr>
+				<th>배송료부과기준</th>
+				<td>구입 총금액이 <input type="text" name="delivery_free_amount" value="<!--{delivery_free_amount}-->" class="frm_input" style="width:50px" />원 이상일 경우 배송비 무료</td>
+			</tr>
+			<tr>
+				<th>포장가중치사용</th>
+				<td>
+					<input type="radio" name="bool_box_weight" id="bool_box_weight_y" value="1" /> <label for="bool_box_weight_y">사용함</label>
+					<input type="radio" name="bool_box_weight" id="bool_box_weight_n" value="0" /> <label for="bool_box_weight_n">사용안함</label><br />
+					100을 1박스단위로 상품의 부피를 기준으로 상품크기를 표기하여 적용</td>
+			</tr>
+			</tbody>
+		</table><br />
+
+		<div class="title_d2"><img src="../images/bullet.gif">지역별 추가비용 설정</div>
+		<p class="button_area_right"><span class="button black"><input type="button" value=" 지역추가 " id="add_region_btn"/></span></p>
+		<table class="form_table">
+			<colgroup>
+				<col width="140"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>지역별 추가비용</th>
+				<td>
+					<ul id="region_form_ul">
+						<!--{@loop_region}-->
+						<li>
+							<span class="delivery_region">지 역 명 : <input type="text" name="delivery_region[]" value="<!--{.delivery_region}-->" class="frm_input" style="width:100px" /></span>
+							<span class="delivery_region_fee"> 추가비용 : <input type="text" name="delivery_region_fee[]" value="<!--{.delivery_region_fee}-->" class="frm_input" style="width:100px" />원</span>
+							<span class="button small"><button class="btn_del_region" >삭제</button></span>
+						</li>
+						<!--{:}-->
+						<li>
+							<span class="delivery_region">지 역 명 : <input type="text" name="delivery_region[]" class="frm_input" style="width:100px" /></span>
+							<span class="delivery_region_fee"> 추가비용 : <input type="text" name="delivery_region_fee[]" class="frm_input" style="width:100px" />원</span>
+							<span class="button small"><button class="btn_del_region" >삭제</button></span>
+						</li>
+						<!--{/}-->
+					</ul>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="delivery_form_2" class="tab_content" <!--{? _GET.tabs_idx !=1}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">배송업체설정<!--  <span id="btn_add_delivery_company">[배송업체추가]</span> --></div>
+		<form method="post" name="jsform2" id="jsform2" action="?">
+		<input type="hidden" name="pg_mode" value="edit_company" />
+		<input type="hidden" name="tabs_idx" value="1" />
+		<div class="button_area_right"><span class="button middle black"><input type="button" value="배송업체등록"  id="btn_add_delivery_company"/></span></div>
+		<table id="homedelivery_company_form" class="form_table">
+			<colgroup>
+				<col width="180"></col>
+				<col width="160"></col>
+				<col width="*"></col>
+				<col width="80"></col>
+			</colgroup>
+			<thead>
+			<tr class="pcenter">
+				<th>배송업체명</th>
+				<th>전화번호</th>
+				<th>배송추적URL</th>
+				<th>삭제</th>
+			</tr>
+			</thead>
+			<tbody>
+			<!--{@loop_company}-->
+			<tr class="pcenter">
+				<td><input type="text" name="company_name[]" value="<!--{.company_name}-->" class="frm_input" style="width:120px" /></td>
+				<td><input type="text" name="company_phone[]" value="<!--{.company_phone}-->" class="frm_input" style="width:100px" /></td>
+				<td class="pleft"><input type="text" name="company_url[]" value="<!--{.company_url}-->" class="frm_input" style="width:400px" /></td>
+				<td><span class="button small"><button class="btn_del_company" >삭제</button></span></td>
+			</tr>
+			<!--{:}-->
+			<tr class="pcenter">
+				<td><input type="text" name="company_name[]" class="frm_input" style="width:120px" /></td>
+				<td><input type="text" name="company_phone[]" class="frm_input" style="width:100px" /></td>
+				<td><input type="text" name="company_url[]" class="frm_input" style="width:200px" /></td>
+				<td><span class="button small"><button class="btn_del_company" >삭제</button></span></td>
+			</tr>
+			<!--{/}-->
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="delivery_form_3" class="tab_content" <!--{? _GET.tabs_idx !=2}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">배송정책설정</div>
+		<form method="post" name="jsform3" id="jsform3" action="?">
+		<input type="hidden" name="pg_mode" value="edit_clause" />
+		<input type="hidden" name="tabs_idx" value="2" />
+		<div class="wrap_textarea"><textarea name="clause_delivery" id="clause_delivery" style="width:100%;display:none"><!--{clause_delivery}--></textarea></div>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+</div>
+
+
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'clause_delivery';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>

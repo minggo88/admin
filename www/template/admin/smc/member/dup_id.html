@@ -1,0 +1,39 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+function formCheck()
+{
+	var f = document.myform;
+	if(!chkBlank(f.userid,"아이디를 입력하세요")) return;
+	else f.submit();
+}
+
+function apply()
+{
+	opener.joinform.userid.value = document.myform.userid.value;
+	opener.joinform.userpw.focus();
+	opener.joinform.userpw.select();
+	self.close();
+}
+//-->
+</script>
+<table width="350" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="30">&nbsp;&nbsp;&nbsp;&nbsp;아이디 중복확인</td>
+	</tr>
+</table>
+<form name="myform" action="" action="get" onSubmit="return formCheck(this)">
+<input type="hidden" name="pg_mode" value="form_dup" />
+<table width="350" cellpadding="0" cellspacing="0" border="0" align="center">
+	<tr>
+		<td height="30" align="center"><input type="text" name="userid" size="15" value="{userid}" />&nbsp;&nbsp;<a href="javascript:formCheck()">[검색]</a></td>
+	</tr>
+</table>
+<table width="350" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center" height="40"><!--{? is_member}--><font color="#CC0033"><b>이미 등록된 아이디입니다.</b></font> 다시 입력해 주십시오<!--{:}--><font color="BLUE"><b>사용 가능한 아이디 입니다.</b></font> <a href="javascript:apply()">아이디를 사용합니다</a><!--{/}--></td>
+	</tr>
+	<tr>
+		<td align="right" height="20"><a href="javascript:self.close()">[창닫기]</a>&nbsp;&nbsp;</td>
+	</tr>
+</table>
+</form>

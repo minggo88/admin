@@ -1,0 +1,134 @@
+<script language="JavaScript">
+<!--
+$(function() {
+
+	$.cleditor.defaultOptions.width = 775;
+	$.cleditor.defaultOptions.height = 300;
+	$.cleditor.defaultOptions.controls = "bold italic underline font size style color highlight removeformat bullets numbering outdent indent alignleft center alignright justify rule image link unlink cut copy paste pastetext  source";
+	var editor = $("#contents").cleditor()[0];
+
+	$('#jsform').submit(function() {
+		var chk_option = [
+			{ 'target':'subject', 'name':'이벤트명', 'type':'blank', 'msg':'이벤트명을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+
+		if(!$(editor.doc.body).html()) {
+			alert('내용을 입력하여 주세요.!');
+			editor.focus();
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.href='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list';
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else { alert('재시도 해주세요!'); }
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+
+
+$(function() {
+
+	$('input[name=bool_event]').val([<!--{? _GET.pg_mode == 'form_new'}-->'1'<!--{:}-->'<!--{bool_event}-->'<!--{/}-->]);
+
+});
+
+$(function() {
+	$('input[name=start_date]').simpleDatepicker();
+	$('input[name=end_date]').simpleDatepicker();
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1>이벤트 관리</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 이벤트 등록 </div>
+<form method="post" action="?" name="jsform" id="jsform" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+<!--{? _GET.pg_mode == 'form_edit'}-->
+<input type="hidden" name="event_code" value="<!--{_GET.event_code}-->" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tr> 
+		<th>이벤트명</th>
+		<td><input type="text" name="subject" value="<!--{subject}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>기간설정</th>
+		<td>
+			<input type="text" name="start_date" value="<!--{start_date}-->" readonly="readonly" class="frm_input" style="width:80px" /> ~ 
+			<input type="text" name="end_date" value="<!--{end_date}-->"  readonly="readonly" class="frm_input" style="width:80px" />
+		</td>
+	</tr>
+	<tr>
+		<th>사용여부</th>
+		<td>
+			<input type="radio" name="bool_event" id="bool_event_n" value="0" /> <label for="bool_event_n">사용안함</label>
+			<input type="radio" name="bool_event" id="bool_event_y" value="1" /> <label for="bool_event_y">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>목록이미지</th>
+		<td>
+			<input type="file" name="event_img_a" class="frm_input" style="width:300px" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<!--{? !empty(event_img_a)}-->
+		<img src="/data/event/<!--{event_img_a}-->" />
+		<!--{:}-->
+		등록된 이미지가 없습니다.
+		<!--{/}-->
+		</td>
+	</tr>
+	<tr>
+		<th>상세이미지</th>
+		<td>
+			<input type="file" name="event_img_b" class="frm_input" style="width:300px" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<!--{? !empty(event_img_b)}-->
+		<img src="/data/event/<!--{event_img_b}-->" />
+		<!--{:}-->
+		등록된 이미지가 없습니다.
+		<!--{/}-->
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><textarea name="contents" id="contents" style="display:none"><!--{contents}--></textarea></td>
+	</tr>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list">취 소</a></span>
+</div>
+</form>

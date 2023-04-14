@@ -1,0 +1,141 @@
+<p align="left"><!--{order_name}-->고객님의 주문이 성공적으로 완료되었습니다.<br>
+<!--{=date('Y년 m월 d일')}-->에 주문하신 상품정보입니다.</p>
+<div style="">주문번호 : <!--{order_code}--></div>
+<table style="border:1px #EBEBEB solid;border-top:2px #EBEBEB solid; width:100%; border-collapse: collapse; margin:10px 0px 10px 0px;">
+	<colgroup>
+		<col width="40"></col>
+		<col width="70"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="80"></col>
+		<col width="50"></col>
+		<col width="80"></col>
+		<col width="80"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">번호</th>
+		<th colspan="2" style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">상품명</th>
+		<th class="right" style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">판매가</th>
+		<th class="right" style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">옵션</th>
+		<th style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">수량</th>
+		<th class="right" style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">합계</th>
+		<th class="right" style="height:24px; padding:2px 0px 2px 0px; border-bottom:1px #ccc solid; background:#f3f3f3; font-weight:bold; text-align:center; line-height:20px;">적립금</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_order}-->
+	<tr>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><!--{.index_+1}--></td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><img src="http://<!--{config_basic.shop_url}-->/data/shop_a/<!--{.img_goods_a}-->" width="50" height="50" alt="<!--{.goods_name}-->" /></td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;">
+				<span class="goods_name"><!--{.goods_name}--></span>
+				<!--{? .cnt_option > 0}-->
+				<!--{.sel_option}-->
+				<!--{/}-->
+		</td> 
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;">
+			<span id="unit_price_<!--{.idx}-->"><!--{=number_format(.selling_price)}--></span> 원
+		</td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><!--{=number_format(.sub_total_option)}--> 원</td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><!--{.order_qty}--></td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><!--{=number_format(.sub_total)}--> 원</td>
+		<td style="height:24px; padding:2px 0px 2px 3px; border-bottom:1px #ccc solid; line-height:18px; text-align:center;"><!--{=number_format(.sub_total_emoney)}--> 원</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="8" id="empty_">선택한 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+
+<div class="title_h2">결제 내역</div>
+<table style="width: 100%; border:3px solid #EBEBEB; border-collapse: collapse;">
+	<colgroup>
+		<col width="150"></col>
+		<col width="*"></col>
+	</colgroup>
+	<tbody>
+	<tr>    
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">주문번호</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{order_code}--></td>
+	</tr>
+	<tr>    
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">총 구매금액</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{=number_format(order_amount)}-->원</td>
+	</tr>
+	<!--{? _SESSION.USER_ID}-->
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">쿠폰사용</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{? coupon_dc > 0}-->-<!--{=number_format(coupon_dc)}--><!--{:}-->-<!--{/}--></td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">사용적립금</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{? pay_emoney > 0}-->-<!--{=number_format(pay_emoney)}--><!--{:}-->-<!--{/}--></td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">배송비 </th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{=number_format(delivery_charge)}-->원</td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">결제금액 </th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{=number_format(pay_amount)}-->원</td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_h2">배송 내역</div>
+<table style="width: 100%; border:3px solid #EBEBEB; border-collapse: collapse;">
+	<colgroup>
+	<col width="150"></col>
+	<col></col>
+	</colgroup>
+	<tbody>
+	<tr>    
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">구매자 이름</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{order_name}--></td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">수취인 이름</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{rsv_name}--></td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">배송지 주소</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{rsv_address}--></td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">수취인 휴대폰</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{rsv_mobile}--></td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">결제수단 </th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><span><!--{payment_method_desc}--></span></td>
+	</tr>
+	<!--{? payment_method=='cash'}-->
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">입금자명</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{payment_name}--></td>
+	</tr>		
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">입금계좌</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{payment_bank}--></td>
+	</tr>
+	<!--{: payment_method=='vbank'}-->
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">입금계좌</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{payment_bank}--> : <!--{payment_account}--> - 에스크로</td>
+	</tr>
+	<tr>
+		<th style="height:23px; padding: 3px 3px 3px 18px; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: bold; background:#f3f3f3">입금기한</th>
+		<td style="height:23px; padding: 3px 3px 3px 5px; border-bottom: 1px solid #ccc; font-size:12px;"><!--{vbank_payment_date}--></td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div style="width:auto; margin:20px 0; text-align:center;">
+	<a href="http://<!--{config_basic.shop_url}-->/member/memberEdit.php"><img src="http://<!--{config_basic.shop_url}-->/template/user/images/mail_btn_modify.gif" alt="개인정보수정" /></a>&nbsp;
+	<a href="http://<!--{config_basic.shop_url}-->"><img src="http://<!--{config_basic.shop_url}-->/template/user/images/mail_btn_goshopping.gif" alt="쇼핑하기" /></a>
+</div>
+
+

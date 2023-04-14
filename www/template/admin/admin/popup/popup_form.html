@@ -1,0 +1,164 @@
+<script language="JavaScript">
+<!--
+var myeditor = new cheditor("myeditor");
+$(function() {
+	$('#jsform').submit(function() {
+		myeditor.outputBodyHTML();
+		var chk_option = [
+			{ 'target':'title', 'name':'팝업타이틀', 'type':'blank', 'msg':'팝업 타이틀을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.href='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list';
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else if(data['msg'] == 'err_cnt') { 
+						alert("현재사용중인 팝업이 3개입니다.\n\n사용안함으로 설정됩니다.");
+						$('input[name=bool_popup]').val(['0']);
+					}
+					else { alert('재시도 해주세요!'); }
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+
+
+$(function() {
+
+	$('input[name=bool_popup]').val([<!--{? _GET.pg_mode == 'form_new'}-->'1'<!--{:}-->'<!--{bool_popup}-->'<!--{/}-->]);
+	$('input[name=pos_mode]').val([<!--{? _GET.pg_mode == 'form_new'}-->'auto'<!--{:}-->'<!--{pos_mode}-->'<!--{/}-->]);
+	$('input[name=size_mode]').val([<!--{? _GET.pg_mode == 'form_new'}-->'auto'<!--{:}-->'<!--{size_mode}-->'<!--{/}-->]);
+	changePosMode(<!--{? _GET.pg_mode == 'form_new'}-->'auto'<!--{:}-->'<!--{pos_mode}-->'<!--{/}-->);
+	changeSizeMode(<!--{? _GET.pg_mode == 'form_new'}-->'auto'<!--{:}-->'<!--{size_mode}-->'<!--{/}-->);
+
+	$('input[name=pos_mode]').click(function() {
+		var val = $(this).val();
+		changePosMode(val);
+	});
+
+	$('input[name=size_mode]').click(function() {
+		var val = $(this).val();
+		changeSizeMode(val);
+	});
+});
+
+function changePosMode(val) {
+	if(val == 'auto') {
+		$('input[name=pos_x]').prop('readonly','readonly').css('background-color','#B6B6B6');
+		$('input[name=pos_y]').prop('readonly','readonly').css('background-color','#B6B6B6');
+	}
+	else {
+		$('input[name=pos_x]').prop('readonly',null).css('background-color','#FFF');
+		$('input[name=pos_y]').prop('readonly',null).css('background-color','#FFF');
+	}
+}
+
+function changeSizeMode(val) {
+	if(val == 'auto') {
+		$('input[name=width]').prop('readonly','readonly').css('background-color','#B6B6B6');
+		$('input[name=height]').prop('readonly','readonly').css('background-color','#B6B6B6');
+	}
+	else {
+		$('input[name=width]').prop('readonly',null).css('background-color','#FFF');
+		$('input[name=height]').prop('readonly',null).css('background-color','#FFF');
+	}
+}
+
+$(function() {
+	$("input[name=start_date], input[name=end_date]").kendoDatePicker({
+		culture: "ko-KR"
+	});
+
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">마케팅관리</span> / <span class="title02">팝업관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 팝업등록 </div>
+<form method="post" action="?" name="jsform" id="jsform" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+<!--{? _GET.pg_mode == 'form_edit'}-->
+<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tr> 
+		<th>타이틀</th>
+		<td colspan="3"><input type="text" name="title" value="<!--{title}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>기간설정</th>
+		<td colspan="3">
+			<input type="text" name="start_date" value="<!--{start_date}-->" readonly="readonly" class="frm_input" style="width:150px;" /> ~ 
+			<input type="text" name="end_date" value="<!--{end_date}-->"  readonly="readonly" class="frm_input" style="width:150px" />
+		</td>
+	</tr>
+	<tr>
+		<th>사용여부</th>
+		<td colspan="3">
+			<input type="radio" name="bool_popup" id="bool_popup_n" value="0" /> <label for="bool_popup_n">사용안함</label>
+			<input type="radio" name="bool_popup" id="bool_popup_y" value="1" /> <label for="bool_popup_y">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>사이즈설정방법</th>
+		<td>
+			<input type="radio" name="size_mode" id="size_mode_auto" value="auto" /> <label for="size_mode_auto">자동설정</label>
+			<input type="radio" name="size_mode" id="size_mode_manual" value="manual" /> <label for="size_mode_manual">사용자지정</label>
+		</td>
+		<th>팝업사이즈</th>
+		<td>가로<input type="text" name="width" value="<!--{width}-->" class="frm_input" style="width:50px" />px / 세로 <input type="text" name="height" value="<!--{height}-->" class="frm_input" style="width:50px" />px</td>
+	</tr>
+	<tr>
+		<th>위치설정방법</th>
+		<td>
+			<input type="radio" name="pos_mode" id="pos_mode_auto" value="auto" /> <label for="pos_mode_auto">중앙배열</label>
+			<input type="radio" name="pos_mode" id="pos_mode_manual" value="manual" /> <label for="pos_mode_manual">사용자지정</label>
+		</td>
+		<th>팝업위치</th>
+		<td>LEFT <input type="text" name="pos_x" value="<!--{pos_x}-->" class="frm_input" style="width:50px" />px / TOP <input type="text" name="pos_y" value="<!--{pos_y}-->" class="frm_input" style="width:50px" />px</td>
+	</tr>
+	<tr>
+		<td colspan="4"><textarea name="contents" id="contents" style="display:none"><!--{contents}--></textarea></td>
+	</tr>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list">취 소</a></span>
+</div>
+</form>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'contents';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>

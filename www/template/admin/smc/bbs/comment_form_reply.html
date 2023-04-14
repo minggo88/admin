@@ -1,0 +1,79 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('#commentReplyForm').submit(function() { 
+		var chk_option = [
+			{ 'target':'author', 'name':'이름', 'type':'blank', 'msg':'작성자 이름을 입력하세요.!' },
+			{ 'target':'passwd', 'name':'비밀번호', 'type':'blank', 'msg':'비밀번호를 입력하세요.!' },
+			{ 'target':'contents', 'name':'본문', 'type':'blank', 'msg':'댓글 내용을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) { 
+					location.replace('<!--{=base64_decode(_GET.ret_url)}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		}); 
+		return false; 
+	}); 
+
+	$('#btn_reply_cancel').click(function() {
+		location.replace('<!--{=base64_decode(_GET.ret_url)}-->');	
+	});
+});
+
+//-->
+</script>
+<div class="comment_form">
+<form name="commentReplyForm" id="commentReplyForm" action="/bbs/comment.php" method="post">
+<input type="hidden" name="bbscode" id="bbscode" value="<!--{_GET.bbscode}-->" />
+<input type="hidden" name="pg_mode" id="pg_mode" value="reply" />
+<input type="hidden" name="link_idx" id="link_idx" value="<!--{_GET.link_idx}-->" />
+<input type="hidden" name="pos" value="<!--{pos}-->" />
+<input type="hidden" name="thread" value="<!--{thread}-->"  /> 
+<input type="hidden" name="depth" value="<!--{depth}-->"  />
+<div class="comment_form_new">
+	<table summary="댓글입력">
+		<colgroup>
+			<col width="120"></col>
+			<col width="200"></col>
+			<col width="120"></col>
+			<col width="200"></col>
+		</colgroup>
+		<tr>
+			<th><label for="author">이름</label></th>
+			<td style="text-align:left;">&nbsp;<input name="author" id="author" type="text" value="" /></td>
+			<th><label for="passwd">비번</label></th>
+			<td style="text-align:left;">&nbsp;<input name="passwd" id="passwd" type="password" /></td>
+		</tr>
+		<tr>
+			<td colspan="4"><textarea name="contents" id="contents"></textarea></td>
+		</tr>
+	</table>
+	<div id="view_button">
+		<button class="grad_bbs"  id="btn_reply_confirm" >확인</button>
+		<button class="grad_bbs"  id="btn_reply_cancel" >취소</button>
+		{*
+		<input type="image" src="images/button_ok.gif" alt="확인" />&nbsp;&nbsp;&nbsp;
+		<img src="images/button_cancel.gif" id="btn_reply_cancel" alt="취소" />
+		*}
+		</div>
+</div>
+</form>
+</div>

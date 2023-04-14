@@ -1,0 +1,162 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#member_list>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function () {
+	$('#all_check').click(function() {
+		if(this.checked) {
+			$("table#member_list tbody :checkbox").attr('checked','checked');
+		}
+		else {
+			$("table#member_list tbody :checkbox").removeAttr('checked');
+		}
+	});
+});
+
+function checkDel() {
+	var num_checked = $('#listform input[name=userid[]]:checked').length;
+	if(num_checked == 0) {
+		alert('삭제하실 회원을 선택하여 주세요.!');
+		return false;
+	}
+	if(!confirm("회원 정보를 삭제하시겠습니까?\n\n삭제된 회원정보는 복구가 되지 않습니다.")) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=multi_del&'+$('#listform').serialize(), function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+function listSort() {
+    	location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url_sort}-->&sort_target='+$('select[name=sort_target]').val()+'&sort_method='+$('select[name=sort_method]').val();
+}
+
+
+$(function() {
+	$('select[name=sort_target]').val('<!--{? !empty(_GET.sort_target)}--><!--{_GET.sort_target}--><!--{:}-->regdate<!--{/}-->');//select
+	$('select[name=sort_method]').val('<!--{? !empty(_GET.sort_method)}--><!--{_GET.sort_method}--><!--{:}-->desc<!--{/}-->');//select
+});
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">실명인증 회원목록</div>
+<!--회원관리에서 검색후 소팅이 가능하게 .-->
+<form id="listform">
+<div class="area_both">
+	<div class="area_child_left" style="width:48%;">
+		<span class="button black"><a href="javascript:;" onclick="checkDel_()">선택삭제</a></span>
+		<select name="sort_target">
+			<option value="reqdate" selected="selected">신청일순</option>
+			<option value="userid">아이디</option>
+                                                            <option value="username">이름</option>
+			<option value="phoneNo">휴대전화</option>
+                                                            <option value="phoneCorp">통신사</option>
+			<option value="birthDay">생년월일</option>
+			<option value="ip">아이피</option>
+			
+		</select>
+		<select name="sort_method">
+			<option value="asc">오름차순</option>
+			<option value="desc">내림차순</option>
+		</select>
+		<span class="button black"><a href="javascript:;" onclick="listSort()">정렬</a></span>
+	</div>
+	<div class="area_child_right" style="width:48%; text-align:right;">
+		<select name="loop_scale" id="loop_scale">
+			<option value="" selected="selected">::목록수::</option>
+			<option value="10">10</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="200">200</option>
+		</select>
+	</div>
+</div>
+<div class="clear_box"></div>
+<table id="member_list" class="list_table">
+	<colgroup>
+        <col width="40">
+        <col width="60">
+        <col width="180">
+        <col width="80">
+        <col width="120">
+        <col width="70">
+        <col width="150">
+        <col width="100">
+        <col width="80">
+                                <col width="80">
+                                <col width="80">
+                                <col width="180">
+        <col width="*">
+                                        <col width="100">
+	</colgroup>
+	<thead>
+	<tr>
+		<th><input type="checkbox" name="all_check" id="all_check" /></th>
+		<th>No</th>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>휴대전화</th>
+		<th>통신사</th>
+		<th>신청일자</th>
+		<th>생년월일</th>
+		<th>국적</th>
+		<th>성별</th>
+		<th>회원구분</th>
+                                        <th>아이피</th>
+                                        <th>encMsg</th>
+                                        <th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td><input type="checkbox" name="user[]" value="<!--{.userid}-->" /></td>
+		<td><!--{.no}--></td>
+                                        <td class="pleft"><a href='/member/admin/memberAdmin.php?pg_mode=view&userid=<!--{.userid}-->'><!--{.userid}--></a></td>
+		<td><!--{.username}--></td>
+		<td><!--{=subStr(.phoneNo,0,3)}-->-<!--{=subStr(.phoneNo,3,4)}-->-<!--{=subStr(.phoneNo,7,4)}--></td>
+		<td><!--{.phoneCorp}--></td>
+		<td><!--{=subStr(.reqdate,0,4)}-->.<!--{=subStr(.reqdate,4,2)}-->.<!--{=subStr(.reqdate,6,2)}--> <!--{=subStr(.reqdate,8,2)}-->:<!--{=subStr(.reqdate,10,2)}-->:<!--{=subStr(.reqdate,12,2)}--></td>
+		<td><!--{=subStr(.birthDay,0,4)}-->.<!--{=subStr(.birthDay,4,2)}-->.<!--{=subStr(.birthDay,6,2)}--></td>
+		<td><!--{? .nation==0}-->내국인<!--{:}-->외국인<!--{/}--></td>
+                                        <td><!--{? .gender==0}-->남<!--{:}-->여<!--{/}--></td>
+		<td><!--{? .plusInfo=='user'}-->일반<!--{: .plusInfo=='fc'}-->설계사<!--{/}--></td>
+		<td><!--{.ip}--></td>
+		<td class="pleft"><!--{.encMsg}--></td>
+                                        <td>
+			<!--{? mode == 'member'}-->
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&userid=<!--{.userid}--><!--{srch_url}-->">수정</a></span>
+			<!--{/}-->
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&userid=<!--{.userid}--><!--{srch_url}-->">보기</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="9" class="ctext">Empty!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<!-- Page Navigation -->
+<div class="navipage"><!--{navi_page}--></div>

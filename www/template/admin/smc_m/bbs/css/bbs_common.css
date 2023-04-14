@@ -1,0 +1,31 @@
+@charset "utf-8"; /* 한글 */
+
+div#bbs_header{border:1px solid #019bd5;padding:10px; margin:10px 0px;  line-height:150%; }
+div#bbs_footer{border:0px #ccc solid; margin:0px auto;}
+div#bbs_content{border:0px red solid;width:100%;text-align:center;padding:0px;margin:0px auto;clear:both;}
+#bbs_content_bottom{text-align:center; margin-top:15px;}
+
+
+div#popup_passwd {width:100%; text-align:center;}
+div#popup_passwd table { border:0px #EBEBEB solid;width:100%;border-collapse: collapse;padding:0px;margin:0px auto;}
+div#popup_passwd td {height:25px;border:0px #E3E3E3 solid;text-align:center; line-height:18px; padding:2px 0px;}
+
+div#popup_passwd td button.grad_bbs{width:70px;height:24px;font-size:12px;padding:0px 0px 0px 0px;margin:0px;}
+
+div#fg_bbs_comment_list { 
+	border-bottom:1px solid #ccc;
+	width:100%;
+	padding:0px 0px 10px 0px;
+	margin: 10px auto 20px auto;
+	clear:both;
+	z-index:998;
+}
+
+div#fg_bbs_comment_form { 
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	width:100%;
+	padding:0px;
+	margin: 10px auto 20px auto;
+	clear:both;
+}

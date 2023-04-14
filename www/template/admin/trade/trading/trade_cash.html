@@ -1,0 +1,145 @@
+<div class="wrapper wrapper-content">
+    <section class="section" style="min-height: 580px;">
+        <div id="root"></div>
+        <div id="root1">
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="pl-3">
+                                <div class="v-heading-v3">
+                                    <h3 class="mt-50 mb-10">
+                                        <span class="span_under big"><img src="../img/cash_image.png" class="mr-5" />현금 입/출금</span>
+                                        <span class="hidden-xs hidden-sm" id="trade">&nbsp;</span>
+                                        <span class="hidden-md hidden-lg" id="trade_m">&nbsp;</span>
+                                    </h3>
+                                </div>
+                                <div class="middle_div big multi mb-10">
+                                    <div class="top_div">
+                                        <div class="header_div">보유 금액</div>
+                                        <div class="inner_div">
+                                            <span class="data_span">0</span>
+                                            <span class="symbol_span">KRW</span>
+                                        </div>
+                                    </div>
+                                    <div class="left_div">
+                                        <div class="data_div multi mb-15">
+                                            <div class="header_div">1일 출금한도</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                        <div class="data_div multi mb-15">
+                                            <div class="header_div small">- 금일 출금 금액</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                        <div class="data_div multi">
+                                            <div class="header_div small">- 최소 출금 금액</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">5,000</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right_div">
+                                        <div class="data_div multi mb-15">
+                                            <div class="header_div">거래대기(미체결) 합계</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                        <div class="data_div multi mb-15">
+                                            <div class="header_div small">- 매수대기</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                        <div class="data_div multi">
+                                            <div class="header_div small">- 출금대기</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="left_div_single">
+                                        <div class="data_div multi">
+                                            <div class="header_div">1일 출금한도</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right_div_single">
+                                        <div class="data_div multi">
+                                            <div class="header_div">출금 수수료</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="left_div_single">
+                                        <div class="data_div multi">
+                                            <div class="header_div">금일 출금 가능 금액</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span">0</span>
+                                                <span class="symbol_span">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right_div_single">
+                                        <div class="data_div multi">
+                                            <div class="header_div danger">출금 가능</div>
+                                            <div class="inner_div multi">
+                                                <span class="data_span danger">0</span>
+                                                <span class="symbol_span danger">KRW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabs-container mt-25 mb-25">
+                                    <ul class="nav nav-tabs nav-new mb-15">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1" id="deposit_no" class="myOrder tab5" aria-expanded="true">무통장입금</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2" id="deposit" class="myOrder tab4" aria-expanded="false">입금</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-3" id="withdrawal" class="myOrder tab5" aria-expanded="false">출금</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="guide_div mt-50 mb-80">
+                                                <p>회원님의 단계는<span class="span_danger">[1단계]</span>입니다</p>
+                                                <p>안전한 거래를 위해 <span class="span_danger">[2단계]</span>부터 이용할 수 있습니다</p>
+                                                <p class="mb-none">단계를 변경하고 지금 바로 이용해 보세요.</p>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="guide_div mt-50 mb-80">
+                                                <p>회원님의 단계는<span class="span_danger">[1단계]</span>입니다</p>
+                                                <p>안전한 거래를 위해 <span class="span_danger">[2단계]</span>부터 이용할 수 있습니다</p>
+                                                <p class="mb-none">단계를 변경하고 지금 바로 이용해 보세요.</p>
+                                            </div>
+                                        </div>
+                                        <div id="tab-3" class="tab-pane">
+                                            <div class="guide_div mt-50 mb-80">
+                                                <p>회원님의 단계는<span class="span_danger">[1단계]</span>입니다</p>
+                                                <p>안전한 거래를 위해 <span class="span_danger">[2단계]</span>부터 이용할 수 있습니다</p>
+                                                <p class="mb-none">단계를 변경하고 지금 바로 이용해 보세요.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

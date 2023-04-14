@@ -1,0 +1,180 @@
+<style type="text/css">
+<!--
+#category_button {width:188px; margin:0; border:1px solid #ccc; line-height:30px; text-align:center;}
+#list_category {width:178px; min-height:500px; margin:10px 0 10px 0; padding: 5px; border:1px solid #ccc;}	
+//-->
+</style>
+
+<script type="text/javascript">
+<!--
+
+var cur_category_code;
+var cur_category_path;
+var cur_depth;
+var cur_parent;
+
+var target_category_code;
+var target_category_path;
+var target_depth;
+var target_parent;
+
+$(function(){
+	$("#category_tree").treeview({
+		control: "#treecontrol",
+		persist: "cookie",
+		cookieId: "treeview-black"
+	});
+});
+
+function selectTree(code,path,depth,parent) {
+	parent = parent || '';
+	var obj = $('#'+code);
+	cur_depth = depth;
+	cur_category_code = code;
+	cur_category_path = path;
+	cur_parent = parent;
+
+	target_depth = depth;
+	target_category_code = code;
+	target_category_path = path;
+	target_parent = parent;
+	$('ul#category_tree li > a').removeClass('select_tree');
+	obj.addClass('select_tree');
+}
+
+$(function(){
+	//일차생성
+	$('button.btn_tree_create_root').click(function() {
+		$('#js_category_form').load('?pg_mode=form_new&depth=1');
+	});
+
+	//하위생성
+	$('button.btn_tree_create_child').click(function() {
+		if(typeof cur_depth == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		if(cur_depth == 4) {
+			alert('4차 카테고리 이하는 생성이 안됩니다.');
+		}
+		else {
+			var depth = cur_depth + 1;
+			$('#js_category_form').load('?pg_mode=form_child&parent_code='+cur_category_code+'&parent_path='+cur_category_path+'&depth='+depth);
+		}
+	});
+
+	//선택삭제
+	$('button.btn_tree_remove').click(function() {
+		if(typeof cur_category_code == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		if(!confirm('하위 카테고리 및 등록된 제품도 영구히 삭제됩니다.\n\n삭제하시겠습니까?')) {
+			return false;
+		}
+		$.get('?pg_mode=del&category_code='+ cur_category_code +'&category_path='+cur_category_path+'&depth='+cur_depth,function(data) {
+			if(data['bool']) {
+				alert('삭제되었습니다.!');
+				location.replace('?');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+				}
+				else {
+					alert('삭제가 되지 않았습니다.\n\n재시도해주세요!');
+				}
+			}
+		},'json');
+	});
+
+	//선택수정
+	$('button.btn_tree_edit').click(function() {
+		if(typeof cur_category_code == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		$('#js_category_form').load('?pg_mode=form_edit&category_code='+cur_category_code+'&category_path='+cur_category_path+'&depth='+cur_depth);
+	});
+
+	//선택복사
+	$('button.btn_tree_copy').click(function() {
+		if(typeof cur_category_code == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		if(!confirm('선택하신 카테고리를 복사하시겠습니까?')) {
+			return false;
+		}
+		$.get('?pg_mode=copy&category_code='+ cur_category_code,function(data) {
+			if(data['bool']) {
+				alert('복사되었습니다.!');
+				location.replace('?');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+				}
+				else {
+					alert('복사가 되지 않았습니다.\n\n재시도해주세요!');
+				}
+			}
+		},'json');
+	});
+
+	//선택이동
+	$('button.btn_tree_move').click(function() {
+		if(typeof cur_category_code == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		$('#js_category_form').load('?pg_mode=form_move&category_code='+cur_category_code+'&category_path='+cur_category_path+'&depth='+cur_depth+'&parent='+cur_parent);
+	});
+
+	//선택이동
+	$('button.btn_tree_ranking').click(function() {
+		if(typeof cur_category_code == 'undefined') {
+			alert('카테고리를 선택하여 주세요!');
+			return false;
+		}
+		$('#js_category_form').load('?pg_mode=form_ranking&category_code='+cur_category_code+'&category_path='+cur_category_path+'&depth='+cur_depth+'&parent='+cur_parent);
+	});
+
+});
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">카테고리 목록</div>
+<div id="category_button">
+	<span class="button middle red"><button class="btn_tree_create_root">일차생성</button></span>&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class="button middle red"><button class="btn_tree_create_child">하위생성</button></span><br />
+	<span class="button middle blue"><button class="btn_tree_edit">선택수정</button></span>&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class="button middle blue"><button class="btn_tree_remove">선택삭제</button></span><br />
+	<span class="button middle black"><button class="btn_tree_copy">선택복사</button></span>&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class="button middle black"><button class="btn_tree_move">선택이동</button></span><br />
+	<span class="button middle black"><button class="btn_tree_ranking">선택 순위 변경</button></span>
+</div>
+<div id="list_category" class="scroll">
+	<ul id="category_tree">
+		<!--{@loop}-->
+		<li>&nbsp;<a href="javascript:;" id="<!--{.category_code}-->" onclick="selectTree('<!--{.category_code}-->','<!--{.category_path}-->','<!--{.depth}-->','<!--{.category_code}-->')"><!--{.category_name}--></a>
+			<!--{@loop_two}--><!--{? ..index_ == 0}--><ul><!--{/}-->
+			<li>&nbsp;<a href="javascript:;" id="<!--{..category_code}-->" onclick="selectTree('<!--{..category_code}-->','<!--{..category_path}-->','<!--{..depth}-->','<!--{.category_code}-->')"><!--{..category_name}--></a>
+				<!--{@loop_three}--><!--{? ...index_ == 0}--><ul><!--{/}-->
+				<li>&nbsp;<a href="javascript:;" id="<!--{...category_code}-->" onclick="selectTree('<!--{...category_code}-->','<!--{...category_path}-->','<!--{...depth}-->','<!--{..category_code}-->')"><!--{...category_name}--></a>
+					<!--{@loop_four}--><!--{? ....index_ == 0}--><ul><!--{/}-->
+					<li>&nbsp;<a href="javascript:;" id="<!--{....category_code}-->" onclick="selectTree('<!--{....category_code}-->','<!--{....category_path}-->','<!--{....depth}-->','<!--{...category_code}-->')"><!--{....category_name}--></a></li>
+					<!--{? ....index_ == ....size_-1}--></ul><!--{/}--><!--{/}-->
+				</li>
+				<!--{? ...index_ == ...size_-1}--></ul><!--{/}--><!--{/}-->
+			</li>
+			<!--{? ..index_ == ..size_-1}--></ul><!--{/}--><!--{/}-->
+		</li>
+		<!--{/}-->
+	</ul>
+</div>

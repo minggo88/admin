@@ -1,0 +1,44 @@
+<script type="text/javascript">
+<!--
+function listLoad(id,url) {
+	$('#'+id).load(url);
+}
+
+function orderView(go_url) {
+	$('#order_info').load(go_url);
+}
+
+//-->
+</script>
+<div id="orderlist">
+	<div class="orders_title"><img src="../images/bullet.gif">금일주문현황</div>
+	<table>
+			<col width="40">
+			<col>
+			<col width="100">
+			<col width="100">
+		<thead>
+		<tr>
+			<th>No</th>
+			<th>주문일자<br />주문번호<br />회원아이디</th>
+			<th>주문자명<br />결제방법<br />결제금액</th>
+			<th>진행상황<br />관리</th>
+		</tr>
+		</thead>
+		<tbody>
+		<!--{@loop}-->
+		<tr class="loop">
+			<td><!--{.no}--></td>
+			<td><!--{.regdate}--><br /><!--{.order_code}--><br /><!--{.userid}--></td>
+			<td><!--{.order_name}--><br /><!--{.payment_method}--><br /><!--{=number_format(.pay_amount)}--></td>
+			<td><!--{.process_a_desc}--><br /><button class="btn_orders_view" onclick="orderView('<!--{.url_view}-->')">상세보기</button></td>
+		</tr>
+		<!--{:}-->
+		<tr>
+			<td colspan="4" id="empty">Empty!</td>
+		</tr>
+		<!--{/}-->
+		</tbody>
+	</table>
+</div>
+<div class="navipage"><!--{navi_page}--></div>

@@ -1,0 +1,227 @@
+<style type="text/css">
+span.msg_title {line-height:24px;}
+.area_remark {overflow:hidden;clear:both; padding:10px;margin:5px 0px 20px 0px;}
+ul#replace_code li {float:left; width:150px; margin-bottom:5px;}	
+ul#replace_code li span.code_name {display:inline-block; width:80px; text-align:left;}	
+ul#replace_code li span.btn_insert {display:inline-block; vertical-align:bottom;}	
+textarea {border:1px solid #aaa;width:165px;height:100px;line-height:18px;font-size:11px;padding:5px;margin:5px auto 0px auto;;}
+
+</style>
+
+<script type="text/javascript">
+//<![CDATA[ 
+var textarea_id;
+
+$(function() {
+	$('#smsfrm').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('textarea').focus(function(){
+		textarea_id = $(this).attr('id');
+	});
+
+	$('.btn_insert').click(function() {
+		if(typeof textarea_id == 'string') {
+			var replace_code = $(this).siblings('.code_name').text();
+			$('#'+textarea_id).insertAtCaretPos(replace_code);
+		}
+		else { 
+			alert('삽입할 메세지를 선택하여 주세요.!');
+			return;
+		}
+	});
+
+	//기본값 설정
+	$('input[name=bool_sms]').val(['<!--{bool_sms}-->']);
+	$('input[name=bool_msg_join]').val(['<!--{bool_msg_join}-->']);
+	$('input[name=bool_msg_ordercash]').val(['<!--{bool_msg_ordercash}-->']);
+	$('input[name=bool_msg_ordercard]').val(['<!--{bool_msg_ordercard}-->']);
+	$('input[name=bool_msg_admin_ordercash]').val(['<!--{bool_msg_admin_ordercash}-->']);
+	$('input[name=bool_msg_admin_ordercard]').val(['<!--{bool_msg_admin_ordercard}-->']);
+	$('input[name=bool_msg_payment]').val(['<!--{bool_msg_payment}-->']);
+	$('input[name=bool_msg_delivery]').val(['<!--{bool_msg_delivery}-->']);
+	$('input[name=bool_msg_passwd]').val(['<!--{bool_msg_passwd}-->']);
+});
+
+$(function() {
+	//첫번째 탭은 활성화
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+
+//]]>
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">마케팅관리</span> / <span class="title02">SMS 정보설정</span></h1></div>
+<ul class="tab_menu">
+	<li class="selected"><a href="#sms_form_1">SMS 기본설정</a></li>
+	<li><a href="#sms_form_2">SMS 메세지설정</a></li>
+</ul>
+<form id="smsfrm" name="smsfrm" action="/admin/sms.php" method="post">
+<input type="hidden" name="pg_mode" value="edit" />
+<div class="tab_container">
+	<div id="sms_form_1" class="tab_content">
+		<div class="title_d2"><img src="../images/bullet.gif">SMS 기본설정</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>SMS사용여부</th>
+				<td><input type="radio" name="bool_sms" id="bool_sms_y" value="1" /> <label for="bool_sms_y">사용함</label> <input type="radio" name="bool_sms" id="bool_sms_n" value="0" /> <label for="bool_sms_n">사용안함</label></td>
+			</tr>
+			<tr>
+				<th>서비스번호</th>
+				<td><input type="text" name="guest_no" value="<!--{guest_no}-->" class="frm_input" style="width:150px" /> 서비스 고객번호를 입력하세요.</td>
+			</tr>
+			<tr>
+				<th>계정인증키</th>
+				<td><input type="text" name="guest_key" value="<!--{guest_key}-->"  class="frm_input" style="width:300px" /> 계정인증키를 입력하세요.</td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td><input type="text" name="tran_callback" value="<!--{tran_callback}-->" class="frm_input" style="width:150px" /></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>
+		</div>
+	</div>
+
+	<div id="sms_form_2"  class="tab_content" style="display:none">
+		<div class="title_d2"><img src="../images/bullet.gif">문자메세지 치환 코드표.</div>
+		<span class="msg_title">아래 메세지에 삽입을 원하시는 위치에 커서를 이동하시고 해당하는 항목을 클릭하면 삽입됩니다. </span>
+		<div class="area_remark">
+			<ul id="replace_code">
+				<li><span class="code_name">[회사이름]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[회사URL]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[회사전화]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[회원이름]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[신청인명]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[회원아이디]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[회원등급]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[비밀번호]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[전화번호]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[휴대폰번호]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[이메일]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[적립금]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[가입일]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[신청번호]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[신청금액]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[입금계좌]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[temp01]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+				<li><span class="code_name">[temp02]</span> <span class="btn_insert"><img src="../images/sms_insert.gif"></span></li>
+			</ul>
+		</div>
+		<div class="title_d2"><img src="../images/bullet.gif">메세지 자동발송 문구수정 및 설정</div>
+		<table class="form_table">
+		<colgroup>
+		<col width="25%"></col>
+		<col width="25%"></col>
+		<col width="25%"></col>
+		<col width="25%"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+			<th>가입완료시</th>
+			<th>패스워드안내</th>
+			<th>주문완료</th>
+			<th>주문완료(관리자)</th>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="msg_join" class="scroll" id="msg_join"><!--{msg_join}--></textarea><br />
+				<input type="radio" name="bool_msg_join" id="bool_msg_join_y" value="1" /> <label for="bool_msg_join_y">전송함</label> 
+				<input type="radio" name="bool_msg_join" id="bool_msg_join_n" value="0" /> <label for="bool_msg_join_n">전송안함</label>
+			</td>
+			<td>
+				<textarea name="msg_passwd" class="scroll" id="msg_passwd"><!--{msg_passwd}--></textarea><br />
+				<input type="radio" name="bool_msg_passwd" id="bool_msg_passwd_y" value="1" /> <label for="bool_msg_passwd_y">전송함</label> 
+				<input type="radio" name="bool_msg_passwd" id="bool_msg_passwd_n" value="0" /> <label for="bool_msg_passwd_n">전송안함</label>
+			</td>
+			<td>
+				<textarea name="msg_ordercash" class="scroll" id="msg_ordercash"><!--{msg_ordercash}--></textarea><br />
+				<input type="radio" name="bool_msg_ordercash" id="bool_msg_ordercash_y" value="1" /> <label for="bool_msg_ordercash_y">전송함</label> 
+				<input type="radio" name="bool_msg_ordercash" id="bool_msg_ordercash_n" value="0" /> <label for="bool_msg_ordercash_n">전송안함</label>
+			</td>
+			<td>
+				<textarea name="msg_admin_ordercash" class="scroll" id="msg_admin_ordercash"><!--{msg_admin_ordercash}--></textarea><br />
+				<input type="radio" name="bool_msg_admin_ordercash" id="bool_msg_admin_ordercash_y" value="1" /> <label for="bool_msg_admin_ordercash_y">전송함</label> 
+				<input type="radio" name="bool_msg_admin_ordercash" id="bool_msg_admin_ordercash_n" value="0" /> <label for="bool_msg_admin_ordercash_n">전송안함</label>
+			</td>
+		</tr>
+		<tr>
+			<!--{*<th>주문완료 (신용카드)</th>*}-->
+			<!--{*<th>신용카드주문 (관리자)</th>*}-->
+			<th>입금확인메세지</th>
+			<!-- <th>배송완료메세지</th> -->
+		</tr>
+		<tr>
+			<!--{*
+			<td>
+				<textarea name="msg_ordercard" class="scroll" id="msg_ordercard"><!--{msg_ordercard}--></textarea><br />
+				<input type="radio" name="bool_msg_ordercard" id="bool_msg_ordercard_y" value="1" /> <label for="bool_msg_ordercard_y">전송함</label> 
+				<input type="radio" name="bool_msg_ordercard" id="bool_msg_ordercard_n" value="0" /> <label for="bool_msg_ordercard_n">전송안함</label>
+			</td>
+			*}-->
+			<!--{*
+			<td>
+				<textarea name="msg_admin_ordercard" class="scroll" id="msg_admin_ordercard"><!--{msg_admin_ordercard}--></textarea><br />
+				<input type="radio" name="bool_msg_admin_ordercard" id="bool_msg_admin_ordercard_y" value="1" /> <label for="bool_msg_admin_ordercard_y">전송함</label> 
+				<input type="radio" name="bool_msg_admin_ordercard" id="bool_msg_admin_ordercard_n" value="0" /> <label for="bool_msg_admin_ordercard_n">전송안함</label>
+			</td>
+			*}-->
+			<td>
+				<textarea name="msg_payment" class="scroll" id="msg_payment"><!--{msg_payment}--></textarea><br />
+				<input type="radio" name="bool_msg_payment" id="bool_msg_payment_y" value="1" /> <label for="bool_msg_payment_y">전송함</label> 
+				<input type="radio" name="bool_msg_payment" id="bool_msg_payment_n" value="0" /> <label for="bool_msg_payment_n">전송안함</label>
+			</td>
+			<!--{*
+			<td>
+				<textarea name="msg_delivery" class="scroll" id="msg_delivery"><!--{msg_delivery}--></textarea><br />
+				<input type="radio" name="bool_msg_delivery" id="bool_msg_delivery_y" value="1" /> <label for="bool_msg_delivery_y">전송함</label> 
+				<input type="radio" name="bool_msg_delivery" id="bool_msg_delivery_n" value="0" /> <label for="bool_msg_delivery_n">전송안함</label>
+			</td>
+			*}-->
+		</tr>
+		</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>
+		</div>
+	</div>
+</div>
+</form>

@@ -1,0 +1,125 @@
+
+
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function delBBS(code) {
+	if(!confirm("선택하신 게시판을 삭제하시겠습니까?\n\n삭제된 글 및 첨부화일은 복구 되지 않습니다.")) {
+		return false;
+	}
+	$.get("/bbs/admin/bbsSetup.php?pg_mode=del&bbscode="+code,function (data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_ess') {
+				alert('필수 게시판입니다.');
+			}
+			else {
+				alert('삭제되지 않았습니다.');
+			}
+		}
+	},'json');
+}
+
+function editRank() {
+	/*
+	$.get('/bbs/admin/bbsSetup.php?pg_mode=edit_rank&rank='+,function(data) {
+		if(data['bool']) { 
+			alert('적용되었습니다.');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			alert('재시도 해주세요');
+		}
+	},'json');
+	*/
+}
+
+function closeModal() {
+	$.modal.close();
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/PanelBar.png') 0px 0px no-repeat;">커뮤니티</span> / <span class="title02">게시판 설정관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">게시판 목록</div>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><a href="javascript:;" onclick="rankBbs()">게시판순위변경</a></span>
+	</div>
+	<div class="button_right pright">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">게시판 생성</a></span>
+	</div>
+</div>
+<table class="list_table">
+	<colgroup>
+		<col width="80"></col>
+		<col></col>
+		<col width="100"></col>
+		<col width="80"></col>
+		<col width="110"></col>
+		<col width="90"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+	<tr> 
+		<th>코드</th>
+		<th>게시판명</th>
+		<th>스킨타입</th>
+		<th>메뉴구분</th>
+		<th>권한설정</th>
+		<th>등록글 (댓글)</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_bbs}-->
+	<tr>
+		<td><!--{.bbscode}--></td>
+		<td class="pbold"><!--{.title}--></td>
+		<td><!--{?.skin=='skin_list_basic'}-->리스트<!--{:.skin=='skin_webzine_basic'}-->웹진<!--{:.skin=='skin_gallery_basic'}-->갤러리<!--{/}--></td>
+		<td class="pred"><!--{? .kind_menu == 'eta'}-->SCC 소개<!--{: .kind_menu == 'cs'}-->이용안내<!--{: .kind_menu == 'comm'}-->커뮤니티<!--{: .kind_menu == 'shop'}--><!--{/}--></td>
+		<td>
+			<ul>
+				<li class="underline dotted"><span class="right_name">접근</span> : <!--{.right_access}--></li>
+				<li class="underline dotted"><span class="right_name">읽기</span> : <!--{.right_view}--></li>
+				<li class="underline dotted"><span class="right_name">쓰기</span> : <!--{.right_write}--></li>
+				<li class="underline dotted"><span class="right_name">삭제</span> : <!--{.right_del}--></li>
+				<li class="underline none"><span class="right_name">댓글</span> : <!--{.right_comment}--></li>
+			</ul>
+		</td>
+		<td><span style="color: #0000FF"><!--{.cnt_bbs}--></span> (<!--{.cnt_comment}-->)</td>
+		<td>
+			<ul>
+				<li class="underline none pcenter">
+					<span class="button black"><a href="/bbs/admin/bbsAdmin.php?bbscode=<!--{.bbscode}-->" style="width:60px;">게시글관리</a></span>
+				</li>
+				<li class="underline none pcenter">
+					<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&bbscode=<!--{.bbscode}-->" style="width:60px;">설정관리</a></span>			
+				</li>
+				<li class="underline none pcenter">
+					<span class="button red"><a href="javascript:;" onclick="delBBS('<!--{.bbscode}-->')" style="width:60px;">삭제</a></span>
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="7" class="ctext">등록된 게시판이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">게시판 생성</a></span>
+</div>

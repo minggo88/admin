@@ -1,0 +1,93 @@
+<style type="text/css">
+html,body {background-image:none;}	
+</style>
+<script type="text/javascript">
+<!-- 
+var myeditor = new cheditor("myeditor");
+$(function() {
+	$('#frmMail').submit(function() {
+		myeditor.outputBodyHTML();
+		<!--{*
+		var chk_option = [
+			{ 'target':'mail_to_name', 'name':'회원이름을 입력하여 주세요.!', 'type':'blank', 'msg':'회원이름을 입력하여 주세요.!' },
+			{ 'target':'mail_to', 'name':'메일주소', 'type':'blank', 'msg':'메일주소를 입력하여 주세요.!' },
+			{ 'target':'mail_subject', 'name':'메일제목', 'type':'blank', 'msg':'메일제목을 입력하여 주세요.!' },
+			{ 'target':'mail_body', 'name':'내용', 'type':'blank', 'msg':'메일 내용을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		*}-->
+		
+		if(!confirm('작성하신 메일을 전송하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('메일이 전송 되었습니다.!');
+					$('#drag_popup_email',parent.document).hide();
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						parent.document.location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+//-->
+</script>
+<br />
+<!--상품목록 시작-->
+<div class="title_d2"><img src="../images/bullet.gif">메일보내기</div>
+<!-- goods_sort -->
+<form method="post" name="frmMail" id="frmMail"  action="/lib/sendEmail.php" enctype="multipart/form-data">
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>받는 사람</th>
+		<td><input type="text" name="mail_to_name" value="<!--{_GET.mail_to_name}-->" class="frm_input" style="border:0px solid #fff;" readonly /></td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td><input type="text" name="mail_to" value="<!--{_GET.mail_to}-->" class="frm_input" style="border:0px solid #fff;width:400px"  readonly /></td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td><input type="text" name="mail_subject" value="" class="frm_input" style="width:500px" /></td>
+	</tr>
+	</tbody>
+</table>
+
+<div class="mail_body" style="margin:10px 0px 0px 0px;"><textarea name="mail_body" id="mail_body"  title="메일내용"></textarea></div>
+
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="메일발송" /></span>
+	<span class="button large black strong"><input type="button" value="취소"  onclick="$('#drag_popup_email',parent.document).hide()"/></span>
+</div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '230px'; 
+myeditor.config.editorWidth = '626px';
+myeditor.inputForm = 'mail_body';
+myeditor.config.imgMaxWidth = 750;
+myeditor.run();
+//-->
+</script>

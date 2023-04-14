@@ -1,0 +1,343 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header myacc-edit" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_3;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first active">
+						<label class="Rectangle-Text active"><a href="/edit" class="active"><?=Lang::main_35;?></a></label>
+					</div>
+					<div class="layer active"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/certification"><?=Lang::main_36;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 large">
+						<label class="Rectangle-Text small"><a href="/editpin"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/histories"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+
+				<div class="row">
+					<div class="col-sm-12 mb-0">
+						<nav class="pull-right">
+							<ol class="breadcrumb">
+								<li><a href="/">Home</a></li>
+								<li><a href="/certification">My Account</a></li>
+								<li class="active">Edit</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-sm-12 right-side-sidebar">
+
+						<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_39;?></span></h3>
+
+						<div class="smart-wrap">
+						<div class="smart-forms smart-forms-ledger smart-container wrap">
+							<form method="post" name="frmEdit" id="frmEdit" action="/edit" enctype="multipart/form-data">
+								<input type="hidden" name="pg_mode" value="edit" />
+								<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+								<input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+								<input type="hidden" name="token" value="" />
+
+								<div class="form-body">
+									<!--{*
+									<div class="frm-row">
+										<!--{? realname_info.bool_realname }-->
+										<div class="section">
+											<label class="switch switch-round">
+												<input type="checkbox" name="newsletter" id="newsletter" checked disabled>
+												<span class="switch-label" data-on="YES" data-off="NO"></span>
+												<span> <?=Lang::main_40;?></span>
+											</label>
+										</div><!-- end section -->
+										<!--{:}-->
+										<div class="section">
+											<label class="switch switch-round">
+												<input type="checkbox" name="newsletter" id="newsletter" disabled>
+												<span class="switch-label" data-on="YES" data-off="NO"></span>
+												<span> <!--<a href="javascript:fnPopup();">본인인증하기</a>--></span>
+											</label>
+										</div><!-- end section -->
+										<?=Lang::main_91;?>
+											<!--{/}-->
+									</div>
+									*}-->
+										<!--<div class="frm-row">
+											<div class="spacer-t30 spacer-b30">
+												<div class="tagline"><span>Upload identification photo</span></div>
+											</div>
+											<div class="colm colm6">
+												<div class="avatar-edit">
+													&lt;!&ndash;<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />&ndash;&gt;
+												   <input type='file' name="file_data[]" id="imageIdentify" />
+												   <input type="hidden" name="image_identify_url_new" value=""/>
+													<input type="hidden" name="image_identify_url_old" value="&lt;!&ndash;{realname_info.image_identify_url}&ndash;&gt;"/>
+												   <label for="imageIdentify"></label>
+												</div>
+												<div class="avatar-preview">
+													&lt;!&ndash;{? !realname_info.image_identify_url }&ndash;&gt;
+													<div id="imagePreview1">
+														<div class="text-center imageEmpty"></div>
+													</div>
+													&lt;!&ndash;{:}&ndash;&gt;
+													<div id="imagePreview1" style="background-image: url('&lt;!&ndash;{realname_info.image_identify_url}&ndash;&gt;')">
+														<div class="text-center imageEmpty" style="display:none;">
+														</div>
+													</div>
+													&lt;!&ndash;{/}&ndash;&gt;
+												</div>
+											</div>
+											<div class="colm colm6">
+												<div class="avatar-edit">
+													&lt;!&ndash;<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />&ndash;&gt;
+													<input type='file' name="file_data[]" id="imageMix" />
+													<input type="hidden" name="image_mix_url_new" value=""/>
+													<input type="hidden" name="image_mix_url_old" value="&lt;!&ndash;{realname_info.image_mix_url}&ndash;&gt;"/>
+													<label for="imageMix"></label>
+												</div>
+												<div class="avatar-preview">
+													&lt;!&ndash;{? !realname_info.image_mix_url }&ndash;&gt;
+													<div id="imagePreview2">
+														<div class="text-center imageEmpty mix">
+														</div>
+													</div>
+													&lt;!&ndash;{:}&ndash;&gt;
+													<div id="imagePreview2" style="background-image: url('&lt;!&ndash;{realname_info.image_mix_url}&ndash;&gt;')">
+														<div class="text-center imageEmpty" style="display:none;">
+														</div>
+													</div>
+													&lt;!&ndash;{/}&ndash;&gt;
+												</div>
+											</div>
+										</div>-->
+									<div class="spacer-t30 spacer-b30">
+										<div class="tagline"><span><?=Lang::main_41;?></span></div>
+									</div>
+									<div class="frm-row">
+										<div class="colm colm6">
+											<div class="section">
+												<label class="field-label"><?=Lang::main_42;?> </label>
+												<label class="field prepend-icon">
+													<!--{? realname_info.name }-->
+														<input type="text" name="name" class="gui-input" value="<!--{realname_info.name}-->" readonly>
+													<!--{:}-->
+														<input type="text" name="name" class="gui-input" value="" placeholder="Enter Your name" >
+													<!--{/}-->
+													<span class="field-icon"><i class="fa fa-user"></i></span>
+												</label>
+											</div><!-- end section -->
+										</div><!-- end .colm section -->
+										<div class="colm colm6">
+											<div class="section">
+												<label class="field-label"><?=Lang::main_43;?> (<a href="/certification/changeMobile"><?=Lang::main_44;?></a>)</label>
+												<label class="field prepend-icon">
+													<!--{? realname_info.mobile }-->
+													<!--<input type="tel" name="mobile" class="gui-input" value="&lt;!&ndash;{realname_info.mobile_number}&ndash;&gt;" readonly />-->
+													<input type="tel" name="mobile" class="gui-input" value="<!--{realname_info.mobile_origin}-->" readonly />
+													<!--{:}-->
+													<input type="tel" name="mobile" class="gui-input" value="" placeholder="<?=Lang::main_93;?>" readonly />
+													<!--{/}-->
+													<span class="field-icon"><i class="fa fa-phone-square"></i></span>
+												</label>
+											</div><!-- end section -->
+										</div>
+									</div><!-- end .frm-row section -->
+
+									<div class="section">
+										<label for="email" class="field-label"><?=Lang::main_45;?> </label>
+										<label class="field prepend-icon">
+											<input type="email" name="email" id="email" class="gui-input" value="<!--{email}-->" readonly>
+											<span class="field-icon"><i class="fa fa-envelope"></i></span>
+										</label>
+									</div><!-- end section -->
+
+									<div class="spacer-t30 spacer-b30">
+										<div class="tagline"><span><?=Lang::main_46;?> </span></div>
+									</div>
+
+									<div class="frm-row">
+										<div class="colm colm6">
+
+											<div class="section">
+												<label class="field prepend-icon">
+													<input type="password" name="userpw" id="userpw" class="gui-input" placeholder="<?=Lang::main_93;?>">
+													<span class="field-icon"><i class="fa fa-lock"></i></span>
+												</label>
+											</div><!-- end section -->
+
+										</div>
+										<div class="colm colm6">
+
+											<div class="section">
+
+												<label class="option block spacer-b10">
+													<input type="checkbox" name="bool_passwd" value="1" >
+													<span class="checkbox"></span> <?=Lang::main_46;?>
+												</label>
+
+											</div><!-- end section -->
+
+										</div>
+									</div>
+
+									<div class="section pb-md">
+										<script id="dynamic"></script>
+										<script language="javascript" type="text/javascript">
+											function RefreshCaptcha()
+											{
+												var captchaImage = document.getElementById('captcha');
+												captchaImage.src = '/lib/PHPFusion7_CAPTCHA/securimage/securimage_show.php?sid=' + Math.random();
+												return false;
+											}
+											function hearCaptcha()
+											{
+                                                const ua = navigator.userAgent.toLowerCase();
+
+                                                if(ua.indexOf("chrome") !== -1) {
+                                                    alert("This function not supported in Chrome Browser");
+												} else {
+                                                    location.href = '/lib/PHPFusion7_CAPTCHA/securimage/securimage_play.php';
+												}
+                                                return false;
+											}
+										</script>
+										<div class="spacer-t30 spacer-b30">
+											<div class="tagline"><span><?=Lang::main_47;?></span></div>
+										</div>
+										<div class="smart-widget sm-left sml-200">
+											<div class="smart-widget sm-right">
+												<table class="table">
+													<thead>
+														<colgroup>
+															<col style="width:80%" />
+															<col style="width:10%" />
+															<col style="width:10%" />
+														</colgroup>
+													</thead>
+													<tr>
+														<td>
+															<label class="field">
+																<input type="text" name="securimagecode" id="securimagecode" class="gui-input" placeholder="<?=Lang::main_48;?>" autocomplete="off" />
+															</label>
+														</td>
+														<td style="vertical-align:middle; text-align:center;">
+															<!--<a href="javascript:RefreshCaptcha();"><img align="top" alt="" src="/lib/PHPFusion7_CAPTCHA/securimage/images/refresh.gif"/></a>-->
+															<button class="button1" type="button" style="cursor:pointer;" onClick="RefreshCaptcha();"><i class="fa fa-refresh"></i></button>
+														</td>
+														<td style="vertical-align:middle; text-align:center;">
+															<!--<a href="javascript:hearCaptcha();"><img align="top" style="margin-bottom: 1px;" alt="" src="/lib/PHPFusion7_CAPTCHA/securimage/images/audio_icon.gif"/></a>-->
+															<button class="button1" type="button" style="cursor:pointer;" onClick="hearCaptcha();"><i class="fa fa-play"></i></button>
+														</td>
+													</tr>
+												</table>
+												<!--<label class="field">
+													&lt;!&ndash;<button class="button1 second"><i class="fa fa-refresh"></i></button>
+													<button class="button1"><i class="fa fa-play"></i> </button>&ndash;&gt;
+												</label>-->
+											</div>
+											<label class="button">
+												<img src="/lib/PHPFusion7_CAPTCHA/securimage/securimage_show.php?sid=<!--{=time()}-->" alt="Code" name="captcha" width="145" height="45" align="left" id="captcha" />
+											</label>
+										</div><!-- end .smart-widget section -->
+									</div><!-- end section -->
+
+								</div><!-- end .form-body section -->
+								<div class="form-footer">
+									<button type="submit" class="button btn-primary"><?=Lang::main_49;?></button>
+								</div><!-- end .form-footer section -->
+							</form>
+
+						</div><!-- end .smart-forms section -->
+					</div><!-- end .smart-wrap section -->
+
+					<div></div><!-- end section -->
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>
+
+<!--{*
+<div class="title_h2"><img src="../images/bullet.gif" >이메일 및 SMS 수신설정</div>
+<table class="form_table">
+<colgroup>
+	<col width="20%"/>
+	<col width="40%"/>
+	<col width="40%"/>
+</colgroup>
+<tbody>
+<tr>
+	<th></th>
+	<th class='pcenter'>이메일 수신</th>
+	<th class='pcenter'>SMS 수신</th>
+</tr>
+<tr>
+	<th>KRW 입금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_krw_input" value="1" {? bool_email_krw_input === '1' || bool_email_krw_input==''}checked="checked"{/} /> 수신 <input type="radio" name="bool_email_krw_input" value="0" {? bool_email_krw_input === '0'}checked="checked"{/}/> 수신안함</td>
+	<td class='pcenter'><input type="radio" name="bool_sms_krw_input" value="1" {? bool_sms_krw_input === '1' || bool_sms_krw_input==''}checked="checked"{/} /> 수신 <input type="radio" name="bool_sms_krw_input" value="0" {? bool_sms_krw_input === '0'}checked="checked"{/}/> 수신안함</td>
+</tr>
+<tr>
+	<th>KRW 출금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_krw_output" value="1" {? bool_email_krw_output === '1' || bool_email_krw_output==''}checked="checked"{/}/> 수신 <input type="radio" name="bool_email_krw_output" value="0" {? bool_email_krw_output === '0'}checked="checked"{/}/> 수신안함</td>
+	<td class='pcenter'><input type="radio" name="bool_sms_krw_output" value="1" {? bool_sms_krw_output === '1' || bool_sms_krw_output==''}checked="checked"{/}/> 수신 <input type="radio" name="bool_sms_krw_output" value="0" {? bool_sms_krw_output === '0'}checked="checked"{/}/> 수신안함</td>
+</tr>
+<tr>
+	<th>BTC 거래체결</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_trade" value="1" {? bool_email_btc_trade === '1' || bool_email_btc_trade==''}checked="checked"{/}/> 수신 <input type="radio" name="bool_email_btc_trade" value="0" {? bool_email_btc_trade === '0'}checked="checked"{/}/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+<tr>
+	<th>BTC 입금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_input" value="1" {? bool_email_btc_input === '1' || bool_email_btc_input==''}checked="checked"{/}/> 수신 <input type="radio" name="bool_email_btc_input" value="0" {? bool_email_btc_input === '0'}checked="checked"{/}/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+<tr>
+	<th>BTC 출금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_output" value="1" {? bool_email_btc_output === '1' || bool_email_btc_output==''}checked="checked"{/}/> 수신 <input type="radio" name="bool_email_btc_output" value="0" {? bool_email_btc_output === '0'}checked="checked"{/}/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+</tbody>
+</table>
+<div class='button_area'>
+	<input type="submit" value="정보수정" class="grad"/>
+</div>
+</form>
+
+
+<form name="form_chk" method="post">
+	<input type="hidden" name="m" value="checkplusSerivce">						<!-- 필수 데이타로, 누락하시면 안됩니다. -->
+	<input type="hidden" name="EncodeData" value="{enc_data}">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
+	<!-- 업체에서 응답받기 원하는 데이타를 설정하기 위해 사용할 수 있으며, 인증결과 응답시 해당 값을 그대로 송신합니다.
+		 해당 파라미터는 추가하실 수 없습니다. -->
+	<input type="hidden" name="param_r1" value="">
+	<input type="hidden" name="param_r2" value="">
+	<input type="hidden" name="param_r3" value="">
+</form>
+
+*}-->

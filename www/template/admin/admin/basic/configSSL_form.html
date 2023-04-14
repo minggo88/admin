@@ -1,0 +1,73 @@
+<script type="text/javascript">
+<!-- 
+$(function() {
+
+	$('#frmssl').submit(function() {
+		var bool_ssl = $('input[name=bool_ssl]:checked').val();
+		if(bool_ssl > 0) {
+			var chk_option = [
+				{ 'target':'ssl_port', 'name':'포트번호', 'type':'blank', 'msg':'포트번호를 입력하여 주세요.!' }
+			];
+			if(!jsForm(this,chk_option)) {
+				return false;
+			}		
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('input[name=bool_ssl]').val(['<!--{bool_ssl}-->']);
+
+});
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">보안서버 설정</span></h1></div>
+<form method="post" name="frmssl" id="frmssl"  action="<!--{_SERVER.SCRIPT_NAME}-->" >
+<input type="hidden" name="pg_mode" value="edit" />
+<div class="title_d2"><img src="../images/bullet.gif">보안서버 설정</div>
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>보안서버사용</th>
+		<td>
+			<input type="radio" name="bool_ssl" id="bool_ssl_y" value="1" /> <label for="bool_ssl_y">사용함</label>
+			<input type="radio" name="bool_ssl" id="bool_ssl_n" value="0" /> <label for="bool_ssl_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>포트번호</th>
+		<td><input type="text" name="ssl_port" value="<!--{ssl_port}-->" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled;width:80px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+</div>
+</form>

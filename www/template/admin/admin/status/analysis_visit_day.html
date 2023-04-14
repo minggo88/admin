@@ -1,0 +1,27 @@
+<div id="graph_visit_day" style="width:100%;"></div>
+
+<script type="text/javascript">
+$(function() {
+	var plot_cfg1 = {
+		plot_id : 'graph_visit_day',
+		plot_data : [[<!--{day_data}-->]],
+		plot_option : {
+			seriesColors: ["#2F93F7"],
+			legend:{show:false}, 
+			grid: {background:'#FFFFF7', gridLineColor:'#e1e1e1', color:'#555'},
+			series:[
+				{label:'방문 분석(일간)',lineWidth:2, markerOptions:{style:'circle'}}
+				//{label:'방문 분석',renderer:$.jqplot.BarRenderer,rendererOptions:{barPadding: 20, barMargin: 20}}
+			],
+			axesDefaults: { tickRenderer: $.jqplot.CanvasAxisTickRenderer, tickOptions: { angle: -30, fontSize: '10pt' }},
+			axes:{
+				xaxis:{renderer:$.jqplot.CategoryAxisRenderer,ticks: [<!--{day_ticks}-->], tickOptions:{formatString:'%d'}}, 
+				yaxis:{showTicks:false}
+			}
+		}
+	};
+
+	$.jqplot(plot_cfg1.plot_id, plot_cfg1.plot_data,plot_cfg1.plot_option);
+
+});
+</script>

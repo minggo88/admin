@@ -1,0 +1,1 @@
+<script> window.location.replace( window.location.href.replace('www.','wallet.').replace('loc.','wallet.loc.') );</script>

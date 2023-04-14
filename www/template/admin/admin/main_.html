@@ -1,0 +1,516 @@
+
+<div class="wrapper wrapper-content">
+	<!--{*
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Jinpay Coin (JIN)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(cnt_buyjinpaycoin_today)}--> <small> / <!--{=number_format(cnt_buyjinpaycoin)}--></small> </h1>
+						<h5><!--{=number_format(today_total_krw)}--> / <!--{=number_format(total_krw)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Allpass Coin (APC)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(cnt_buysmartcoin_today)}--> <small> / <!--{=number_format(cnt_buysmartcoin)}--></small> </h1>
+						<h5><!--{=number_format(today_total_krw)}--> / <!--{=number_format(total_krw)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Smartcoin (SCC)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(cnt_buysmartcoin_today)}--> <small> / <!--{=number_format(cnt_buysmartcoin)}--></small> </h1>
+						<h5><!--{=number_format(today_total_krw)}--> / <!--{=number_format(total_krw)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Bitcoin (BTC)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(bitcoin_requests.count)}--> <small> / <!--{=number_format(total_bitcoin_request.total_count)}--></small> </h1>
+						<h5><!--{=number_format(bitcoin_requests.amount,8)}--> / <!--{=number_format(total_bitcoin_request.total_amount,8)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Ethereum (ETH)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(ethereum_requests.count)}--> <small> / <!--{=number_format(total_ethereum_request.total_count)}--></small> </h1>
+						<h5><!--{=number_format(ethereum_requests.amount,8)}--> / <!--{=number_format(total_ethereum_request.total_amount,8)}--> </h5>
+						<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Ethereum Classic (ETC)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(dollar_requests.count)}--> <small> / <!--{=number_format(total_dollar_request.total_count)}--></small>  </h1>
+						<h5><!--{=number_format(dollar_requests.amount,2)}--> / <!--{=number_format(total_dollar_request.total_amount,2)}--> </h5>
+						<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Bitcoin Cash (USD)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(dollar_requests.count)}--> <small> / <!--{=number_format(total_dollar_request.total_count)}--></small>  </h1>
+						<h5><!--{=number_format(dollar_requests.amount,2)}--> / <!--{=number_format(total_dollar_request.total_amount,2)}--> </h5>
+						<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Lightcoin (LTC)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(lightcoin_requests.count)}--> <small> / <!--{=number_format(total_lightcoin_request.total_count)}--></small>  </h1>
+						<h5><!--{=number_format(lightcoin_requests.amount,8)}--> / <!--{=number_format(total_lightcoin_request.total_amount,8)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>Quantum (QTUM)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(lightcoin_requests.count)}--> <small> / <!--{=number_format(total_lightcoin_request.total_count)}--></small>  </h1>
+						<h5><!--{=number_format(lightcoin_requests.amount,8)}--> / <!--{=number_format(total_lightcoin_request.total_amount,8)}--> </h5>
+						<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+							<span class="label label-primary pull-right">Today</span>
+						<h5>US Dollar (USD)</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(dollar_requests.count)}--> <small> / <!--{=number_format(total_dollar_request.total_count)}--></small>  </h1>
+						<h5><!--{=number_format(dollar_requests.amount,2)}--> / <!--{=number_format(total_dollar_request.total_amount,2)}--> </h5>
+						<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+						<small>Today / Total</small>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-lg-3">
+				<div class="ibox float-e-margins m-b-md">
+					<div class="ibox-title">
+						<span class="label label-primary pull-right">Today</span>
+						<h5>회원가입수</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins"><!--{=number_format(cnt_join_today)}--> <small> / <!--{=number_format(cnt_member)}--></small> </h1>
+						<h5><!--{=number_format(cnt_request_today)}--> / <!--{=number_format(cnt_request_member)}--> </h5>
+						<div class="font-bold text-navy">0% <i class="fa fa-level-up"></i> <small>Up</small></div>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Income</h5>
+						<div class="ibox-tools">
+							<span class="label label-primary">Today</span>
+						</div>
+					</div>
+					<div class="ibox-content no-padding">
+						<div class="flot-chart m-t-lg" style="height: 55px;">
+							<div class="flot-chart-content" id="flot-chart1"></div>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+
+	
+		</div>
+		*}-->
+		<div class="row">
+			<div class="col-lg-12 space-20">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<div>
+							<!--{*
+							<span class="pull-right text-right">
+							<small>Average value of sales in the past month in: <strong>United states</strong></small>
+								<br/>
+								All sales: 162,862
+							</span>
+							*}-->
+							<h3 class="font-bold no-margins">
+								날짜별 Coin 거래액
+							</h3>
+							<small>JIN,  BTC, ETH, LTC, BCH, ETC, QTUM, APC, KRW 비교</small>
+						</div>
+	
+						<div class="m-t-sm">
+	
+							<div class="row">
+								<div class="col-md-9">
+									<!--{*
+									<div>
+										<canvas id="lineChart" height="114"></canvas>
+									</div>
+									*}-->
+									<div>
+										<div id="lineChart0" style="min-height:450px;margin:25px auto 0px auto;"></div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<ul class="stat-list m-t-lg">
+										<li>
+											<h3 class="no-margins"><i class="cc JIN-alt" aria-hidden="true"></i> <!--{=number_format(total_jincoin,8)}--></h3>
+											<small>Jinpay Coin</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_jincoin}-->%;background-color:rgba(240,193,7,1);"></div>
+											</div>
+											<small><!--{total_rate_jincoin}-->%</small>
+										</li>
+										<!--{*
+										<li>
+											<h3 class="no-margins"><i class="cc SCC-alt" aria-hidden="true"></i> <!--{=number_format(total_smartcoin,8)}--></h3>
+											<small>Smartcoin</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_smartcoin}-->%;background-color:rgba(240,193,7,1);"></div>
+											</div>
+											<small><!--{total_rate_smartcoin}-->%</small>
+										</li>
+										*}-->
+										<li>
+											<h3 class="no-margins"><i class="cc BTC-alt" aria-hidden="true"></i> <!--{=number_format(total_bitcoin,8)}--></h3>
+											<small>Bitcoin</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_bitcoin}-->%;background-color:rgba(240,193,7,1);"></div>
+											</div>
+											<small><!--{total_rate_bitcoin}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins "><i class="cc ETH-alt" aria-hidden="true"></i> <!--{=number_format(total_ethereum,8)}--></h3>
+											<small>Ethereum</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_ethereum}-->%;background-color:rgba(23,160,132,1);"></div>
+											</div>
+											<small><!--{total_rate_ethereum}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins "><i class="cc LTC-alt" aria-hidden="true"></i> <!--{=number_format(total_lightcoin,8)}--></h3>
+											<small>Lightcoin</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_lightcoin}-->%;background-color:#0961f0;"></div>
+											</div>
+											<small><!--{total_rate_lightcoin}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins"><i class="cc BCH-alt" aria-hidden="true"></i> <!--{=number_format(total_bitcoincash,8)}--></h3>
+											<small>Bitcoin Cash</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_bitcoincash}-->%;background-color:rgba(240,193,7,1);"></div>
+											</div>
+											<small><!--{total_rate_bitcoincash}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins "><i class="cc ETC-alt" aria-hidden="true"></i> <!--{=number_format(total_etherclassic,8)}--></h3>
+											<small>Ethereum Classic</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_etherclassic}-->%;background-color:rgba(23,160,132,1);"></div>
+											</div>
+											<small><!--{total_rate_etherclassic}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins "><i class="cc QTUM-alt" aria-hidden="true"></i> <!--{=number_format(total_quantum,8)}--></h3>
+											<small>Quantum</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_quantum}-->%;background-color:#0961f0;"></div>
+											</div>
+											<small><!--{total_rate_quantum}-->%</small>
+										</li>
+										<li>
+											<h3 class="no-margins"><i class="cc APC-alt" aria-hidden="true"></i> <!--{=number_format(total_allpasscoin,8)}--></h3>
+											<small>Allpass Coin</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_allpasscoin}-->%;background-color:rgba(240,193,7,1);"></div>
+											</div>
+											<small><!--{total_rate_allpasscoin}-->%</small>
+										</li>
+										<!--{*
+										<li>
+											<h3 class="no-margins "><i class="fa fa-dollar" aria-hidden="true"></i> <!--{=number_format(total_dollar,2)}--></h3>
+											<small>US Dollar</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: <!--{total_rate_dollar}-->%;background-color:#750404;"></div>
+											</div>
+											<small><!--{total_rate_dollar}-->%</small>
+										</li>
+										*}-->
+										<li>
+											<h3 class="no-margins "><i class="fa fa-krw" aria-hidden="true"></i> <!--{=number_format(total_krw)}--></h3>
+											<small>Total KRW</small>
+											<div class="progress progress-mini">
+												<div class="progress-bar" style="width: 100%;background-color:rgba(250,72,25,1);"></div>
+											</div>
+											<small>100%</small>
+										</li>
+									</ul>
+								</div>
+							</div>
+	
+						</div>
+	
+					</div>
+				</div>
+			</div>
+	
+		</div>
+		
+		<!--{*
+		<div class="row">
+			<div class="col-lg-12 m-b-md">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5><!--{config_basic.license_company}--> 월별 현황</h5>
+						<div class="ibox-tools">
+							<a class="excel-link" href="#">
+								<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+							</a>
+							<a class="pdf-link" href="#">
+									<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+							</a>
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="close-link">
+								<i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-9 m-b-xs">
+								<div data-toggle="buttons" class="btn-group">
+									<label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Day </label>
+									<label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Week </label>
+									<label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Month </label>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+													<button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th rowspan="2" class="text-center red-bg">Month </th>
+									<th rowspan="2" class="text-center blue-bg">매출액</th>
+									<th colspan="6" class="text-center navy-bg">거래</th>
+									<th colspan="4" class="text-center brown-bg">입/출금</th>
+									<th colspan="2" class="text-center violet-bg">회원수(명) </th>
+								</tr>
+								<tr>
+									<th class="text-center navy-bg">Buy </th>
+									<th class="text-center navy-bg">Buy Fee </th>
+									<th class="text-center navy-bg">Sell </th>
+									<th class="text-center navy-bg">Sell Fee </th>
+									<th class="text-center navy-bg">매칭CTR </th>
+									<th class="text-center navy-bg">비매칭CTR </th>
+									<th class="text-center brown-bg">입금 </th>
+									<th class="text-center brown-bg">출금 </th>
+									<th class="text-center brown-bg">출금수수료 </th>
+									<th class="text-center brown-bg">잔액 </th>
+									<th class="text-center violet-bg">비거래 </th>
+									<th class="text-center violet-bg">거래 </th>
+								</tr>
+								</thead>
+								<tbody>
+									<!--{@loop_summaries}-->
+									<tr>
+										<td class="text-center"><!--{.month}-->월</td>
+										<td class="text-right"><!--{=number_format(.coin_chargings)}--></td>
+										<td class="text-right"><!--{=number_format(.coin_inquiries)}--></td>
+										<td class="text-right"><!--{=number_format(.coin_assigns)}--></td>
+										<td class="text-right"><!--{=number_format(.coin_comments)}--></td>
+										<td class="text-right"><!--{=number_format(.coin_choices)}--></td>
+										<td class="text-right"><!--{=number_format(.sub_total_coin)}--></td>
+										<td class="text-right"><!--{=number_format(.bidding_inquiry_count)}--></td>
+										<td class="text-right"><!--{=number_format(.bidding_publish_count)}--></td>
+										<td class="text-right"><!--{=number_format(.bidding_win_count)}--></td>
+										<td class="text-right"><!--{=number_format(.matching_ctr)}-->%</td>
+										<td class="text-right"><!--{=number_format(.win_ctr)}-->%</td>
+										<td class="text-right"><!--{=number_format(.customer_count)}--></td>
+										<td class="text-right"><!--{=number_format(.planner_count)}--></td>
+									</tr>
+									<!--{/}-->
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="text-center darkgray-bg">합계</td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin_chargings)}--></td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin_inquiries)}--></td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin_assigns)}--></td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin_comments)}--></td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin_choices)}--></td>
+										<td class="text-right darkgray-bg"><i class="fa fa-krw" aria-hidden="true"></i><!--{=number_format(total_coin)}--></td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_bidding_inquiry_count)}--></td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_bidding_publish_count)}--></td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_bidding_win_count)}--></td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_matching_ctr)}-->%</td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_win_ctr)}-->%</td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_customer_count)}--></td>
+										<td class="text-right darkgray-bg"><!--{=number_format(total_planner_count)}--></td>
+	
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+	
+					</div>
+				</div>
+			</div>
+		</div>
+		*}-->
+		
+</div>
+
+
+<!--{*
+<div class="title_d2"><img src="./images/bullet.gif">거래소 현황</div>
+<table class="list_table" style="width:800px">
+	<colgroup>
+	<col width="12%"></col>
+	<col width="12%"></col>
+	<col width="12%"></col>
+	<col width="12%"></col>
+	<col width="15%"></col>
+	<col width="12%"></col>
+	<col width="*"></col>
+	</colgroup>
+	<thead>
+		<th>거래현황</th>
+		<th>요청건수</th>
+		<th>인증건수</th>
+		<th>실행건수</th>
+		<th>금액(원/BTC/P)</th>
+		<th>수수료</th>
+		<th>비고</th>
+	</thead>
+	<tbody>
+	<tr>
+		<th>KRW 포인트</th>
+		<td class="pright"><!--{=number_format(cnt_member_point)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_member_point_auth)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(cnt_member_point_auth)}--> 건</td>
+		<td class="pright"><!--{=number_format(sum_member_point_emoney)}--> 원</td>
+		<td class="pcenter">-</td>
+		<td>회원보유포인트 합산</td>
+	</tr>
+	<tr>
+		<th>KRW 입금</th>
+		<td class="pright"><!--{=number_format(cnt_krw_A)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_order)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(sum_krw_A_amount)}--> 건</td>
+		<td class="pright"><!--{=number_format(sum_krw_A_amount)}--> 원</td>
+		<td class="pcenter">-</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>KRW 출금</th>
+		<td class="pright"><!--{=number_format(cnt_krw_B)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_order)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(sum_krw_B_amount)}--> 건</td>
+		<td class="pright"><!--{=number_format(sum_krw_B_amount)}--> 원</td>
+		<td class="pright"><!--{=number_format(cnt_pay)}--> 원</td>
+		<td>건당 1,000원</td>
+	</tr>
+	<tr>
+		<th>BTC 입금</th>
+		<td class="pright"><!--{=number_format(cnt_btc_C)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_order)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(sum_btc_C_amount)}--> 건</td>
+		<td class="pright"><!--{sum_btc_C_amount}--> BTC</td>
+		<td class="pcenter">-</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>BTC 출금</th>
+		<td class="pright"><!--{=number_format(cnt_btc_D)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_btc_D_auth)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(sum_btc_d_amount)}--> 건</td>
+		<td class="pright"><!--{sum_btc_D_amount}--> BTC</td>
+		<td class="pright"><!--{=number_format(cnt_pay)}--> BTC</td>
+		<td>네트워크 수수료(변동)</td>
+	</tr>
+	<tr>
+		<th>BTC 매수</th>
+		<td class="pright"><!--{=number_format(cnt_btc_trade_A)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_btc_trade_A_auth)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(cnt_btc_trade_A_confirm)}--> 건</td>
+		<td class="pright"><!--{=number_format(sum_btc_trade_A_amount)}--> 원</td>
+		<td class="pright"><!--{=number_format(sum_btc_trade_A_fee)}--> 원</td>
+		<td>0%(KRW)</td>
+	</tr>
+	<tr>
+		<th>BTC 매도</th>
+		<td class="pright"><!--{=number_format(cnt_btc_trade_B)}--> 건</td>
+		<td class="pright"><!--{=number_format(cnt_btc_trade_B_auth)}--> 건</td>
+		<td class="pright pblue"><!--{=number_format(cnt_btc_trade_B_confirm)}--> 건</td>
+		<td class="pright"><!--{=number_format(sum_btc_trade_B_amount)}--> 원</td>
+		<td class="pright"><!--{=number_format(sum_btc_trade_B_fee)}--> 원</td>
+		<td>0.6%(KRW)</td>
+	</tr>
+	</tbody>
+</table>
+*}-->

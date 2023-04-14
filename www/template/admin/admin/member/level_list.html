@@ -1,0 +1,261 @@
+
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$("#level_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#levelform').submit(function() {
+		var chk_option = [
+			{ 'target':'level_name', 'name':'레벨명', 'type':'blank', 'msg':'레벨명을 입력하여 주세요.' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else if(data['msg'] == 'err_max') {
+						alert('회원레벨은 필수 레벨을 제외한 8개까지 생성가능합니다.!');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('#chgform').submit(function() {
+		var chk_option = [
+			{ 'target':'level_code', 'name':'변경레벨', 'type':'select', 'msg':'변경하실 레벨명을 선택하여 주세요.' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('변경하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('변경되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+function levelDel(level_code) {
+	if(!confirm('선택한 회원레벨을 삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('?pg_mode=del&level_code='+level_code,function(data) {
+		if(data['bool']) {
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else { 
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else if(data['msg'] == 'err_basic') {
+				alert('기본레벨을 삭제할 수 없습니다.!');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+$(function() {
+	$("#level_table").tableDnD({
+		onDragClass: "dndover"
+		//dragHandle: "drag_hangle"
+	});
+});
+
+function saveRanking() {
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=save_order&'+$('#level_table').tableDnDSerialize(),function(data) {
+		if(data['bool']) {
+			alert('순서가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}	
+
+function changeLevel(level_code) {
+	$('#chgform input[name=target_level]').val(level_code);
+	$('#target_level_name').html($('#name'+level_code).html());
+	showPopup('drag_popup_level',{kind_pos:'center'});
+}
+
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_03.png') 0px 0px no-repeat;">회원관리</span> / <span class="title02">회원레벨관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">레벨별 등록</div>
+<form method="post" action="<!--{_SERVER.SCRIPT_NAME}-->" name="levelform" id="levelform">
+<!--{? _GET.pg_mode=='form_edit'}-->
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="level_code" value="<!--{_GET.level_code}-->" />
+<!--{:}-->
+<input type="hidden" name="pg_mode" value="write" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="*"></col>
+		<col width="140"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>레벨명</th>
+		<td><input type="text" name="level_name" value="<!--{level_name}-->" class="frm_input" style="width:250px" /></td>
+		<td><span class="button middle black"><input type="submit" value="저장"/></span>&nbsp;<span class="button middle black"><input type="button" value="취소" onclick="location.replace('<!--{_SERVER.SCRIPT_NAME}-->')" /></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="title_d2"><img src="../images/bullet.gif">레벨 목록</div>
+<div class="button_area_right">
+	<span class="button black"><a href="javascript:;" onclick="saveRanking()">순서저장</a></span>
+</div>
+<table id="level_table" class="list_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="100"></col>
+		<col width="140"></col>
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th class="pcenter">순위</th>
+		<th class="pcenter">레벨명</th>
+		<th class="pcenter">필수레벨</th>
+		<th class="pcenter">회원현황</th>
+		<th class="pcenter">관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_level}-->
+	<tr id="<!--{.level_code}-->" class="<!--{? .bool_basic > 0}-->nodrag<!--{:}-->drag<!--{/}-->">
+		<td class="pcenter"><!--{.index_+1}--></td>
+		<td class="pcenter"><span id="name<!--{.level_code}-->"><!--{.level_name}--></span></td>
+		<td class="pcenter"><!--{? .bool_basic > 0}--><span style="color:#ff0000;font-weight:bold;">필수</span><!--{:}--><span style="color:#0033ff;font-weight:bold;">선택</span><!--{/}--></td>
+		<td class="pcenter"><!--{.cnt_member}--></td>
+		<td class="pcenter">
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&level_code=<!--{.level_code}-->">수정</a></span>
+			<!--{*
+			<!--{? .bool_basic == 0}-->
+			<span class="button small black"><a href="javascript:;" onclick="levelDel('<!--{.level_code}-->')">삭제</a></span>
+			<!--{/}-->
+			<!--{? .cnt_member>0}--><span class="button small black"><a href="javascript:;" onclick="changeLevel('<!--{.level_code}-->')">레벨변경</a></span><!--{/}-->
+			*}-->
+		</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area"></div>
+
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_level').dragPopup({
+		popup_id: 'drag_popup_level',
+		popup_title: '회원레벨변경',
+		popup_width: 300,
+		popup_height: 250,
+		bool_today_close:false
+	});
+});
+//-->
+</script>
+
+<div id="popup_level" style="display:none;padding:20px;">
+	<form method="post" action="<!--{_SERVER.SCRIPT_NAME}-->" name="chgform" id="chgform">
+	<input type="hidden" name="pg_mode" value="change_level" />
+	<input type="hidden" name="target_level" value="" />
+	<table class="form_table">
+		<colgroup>
+			<col width="30%"></col>
+			<col width="70%"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+			<th>대상레벨</th>
+			<td id="target_level_name"></td>
+		</tr>
+		<tr>
+			<th>변경레벨</th>
+			<td>
+				<select name="level_code">
+					<option value="" selected="selected">::레벨선택::</option>
+					<!--{@loop_level}-->
+					<!--{? .ranking < 100}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+					<!--{/}-->
+				</select>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<div class="button_area">
+		<span class="button large black strong"><input type="submit" value="변경하기"/></span>
+	</div>
+	</form>
+</div>

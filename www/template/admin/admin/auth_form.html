@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to <!--{config_basic.license_company}--> Admin</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">
+                <img src="/template/admin/smc/img/main/kmcse-stock-logo.png" style="object-fit: contain;">
+            </h1>
+        </div>
+        <div>
+            <h2>Welcome to Admin</h2>
+        </div>
+        <h3><!--{config_basic.license_company}--></h3>
+        <p>Login in. To see it in action.</p>
+        <form method="post" class="m-t" name="authform" id="authform" action="/admin/auth.php">
+          <input type="hidden" name="pg_mode" value="auth">
+          <input type="hidden" name="ret_url" value="<!--{ret_url}-->">
+          <input type="hidden" name="level" value="x">
+            <div class="form-group">
+                <input type="text" name="adminid" class="form-control" placeholder="Userid">
+            </div>
+            <div class="form-group">
+                <input type="password" name="adminpw" class="form-control" placeholder="Password">
+			</div>
+			<!--{? otpuse>0}-->
+            <div class="form-group">
+                <input type="password" name="otppw" class="form-control" placeholder="OTP키를 숫자만 입력해주세요.">
+			</div>
+			<!--{/}-->
+			<input type="submit" class="btn btn-primary block full-width m-b" value="Login" />
+
+        </form>
+        <p class="m-t"> <small><!--{config_basic.license_company}--> &copy; 2021</small> </p>
+    </div>
+  </div>
+
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('#authform').submit(function() {
+
+                if(this.adminid.value == '') {
+                    alert('UserID를 입력하여 주세요.!');
+                    this.adminid.focus();
+                    return false;
+                }
+                if(this.adminpw.value == '') {
+                    alert('Password를 입력하여 주세요.!');
+                    this.adminpw.focus();
+                    return false;
+                }
+            });
+
+		    $('adminid').focus();
+        });
+    </script>
+</body>
+
+</html>

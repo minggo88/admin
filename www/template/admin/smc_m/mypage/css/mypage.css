@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+div.metapo {width:770px;margin: 0 auto 0 auto;}
+
+/* contents layout  */
+div#fg_mypage {border:0px #d4d4d4 solid;width:770px;margin: 0 auto 0 auto;}
+
+div#fg_myinfo {border:0px #d4d4d4 solid; width:770px;margin: 0 auto 0 auto;}
+
+div#fg_myinfo #prvinfo {border:1px #e1e1e1 solid;border-top:0px #e1e1e1 solid;width:320px;height:120px;text-align:center;float:left;}
+div#fg_myinfo #prvinfo li {line-height: 24px; margin-left: 3px; border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;}
+div#fg_myinfo #prvinfo li a{line-height: 24px;  color: #9b9b9b;display: block;}
+div#fg_myinfo #prvinfo li a:hover {line-height: 24px; color: #000;display: block; font-weight:bold; }
+
+div#fg_myinfo #orderinfo {border:1px #e1e1e1 solid;border-top:0px #e1e1e1 solid;width:320px;height:120px;text-align:center;float:right;}
+div#fg_myinfo #orderinfo li {line-height: 24px; margin-left: 3px; border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;}
+div#fg_myinfo #orderinfo li a{line-height: 24px;  color: #9b9b9b;display: block;}
+div#fg_myinfo #orderinfo li a:hover {line-height: 24px; color: #000;display: block; font-weight:bold; }
+
+div#fg_myinfo1 {border:0px #d4d4d4 solid; width:770px;margin: 0 auto 0 auto;}
+.t_b02{color:#434343;  font-weight:bold; }
+.t_b03 {color:#DC5591;}
+
+div#fg_myinfo2 {border:0px #d4d4d4 solid; width:770px;margin: 0 auto 0 auto;}
+
+div#fg_myinfo2 #notice {border:0px #d4d4d4 solid; width:770px;margin:20px 0px 0px 0px;clear:both;}
+
+div#fg_myinfo2 #wishlist {border:0px #d4d4d4 solid;width:320px;height:120px; margin:45px 0px 0px 0px; text-align:center;float:left;}
+div#fg_myinfo2 #wishlist li {border-bottom: 1px #e1e1e1 solid; color: #9b9b9b;margin-left: 3px; line-height: 22px;}
+div#fg_myinfo2 #wishlist li a{color: #9b9b9b;display: block;}
+div#fg_myinfo2 #wishlist li a:hover {color: #000;display: block; font-weight:bold; }
+
+
+div#fg_myinfo2 #today {border:0px #e1e1e1 solid;width:320px;height:120px;text-align:center;float:right;margin:45px 0px 0px 0px; }
+div#fg_myinfo2 #today li {border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;margin-left: 3px;line-height: 22px;}
+div#fg_myinfo2 #today li a{color: #9b9b9b;display: block;}
+div#fg_myinfo2 #today li a:hover {color: #000;display: block; font-weight:bold; }
+
+div#fg_myinfo3 {border:0px #e1e1e1 solid; width:770px;margin: 0 auto 0 auto;}
+
+div#fg_myinfo3 #notice {border:0px #e1e1e1 solid; width:770px;margin:0px;clear:both;}
+
+div#fg_myinfo3 #review {border:0px #d4d4d4 solid;width:320px;height:120px;text-align:center;float:left; margin:30px 0px 0px 0px;}
+div#fg_myinfo3 #review li {border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;margin-left: 3px; line-height: 22px;}
+div#fg_myinfo3 #review li a{color: #9b9b9b;display: block;}
+div#fg_myinfo3 #review li a:hover {color: #000;display: block; font-weight:bold; }
+
+div#fg_myinfo3 #fgnotice {border:0px #d4d4d4 solid;width:320px;height:120px;text-align:center;float:right;margin:30px 0px 0px 0px;}
+div#fg_myinfo3 #fgnotice li {border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;margin-left: 3px;line-height: 22px;}
+div#fg_myinfo3 #fgnotice li a{color: #9b9b9b;display: block;}
+div#fg_myinfo3 #fgnotice li a:hover {color: #000;display: block; font-weight:bold; }
+
+div#fg_combbs2 {border:0px #777777 solid;width:678px;text-align:center;padding:10px;margin:20px 0px 0px 0px;clear:both;}
+
+div#fg_combbs2 #review {width:320px;text-align:center;float:left;}
+div#fg_combbs2 #review li {line-height: 24px; margin-left: 3px; border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;}
+div#fg_combbs2 #review li a{line-height: 24px;  color: #9b9b9b;display: block;}
+div#fg_combbs2 #review li a:hover {line-height: 24px; color: #000;display: block; font-weight:bold; }
+
+
+div#fg_combbs2 #gallery {width:320px;text-align:center;float:right;}
+div#fg_combbs2 #gallery li {line-height: 24px; margin-left: 3px; border-bottom: 1px #E3E3E3 solid; color: #9b9b9b;}
+div#fg_combbs2 #gallery li a{line-height: 24px;  color: #9b9b9b;display: block;}
+div#fg_combbs2 #gallery li a:hover {line-height: 24px; color: #000;display: block; font-weight:bold; }
+
+
+
+
+
+

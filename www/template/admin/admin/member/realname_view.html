@@ -1,0 +1,179 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('ul.tab_menu li:eq(0)').addClass('selected');
+});
+
+function memberDel(userid) {
+	if(!confirm('회원정보만 삭제되며 구매정보 및 게시판에 해당회원 글은 삭제 되지 않습니다.!\n\n삭제 하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&userid='+userid,function(data) {
+		if(data['bool']) {
+			alert('회원정보가 삭제되었습니다.');
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+<!--{? mode == 'withdraw'}-->
+function memberRollback(userid) {
+	if(!confirm('회원정보로 다시 복원하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=rollback&userid='+userid,function(data) {
+		if(data['bool']) {
+			alert('회원정보가 복원되었습니다.');
+			location.replace('/member/admin/memberAdmin.php');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+<!--{/}-->
+//-->
+</script>
+
+<!--{? mode != 'member'}-->
+<div class="title_d2"><img src="../images/bullet.gif">실명인증정보 (<!--{userid}--> / <!--{username}-->)</div>
+<table class="form_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="*"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>reqDate</th>
+		<td><!--{reqdate}--></td>
+	</tr>
+	<tr>
+		<th>certNum</th>
+		<td><!--{certNum}--></td>
+	</tr>
+	</tbody>
+</table>
+<!--{/}-->
+<div class="title_d2"><img src="../images/bullet.gif"> 회원정보</div>
+<table class="form_table">
+    <colgroup>
+        <col width="140"></col>
+        <col width="37%"></col>
+        <col width="140"></col>
+        <col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>아이디</th>
+            <td><b><!--{userid}--></b> &nbsp;<span class="button small black"><a href="javascript:;" onclick="popupMail('<!--{email}-->','<!--{name}-->')">메일 전송</a></span></td>
+            <th>회원가입일</th>
+            <td><!--{reqdate}--></td>
+	</tr>
+	<tr>
+            <th>성명</th>
+            <td><b><!--{username}--></b></td>
+            <th>회원레벨</th>
+            <td><!--{plusInfo}--></td>
+        </tr>
+        <tr>
+            <th>휴대전화</th>
+            <td><!--{phoneNo}-->&nbsp;<span class="button small black"><a href="javascript:;"  onclick="popupSms('<!--{userid}-->','<!--{phoneNo}-->')">SMS 전송</a></span></td>
+            <th>통신사</th>
+            <td><!--{phoneCorp}--></td>
+        </tr>
+        <tr>
+            <th>성별</th>
+            <td><!--{gender}--></td>
+            <th>생년월일</th>
+            <td><!--{birthDay}--></td>
+          </tr>
+        <tr>
+          <th>국적</th>
+          <td><!--{nation}--></td>
+          <th>아이피</th>
+          <td><!--{ip}--></td>
+        </tr>
+        <tr>
+          <th>CI</th>
+          <td><!--{CI}--></td>
+          <th>DI</th>
+          <td><!--{DI}--></td>
+        </tr>
+         <tr>
+          <th>Log</th>
+          <td colspan="3" style="width:60%;word-wrap: break-word;">><!--{rec_cert}--></td>
+        </tr>
+   </tbody>
+</table>
+
+<div class="button_area_both">
+    <div class="button_left">
+
+    </div>
+    <div class="button_right">
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록보기</a></span>
+    </div>
+</div>
+
+<!--상품목록 끝-->
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_email').dragPopup({
+		popup_id: 'drag_popup_email',
+		popup_title: '메일 전송',
+		popup_width: 650,
+		popup_height: 580,
+		bool_today_close:false
+	});
+});
+
+function popupMail(mail_to,mail_to_name) {
+	$('#iframe_email').attr('src','/admin/email.php?pg_mode=form_email&mail_to='+mail_to+'&mail_to_name='+encodeURIComponent(mail_to_name));
+	showPopup('drag_popup_email',{kind_pos:'center'});
+}
+
+$(function() {
+	$('#popup_sms').dragPopup({
+		popup_id: 'drag_popup_sms',
+		popup_title: '문자전송 전송',
+		popup_width: 300,
+		popup_height: 300,
+		bool_today_close:false
+	});
+});
+
+function popupSms(userid,tran_phone) {
+	$('#iframe_sms').attr('src','/admin/sms.php?pg_mode=form_sms&userid='+userid+'&tran_phone='+tran_phone);
+	showPopup('drag_popup_sms',{kind_pos:'center'});
+}
+
+//-->
+</script>
+
+<div id="popup_email" style="display:none;padding:10px;">
+	<iframe id="iframe_email"  frameborder="0" style="width:628px;height:528px;border:0px;"></iframe>
+</div>
+
+<div id="popup_sms" style="display:none;padding:10px;">
+	<iframe id="iframe_sms"  frameborder="0" style="width:280px;height:248px;border:0px;"></iframe>
+</div>

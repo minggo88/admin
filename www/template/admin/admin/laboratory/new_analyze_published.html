@@ -1,0 +1,244 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>플랜요청 성향분석 New</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/laboratory/admin/labAdmin.php?pg_mode=kpi_joinnsave">통계그래프</a>
+            </li>
+            <li class="active">
+                <strong>플랜요청 성향분석 New</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search <small>상세조건별 검색(2017-12-07일 부터 검색 가능)</small></h5>
+                </div>
+                <div class="ibox-content">
+                
+                    <form method="get" name="srchform" id="srchform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+                    <input type="hidden"  name="pg_mode" value="new_analyze_published" />    
+                    <input type="hidden"  name="loop_scale" value="" />     
+                    <input type="hidden"  name="start_published_at" value="<!--{_GET.start_published_at}-->" />     
+                    <input type="hidden"  name="end_published_at" value="<!--{_GET.end_published_at}-->" />  
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-8 col-xs-12" style="margin:0px 0px 10px 0px;">
+                            
+                            <div id="reportrange" class="form-control" >
+                                <i class="fa fa-calendar"></i>
+                                <span></span> <b class="caret"></b>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-4 col-xs-12">
+                            <input class="btn btn-primary" type="submit" value="Search">
+                            <a href="javascript:;" class="btn btn-white" onclick="location.href='/laboratory/admin/labAdmin.php?pg_mode=stat_published'">초기화</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    </form>
+
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 m-t-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                        <h5>지역별 플랜요청</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <canvas id="barChart_location" height="140"></canvas>
+                    </div>
+                </div>
+                <div class="ibox-content m-t-md">
+                        
+                    <h4>지역별 플랜요청 (Total Published: <!--{=number_format(bidding_search_cnt)}--> / <!--{=number_format(bidding_cnt)}-->)</h4>
+                        
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                                <tr>
+                                    <!--{@loop_location_avg}-->   
+                                    <th class="text-center" style="width:100px;"><!--{.name}--></th>
+                                    <!--{/}-->                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA">
+                                    <!--{@loop_location_avg}-->   
+                                    <td class="text-center"><!--{=number_format(.count)}--></td>
+                                    <!--{/}-->  
+                                </tr>
+                                <tr class="gradeB">
+                                    <!--{@loop_location_avg}-->   
+                                    <td class="text-center"><!--{.avg}-->%</td>
+                                    <!--{/}-->  
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 m-t-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>나이별 플랜요청</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <canvas id="barChart_age" height="140"></canvas>
+                    </div>
+                </div>
+                <div class="ibox-content m-t-md">
+                    
+                    <h4>나이별 플랜요청 (Total Published: <!--{=number_format(bidding_search_cnt)}--> / <!--{=number_format(bidding_cnt)}-->)</h4>
+                        
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                                <tr>
+                                    <!--{@loop_age_avg}-->   
+                                    <th class="text-center">
+                                        <!--{?.age==0}-->태아
+                                        <!--{:.age==5}-->어린이
+                                        <!--{:.age==15}-->10대
+                                        <!--{:.age==25}-->20대
+                                        <!--{:.age==35}-->30대
+                                        <!--{:.age==45}-->40대
+                                        <!--{:.age==55}-->50대
+                                        <!--{/}-->
+                                    </th>
+                                    <!--{/}-->                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA">
+                                    <!--{@loop_age_avg}-->   
+                                    <td class="text-center"><!--{=number_format(.count)}--></td>
+                                    <!--{/}-->  
+                                </tr>
+                                <tr class="gradeB">
+                                    <!--{@loop_age_avg}-->   
+                                    <td class="text-center"><!--{.avg}-->%</td>
+                                    <!--{/}-->  
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-6 m-t-md m-b-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                        <h5>직업등급별 플랜요청</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <canvas id="barChart_job" height="140"></canvas>
+                    </div>
+                </div>
+                <div class="ibox-content m-t-md">
+                        
+                    <h4>직업등급별 플랜요청 (Total Published: <!--{=number_format(bidding_search_cnt)}--> / <!--{=number_format(bidding_cnt)}-->)</h4>
+                        
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                                <tr>
+                                    <!--{@loop_job_avg}-->   
+                                    <th class="text-center"><!--{.job_grade}--> 등급</th>
+                                    <!--{/}-->                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA">
+                                    <!--{@loop_job_avg}-->   
+                                    <td class="text-center"><!--{=number_format(.count)}--></td>
+                                    <!--{/}-->  
+                                </tr>
+                                <tr class="gradeB">
+                                    <!--{@loop_job_avg}-->   
+                                    <td class="text-center"><!--{.avg}-->%</td>
+                                    <!--{/}-->  
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 m-t-md m-b-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>성별 플랜요청</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <canvas id="doughnutChart_sex" height="140"></canvas>
+                    </div>
+                </div>
+                <div class="ibox-content m-t-md">
+                    
+                    <h4>성별 플랜요청 (Total Published: <!--{=number_format(bidding_search_cnt)}--> / <!--{=number_format(bidding_cnt)}-->)</h4>
+                        
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                                <tr>
+                                    <!--{@loop_sex_avg}-->   
+                                    <th class="text-center">
+                                        <!--{?.sex==0}-->태아
+                                        <!--{:.sex==1}-->남자
+                                        <!--{:.sex==2}-->여자
+                                        <!--{/}--> 
+                                    </th>
+                                    <!--{/}-->                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA">
+                                    <!--{@loop_sex_avg}-->   
+                                    <td class="text-center"><!--{=number_format(.count)}--></td>
+                                    <!--{/}-->  
+                                </tr>
+                                <tr class="gradeB">
+                                    <!--{@loop_sex_avg}-->   
+                                    <td class="text-center"><!--{.avg}-->%</td>
+                                    <!--{/}-->  
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

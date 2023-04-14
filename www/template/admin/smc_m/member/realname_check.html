@@ -1,0 +1,80 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+function checkAgree() {
+	var bool_agreement = $('#ok_agreement')[0].checked;
+	var bool_private = $('#ok_private')[0].checked;
+	if(!bool_agreement || !bool_private) {
+		alert('이용약관 및 수집하는 개인정보 항목에 모두 동의 해주세요. !');
+		return false;
+	}
+	else {
+		location.href ='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_join';
+	}
+}
+//-->
+</script>
+
+<style type="text/css">
+.area_btn {width:450px;height:130px;text-align:center;margin:50px auto 0px auto;}
+</style>
+
+<div class="contents">
+	<span class="bit_title_a">비트코인 매수/매도시에는 본인인증이 필요합니다.</span>
+	<br>
+	<br>
+	<span class="bit_title_b">회원가입시 본인확인(인증)은 필수사항이 아닙니다.<br />
+하지만 이메일 인증(1단계)만 하신 경우, 비트코인 지갑 기능(비트코인 계좌 기능)만 이용이 가능합니다.</span>
+
+    <br>
+    <form class="align-center" method="post" name="form_chk">
+      <input type="hidden" value="checkplusSerivce" name="m"> 
+      <input type="hidden" value="<!--{enc_data}-->" name="EncodeData"> 
+      <input type="hidden" value="<!--{param_r1}-->" name="param_r1"> 
+
+		<div class="area_btn">
+			<a href="javascript:;" onclick="fnPopup()"><img src="/template/user/images/member/realname_check.jpg" /></a>
+		</div>
+
+    </form>
+  <br>
+</div>
+
+
+<script language="javascript">
+window.name ="Parent_window";
+
+function fnPopup(){
+  window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+  document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+  document.form_chk.target = "popupChk";
+  document.form_chk.submit();
+}
+
+function submitter(action, method, values) {
+    var form = $('&lt;form/&gt;', {
+        action: action,
+        method: method
+    });
+    $.each(values, function() {
+        form.append($('&lt;input/&gt;', {
+            type: 'hidden',
+            name: this.name,
+            value: this.value
+        }));
+    });
+    form.appendTo('body').submit();
+}
+
+function receiver(enc_data){
+  // window.location.href = "https://www.korbit.co.kr/users/sign_up?EncodeData=" + enc_data;
+  submitter("https://www.smcc.io/member/memberJoin.php?pg_mode=form_join", 'POST', [
+      { name: 'EncodeData', value: unescape(enc_data) },
+      { name: 'authenticity_token', value: "BEdOjAToBvJD3jYVnAKwEqurSUU+XTWuYjOK9kCdMjY=" },
+  ]);
+  // alert(enc_data);
+  // $('#enc').attr('value', enc_data);
+  // $('#enc_form').submit();
+}
+
+
+</script>

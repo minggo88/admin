@@ -1,0 +1,279 @@
+<?php /* Template_ 2.2.6 2022/10/27 11:14:34 /home/ubuntu/www/admin/www/template/admin/admin/auction/auction_list.html 000010669 */ 
+$TPL_loop_type_1=empty($TPL_VAR["loop_type"])||!is_array($TPL_VAR["loop_type"])?0:count($TPL_VAR["loop_type"]);?>
+<div class="wrapper search-wrapper-content animated fadeInRight">
+<div class="row">
+<div class="col-lg-12">
+<div class="ibox ">
+<div class="ibox-title">
+<h5 id="page_title"> 경매 목록 </h5>
+<div class="ibox-tools">
+<button name="btn-add" class="btn btn-primary btn-xs">추가</button>
+</div>
+</div>
+<div class="ibox-content">
+<div id="box_list" class="table-responsive">
+<div>
+<table class="table table-striped table-bordered table-hover dataTables-auctionList">
+<colgroup>
+<col width="80"></col>
+<col width="50"></col>
+<col width="50"></col>
+<col width="*"></col>
+<col width="100"></col>
+<col width="70"></col>
+<col width="*"></col>
+<!-- <col width="100"></col> -->
+<col width="80"></col>
+<col width="80"></col>
+<col width="80"></col>
+<col width="100"></col>
+<col width="60"></col>
+<col width="60"></col>
+<col width="100"></col>
+</colgroup>
+<thead>
+<tr>
+<th class="text-center">경매번호</th>
+<th class="text-center">상태</th>
+<th class="text-center">종류</th>
+<th class="text-center">경매이름</th>
+<th class="text-center">판매자</th>
+<th class="text-center">상품이미지</th>
+<th class="text-center">상품이름</th>
+<!-- <th class="text-center">소유자</th> -->
+<th class="text-center">시작가격</th>
+<th class="text-center">최고입찰가격</th>
+<th class="text-center">최고입찰회원</th>
+<th class="text-center">이벤트노출</th>
+<th class="text-center">시작날짜</th>
+<th class="text-center">종료날짜</th>
+<th class="text-center">입찰기록</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th class="text-center">경매번호</th>
+<th class="text-center">상태</th>
+<th class="text-center">종류</th>
+<th class="text-center">경매이름</th>
+<th class="text-center">판매자</th>
+<th class="text-center">상품이미지</th>
+<th class="text-center">상품이름</th>
+<!-- <th class="text-center">소유자</th> -->
+<th class="text-center">시작가격</th>
+<th class="text-center">최고입찰가격</th>
+<th class="text-center">최고입찰회원</th>
+<th class="text-center">이벤트노출</th>
+<th class="text-center">시작날짜</th>
+<th class="text-center">종료날짜</th>
+<th class="text-center">입찰기록</th>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<div id="box_edit" class="hide">
+<h3>상품정보 및 경매정보</h3>
+<form action="upload.php" method="post" enctype="multipart/form-data" name="form_up" >
+<input type="hidden" value="" name="idx">
+<input type="hidden" value="" name="auction_idx">
+<input type="hidden" value="" name="old_userid">
+<table class="table table-striped table-bordered table-hover custab1">
+<tbody>
+<tr>
+<th class="text-center">종류</th>
+<td>
+<select name="auction_type" class="form-control">
+<?php if($TPL_loop_type_1){foreach($TPL_VAR["loop_type"] as $TPL_V1){?>
+<option value="<?php echo $TPL_V1["goods_type1"]?>"><?php echo $TPL_V1["goods_type1"]?></option>
+<?php }}?>
+</select>
+</td>
+</tr>
+<tr>
+<th class="text-center">이미지</th>
+<td class="text-left">
+<div>
+<span style="width:70px;display:inline-block">대 표: </span><input type="file" name="main_pic" id="main_pic" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-main_pic" class="btn btn-primary btn-preview hide" target="_blank">미리보기</a> <a name="btn-delete-main_pic" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+<div>
+<span style="width:70px;display:inline-block">서브1: </span><input type="file" name="sub1_pic" id="sub1_pic" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-sub1_pic" class="btn btn-primary btn-preview hide" target="_blank">미리보기</a> <a name="btn-delete-sub1_pic" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+<div>
+<span style="width:70px;display:inline-block">서브2: </span><input type="file" name="sub2_pic" id="sub2_pic" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-sub2_pic" class="btn btn-primary btn-preview hide" target="_blank">미리보기</a> <a name="btn-delete-sub2_pic" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+<div>
+<span style="width:70px;display:inline-block">서브3: </span><input type="file" name="sub3_pic" id="sub3_pic" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-sub3_pic" class="btn btn-primary btn-preview hide" target="_blank">미리보기</a> <a name="btn-delete-sub3_pic" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+<div>
+<span style="width:70px;display:inline-block">서브4: </span><input type="file" name="sub4_pic" id="sub4_pic" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-sub4_pic" class="btn btn-primary btn-preview hide" target="_blank">미리보기</a> <a name="btn-delete-sub4_pic" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+<div>
+<span style="width:70px;display:inline-block">애니메이션: </span><input type="file" name="animation" id="animation" style="display:inline-block;width: 240px;" class="form-control"> <a href="#" name="btn-preview-animation" class="btn btn-primary btn-preview hide" target="_blank ">미리보기</a> <a name="btn-delete-animation" class="btn btn-warning btn-file_delete hide" target="_blank">삭제</a>
+</div>
+</td>
+</tr>
+<tr>
+<th class="text-center ">판매자ID</th>
+<td class="text-left "><input type="userid" name="userid" size='6' class="form-control"></td>
+</tr>
+<tr>
+<th class="text-center ">제품제목</th>
+<td class="text-left "><input type="text" name="title" class="form-control"></td>
+</tr>
+<tr>
+<th class="text-center ">제품설명</th>
+<td class="text-left "><textarea rows=10 cols=10 name="content" id="content" class="form-control"></textarea></td>
+</tr>
+<tr>
+<th class="text-center ">경매이름</th>
+<td class="text-left "><input type="text" name="auction_title" class="form-control"></td>
+</tr>
+<tr>
+<th class="text-center ">시작가격</th>
+<td class="text-left "><input type="text" name="sell_price" size="7" class="form-control"></td>
+</tr>
+<tr>
+<th class="text-center ">경매기간</th>
+<td class="text-left ">
+<span style="width:60px;display:inline-block">시작날짜 : </span><input type="datetime-local" name="start_date" id="start_date" class="form-control" style="width:calc(100% - 60px);display:inline-block"><br>
+<span style="width:60px;display:inline-block">종료날짜 : </span><input type="datetime-local" name="end_date" id="end_date" class="form-control" style="width:calc(100% - 60px);display:inline-block">
+</td>
+</tr>
+<tr>
+<td class="text-center" colspan="2 ">
+<input type="button" value="저장" class="btn btn-primary" onclick="submit_go();">
+<input type="button" value="취소" class="btn btn-default" name="btn-cancel">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+function popup_detail(auction_idx, auction_title){
+var win = window.open("?pg_mode=historyApplyLists&auction_idx="+auction_idx+"&auction_title="+auction_title, "_blank", "toolbar=no,scrollbars=yes,resizable=yes,top=100,left=200,width=600,height=800");
+}
+</script>
+<script>
+function submit_go() {
+if ($('input[name=title]').val() == " ") {
+alert('제품제목을 넣어주세요');
+} else {
+if ($('input[name=content]').val() == " ") {
+alert('제품내용을 넣어주세요');
+} else {
+if ($('input[name=auction_title]').val() == " ") {
+alert('경매이름을 넣어주세요');
+} else {
+if ($('input[name=sell_price]').val() == " ") {
+alert('금액을 넣어주세요');
+} else {
+if ($('input[name=start_date]').val() == " ") {
+alert('시작날짜를 넣어주세요');
+} else {
+if ($('input[name=end_date]').val() == " ") {
+alert('종료날짜를 넣어주세요');
+} else {
+form_up.submit();
+}
+}
+}
+}
+}
+}
+}
+setTimeout(function() {
+jQuery(function($) {
+$('[name=btn-delete]').on('click', function() {
+let goods_idx = $(this).attr('data-goods_idx'),
+auction_idx = $(this).attr('data-auction_idx'),
+msg = '삭제하시겠습니까?'
+;
+if(auction_idx) {
+msg = '등록된 경매가 있습니다. 상품을 삭제하면 등록된 경매도 삭제됩니다.\n\n삭제하시겠습니까?';
+}
+if(!goods_idx) {
+alert('상품번호가 없습니다.'); return false;
+}
+if(confirm(msg)) {
+$.post('delete.php', {'idx':goods_idx}, function(r){
+if(r=='ok') {
+alert('삭제되었습니다.');
+window.location.reload();
+} else {
+alert('삭제하지 못했습니다.');
+}
+})
+}
+});
+$('.btn-preview').on('click', function() {
+let url = $(this).attr('href');
+SimpleLightbox.open({ items: [url] });
+return false;
+});
+$('.btn-file_delete').on('click', function() {
+let goods_idx = $(this).attr('data-idx'),
+image = $(this).attr('data-img'),
+msg = '삭제하시겠습니까?',
+$self = $(this)
+;
+if(!goods_idx) {
+alert('상품번호가 없습니다.'); return false;
+}
+if(confirm(msg)) {
+$.post('delete_file.php', {'idx':goods_idx,'image':image}, function(r){
+if(r=='ok') {
+alert('삭제되었습니다.');
+$self.hide();
+$self.siblings('.btn-preview').hide()
+} else {
+alert('삭제하지 못했습니다.');
+}
+})
+}
+return false;
+});
+$('[name=btn-add]').on('click', function() {
+$('input[name=idx]').val('');
+$('input[name=auction_idx]').val('');
+$('input[name=auction_title]').val('');
+$('input[name=title]').val('');
+$('input[name=old_userid]').val('');
+$('input[name=userid]').val('');
+$('#content').val('');
+$('input[name=sell_price]').val('');
+$('#start_date').val('');
+$('#end_date').val('');
+$("select[name=auction_type]").val('');
+$('.btn-preview').addClass('hide').attr('href', '#');
+$('#box_edit').removeClass('hide');
+$('#box_list').addClass('hide');
+$('#page_title').text('상품 등록');
+})
+$('[name=btn-cancel]').on('click', function() {
+$('input[name=idx]').val('');
+$('input[name=auction_idx]').val('');
+$('input[name=auction_title]').val('');
+$('input[name=title]').val('');
+$('input[name=old_userid]').val('');
+$('input[name=userid]').val('');
+$('#content').val('');
+$('input[name=sell_price]').val('');
+$('#start_date').val('');
+$('#end_date').val('');
+$("select[name=auction_type]").val('');
+$('.btn-preview').addClass('hide').attr('href', '#');
+$('#box_edit').addClass('hide');
+$('#box_list').removeClass('hide');
+$('#page_title').text('Auction 목록');
+});
+$('.goods').each(function(){$(this).find('a.simpleLightbox').simpleLightbox();});
+})
+}, 1200);
+</script>

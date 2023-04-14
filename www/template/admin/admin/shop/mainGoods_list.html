@@ -1,0 +1,146 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$("#goods_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function delDiv(main_code) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('?pg_mode=del&main_code='+main_code,	function(data){
+		if(data['bool']) { 
+			alert('삭제되었습니다.');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//순서 드래그 
+$(function() {
+	$("#goods_table").tableDnD({
+		onDragClass: "dndover "
+	});
+});
+
+function setOrder() {
+	var tr_len = $('table#goods_table>tbody tr').size();
+	if(tr_len == 0) {
+		alert('생성된 항목이 없습니다.!');
+		return false;
+	}
+	if(!confirm('변경된 순서를 저장하시겠습니까?')) {
+		return false;
+	}
+	$.get('?pg_mode=set_order<!--{get_url}-->&'+$('#goods_table').tableDnDSerialize(),function(data) {
+		if(data['bool']) {
+			alert('순서가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+<div class="title_d1"><h1>메인페이지진열</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">메인페이지 진열상품 관리</div>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><input type="button" value="순서 저장" onclick="setOrder()" /></span>
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_grp">그룹 관리</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">항목추가</a></span>
+	</div>
+</div>
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="40"></col>
+		<col width="60"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="100"></col>
+		<col width="120"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th>순번</th>
+		<th>메인코드</th>
+		<th>항목명</th>
+		<th>사용여부/그룹</th>
+		<th>상품진열유형</th>
+		<th>등록제품관리</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_main}-->
+	<tr id="<!--{.main_code}-->">
+		<td><!--{.index_+1}--></td>
+		<td><!--{.main_code}--></td>
+		<td><!--{.name_div}--></td>
+		<td>
+			<ul>
+				<li class="underline highlight pcenter"><!--{? .bool_display==1}-->사용함<!--{:}--><span class="red">사용안함</span><!--{/}--></li>
+				<li class="pcenter"><!--{? .bool_grp > 0}--><!--{.grp_name}--><!--{:}-->미지정<!--{/}--></li>
+			</ul>
+		</td>
+		<td>
+			<!--{? .type_display=="gallery"}-->갤러리
+			<!--{: .type_display=="gallery_a"}-->대표이미지
+			<!--{: .type_display=="list"}-->목록형<!--{/}-->
+		</td>
+		<td>
+			<ul>
+				<li class="underline none pcenter">등록제품수 : <!--{.cnt_main_goods}--></li>
+				<li class="underline none pcenter"><span class="button small black"><a href="?pg_mode=form_main&main_code=<!--{.main_code}-->">메인제품관리</a></span></li>
+			</ul>
+		</td>
+		<td class="pcenter">
+			<span class="button small black"><a href="javascript:;" onclick="delDiv('<!--{.main_code}-->')">삭제</a></span>
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&main_code=<!--{.main_code}-->">수정</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="7">등록된 항목이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><input type="button" value="순서 저장" onclick="setOrder()" /></span>
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_grp">그룹 관리</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">항목추가</a></span>
+	</div>
+</div>

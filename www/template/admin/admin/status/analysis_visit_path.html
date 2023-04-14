@@ -1,0 +1,51 @@
+<div id="graph_path" style="width:100%;"></div>
+
+<div id="category_list_title2"><img src="../images/bullet.gif">접근경로 분석 테이블</div>
+<table id="analysis_path_table">
+	<col>
+	<col width="120">
+	<thead>
+	<tr>
+		<th style="background-color: #cccccc">접근경로</th>
+		<th style="background-color: #2F93F7;color:#fff;">노출횟수</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_path}-->
+	<tr>
+		<td class="index"><a href="<!--{.access_path_link}-->" target="_blank"><!--{.access_path}--></a></td>
+		<td class="payment"><!--{=number_format(.cnt)}--></td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+
+
+<script type="text/javascript">
+<!--
+$(function() {
+	var plot_cfg4 = {
+		plot_id : 'graph_path',
+		plot_data : [[<!--{path_data}-->]],
+		plot_option : {
+			seriesColors: ["#2F93F7"],
+			legend:{show:false}, 
+			grid: {background:'#FFFFF7', gridLineColor:'#e1e1e1', color:'#555'},
+			series:[
+				//{label:'경로 분석',lineWidth:2, markerOptions:{style:'circle'}}
+				
+				{label:'방문 분석',renderer:$.jqplot.BarRenderer,rendererOptions:{<!--{? loop_path.size_ < 8}-->barWidth:50,<!--{/}-->barPadding: 20, barMargin: 20}}
+			],
+			//axesDefaults: { tickRenderer: $.jqplot.CanvasAxisTickRenderer, tickOptions: { angle: -30, fontSize: '10pt' }},
+			axes:{
+				xaxis:{renderer:$.jqplot.CategoryAxisRenderer,ticks: [<!--{path_ticks}-->], tickOptions:{formatString:'%d'}}, 
+				yaxis:{showTicks:false}
+			}
+		}
+	};
+
+	$.jqplot(plot_cfg4.plot_id, plot_cfg4.plot_data,plot_cfg4.plot_option);
+});
+
+//-->
+</script>

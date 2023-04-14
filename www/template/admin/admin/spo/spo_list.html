@@ -1,0 +1,118 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+			<h2>공모주관리</h2>
+			<ol class="breadcrumb">
+					<li>
+							<a href="index.html">Home</a>
+					</li>
+					<li>
+							<a href="/kspo/admin/spoAdmin.php">공모주관리</a>
+					</li>
+					<li class="active">
+							<strong>공모주관리</strong>
+					</li>
+			</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper search-wrapper-content animated fadeInRight">
+	<div class="row">
+			<div class="col-lg-12">
+
+
+				<div class="ibox ">
+					<div class="ibox-title">
+							<h5> 공모주목록 </h5>
+					</div>
+					<div class="ibox-content">
+						<div class="table-responsive">
+
+
+							<div class="text-left" style="margin-bottom: 20px;">
+								<a href="javascript:;" onclick="checkDel()" class="btn btn-danger btn-xs">선택삭제</a>
+							</div>
+							<div class=" text-right" style="margin-bottom: 20px;"></div>
+						
+							<form id="list_form">
+							<table class="table table-striped table-bordered table-hover dataTables-mtom">
+								<colgroup>
+									<col width="30"></col>
+									<col width="60"></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+									<col></col>
+								</colgroup>
+								<thead>
+								<tr>
+									<th class="text-center"><input type="checkbox" id="all_check" /></th>
+									<th class="text-center">No</th>
+									<th class="text-center">진행상황</th>
+									<th class="text-center">회사명</th>
+									<th class="text-center">공모주수</th>
+									<th class="text-center">청약시작일</th>
+									<th class="text-center">청약마감일</th>
+									<th class="text-center">상장예정일</th>
+									<th class="text-center">공모가</th>
+									<th class="text-center">청약증거금률</th>
+									<th class="text-center">청약신청수</th>
+									<th class="text-center">등록일</th>
+								</tr>
+								</thead>
+								<tbody>
+								<!--{@ loop_spo}-->
+								<tr>
+									<td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" /></td>
+									<td class="text-center"><!--{.no}--></td>
+									<td class="text-center"><!--{?.process=='p'}-->진행중<!--{:.process=='f'}-->종료<!--{:.process=='r'}-->환불중<!--{/}--></td>
+									<td class="text-center"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&idx=<!--{.idx}--><!--{srch_url}-->"><!--{.company}--></a></td>
+									<td class="text-center"><!--{.spo_cnt}--></td>
+									<td class="text-center"><!--{.spo_startdate}--></td>
+									<td class="text-center"><!--{.spo_enddate}--></td>
+									<td class="text-center"><!--{.spo_date}--></td>
+									<td class="text-center"><!--{.spo_price}--></td>
+									<td class="text-center"><!--{.spo_margin_rate}--></td>
+									<td class="text-center"><!--{.spo_total_apply}--></td>
+									<td class="text-center"><!--{=date('Y/m/d H:i:s', .regdate)}--></td>
+								</tr>
+								<!--{:}-->
+								<tr> 
+									<td colspan="12" class="ctext">등록된 공모주가 없습니다.</td>
+								</tr>
+								<!--{/}-->
+								</tbody>
+							</table>
+							</form>
+							
+							<div class="text-left" style="margin-bottom: 20px;">
+								<a href="javascript:;" onclick="checkDel()" class="btn btn-danger btn-xs">선택삭제</a>
+								<a href="/kspo/admin/spoAdmin.php?pg_mode=form_new" class="btn btn-primary btn-xs">공모주등록</a>
+							</div>
+							<div class=" text-right" style="margin-bottom: 20px;"></div>
+							
+							<form name="searchform" id="searchform" method="get" action="<!--{_SERVER.SCRIPT_NAME}-->" class="form-horizontal">
+							<div class="search_area pcenter">
+								<input type="checkbox" name="author" id="author" value="1" >&nbsp;<label for="author">이름</label>
+								<input type="checkbox" name="subject" id="subject" value="1" checked="checked">&nbsp;<label for="subject">제목</label>
+								<input type="checkbox" name="contents" id="contents" value="1" checked="checked">&nbsp;<label for="contents">내용</label>
+								<input type="text" name="s_val" value="<!--{_GET.s_val}-->" class="frm_input" style="width:100px">&nbsp;
+								<input type="submit" value="검 색" class="btn btn-primary btn-xs" />&nbsp;
+								<a href="<!--{_SERVER.SCRIPT_NAME}-->" class="btn btn-danger btn-xs"> 취소</a>
+							</div>
+							</form>
+							<div id="navipage"><!--{navi_page}--></div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+</div>

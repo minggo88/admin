@@ -1,0 +1,314 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+-->
+</script>
+
+
+<div id="contents">
+	<div class="_contents">
+
+		<div class="sub_contents">
+
+			<div class="sub_contents_box second">
+				<div class="sub_contents_boxL">
+					<table summary="보유포인트">
+						<caption>보유포인트<caption>
+						<colgroup>
+							<col class="bit_table1_col1"/>
+						</colgroup>
+						<colgroup>
+							<col class="bit_table1_col2"/>
+						</colgroup>
+						<tbody>
+							<tr class="top">
+								<th scope="row">보유 KRW 포인트</th>
+								<td class="pright"><!--{=number_format(WALLET_KRW_AMOUNT)}--> KRW</td>
+							</tr>
+							<!--{*
+							<tr>
+								<th scope="row">적립 KRW 포인트</th>
+								<td class="pright"><!--{=number_format(WALLET_KRW_POINT)}--> KRW</td>
+							</tr>
+							*}-->
+							<tr>
+								<th scope="row">비트코인 보유액</th>
+								<td class="pright"><!--{=number_format(WALLET_BTC_AMOUNT, strlen(strrchr(WALLET_BTC_AMOUNT, '.') * 1)-2)}--> BTC</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="sub_contents_boxR">
+					<table summary="개인정보">
+						<caption>개인정보<caption>
+						<colgroup>
+							<col class="bit_table1_col1"/>
+						</colgroup>
+						<colgroup>
+							<col class="bit_table1_col2"/>
+						</colgroup>
+						<tbody>
+							<tr class="top">
+								<th scope="row">회원이름</th>
+								<td><!--{USER_NAME}--></td>
+							</tr>
+							<tr>
+								<th scope="row">전화번호</th>
+								<td><!--{USER_MOBILE}--> <a href="/edit">(변경하기)</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="sub_contents_box1">
+				<div class="sub_contents_boxL_">
+					<div class="bar"></div>
+					<h5>나의 주문 내역</h5>
+					<table summary="나의 주문 내역">
+						<caption>나의 주문 내역<caption>
+						<colgroup>
+							<col class="bit_table1_col4"/>
+							<col class="bit_table1_col8"/>
+							<col class="bit_table1_col8"/>
+							<col class="bit_table1_col8"/>
+						</colgroup>
+						<thead>
+							<tr class="top">
+								<th scope="col">주문시간</th>
+								<th scope="col">매도 / 매수</th>
+								<th scope="col">수량 BTC</th>
+								<th class="tr bR0" scope="col">호가 KRW</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--{@loop_user_trade}-->
+							<tr>
+								<td><!--{.regdate}--></td>
+								<td><!--{.type}--></td>
+								<td><!--{=number_format(.amount, strlen(strrchr(.amount, '.') * 1)-2)}--></td>
+								<td class="tr bR0"><!--{=number_format(.price)}--></td>
+							</tr>
+							<!--{:}-->
+							<tr>
+								<td colspan="4" class="pcenter">주문 내역이 없습니다.</td>
+							</tr>
+							<!--{/}-->
+						</tbody>
+					</table>
+				</div>
+				<div id="navipage">
+					<div class="paginate">
+						<a class="direction prev" href="javascript:;"><span></span><span></span> 처음</a>
+						<a class="direction prev" href="javascript:;"><span></span> 이전</a>
+						<strong>1</strong>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">2</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">3</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">4</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">5</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC892805'" href="javascript:;">6</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">7</a>
+						<a class="direction next" onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">다음 <span></span></a>
+						<a class="direction next" href="javascript:;">끝 <span></span><span></span></a>
+					</div>		
+					<!--{navi_page}-->
+				</div>
+				<!--{?_GET.cate_code=='JG40489'}-->
+				<div class="sub_contents_boxR_">
+					<div class="bar"></div>
+					<h5>나의 최근 체결된 내역</h5>
+					<table summary="나의 최근 체결된 내역">
+						<caption>나의 최근 체결된 내역<caption>
+						<colgroup>
+							<col class="bit_table1_col4"/>
+							<col class="bit_table1_col8"/>
+							<col class="bit_table1_col8"/>
+							<col class="bit_table1_col8"/>
+						</colgroup>
+						<thead>
+							<tr class="top">
+								<th scope="col">체결시간</th>
+								<th class="tr" scope="col">호가 KRW</th>
+								<th scope="col">수량 BTC</th>
+								<th class="bR0" scope="col">매도 / 매수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--{@loop_user_complete_trade}-->
+							<tr <!--{?.type=='매도'}-->class="type1"<!--{:.type=='매수'}-->class="type2"<!--{/}-->>
+								<td><!--{.regdate}--></td>
+								<td class="tr"><!--{=number_format(.price)}--></td>
+								<td class="tr"><!--{=number_format(.amount, strlen(strrchr(.amount, '.') * 1)-2)}--></td>
+								<td class="bR0"><!--{.type}--></td>
+							</tr>
+							<!--{:}-->
+							<tr>
+								<td colspan="4" class="tr pcenter">체결 내역이 없습니다.</td>
+							</tr>
+							<!--{/}-->
+						</tbody>
+					</table>
+				</div>
+				<div id="navipage">
+					<div class="paginate">
+						<a class="direction prev" href="javascript:;"><span></span><span></span> 처음</a>
+						<a class="direction prev" href="javascript:;"><span></span> 이전</a>
+						<strong>1</strong>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">2</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">3</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">4</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">5</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC892805'" href="javascript:;">6</a>
+						<a onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">7</a>
+						<a class="direction next" onclick="location.href='/account/myinfo.php?&gnb_code=VP29561&cate_code=FC89280'" href="javascript:;">다음 <span></span></a>
+						<a class="direction next" href="javascript:;">끝 <span></span><span></span></a>
+					</div>		
+					<!--{navi_page}-->
+				</div>
+				<!--{/}-->
+			</div>
+		</div>
+
+		<div class="ssub_nav">
+			<ul>
+				<li class="select"><a href="/account/myinfo.php?type=total&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">종합내역</a></li>
+				<li><a href="/account/myinfo.php?type=trade_history&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">거래내역</a></li>
+				<li><a href="/account/myinfo.php?type=btc_history&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">비트코인 입출금 내역</a></li>
+			</ul>
+		</div>
+
+	</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!--{*
+<div style="width:100%">
+	<div style="width:49%;float:left;">
+		<table class="form_table">
+			<colgroup>
+				<col width="150"></col>
+				<col width="150"></col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>보유 KRW 포인트</td>
+					<td class="pright"><!--{WALLET_KRW_AMOUNT}--> KRW</td>
+				</tr>
+                <!--
+				<tr>
+					<td class="OrangeRed">적립 KRW 포인트</td>
+					<td class="pright">?? KRW</td>
+				</tr>
+				//-->
+				<tr>
+					<td>비트코인 보유액</td>
+					<td class="pright"><!--{WALLET_BTC_AMOUNT}--> BTC</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="width:49%;float:right;">
+		<table class="form_table">
+			<colgroup>
+				<col width="150"></col>
+				<col width="150"></col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>회원이름</td>
+					<td><!--{USER_NAME}--></td>
+				</tr>
+				<tr>
+					<td>전화번호</td>
+					<td><!--{USER_MOBILE}-->  (변경하기)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="clear_box pcenter"></div>
+
+<div style="width:100%">
+	<div style="width:49%;float:left;">
+		<table class="list_table">
+			<colgroup>
+				<col width="50"></col>
+				<col width="50"></col>
+				<col width="50"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="3" class="pcenter">나의 주문내역</th>
+				</tr>
+				<tr>
+					<th>매도/매수</th>
+					<th>수량 BTC</th>
+					<th>호가 KRW</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--{@loop_user_trade}-->
+				<tr>
+					<td><!--{.type}--></td>
+					<td><!--{.amount}--></td>
+					<td><!--{.price}--></td>
+				</tr>
+				<!--{:}-->
+				<tr>
+					<td colspan="3" class="pcenter">주문 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+	<div style="width:49%;float:right;">
+		<table class="list_table">
+			<colgroup>
+				<col width="50"></col>
+				<col width="50"></col>
+				<col width="50"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="3" class="pcenter">나의 최근체결내역</th>
+				</tr>
+				<tr>
+					<th>호가 KRW</th>
+					<th>수량 BTC</th>
+					<th>매도/매수</th>
+				</tr>
+			</thead>
+			<tbody>
+                <!--{@loop_user_complete_trade}-->
+                <tr>
+                    <td><!--{.price}--></td>
+                    <td><!--{.amount}--></td>
+                    <td><!--{.type}--></td>
+                </tr>
+                <!--{:}-->
+				<tr>
+					<td colspan="3" class="pcenter">체결 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+</div>
+*}-->

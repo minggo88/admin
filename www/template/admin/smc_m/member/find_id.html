@@ -1,0 +1,343 @@
+<style type="text/css">
+div#form_find_id div.area_child_left,
+div#form_find_pw div.area_child_left,
+div#form_email_resend div.area_child_left {width:400px; margin-top:10px;}
+div#form_find_id div.area_child_left table,
+div#form_find_pw div.area_child_left table,
+div#form_email_resend div.area_child_left table {width:400px;}
+div#form_find_id div.area_child_right,
+div#form_find_pw div.area_child_right,
+div#form_email_resend div.area_child_right {width:340px; margin-top:10px;}
+
+
+</style>
+
+
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('#idform').submit(function() {
+		var chk_option = [
+			{ 'target':'name', 'name':'사용자이름', 'type':'blank', 'msg':'사용자이름을 입력하여 주세요.!' },
+			{ 'target':'mobile_a', 'name':'휴대전화번호', 'type':'select', 'msg':'휴대전화번호를 선택하여 주세요.!' },
+			{ 'target':'mobile_b', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' },
+			{ 'target':'mobile_c', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' }
+//			{ 'target':'email_a', 'name':'이메일', 'type':'blank', 'msg':'이메일을 입력하여 주세요.!' },
+//			{ 'target':'email_b', 'name':'이메일', 'type':'blank', 'msg':'이메일 도메인을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					$('#result_find_userid').html(data['msg']);
+					showPopup('drag_popup_userid',{kind_pos:'center'});
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert("회원가입시 입력한 정보와 일치하지 않습니다.\n\n재시도 해주세요.!");
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		});
+		return false;
+	});
+
+	$('#pwform').submit(function() {
+		var chk_option = [
+		// { 'target':'userid', 'name':'사용자아이디', 'type':'blank', 'msg':'사용자아이디를 입력하여 주세요.!' },
+			{ 'target':'email_a', 'name':'이메일', 'type':'blank', 'msg':'이메일을 입력하여 주세요.!' },
+			{ 'target':'email_b', 'name':'이메일', 'type':'blank', 'msg':'이메일 도메인을 입력하여 주세요.!' },
+			{ 'target':'name', 'name':'사용자이름', 'type':'blank', 'msg':'사용자이름을 입력하여 주세요.!' },
+			{ 'target':'mobile_a', 'name':'휴대전화번호', 'type':'select', 'msg':'휴대전화번호를 선택하여 주세요.!' },
+			{ 'target':'mobile_b', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' },
+			{ 'target':'mobile_c', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					if(data['msg'] == 'email') {
+						alert('회원가입시 입력하신 메일로 임시비밀번호를 발급하였습니다.!');
+					}
+					else {
+						alert('회원가입시 입력하신 휴대폰으로 임시비밀번호를 발급하였습니다.!');
+					}
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_email') {
+						alert("메일 발송이 되지 않았습니다.\n\n회원님의 메일을 다시 한번 확인하여 주세요.!");
+					}
+					else if(data['msg'] == 'err_sms') {
+						alert("문자가 전송 되지 않았습니다.!");
+					}
+					else {
+						alert("회원가입시 입력한 정보와 일치하지 않습니다.\n\n재시도 해주세요.!");
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		});
+		return false;
+	});
+
+	$('#email_resend').submit(function() {
+		var chk_option = [
+			{ 'target':'email', 'email':'이메일', 'type':'blank', 'msg':'이메일을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					if(data['msg'] == 'email') {
+						alert('회원가입시 입력하신 메일로 이메일인증 확인 메일을 다시 보내드렸습니다.!');
+					}
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_email') {
+						alert("메일 발송이 되지 않았습니다.\n\n회원님의 메일을 다시 한번 확인하여 주세요.!");
+					}
+					else {
+						alert('회원님의 계정이 존재한다면 곧 이메일인증 확인 메일을 받아 보실 수 있습니다.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		});
+		return false;
+	});
+
+	$('#email_domain, #email_domain1').change(function() {
+		var select_idx = this.selectedIndex;
+		var domain = $(this).val();
+		if(select_idx > 0) {
+			if(domain == 'etc') {
+				$(this).siblings('input[name=email_b]').val('');
+			}
+			else {
+				$(this).siblings('input[name=email_b]').val(domain);
+			}
+		}
+	});
+});
+
+$(function() {
+	//첫번째 탭은 활성화
+	$('div.tab>ul>li').click(function(event){
+		$('div.tab>ul>li').removeClass("on");
+		$(this).addClass("on");
+		$('div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		$(this).blur();
+		return false;
+	});
+});
+
+//-->
+</script>
+
+<div class="remark_announce">
+	<!--<span class="sub_title_b">(주)SCC</span> <span class="sub_title_g">는 www.</span><br />-->
+</div>
+
+<div class="tab">
+	<ul>
+		<li class="on"><a href="#form_find_id">이메일 찾기</a></li>
+		<li><a href="#form_find_pw">비밀번호 찾기</a></li>
+		<li><a href="#form_email_resend">이메일인증 확인 메일 재발송</a></li>
+	</ul>
+</div>
+<div id="form_find_id" class="tab_content area_both">
+	<div class="area_child_left">
+		<form method="post" name="idforrm" id="idform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+		<input type="hidden" name="pg_mode" value="find_id" />
+		<table class="form_table">
+			<colgroup>
+				<col width="90"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" class="frm_input" style="width:100px" autocomplete="off" /></td>
+			</tr>
+			<tr>
+				<th>휴대전화</th>
+				<td>
+					<select name="mobile_a" style="width:60px;">
+						<!--{=loopMobileA()}-->
+					</select> - 
+					<input type="text" name="mobile_b" maxlength="4" class="frm_input" style="width:50px" autocomplete="off" /> -
+					<input type="text" name="mobile_c" maxlength="4" class="frm_input" style="width:50px" autocomplete="off" />
+				</td>
+			</tr>
+			<!--{*	
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input type="text" name="email_a" class="frm_input" style="width:60px" />@
+					<input type="text" name="email_b" class="frm_input" style="width:80px" />
+					<select name='email_domain' id='email_domain'>
+						{=loopMailDomain()}
+					</select>
+				</td>
+			</tr>
+			*}-->
+			</tbody>
+		</table>
+		<div class='button_area'>
+			<input type="submit" value="확인" class="grad"/>
+		</div>
+		</form>
+	</div>
+	<div class="area_child_right" style="line-height:20px;">
+		<ul>
+			<li>* 이용안내</li>
+			<li>- 회원가입시 입력하신 정보와 동일하게 입력하여 주세요.</li>
+			<li>- 회원정보 암호화되어 전송되어 노출의 위험이 없습니다.</li>
+		</ul>
+
+	</div>
+</div>
+<div id="form_find_pw" class="tab_content area_both" style="display:none">
+	<div class="area_child_left">
+		<form method="post" name="pwforrm" id="pwform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+		<input type="hidden" name="pg_mode" value="find_pw" />
+		<table class="form_table">
+			<colgroup>
+				<col width="90"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<!--{*
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="userid" class="frm_input" style="width:100px" autocomplete="off"  /></td>
+			</tr>
+			*}-->
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input type="text" name="email_a" class="frm_input" style="width:60px" autocomplete="off" />@
+					<input type="text" name="email_b" class="frm_input" style="width:80px" autocomplete="off" />
+					<select name='email_domain' id='email_domain1'>
+						<!--{=loopMailDomain()}-->
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" class="frm_input" style="width:100px" autocomplete="off" /></td>
+			</tr>
+			<tr>
+				<th>휴대전화</th>
+				<td>
+					<select name="mobile_a" style="width:60px;">
+						<!--{=loopMobileA()}-->
+					</select> - 
+					<input type="text" name="mobile_b" maxlength="4" class="frm_input" style="width:50px" autocomplete="off" /> -
+					<input type="text" name="mobile_c" maxlength="4" class="frm_input" style="width:50px" autocomplete="off" />
+				</td>
+			</tr>
+			<tr>
+				<th>수신방법</th>
+				<td><input type="radio" name="trans_method" value="email" checked="checked" id="email"/> <label for="email">이메일</label> <input type="radio" name="trans_method" value="sms" id="sms"/><label for="sms">휴대폰문자</label></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class='button_area'>
+			<input type="submit" value="확인" class="grad"/>
+		</div>
+
+		</form>
+	</div>
+	<div class="area_child_right" style="line-height:20px;">
+		<ul>
+			<li>* 이용안내</li>
+			<li>- 회원가입시 입력하신 정보와 동일하게 입력하여 주세요.</li>
+			<li>- 회원정보 암호화되어 전송되어 노출의 위험이 없습니다.</li>
+		</ul>
+	</div>
+</div>
+<div id="form_email_resend" class="tab_content area_both" style="display:none">
+	<div class="area_child_left">
+		<form method="post" name="email_resend" id="email_resend" action="<!--{_SERVER.SCRIPT_NAME}-->">
+		<input type="hidden" name="pg_mode" value="email_resend" />
+		<table class="form_table">
+			<colgroup>
+				<col width="90"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input type="text" name="email" class="frm_input" style="width:280px" autocomplete="off" />
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class='button_area'>
+			<input type="submit" value="확인" class="grad"/>
+		</div>
+
+		</form>
+	</div>
+	<div class="area_child_right" style="line-height:20px;">
+		<ul>
+			<li>* 이용안내</li>
+			<li>- 회원가입시 입력하신 정보와 동일하게 입력하여 주세요.</li>
+			<li>- 회원정보 암호화되어 전송되어 노출의 위험이 없습니다.</li>
+		</ul>
+	</div>
+</div>
+
+<div class="area_remark" style="line-height:20px;padding:20px;">
+	<ul>
+		<li> - 이메일 찾기 및 비밀번호 찾기에 어려움이 있으신 분은 <a href="mailto:info@kmcse.com"><b>info@kmcse.com</b></a>으로 연락주십시오.</li>
+	</ul>
+</div>
+
+
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_userid').dragPopup({
+		popup_id: 'drag_popup_userid',
+		popup_title: '이메일 검색 결과',
+		popup_width: 300,
+		popup_height: 200,
+		bool_today_close:false
+	});
+});
+//-->
+</script>
+<div id="popup_userid" style="display:none;padding:5px;">
+	<div class="title_popup">
+		이메일 검색결과
+	</div>	
+	<div id="wrap_find_userid">
+		회원님의 이메일은<br />
+		<span id="result_find_userid"></span><br />
+		입니다.
+	</div>
+</div>

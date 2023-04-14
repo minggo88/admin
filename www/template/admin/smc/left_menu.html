@@ -1,0 +1,134 @@
+<dl id="js_left_menu_box">
+	<dd id="menu_body">
+		<div id="menu_title">
+		<!--{left_title}-->
+		</div>
+		<div id="menubox">
+			<ul>
+				<!--{@loop_lnb}-->
+				<!--{?.cate_code == _GET.cate_code}--><li class="lilist_over"><!--{:}--><li class="lilist"><!--{/}--><a href="<!--{?empty(.link_name)}--><!--{.link_url}--><!--{:}-->/<!--{.link_name}--><!--{/}-->"><!--{.contents_name}--></a></li>
+				<!--{/}-->
+			</ul>
+		</div>
+	</dd>
+</dl>
+
+<div id="trade_signal">
+
+	<h3>SCC 거래시세</h3>
+	<table summary="거래시세">
+	<caption>거래시세</caption>
+	<colgroup>
+		<col width="40px"></col>
+		<col width="70px"></col>
+		<col width="90px"></col>
+	</colgroup>
+	<thead>
+		<tr>
+			<th class="co1">-</th>
+			<th class="co1">SCC</th>
+			<th class="co1 right">KRW</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_trade_sell}-->
+	<!--{?.index_=="0"}-->
+	<tr>
+		<td class="cs_3 middle" rowspan="7">매도</td>
+		<td class="cs_<!--{.index_}-->" style="text-align:right"><!--{? !empty(.amount)}--><!--{=substr(clean_float_number(.amount, 0), 0, 7)}--> SCC<!--{:}-->&nbsp;<!--{/}--></td>
+		<td class="right buy blue cs_<!--{.index_}-->"><!--{? !empty(.amount)}--><!--{=number_format(.price)}--> USD<!--{:}-->&nbsp;<!--{/}--></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td class="cs_<!--{.index_}--> <!--{?.index_=='6'}-->middle<!--{/}-->" style="text-align:right"><!--{? !empty(.amount)}--><!--{=substr(clean_float_number(.amount, 0), 0, 7)}--> SCC<!--{:}-->&nbsp;<!--{/}--></td>
+		<td class="right buy blue cs_<!--{.index_}--> <!--{?.index_=='6'}-->middle<!--{/}-->"><!--{? !empty(.amount)}--><!--{=number_format(.price)}--> USD<!--{:}-->&nbsp;<!--{/}--></td>
+	</tr>
+	<!--{/}-->
+	<!--{:}-->
+	<tr>
+		<td class="">-</td>
+		<td class="">-</td>
+		<td class="right buy blue">-</td>
+	</tr>
+	<!--{/}-->
+	<!--{@loop_trade_buy}-->
+	<!--{?.index_=="0"}-->
+	<tr>
+		<td class="cb_5 middle" rowspan="7">매수</td>
+		<td class="cb_<!--{.index_}-->" style="text-align:right"><!--{? !empty(.amount)}--><!--{=substr(clean_float_number(.amount, 0), 0, 7)}--> SCC<!--{:}-->&nbsp;<!--{/}--></td>
+		<td class="right sale red cb_<!--{.index_}-->"><!--{? !empty(.amount)}--><!--{=number_format(.price)}--> USD<!--{:}-->&nbsp;<!--{/}--></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td class="cb_<!--{.index_}--> <!--{?.index_=='6'}-->middle<!--{/}-->" style="text-align:right"><!--{? !empty(.amount)}--><!--{=substr(clean_float_number(.amount, 0), 0, 7)}--> SCC<!--{:}-->&nbsp;<!--{/}--></td>
+		<td class="right sale red cb_<!--{.index_}--> <!--{?.index_=='6'}-->middle<!--{/}-->"><!--{? !empty(.amount)}--><!--{=number_format(.price)}--> USD<!--{:}-->&nbsp;<!--{/}--></td>
+	</tr>
+	<!--{/}-->
+	<!--{:}-->
+	<tr>
+		<td>-</td>
+		<td>-</td>
+		<td class="sale red right">-</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+	</table>
+</div>
+
+
+<!--{*
+<ul style="margin:20px 0px 30px 0px;">
+	<li><a href="http://bitcoin2.fgshop.co.kr" target="new"><img src="/data/editor/goShopping_g.jpg" alt="사용자 커뮤니티" /></a></li>
+</ul>
+*}-->
+
+<script type="text/javascript">
+$(function() {
+	
+	// 매도 가격 클릭시 매수 가격으로 설정.
+	$('.buy').click(function(){
+		$('#bitcoin_sell_price').val($(this).text().replace(/[^0-9.]/g, '')).keyup();
+		$('#bitcoin_sell_amount').select();
+	}).css('cursor','pointer');
+	// 매수 가격 클릭시 매수 가격으로 설정.
+	$('.sale').click(function(){
+		$('#bitcoin_buy_price').val($(this).text().replace(/[^0-9.]/g, '')).keyup();
+		$('#bitcoin_buy_amount').select();
+	}).css('cursor','pointer');
+
+		<!--{? bool_slide_FA73}-->
+    $("#banner_FA73").jCarouselLite({
+        btnNext: "#arrow_left_btn",
+        btnPrev: "#arrow_right_btn",
+        //mouseWheel: true,
+        mouseOver: true,
+        auto: 3000,
+        speed: 200,
+        easing: "easeInOutExpo",
+        //vertical: true,
+        visible: 1,
+        scroll: 1,
+		btnGo: [<!--{btn_FA73}-->],
+		beforeStart: function(a) {},
+		afterEnd: function(c) {}
+	});
+	<!--{/}-->
+});
+</script>
+
+<!--{*
+-->
+<div id="menu_event">
+	<div id="banner">
+		<ul>
+			<!--{@loop_FA73}-->
+			<li>
+				<a href="http://<!--{.banner_url}-->">
+					<img src="/data/design/<!--{.img_banner}-->" alt="FA73_btn<!--{.index_}-->" style="width:<!--{size_x_FA73}-->px;height:<!--{size_y_FA73}-->px"/>
+				</a>
+			</li>
+			<!--{/}-->
+		</ul>
+	</div>
+</div>
+*}-->

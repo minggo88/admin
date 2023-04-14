@@ -1,0 +1,66 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>거래내역</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">Home</a>
+            </li>
+            <li>
+                <a>외부거래</a>
+            </li>
+            <li>
+                <a><!--{? _GET.inout=='in'}-->들어온 코인<!--{:}-->나간 코인<!--{/}--></a>
+            </li>
+            <li class="active">
+                <strong><!--{_GET.symbol}--> 거래내역</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 col-nd-12">
+            <div class="ibox float-e-margins">
+                <h3 class="ibox-title"><i class="fa fa-database"></i> <!--{_GET.symbol}-->  거래내역(Wallet)</h3>
+                <div class="ibox-content">
+                    <div class="table-responsive mt-10">
+                        <div class="" id="box_filter" style="display:none;position: absolute;right: 278px;z-index: 1;color: #000;padding-top: 2px;">
+                            <!-- <input type="checkbox" id="filter_out_txn" name="filter_out_txn" value="Y" style="vertical-align: middle;margin-top: 0;"> <label for="filter_out_txn" style="line-height: 2rem;font-weight: 700;cursor:pointer">외부 거래 보기</label> -->
+                        </div>
+                        <table name="db_txn_list" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>날짜</th>
+                                    <!-- <th>상태</th> -->
+                                    <th>외부거래소(주소)</th>
+                                    <th><!--{?_GET.inout=='in'}-->받은회원(이름)<!--{:}-->보낸회원(이름)<!--{/}--></th>
+                                    <th><!--{?_GET.inout=='in'}-->받은수량<!--{:}-->보낸수량<!--{/}--></th>
+                                    <th>수수료</th>
+                                    <th>송금비용</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>날짜</th>
+                                    <!-- <th>상태</th> -->
+                                    <th>외부거래소(주소)</th>
+                                    <th><!--{?_GET.inout=='in'}-->받은회원(이름)<!--{:}-->보낸회원(이름)<!--{/}--></th>
+                                    <th><!--{?_GET.inout=='in'}-->받은수량<!--{:}-->보낸수량<!--{/}--></th>
+                                    <th>수수료</th>
+                                    <th>송금비용</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- Page Navigation -->
+                    <div class="navipage">
+                        <!--{navi_page}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

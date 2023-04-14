@@ -1,0 +1,286 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header myacc-edit" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_3;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text"><a href="/edit" class="active">Edit</a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/certification">Certification</a></label>
+					</div>
+					<div class="layer active"></div>
+					<div class="Rectangle-6-copy-4 large">
+						<label class="Rectangle-Text small"><a href="/editpin">Change Pin Number</a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/histories">Histories</a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+
+				<div class="row">
+					<div class="col-sm-12 mb-0">
+						<nav class="pull-right">
+							<ol class="breadcrumb">
+								<li><a href="/">Home</a></li>
+								<li><a href="/certification">My Account</a></li>
+								<li class="active">Certification</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-sm-12 right-side-sidebar">
+
+						<h3 class="xspecial-heading v2 fs-18"><span>Certification</span></h3>
+
+						<div class="smart-wrap">
+							<div class="smart-forms smart-forms-ledger smart-container wrap">
+								<div class="form-body">
+									<div class="frm-row">
+										<div class="container">
+											<div class="row process-step v2 hidden-desktop">
+												<div class="col-md-3 process-step-step complete exp-animation express_image_appear" data-animation="express_image_appear" data-delay="400" style="opacity: 1; visibility: visible;">
+													<div class="process-step-icon clearfix">
+														<i class="ion-ios-compose-outline fa-3x primary-color"></i>
+													</div>
+													<div class="process-step-content">
+														<div class="text-center process-step-stepnum">Regist</div>
+														<div class="progress"><div class="progress-bar"></div></div>
+														<a href="#" class="process-step-dot"></a>
+													</div>
+												</div>
+
+												<div class="col-md-3 process-step-step active exp-animation express_image_appear" data-animation="express_image_appear" data-delay="400" style="opacity: 1; visibility: visible;">
+													<div class="process-step-icon clearfix">
+														<i class="ion-android-phone-portrait fa-3x primary-color"></i>
+													</div>
+													<div class="process-step-content">
+														<div class="text-center process-step-stepnum">Phone</div>
+														<div class="progress"><div class="progress-bar"></div></div>
+														<a href="#" class="process-step-dot"></a>
+													</div>
+												</div>
+
+												<div class="col-md-3 process-step-step exp-animation express_image_appear" data-animation="express_image_appear" data-delay="800" style="opacity: 1; visibility: visible;">
+													<div class="process-step-icon clearfix">
+														<i class="ion-android-image fa-3x"></i>
+													</div>
+													<div class="process-step-content">
+														<div class="text-center process-step-stepnum">Photo</div>
+														<div class="progress"><div class="progress-bar"></div></div>
+														<a href="#" class="process-step-dot"></a>
+													</div>
+												</div>
+
+												<div class="col-md-3 process-step-step exp-animation express_image_appear" data-animation="express_image_appear" data-delay="1200" style="opacity: 1; visibility: visible;">
+													<div class="process-step-icon clearfix">
+														<i class="ion-ios-paper-outline fa-3x"></i>
+													</div>
+													<div class="process-step-content">
+														<div class="text-center process-step-stepnum">Bank Account</div>
+														<div class="progress"><div class="progress-bar"></div></div>
+														<a href="#" class="process-step-dot"></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="frm-row">
+										<div class="col-md-12">
+
+											<div class="tab-wrap clean-tab">
+												<ul class="nav nav-tabs  justify-content-center" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-toggle="tab" href="#About3xxc" role="tab"><i class="fa fa-phone2"></i> Phone</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#Services3xxc" role="tab"><i class="fa fa-photo"></i> Photo</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#Clients3xxc" role="tab"><i class="fa fa-paper"></i> Bank Account</a>
+													</li>
+												</ul>
+
+												<div class="tab-content">
+													<div class="tab-pane active" id="About3xxc" role="tabpanel">
+														<form method="post" name="frmEdit" id="frmEdit" action="/edit" enctype="multipart/form-data">
+															<input type="hidden" name="pg_mode" value="edit" />
+															<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+															<input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+															<div class="frm-row">
+																<div class="spacer-t30 spacer-b30">
+																	<div class="tagline"><span>Certificate your phone</span></div>
+																</div>
+																<div class="colm colm12">
+																	<div class="section">
+																		<label class="field-label">Your phone number </label>
+																		<label class="field prepend-icon">
+																			<!--{? realname_info.name }-->
+																			<input type="text" name="name" class="gui-input" value="<!--{realname_info.name}-->" readonly>
+																			<!--{:}-->
+																			<input type="text" name="name" class="gui-input" value="" placeholder="Enter Your name" >
+																			<!--{/}-->
+																			<span class="field-icon"><i class="fa fa-user"></i></span>
+																		</label>
+																	</div><!-- end section -->
+																	<div class="form-footer text-center mt-30 pb-0">
+																		<button type="submit" class="button btn-primary">Certificate</button>
+																	</div><!-- end .form-footer section -->
+
+																</div><!-- end .colm section -->
+															</div>
+														</form>
+													</div>
+													<div class="tab-pane" id="Services3xxc" role="tabpanel">
+														<form method="post" name="frmEdit" id="frmEdit" action="/edit" enctype="multipart/form-data">
+															<input type="hidden" name="pg_mode" value="edit" />
+															<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+															<input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+															<div class="frm-row">
+																<div class="spacer-t30 spacer-b30">
+																	<div class="tagline"><span>Upload identification photo</span></div>
+																</div>
+																<div class="colm colm6">
+																	<div class="avatar-edit">
+																		<!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+																		<input type='file' name="file_data[]" id="imageIdentify" />
+																		<input type="hidden" name="image_identify_url_new" value=""/>
+																		<input type="hidden" name="image_identify_url_old" value="<!--{realname_info.image_identify_url}-->"/>
+																		<label for="imageIdentify"></label>
+																	</div>
+																	<div class="avatar-preview">
+																		<!--{? !realname_info.image_identify_url }-->
+																		<div id="imagePreview1">
+																			<div class="text-center imageEmpty">
+																				<p>Input identification</p>
+																			</div>
+																		</div>
+																		<!--{:}-->
+																		<div id="imagePreview1" style="background-image: url('<!--{realname_info.image_identify_url}-->')">
+																			<div class="text-center imageEmpty" style="display:none;">
+																				<p>Input identification</p>
+																			</div>
+																		</div>
+																		<!--{/}-->
+																	</div>
+																</div>
+																<div class="colm colm6">
+																	<div class="avatar-edit">
+																		<!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+																		<input type='file' name="file_data[]" id="imageMix" />
+																		<input type="hidden" name="image_mix_url_new" value=""/>
+																		<input type="hidden" name="image_mix_url_old" value="<!--{realname_info.image_mix_url}-->"/>
+																		<label for="imageMix"></label>
+																	</div>
+																	<div class="avatar-preview">
+																		<!--{? !realname_info.image_mix_url }-->
+																		<div id="imagePreview2">
+																			<div class="text-center imageEmpty">
+																				<p>Input person <br/>with identification</p>
+																			</div>
+																		</div>
+																		<!--{:}-->
+																		<div id="imagePreview2" style="background-image: url('<!--{realname_info.image_mix_url}-->')">
+																			<div class="text-center imageEmpty" style="display:none;">
+																				<p>Input person <br/>with identification</p>
+																			</div>
+																		</div>
+																		<!--{/}-->
+																	</div>
+																</div>
+																<div class="form-footer text-center mt-30 pb-0">
+																	<button type="submit" class="button btn-primary">Certificate</button>
+																</div><!-- end .form-footer section -->
+															</div>
+														</form>
+													</div>
+													<div class="tab-pane" id="Clients3xxc" role="tabpanel">
+														<form method="post" name="frmEdit" id="frmEdit" action="/edit" enctype="multipart/form-data">
+															<input type="hidden" name="pg_mode" value="edit" />
+															<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+															<input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+															<div class="frm-row">
+																<div class="spacer-t30 spacer-b30">
+																	<div class="tagline"><span>Certificate bank account</span></div>
+																</div>
+																<div class="colm colm12">
+																	<div class="section">
+																		<label class="field-label">Your bank </label>
+																		<label class="field prepend-icon">
+																			<!--{? realname_info.name }-->
+																			<input type="text" name="name" class="gui-input" value="<!--{realname_info.name}-->" readonly>
+																			<!--{:}-->
+																			<input type="text" name="name" class="gui-input" value="" placeholder="Enter Your name" >
+																			<!--{/}-->
+																			<span class="field-icon"><i class="fa fa-user"></i></span>
+																		</label>
+																	</div><!-- end section -->
+																	<div class="section">
+																		<label class="field-label">Your Account </label>
+																		<label class="field prepend-icon">
+																			<!--{? realname_info.name }-->
+																			<input type="text" name="name" class="gui-input" value="<!--{realname_info.name}-->" readonly>
+																			<!--{:}-->
+																			<input type="text" name="name" class="gui-input" value="" placeholder="Enter Your name" >
+																			<!--{/}-->
+																			<span class="field-icon"><i class="fa fa-user"></i></span>
+																		</label>
+																	</div><!-- end section -->
+																	<div class="section">
+																		<label class="field-label">Your Account Holder </label>
+																		<label class="field prepend-icon">
+																			<!--{? realname_info.name }-->
+																			<input type="text" name="name" class="gui-input" value="<!--{realname_info.name}-->" readonly>
+																			<!--{:}-->
+																			<input type="text" name="name" class="gui-input" value="" placeholder="Enter Your name" >
+																			<!--{/}-->
+																			<span class="field-icon"><i class="fa fa-user"></i></span>
+																		</label>
+																	</div><!-- end section -->
+																	<div class="form-footer text-center mt-30 pb-0">
+																		<button type="submit" class="button btn-primary">Certificate</button>
+																	</div><!-- end .form-footer section -->
+
+																</div><!-- end .colm section -->
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								</form>
+							</div><!-- end .smart-forms section -->
+						</div><!-- end .smart-wrap section -->
+
+						<div></div><!-- end section -->
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

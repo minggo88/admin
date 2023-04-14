@@ -1,0 +1,150 @@
+<div class="sub_title_bg spo_view_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container">
+			<h2 class="section-title body-font text-left fs-24 pt-70 pb-20">
+				<!--{company}--><br />
+			</h2>
+			<h3 class=" pb-20">
+				청약기간 : <!--{spo_startdate}--> ~ <!--{spo_enddate}--><br />
+				공모주수 : <!--{spo_cnt}-->주<br />
+			</h3>
+			<h3>상장예정일 : <!--{spo_date}--></h3>
+		</div>
+	</div>
+</div>
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-50 pr-50 pt-30">
+				   <div class="row">
+
+						<div class="col-sm-12 mb-50 smart-forms">
+							
+							<h3 class="xspecial-heading v2 fs-24 pt-lg"><span>청약 신청 정보</span></h3>
+							<div class="table-responsive">
+								<table class="table table-bordered spoTableView" style="min-width: 540px;border: none;">
+									<colgroup>
+										<col width="20%"></col>
+										<col width="30%"></col>
+										<col width="20%"></col>
+										<col width="30%"></col>
+									</colgroup>
+									<tbody>
+										<tr>
+											<th class="text-left">경쟁률</th>
+											<td class="text-right">0.00%</td>
+											<th class="text-left">청약주수</th>
+											<td class="text-right"><!--{spo_total_apply}--></td>
+										</tr>
+										<tr>
+											<th class="text-left">공모가</th>
+											<td class="text-right"><!--{=number_format(spo_price)}-->원</td>
+											<th class="text-left">액면가</th>
+											<td class="text-right"><!--{=number_format(basic_price)}-->원</td>
+										</tr>
+										<tr>
+											<th class="text-left">공모주수</th>
+											<td class="text-right"><!--{=number_format(spo_cnt)}-->주</td>
+											<th class="text-left">공모금액</th>
+											<td class="text-right"><!--{=number_format(spo_total_apply_price)}-->원</td>
+										</tr>
+										<tr>
+											<th class="text-left">청약증거금률</th>
+											<td class="text-right"><!--{spo_margin_rate}-->%</td>
+											<th class="text-left">최대청약주수</th>
+											<td class="text-right"><!--{=number_format(spo_max_number)}-->주</td>
+										</tr>
+										<tr>
+											<th class="text-left">환불일</th>
+											<td class="text-right"><!--{refund_date}--></td>
+											<th class="text-left">출금일</th>
+											<td class="text-right"><!--{withdrawal_date}--></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<h3 class="fs-22 pt-lg"><span>청약자격</span></h3>
+							<p class="fs-18 box-round-gray">당사 홈페이지에 본인인증 후 계정을 보유한 모든 회원</p>
+
+							<h3 class="fs-22 pt-sm"><span>청약한도</span></h3>
+							<p class="fs-18 box-round-gray">계좌 예수금 잔고(보유상품잔고 제외) 기준 100%</p>
+
+							<h3 class="fs-22 pt-sm"><span>청약수수료</span></h3>
+							<p class="fs-18 box-round-gray">당사 홈페이지에 본인인증 회원 수수료</p>
+
+							<h3 class="fs-22 pt-sm"><span>배정기준</span></h3>
+							<p class="fs-18 box-round-gray">일반청약자 100% 안분 배정 계산</p>
+
+							<a href="#" data-smart-modal="#smart-modal1" class="btn btn-primary btn-md pull-right">청약신청</a>
+							<a href="/spo" class="btn btn-success btn-md pull-left">목록보기</a>
+						</div>
+						
+					</div>
+					
+					<div id="smart-modal1" class="smartforms-modal" role="alert">
+						<div class="smartforms-modal-container">
+							<div class="smartforms-modal-header pl-30">
+								<h3 class="fs-22 text-white"><!--{company}--> 청약 신청</h3>
+								<a href="#" class="smartforms-modal-close">&times;</a>            
+							</div><!-- .smartforms-modal-header -->
+							<div class="smartforms-modal-body">
+								<div class="smart-wrap">
+									<div class="smart-forms smart-container wrap-full">
+										<div class="form-body pt-30">
+											<form method="post" action="" id="smart-form">
+												<div class="frm-row">
+													<div class="section colm colm4">
+														<h3 class="fs-18">공모가</h3>
+													</div><!-- end section -->
+													<div class="section colm colm8">
+														<label class="field prepend-icon">
+															50,000원
+														</label>
+													</div><!-- end section -->
+												</div><!-- end .frm-row section -->
+												<div class="frm-row">
+													<div class="section colm colm4">
+														<h3 class="fs-18 pt-sm">매수수량</h3>
+													</div><!-- end section -->
+													<div class="section colm colm8">
+														<label class="field prepend-icon">
+															<input type="text" name="stock_amount" id="stock_amount" class="gui-input" placeholder="매수수량">
+														</label>
+													</div><!-- end section -->
+												</div><!-- end .frm-row section -->
+												<div class="frm-row">
+													<div class="section colm colm4">
+														<h3 class="fs-18 pt-sm">납입증거금</h3>
+													</div><!-- end section -->
+													<div class="section colm colm8">
+														<label class="field prepend-icon">
+															<input type="text" name="payment_margin" id="payment_margin" class="gui-input" placeholder="납입증거금">
+														</label>
+													</div><!-- end section -->
+												</div><!-- end .frm-row section -->    
+												<div class="smartforms-modal-footer pt-md">
+													<button type="submit" class="button btn-primary"> 청약신청 </button>
+													<button type="button" data-smartmodal-close="#smart-modal1" class="button"> 취소 </button>
+												</div><!-- end .form-footer section -->                                                          
+											</form>                                                                                   
+										</div><!-- end .form-body section -->
+									</div><!-- end .smart-forms section -->
+								</div><!-- end .smart-wrap section -->            
+							</div><!-- .smartforms-modal-body -->
+						</div><!-- .smartforms-modal-container -->
+					</div><!-- .smartforms-modal 1 -->
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

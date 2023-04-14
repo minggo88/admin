@@ -1,0 +1,122 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# home
+RewriteRule ^home /index.php [L,QSA]
+
+#lang
+RewriteRule ^kr /lang.php?lang=kr
+RewriteRule ^en /lang.php?lang=en
+RewriteRule ^cn /lang.php?lang=cn
+
+# Systemcheck
+RewriteRule ^systemcheck/(.*)$ /checkserver/?pg_mode=$1 [L,QSA]
+RewriteRule ^systemcheck /checkserver/?pg_mode=systemcheck [L,QSA]
+
+# Trade
+RewriteRule ^chart_m/(.*)$ /template/m/chart_m.html
+RewriteRule ^trade/(.*)/(.*)$ /trading/index.php?pg_mode=$1&coin=$2 [L,QSA]
+RewriteRule ^trade/(.*)$ /trading/index.php?pg_mode=$1 [L,QSA]
+
+# SPO
+RewriteRule ^spo/(.*)/(.*)$ /kspo/spo.php?pg_mode=$1&idx=$2 [L,QSA]
+RewriteRule ^spo/(.*)$ /kspo/spo.php?pg_mode=$1 [L,QSA]
+RewriteRule ^(spo) /kspo/spo.php [L,QSA]
+
+# NFT
+RewriteRule ^nft/(.*)/(.*)$ /knft/nft.php?pg_mode=$1&idx=$2 [L,QSA]
+RewriteRule ^nft/(.*)$ /knft/nft.php?pg_mode=$1 [L,QSA]
+RewriteRule ^(nft) /knft/nft.php [L,QSA]
+
+# Notice
+RewriteRule ^notice/list/(.*)$ /bbs/bbs.php?bbscode=PY395&pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^notice/view/(.*)$ /bbs/bbs.php?bbscode=PY395&pg_mode=view&idx=$1 [L,QSA]
+RewriteRule ^(notice) /bbs/bbs.php?bbscode=PY395 [L,QSA]
+
+# News
+RewriteRule ^mbnews/list/(.*)$ /bbs/bbs.php?bbscode=NW620&pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^mbnews/view/(.*)$ /bbs/bbs.php?bbscode=NW620&pg_mode=view&idx=$1 [L,QSA]
+RewriteRule ^(mbnews) /bbs/bbs.php?bbscode=NW620 [L,QSA]
+
+#FAQ
+RewriteRule ^faq/list/(.*)$ /cscenter/faq.php?pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^(faq) /cscenter/faq.php [L,QSA]
+
+# CoinNews
+RewriteRule ^coinnews/list/(.*)$ /bbs/bbs.php?bbscode=CN719&pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^coinnews/view/(.*)$ /bbs/bbs.php?bbscode=CN719&pg_mode=view&idx=$1 [L,QSA]
+RewriteRule ^(coinnews) /bbs/bbs.php?bbscode=CN719 [L,QSA]
+
+# Gallery
+RewriteRule ^gallery/list/(.*)$ /bbs/bbs.php?bbscode=PT038&pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^gallery/view/(.*)$ /bbs/bbs.php?bbscode=PT038&pg_mode=view&idx=$1 [L,QSA]
+RewriteRule ^(gallery) /bbs/bbs.php?bbscode=PT038 [L,QSA]
+
+# Press
+RewriteRule ^press/list/(.*)$ /bbs/bbs.php?bbscode=SV626&pg_mode=list&start=$1 [L,QSA]
+RewriteRule ^press/view/(.*)$ /bbs/bbs.php?bbscode=SV626&pg_mode=view&idx=$1 [L,QSA]
+RewriteRule ^(press) /bbs/bbs.php?bbscode=SV626 [L,QSA]
+
+#myhistory
+RewriteRule ^histories/list/(.*)$ /account/myinfo.php?page=$1 [L,QSA]
+RewriteRule ^(histories) /account/myinfo.php [L,QSA]
+
+#check realname
+RewriteRule ^(check_realname) /member/memberEdit.php [L,QSA]
+
+#Auth
+RewriteRule ^(auth) /member/memberAuth.php [L,QSA]
+
+#member
+RewriteRule ^login/(.*)$ /member/memberAuth.php?ret_url=$1 [L,QSA]
+RewriteRule ^(login) /member/memberAuth.php [L,QSA]
+RewriteRule ^(logout) /member/memberAuth.php?pg_mode=out [L,QSA]
+RewriteRule ^(join) /member/memberJoin.php [L,QSA]
+RewriteRule ^(formjoin) /member/memberJoin.php?pg_mode=form_join [L,QSA]
+RewriteRule ^(findinfo) /member/memberInfoFind.php [L,QSA]
+RewriteRule ^(withdraw) /member/memberWithdraw.php [L,QSA]
+
+RewriteRule ^(form_email) /member/memberJoin.php?pg_mode=join_email [L,QSA]
+RewriteRule ^(form_ok) /member/memberJoin.php?pg_mode=join_ok [L,QSA]
+
+# edit_pin
+RewriteRule ^(certification) /member/memberEdit.php?pg_mode=certification [L,QSA]
+RewriteRule ^(editpin) /member/memberEdit.php?pg_mode=edit_pin [L,QSA]
+RewriteRule ^(edit) /member/memberEdit.php [L,QSA]
+
+# mtom
+RewriteRule ^mtom/(.*)/(.*)$ /mypage/mtom.php?pg_mode=$1&idx=$2 [L,QSA]
+RewriteRule ^mtom/(.*)$ /mypage/mtom.php?pg_mode=$1 [L,QSA]
+RewriteRule ^(mtom) /mypage/mtom.php [L,QSA]
+
+#etc
+# RewriteRule ^(agreement) /cscenter/?code=agreement [L,QSA]
+RewriteRule ^(policy) /cscenter/?code=private [L,QSA]
+# RewriteRule ^(refusal) /cscenter/?code=refusal [L,QSA]
+# RewriteRule ^(sitemap) /cscenter/?code=sitemap [L,QSA]
+
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9]+)$
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 seconds"
+  ExpiresByType text/html "access plus 1 seconds"
+  ExpiresByType image/gif "access plus 120 minutes"
+  ExpiresByType image/jpeg "access plus 120 minutes"
+  ExpiresByType image/png "access plus 120 minutes"
+  ExpiresByType text/css "access plus 60 minutes"
+  ExpiresByType text/javascript "access plus 60 minutes"
+  ExpiresByType application/x-javascript "access plus 60 minutes"
+  ExpiresByType text/xml "access plus 60 minutes"
+</IfModule>
+
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+php_value short_open_tag 1
+php_value error_reporting E_ALL^E_NOTICE
+#AddType application/x-httpd-php .html .htm
+#AddHandler application/x-httpd-php .html

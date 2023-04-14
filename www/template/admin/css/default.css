@@ -1,0 +1,190 @@
+@charset "utf-8";
+/**
+ * UTF-8 :한글
+ */
+/*  basic */
+/*
+@font-face {
+    font-family: "NanumGothic";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://smcc.io/template/css/NanumGothic.eot") format("embedded-opentype"), url("http://smcc.io/template/css/NanumGothic.woff") format("woff"), url("http://smcc.io/template/css/NanumGothic.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumGothicBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://smcc.io/template/css/NanumGothicBold.eot") format("embedded-opentype"), url("http://smcc.io/template/css/NanumGothicBold.woff") format("woff"), url("http://smcc.io/template/css/NanumGothicBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumGothicExtraBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://smcc.io/template/css/NanumGothicExtraBold.eot") format("embedded-opentype"), url("http://smcc.io/template/css/NanumGothicExtraBold.woff") format("woff"), url("http://smcc.io/template/css/NanumGothicExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumGothicLight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://smcc.io/template/css/NanumGothicLight.eot") format("embedded-opentype"), url("http://smcc.io/template/css/NanumGothicLight.woff") format("woff"), url("http://smcc.io/template/css/NanumGothicLight.ttf") format("truetype");
+}
+*/
+* { 
+font-family:'나눔고딕','맑은 고딕',sans-serif;
+margin : 0; 
+padding : 0; 
+}
+
+html, body {color:#555;font-size:13px;padding:0;margin:0 0 0 0;} 
+
+h1, h2, h3, h4, div, ul, ol, li, dl, dt, li, form, select, td,input,textarea {list-style:none;margin:0;padding:0;} 
+h1{font-size:15px;}
+h2{font-size:14px;}
+h3{font-size:13px;}
+
+li{list-style:none;}
+a:link{color:#777777;text-decoration:none;}
+a:hover{color:#444444;text-decoration:none;}
+a:visited{color:#444444;text-decoration:none;}
+em,address{font-style:normal;}
+button {cursor:pointer;}
+button * {position:relative;}
+button img{left:-3px;left:auto;}
+textarea{overflow:auto;}
+html:first-child select{height:20px;padding-right:6px;}
+
+label {border-radius:3px 3px 3px 3px;padding:3px 3px 3px 3px;cursor:pointer;}
+label:hover {border-radius:3px 3px 3px 3px;color:#fff;background:#00528c;padding:3px 3px 3px 3px;cursor:pointer;}
+
+/* blind */
+caption,legend, .blind {position:absolute; width:0; height:0; overflow:hidden; font-size:0; line-height:0; visibility:hidden; z-index:-1;}
+
+.clearline {height:0px;clear:both;}
+
+dl dt {margin:0;padding:0;font-family:'나눔고딕','맑은 고딕',sans-serif;}
+dl dd {margin:0;padding:0;font-family:'나눔고딕','맑은 고딕',sans-serif;}
+table tr td {margin:0;padding:0;font-family:'나눔고딕','맑은 고딕',sans-serif;}
+
+
+img, fieldset, div .menu, .pngfix, input { border:0px solid #c5c5c5;vertical-align:middle;margin:0px 3px 0px 0px;}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:link,a:visited,a:hover,a:active,a:focus{color : #323232; text-decoration : none;}
+
+dl dt {margin:0;padding:0;text-align:left;font-weight:bold;}
+table tr th {margin:0;padding:0;text-align:left;font-weight:bold;}
+
+/* UI Object */
+.paginate{padding:15px 0;line-height:normal;text-align:center;clear:both;}
+.paginate a,
+.paginate strong{display:inline-block;position:relative;z-index:2;margin:0 -3px;padding:1px 8px;border-left:1px solid #d6d6d6;border-right:1px solid #d6d6d6;background-color:#fff;color:#323232;text-decoration:none;vertical-align:top}
+.paginate a:hover,
+.paginate a:active,
+.paginate a:focus{background-color:#f8f8f8}
+.paginate strong{color:#ff8600}
+.paginate .direction{border:0;font-weight:normal;color:#767676;text-decoration:none !important;z-index:1}
+.paginate .direction:hover,
+.paginate .direction:active,
+.paginate .direction:focus{color:#323232;background-color:#fff}
+.paginate .prev{border-left:0}
+.paginate .next{border-right:0}
+.paginate .direction span{display:inline-block;position:relative;top:4px;width:0;height:0;font-size:0;line-height:0;vertical-align:top}
+.paginate .prev span{*left:-4px;margin-right:1px;border:3px solid;border-top:solid#fff;border-bottom:solid#fff;border-left:0}
+.paginate .next span{margin-left:1px;border:3px solid;border-top:solid#fff;border-bottom:solid#fff;border-right:0}
+/* //UI Object */
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0px 0;
+    border-radius: 4px;
+}
+
+.pagination>li {
+    display: inline;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.clear{clear:both;}
+
+.rline{border-right:1px solid #ccc;}
+.lline{border-left:1px solid #ccc;}
+
+.ctext{text-align:center;min-height:40px;}
+/*
+.hide{display:none;}
+*/
+
+/* 정렬정의 */
+.pcenter {text-align:center;}
+.pleft {text-align:left;}
+.pright {text-align:right;}
+
+/* 여백 및 줄바꾸기 정의 */
+.clear_box {height:10px; margin:0; padding:0; clear:both;}
+.clear_line {width:auto; height:0px; margin:0; padding:0; clear:both;}
+
+.button_area {width:auto;margin:10px auto; padding:5px 0px 5px 0px; text-align:center;}
+.button_area_left {width:auto;margin:0 auto; padding:5px 0px 5px 0px; text-align:left;}
+.button_area_right {width:auto;margin:0 auto; padding:5px 0px 5px 0px; text-align:right;}
+.button_area_both {overflow:hidden;clear:both;width:100%; padding:5px 0px 5px 0px;}
+.button_area_both .button_left {float:left;}
+.button_area_both .button_right {float:right;}
+
+.area {margin:0; padding:0px; text-align:center;}
+.area_left {margin:0; padding:0px; text-align:left;}
+.area_right {margin:0; padding:0px; text-align:right;}
+.area_both {overflow:hidden;clear:both; margin:0; padding:0px;}
+.area_child_left,
+.area_child_center {float:left; margin:0; padding:0px;}
+.area_child_right {float:right; margin:0; padding:0px;}
+
+.area_child_top,
+.area_child_bottom {clear:both;padding:0px;margin:0px;}
+
+/* 기타 영역 */
+.area_remark {width:auto; margin:5px 0;padding:5px; border:1px solid #ccc;}
+.search_area {width:auto; margin:0; padding:10px 0px;}
+
+/* 폼에 관련된 스타일 정의 */
+.frm_input {height:20px; border:1px #d6d6d6 solid; font-size:13px;}
+.frm_textarea {border:1px #bbb solid; line-height:18px; font-size:13px; margin:3px auto 3px auto;}
+.frm_select {border:1px #bbb solid; line-height:18px; font-size:13px;}
+
+/* 폼에 숫자입력 뒤쪽 */
+.frm_sn40r {width:40px;text-align:right;color:#116bb5;padding-right:3px;}
+.frm_sn50r {width:50px;text-align:right;color:#116bb5;padding-right:3px;}
+.frm_sn70r {width:70px;text-align:right;color:#116bb5;padding-right:3px;}
+
+/* UI Object */
+.star_rating,
+.star_rating span{display:inline-block;overflow:hidden;height:14px;text-align:left; background:transparent url(/template/user/images/ico_star.gif) no-repeat}
+.star_rating{width:79px;vertical-align:middle}
+.star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
+/* //UI Object */
+
+/*** 스크롤 ***/
+.scroll	{scrollbar-face-color:#FFFFFF; scrollbar-shadow-color:#909090; scrollbar-highlight-color:#909090; scrollbar-3dlight-color:#FFFFFF; scrollbar-darkshadow-color:#FFFFFF; scrollbar-track-color:#f5f5f5; scrollbar-arrow-color:#aaa;}

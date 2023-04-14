@@ -1,0 +1,67 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#goods_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function addCategoryGoods(category_code,kind_item) {
+	location.href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_select&category_code="+category_code+"&kind_item="+kind_item;
+}
+
+//-->
+</script>
+<div class="title_d1"><h1>분류페이지진열</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">분류페이지 진열상품 관리</div>
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="50"></col>
+		<col width="*"></col>
+		<col width="150"></col>
+		<col width="150"></col>
+		<col width="150"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th class="pcenter">순번</th>
+		<th class="pcenter">카테고리명</th>
+		<th class="pcenter">신상품</th>
+		<th class="pcenter">인기상품</th>
+		<th class="pcenter">추천상품</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_category_goods}-->
+	<tr>
+		<td class="pcenter"><!--{.index_+1}--></td>
+		<td><!--{.category_name}--></td>
+		<td>
+			<ul>
+				<li class="underline dotted pcenter">등록상품수: <!--{.cnt_new}--></li>
+				<li class="underline none pcenter"><span class="button small black"><input type="button" value="신상품등록" onclick="addCategoryGoods('<!--{.category_code}-->','new')" /></span></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li class="underline dotted pcenter">등록상품수: <!--{.cnt_hit}--></li>
+				<li class="underline none pcenter"><span class="button small black"><input type="button" value="인기상품등록" onclick="addCategoryGoods('<!--{.category_code}-->','hit')" /></span></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li class="underline dotted pcenter">등록상품수: <!--{.cnt_recom}--></li>
+				<li class="underline none pcenter"><span class="button small black"><input type="button" value="추천상품등록" onclick="addCategoryGoods('<!--{.category_code}-->','recom')" /></span></li>
+			</ul>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="5">등록된 항목이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area">
+</div>

@@ -1,0 +1,45 @@
+<!-- 1: style.basic.html -->
+<ul>
+		<!--{@ loop_bbs_recent}-->
+		<li>
+			<!--{? .bbscode=='PY395'}-->
+				
+				<!--{? .bool_secret}-->
+				<a href="/notice/"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{:}-->
+				<a href="/notice/view/<!--{.idx}-->"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{/}-->
+				
+			<!--{: .bbscode=='NW620'}-->
+	
+				
+				<!--{? .bool_secret}-->
+				<a href="/mbnews/"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{:}-->
+				<a href="/mbnews/view/<!--{.idx}-->"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{/}-->
+	
+			<!--{: .bbscode=='CN719'}-->
+	
+				<!--{? .bool_secret}-->
+				<a href="/coinnews/"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{:}-->
+				<a href="/coinnews/view/<!--{.idx}-->"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+				<!--{/}-->
+	
+			<!--{/}-->
+				
+			<span><!--{=date('m.d',.regdate)}--></span>
+		</li>
+		<!--{:}-->
+		<li>
+			<!--{? _SESSION.lang == 'kr'}-->
+			등록된 글이 없습니다.
+			<!--{: _SESSION.lang == 'en'}-->
+			There is no article.
+			<!--{: _SESSION.lang == 'cn'}-->
+			沒有文章.
+			<!--{/}-->
+		</li>
+		<!--{/}-->
+	</ul>

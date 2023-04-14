@@ -1,0 +1,83 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+
+<!--{? info_bbs.bool_editor}-->
+var myeditor = new cheditor("myeditor");
+<!--{/}-->
+$(function() {
+	$('#jsform').submit(function() {
+		<!--{? info_bbs.bool_editor}-->
+		myeditor.outputBodyHTML();
+		<!--{/}-->
+		var chk_option = [
+			{ 'target':'author', 'name':__('bbs11'), 'type':'blank', 'msg':__('bbs10') },
+			{ 'target':'passwd', 'name':__('bbs12'), 'type':'blank', 'msg':__('member13') },
+			{ 'target':'subject', 'name':__('bb213'), 'type':'blank', 'msg':__('bbs4') }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		
+		if(!confirm(__('bbs5'))) {
+			return false;
+		}
+
+		<!--{? !config_basic.bool_ssl}-->
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert(__('basic9'));
+					}
+					else {
+						alert(__('basic10'));
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+		<!--{:}-->
+		this.ret_url.value = base64_encode('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->');
+		<!--{/}-->
+	});
+});
+
+//쓰기 취소
+$(function  () {
+	$('#btn_cancel').click(function() {
+		history.go(-1);
+	});
+});
+
+//-->
+</script>
+
+<!--{? info_bbs.bool_header > 0 && !empty(info_bbs.header)}-->
+<div id="bbs_header">
+<!--{info_bbs.header}-->
+</div>
+<!--{/}-->
+<div id="bbs_content_form">
+<!--{# js_tpl_main_sub}-->
+</div>
+
+<!--{? info_bbs.bool_footer}-->
+<div id="bbs_footer"><!--{info_bbs.footer}--></div>
+<!--{/}-->
+
+<!--{? info_bbs.bool_editor}-->
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'contents';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>
+<!--{/}-->

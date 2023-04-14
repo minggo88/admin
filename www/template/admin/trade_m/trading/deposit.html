@@ -1,0 +1,164 @@
+<div class="row wrapper border-bottom white-bg page-heading hidden">
+    <div class="col-lg-10">
+        <h2><?=Lang::main_13;?></h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            <li>
+                <a href="/trade/deposit">Wallet</a>
+            </li>
+            <li class="active">
+                <strong><?=Lang::main_13;?></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight wrap-withdrawal">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h3><?=Lang::main_13;?></h3>
+                    <div class="ibox-tools hidden">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div id="deposit"></div>
+                <!--<div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group m-b">
+                                <div class="input-group-btn">
+                                    <button tabindex="-1" class="btn btn-white" type="button">
+                                        <div class="coin-name">
+                                            <h4 class="">
+                                                <span class="icon-24 icon-24-scc"></span>
+                                                <span class="name-con m-l-xs">Smart crypto currency </span>
+                                            </h4>
+                                        </div>
+                                    </button>
+                                    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">
+                                            <div class="coin-name">
+                                                <h4 class="">
+                                                    <span class="icon-24 icon-24-scc"></span>
+                                                    <span class="name-con m-l-xs">Smart crypto currency </span>
+                                                </h4>
+                                            </div>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <div class="coin-name">
+                                                <h4 class="">
+                                                    <span class="icon-24 icon-24-btc"></span>
+                                                    <span class="name-con m-l-xs">bitcoind</span>
+                                                </h4>
+                                            </div>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <div class="coin-name">
+                                                <h4 class="">
+                                                    <span class="icon-24 icon-24-eth"></span>
+                                                    <span class="name-con m-l-xs">Ethereum</span>
+                                                </h4>
+                                            </div>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <div class="coin-name">
+                                                <h4 class="">
+                                                    <span class="icon-24 icon-24-ltc"></span>
+                                                    <span class="name-con m-l-xs">Litecoin</span>
+                                                </h4>
+                                            </div>
+                                        </a></li>
+                                        &lt;!&ndash; <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li> &ndash;&gt;
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="payment-card m-b scc-payment-card">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3 class="text-black m-t-none">예금안내</h3>
+                                        <ul class="m-b">
+                                            <li><span class="text-green">(Bitcoin)</span> 을 판매하기 위해서는 먼저 회원님의 지갑(Wallet)에 판매할 <span class="text-green">(Bitcoin)</span>을 직접 입금 하시거나 다른 회원으로 부터 <span class="text-green">(Bitcoin)</span>을 구매해야 합니다.</li>
+                                            <li>회원님께 할당된 <span class="text-green">(Bitcoin)</span> 주소로 <span class="text-green">(Bitcoin)</span>을 전송하시면 자동으로 지갑에 반영됩니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul class="list-group scc-list-group m-b-none">
+                                        <li class="list-group-item">
+                                            <h4>Address</h4>
+                                            <div class="input-group">
+                                                <div class="text-muted">(Bitcoin)주소를 생성해주세요</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>Address</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control text-muted" disabled value="1PoW5WEaaCY3ykDTf7wtitQoeaPmVd8LXm">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>BTC Account</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control text-muted append-uint" disabled value="10">
+                                                <span class="text-primary">scc</span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>QR Cord</h4>
+                                            <div class="input-group">
+                                                <div class="qr-code text-right"><img src="/template/trade/img/qrcode.png" alt=""></div>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-12 text-center">
+                                    <button type="button" class="btn btn-primary btn-block btn-xl">Create BTC Address</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div id="main_contents"></div> -->
+
+<!-- 
+<!--{_GET.pg_mode}-->
+<br />
+<!--{_GET.coin}-->
+-->

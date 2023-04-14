@@ -1,0 +1,75 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('.btn_comment_del').click(function() {
+		if(!confirm('삭제하시겠습니까?')) {
+			return false;
+		}
+		var arr = explode('_',$(this).attr('id'));
+		$.get('/bbs/admin/commentAdmin.php?pg_mode=del&bbscode=<!--{_GET.bbscode}-->&idx='+arr[2],function(data) {
+			if(data['bool']) {
+				location.replace('<!--{_SERVER.REQUEST_URI}-->');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},'json');
+	});
+});
+
+$(function() {
+	$('.btn_comment_reply').click(function() {
+		$('.comment_reply_form').empty();
+		var arr = explode('_',$(this).attr('id'));
+		$('#comment_reply_form_'+arr[2]).load('/bbs/admin/commentAdmin.php?pg_mode=form_reply&bbscode=<!--{_GET.bbscode}-->&link_idx=<!--{_GET.idx}-->&idx='+arr[2]+'&ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+	});
+});
+
+$(function() {
+	$('.btn_comment_edit').click(function() {
+		var arr = explode('_',$(this).attr('id'));
+		$('#comment_list_'+arr[2]).load('/bbs/admin/commentAdmin.php?pg_mode=form_edit&idx='+arr[2]+'&ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+	});
+});
+
+//-->
+</script>
+
+<div id="loop_comment">
+<!--{@ loop_comment}-->
+<div id="comment_list_<!--{.idx}-->">
+	<!--{? .depth > 1}-->
+	<table class="comment_reply_table">
+	<!--{:}-->
+	<table class="comment_table">
+	<!--{/}-->
+		<colgroup>
+			<col width="50%"></col>
+			<col width="50%"></col>
+		</colgroup>
+		<tr class="comment_info_row">
+			<td><!--{.author}--><!--{.depth}--></td>
+			<td class="pright">
+				<span class="button small"><button class="btn_comment_edit" id="comment_edit_<!--{.idx}-->">수정</button></span>
+				<!--{? .depth == 1}-->
+				<span class="button small"><button class="btn_comment_reply" id="comment_reply_<!--{.idx}-->">답글</button></span>
+				<!--{/}-->
+				<span class="button small"><button class="btn_comment_del" id="comment_del_<!--{.idx}-->">삭제</button></span>
+			</td>
+		</tr>
+		<tr class="comment_contents_row">
+			<td colspan="2"><div id="comment_contents<!--{.idx}-->"><!--{.contents}--></div></td>
+		</tr>
+	</table>
+</div>
+<div id="comment_reply_form_<!--{.idx}-->" class="comment_reply_form"></div>
+<!--{/}-->
+</div>

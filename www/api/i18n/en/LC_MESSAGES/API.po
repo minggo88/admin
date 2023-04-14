@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-05 11:17+0900\n"
+"PO-Revision-Date: 2019-08-05 11:19+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/SimpleRestful.php:207 ../lib/SimpleRestful.php:255
+#: ../lib/SimpleRestful.php:260 ../lib/SimpleRestful.php:258
+#: ../lib/SimpleRestful.php:263 ../lib/SimpleRestful.php:276
+msgid "Failed to create folders. path: {dir}"
+msgstr ""
+
+#: lib/SimpleRestful.php:211 ../lib/SimpleRestful.php:259
+#: ../lib/SimpleRestful.php:264 ../lib/SimpleRestful.php:262
+#: ../lib/SimpleRestful.php:267 ../lib/SimpleRestful.php:280
+msgid ""
+"The folder does not have write permission. Please specify write permission. "
+"path: {dir}"
+msgstr ""
+
+#: lib/SimpleRestful.php:307 ../lib/SimpleRestful.php:355 ../lib/test.php:36
+#: ../lib/SimpleRestful.php:360 ../lib/SimpleRestful.php:358
+#: ../lib/SimpleRestful.php:363 ../lib/SimpleRestful.php:376
+msgid "Mysql Connection Error: Failed connecting to database server"
+msgstr ""
+
+#: lib/SimpleRestful.php:369 ../lib/SimpleRestful.php:417
+#: ../lib/SimpleRestful.php:422 ../lib/SimpleRestful.php:420
+#: ../lib/SimpleRestful.php:425 ../lib/SimpleRestful.php:438
+msgid "Mysql Query Error: Failed executing database query"
+msgstr ""
+
+#: lib/SimpleRestful.php:1064 ../lib/SimpleRestful.php:1112 ../lib/test.php:39
+#: ../lib/SimpleRestful.php:1117 ../lib/SimpleRestful.php:1122
+#: ../lib/SimpleRestful.php:1129 ../lib/SimpleRestful.php:1142
+#: ../lib/SimpleRestful.php:1169 ../lib/SimpleRestful.php:1182
+msgid "Please fill in {name}."
+msgstr ""
+
+#: lib/SimpleRestful.php:1072 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1125 ../lib/SimpleRestful.php:1130
+#: ../lib/SimpleRestful.php:1137 ../lib/SimpleRestful.php:1150
+#: ../lib/SimpleRestful.php:1177 ../lib/SimpleRestful.php:1190
+msgid "Please enter a number greater than zero."
+msgstr ""
+
+#: lib/SimpleRestful.php:1080 lib/TradeApi.php:514 lib/TradeApi.php:538
+#: ../lib/SimpleRestful.php:1128 ../lib/TradeApi.php:514
+#: ../lib/TradeApi.php:538 ../lib/SimpleRestful.php:1133
+#: ../lib/SimpleRestful.php:1138 ../lib/TradeApi.php:513
+#: ../lib/SimpleRestful.php:1145 ../lib/TradeApi.php:515
+#: ../lib/TradeApi.php:540 ../lib/SimpleRestful.php:1158
+#: ../lib/SimpleRestful.php:1185 ../lib/TradeApi.php:519
+#: ../lib/TradeApi.php:544 ../lib/SimpleRestful.php:1198
+#: ../lib/TradeApi.php:631 ../lib/TradeApi.php:656
+msgid "Please enter the number."
+msgstr ""
+
+#: lib/TradeApi.php:161 ../lib/TradeApi.php:161 ../lib/TradeApi.php:163
+#: ../lib/TradeApi.php:213 ../lib/TradeApi.php:221
+msgid "Please login."
+msgstr ""
+
+#: lib/TradeApi.php:217 lib/TradeApi.php:227 lib/TradeApi.php:237
+#: lib/TradeApi.php:247 lib/TradeApi.php:258 lib/TradeApi.php:269
+#: lib/TradeApi.php:327 lib/TradeApi.php:337 ../lib/TradeApi.php:217
+#: ../lib/TradeApi.php:227 ../lib/TradeApi.php:237 ../lib/TradeApi.php:247
+#: ../lib/TradeApi.php:258 ../lib/TradeApi.php:269 ../lib/TradeApi.php:327
+#: ../lib/TradeApi.php:337 ../lib/TradeApi.php:219 ../lib/TradeApi.php:229
+#: ../lib/TradeApi.php:239 ../lib/TradeApi.php:249 ../lib/TradeApi.php:260
+#: ../lib/TradeApi.php:271 ../lib/TradeApi.php:329 ../lib/TradeApi.php:339
+#: ../lib/TradeApi.php:283 ../lib/TradeApi.php:293 ../lib/TradeApi.php:303
+#: ../lib/TradeApi.php:313 ../lib/TradeApi.php:324 ../lib/TradeApi.php:335
+#: ../lib/TradeApi.php:393 ../lib/TradeApi.php:403
+msgid "Failed to connect to coin server. details: "
+msgstr ""
+
+#: lib/TradeApi.php:1909 ../lib/TradeApi.php:1909 ../lib/TradeApi.php:1911
+#: ../lib/TradeApi.php:1921 ../lib/TradeApi.php:1957 ../lib/TradeApi.php:2111
+msgid "Please enter the correct return type."
+msgstr ""
+
+#: lib/TradeApi.php:1916 lib/TradeApi.php:1951 ../lib/TradeApi.php:1916
+#: ../lib/TradeApi.php:1951 ../lib/TradeApi.php:1918 ../lib/TradeApi.php:1953
+#: ../lib/TradeApi.php:1928 ../lib/TradeApi.php:1963 ../lib/TradeApi.php:1964
+#: ../lib/TradeApi.php:1999 ../lib/TradeApi.php:2118 ../lib/TradeApi.php:2153
+msgid "Please enter the correct symbol."
+msgstr ""
+
+#: lib/TradeApi.php:1925 ../lib/TradeApi.php:1925 ../lib/TradeApi.php:1927
+#: ../lib/TradeApi.php:1937 ../lib/TradeApi.php:1973 ../lib/TradeApi.php:2127
+msgid "Please enter the correct action value."
+msgstr ""
+
+#: lib/TradeApi.php:1931 ../lib/TradeApi.php:1931 ../lib/TradeApi.php:1933
+#: ../lib/TradeApi.php:1943 ../lib/TradeApi.php:1979 ../lib/TradeApi.php:2133
+msgid "You can only view your personal information."
+msgstr ""
+
+#: lib/TradeApi.php:1942 ../lib/TradeApi.php:1942 ../lib/TradeApi.php:1944
+#: ../lib/TradeApi.php:1954 ../lib/TradeApi.php:1990 ../lib/TradeApi.php:2144
+msgid "Please enter the correct UUID."
+msgstr ""
+
+#: lib/TradeApi.php:1960 ../lib/TradeApi.php:1960 ../lib/TradeApi.php:1962
+#: ../lib/TradeApi.php:1972 ../lib/TradeApi.php:2008 ../lib/TradeApi.php:2162
+msgid "Please enter the correct date."
+msgstr ""
+
+#: lib/TradeApi.php:1970 ../lib/TradeApi.php:1970 ../lib/TradeApi.php:1972
+#: ../lib/TradeApi.php:1982 ../lib/TradeApi.php:2017 ../lib/TradeApi.php:2171
+msgid "Please enter the price according to the quotation unit({quote_unite})."
+msgstr ""
+
+#: v1.0/buy/index.php:65 ../v1.0/buy/index.php:65 ../v1.0/buy/index.php:66
+#: ../v1.0/buy/index.php:68 ../v1.0/buy/index_bms.php:71
+#: ../v1.0/buy/index.php:72 ../v1.0/buy/index_static_price.php:68
+msgid "There is not enough balance to buy."
+msgstr ""
+
+#: v1.0/buy/index.php:183 v1.0/cancel/index.php:56
+#: v1.0/checkReceive/index.php:109 v1.0/deposit/index.php:37
+#: v1.0/putFCM/index.php:32 v1.0/sell/index.php:170 ../v1.0/buy/index.php:183
+#: ../v1.0/cancel/index.php:56 ../v1.0/checkReceive/index.php:109
+#: ../v1.0/deposit/index.php:37 ../v1.0/putFCM/index.php:32
+#: ../v1.0/sell/index.php:170 ../v1.0/buy/index.php:184
+#: ../v1.0/checkReceive/index.php:117 ../v1.0/sell/index.php:171
+#: ../v1.0/buy/index.php:194 ../v1.0/buy/index_bms.php:234
+#: ../v1.0/sell/index.php:180 ../v1.0/sell/index_bms.php:216
+#: ../v1.0/buy/index.php:235 ../v1.0/buy/index_static_price.php:194
+#: ../v1.0/deposit/index.php:42 ../v1.0/sell/index.php:217
+#: ../v1.0/sell/index_static_price.php:180
+msgid "A system error has occurred."
+msgstr ""
+
+#: v1.0/cancel/index.php:23 ../v1.0/cancel/index.php:23
+msgid "You can only process your own orders."
+msgstr ""
+
+#: v1.0/cancel/index.php:28 ../v1.0/cancel/index.php:28
+msgid "You can not cancel because already completed an order."
+msgstr ""
+
+#: v1.0/createNewAddress/index.php:30 ../v1.0/createNewAddress/index.php:30
+msgid "Failed to create new address. "
+msgstr ""
+
+#: v1.0/getTransactionList/index.php:23 ../v1.0/getTransactionList/index.php:23
+msgid "Wallet address is missing. Please create an address."
+msgstr ""
+
+#: v1.0/getTransactionList/index.php:26 ../v1.0/getTransactionList/index.php:26
+msgid "Please enter the correct address."
+msgstr ""
+
+#: v1.0/getVersion/index.php:20 ../v1.0/getVersion/index.php:20
+msgid "There is no version information."
+msgstr ""
+
+#: v1.0/join/index.php:24 v1.0/join/index.php:29 v1.0/login/index.php:24
+#: v1.0/login/index.php:29 ../v1.0/join/index.php:24 ../v1.0/join/index.php:29
+#: ../v1.0/login/index.php:24 ../v1.0/login/index.php:29
+#: ../v1.0/login/index.php:28 ../v1.0/login/index.php:33
+#: ../v1.0/login/index.php:27 ../v1.0/login/index.php:32
+#: ../v1.0/loginAdmin/index.php:23
+msgid "The information does not match. Please check your ID!"
+msgstr ""
+
+#: v1.0/join/index.php:34 v1.0/login/index.php:34 ../v1.0/join/index.php:34
+#: ../v1.0/login/index.php:34 ../v1.0/login/index.php:38
+#: ../v1.0/login/index.php:37
+msgid "You did not verify your email. Please check your email verification!"
+msgstr ""
+
+#: v1.0/join/index.php:46 v1.0/login/index.php:46 ../v1.0/join/index.php:46
+#: ../v1.0/login/index.php:46 ../v1.0/login/index.php:50
+#: ../v1.0/login/index.php:49
+msgid "Login failed."
+msgstr ""
+
+#: v1.0/putFCM/index.php:22 ../v1.0/putFCM/index.php:22
+msgid "The UUID that is already registered."
+msgstr ""
+
+#: v1.0/sell/index.php:52 ../v1.0/sell/index.php:52 ../v1.0/sell/index.php:53
+#: ../v1.0/sell/index.php:55 ../v1.0/sell/index_bms.php:58
+#: ../v1.0/sell/index.php:59 ../v1.0/sell/index_static_price.php:55
+msgid "There is not enough balance to sell."
+msgstr ""
+
+#: v1.0/withdraw/index.php:23 ../v1.0/withdraw/index.php:23
+msgid "Please enter a value larger than the minimum withdrawal amount."
+msgstr ""
+
+#: v1.0/withdraw/index.php:29 ../v1.0/withdraw/index.php:29
+msgid "Please enter the correct PIN number."
+msgstr ""
+
+#: v1.0/withdraw/index.php:37 ../v1.0/withdraw/index.php:37
+msgid "Please enter the member's withdrawal address."
+msgstr ""
+
+#: v1.0/withdraw/index.php:43 ../v1.0/withdraw/index.php:43
+msgid "You can not withdraw more than your balance."
+msgstr ""
+
+#: v1.0/withdraw/index.php:50 ../v1.0/withdraw/index.php:50
+msgid "Withdrawal amount is less than the fee."
+msgstr ""
+
+#: v1.0/withdraw/index.php:55 ../v1.0/withdraw/index.php:55
+msgid "Member requested withdrawal."
+msgstr ""
+
+#: ../lib/SimpleRestful.php:1216 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1127 ../lib/SimpleRestful.php:1140
+#: ../lib/SimpleRestful.php:1167 ../lib/SimpleRestful.php:1180
+msgid "the required fields"
+msgstr ""
+
+#: ../v1.0/checkReceive/index.php:28
+msgid "Symbole 정보가 없습니다."
+msgstr "Symbole information is missing."
+
+#: ../v1.0/checkReceive/index.php:52
+msgid "이미 처리했습니다."
+msgstr "Already processed it."
+
+#: ../v1.0/checkReceive/index.php:70
+msgid "입금 정보에서 입금자와 입금액을 찾지 못했습니다."
+msgstr ""
+"We could not find the depositor and deposit amount in your deposit "
+"information."
+
+#: ../v1.0/logout/index.php:10
+msgid "Please enter the token value."
+msgstr "Please enter the token value."
+
+#: ../v1.0/join/index.php:10
+msgid "Enter your first name!"
+msgstr ""
+
+#: ../v1.0/join/index.php:14
+msgid "Enter your last name!"
+msgstr ""
+
+#: ../v1.0/join/index.php:21
+msgid "Please enter your member ID."
+msgstr ""
+
+#: ../v1.0/join/index.php:34 ../v1.0/join/index.php:39
+#: ../v1.0/join/index.php:49
+msgid "Enter your password!"
+msgstr ""
+
+#: ../v1.0/join/index.php:51 ../v1.0/join/index.php:56
+#: ../v1.0/join/index.php:66
+msgid "Please enter another ID that is not duplicated."
+msgstr ""
+
+#: ../v1.0/join/index.php:75 ../v1.0/join/index.php:79
+#: ../v1.0/join/index.php:88 ../v1.0/join/index.php:92
+#: ../v1.0/join/index.php:98 ../v1.0/join/index.php:102
+msgid ""
+"There was an error processing your subscription. Please contact "
+"administrator."
+msgstr ""
+
+#: ../v1.0/buy/index_bms.php:77 ../v1.0/buy/index_bms.php:82
+#: ../v1.0/sell/index_bms.php:64 ../v1.0/sell/index_bms.php:69
+#: ../v1.0/buy/index.php:78 ../v1.0/buy/index.php:83 ../v1.0/sell/index.php:65
+#: ../v1.0/sell/index.php:70
+msgid "There is no fee account information."
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:12
+msgid "Korea (the Republic of)"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:13
+msgid "China"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:14
+msgid "Hong Kong"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:15
+msgid "Macau"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:16
+msgid "Singapore"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:17
+msgid "Malaysia"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:18
+msgid "Indonesia"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:19
+msgid "Mongolia"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:20
+msgid "Thailand"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:21
+msgid "Australia"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:22
+msgid "United States"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:23
+msgid "United Kingdom"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:24
+msgid "Canada"
+msgstr ""
+
+#: ../v1.0/getCountry/index.php:25
+msgid "Japan"
+msgstr ""
+
+#: ../lib/TradeApi.php:2025 ../lib/TradeApi.php:2179
+msgid "Please enter the correct email."
+msgstr ""
+
+#: ../v1.0/join/index.php:26
+msgid "The member ID must contain a country code in uppercase letters."
+msgstr ""
+
+#: ../v1.0/join/index.php:30
+msgid "Please enter your phone number."
+msgstr ""
+
+#: ../v1.0/join/index.php:36
+msgid "Please enter the mobile value."
+msgstr ""
+
+#: ../lib/TradeApi.php:228
+msgid "You do not have permission."
+msgstr ""
+
+#: ../v1.0/buy/index.php:18 ../v1.0/sell/index.php:18
+msgid "Please enter only 4 decimal places for quantity."
+msgstr ""
+
+#: ../v1.0/buy/index.php:57 ../v1.0/sell/index.php:54
+msgid "Your payment amount is too low. Please raise the quantity."
+msgstr ""

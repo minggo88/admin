@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Smart Forms - Create Account </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--<link rel="stylesheet" type="text/css"  href="css/smart-forms.css">
+    <link rel="stylesheet" type="text/css"  href="css/font-awesome.min.css">-->
+
+
+    <!--[if lte IE 9]>
+    	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+        <link type="text/css" rel="stylesheet" href="css/smart-forms-ie8.css">
+    <![endif]-->
+
+</head>
+
+<body class="woodbg">
+
+    <div class="smart-wrap">
+        <div class="smart-forms smart-container pb-50">
+
+            <div class="form-header header-primary">
+                <h4><i class="fa fa-pencil-square"></i>
+                    <!--{219}-->
+                </h4>
+            </div><!-- end .form-header section -->
+
+            <form method="post" action="/join" id="joinform">
+                <input type="hidden" name="pg_mode" value="write" />
+                <input type="hidden" name="name" value="" />
+                <input type="hidden" name="emailRegYn" value="0" />
+
+                <div class="form-body">
+
+                    <div class="spacer-b30">
+                        <div class="tagline"><span>
+                                <!--{220}-->
+                            </span></div><!-- .tagline -->
+                    </div>
+
+                    <!-- 성+이름, 닉네임을 받는 형식 -->
+                    <div class="frm-row">
+                        <div class="section colm colm6">
+                            <label htmlFor="username" class="field-label">
+                                <!--{member64-1}-->
+                            </label>
+                            <label class="field prepend-icon">
+                                <input type="text" name="username" id="username" class="gui-input"
+                                    placeholder="<!--{member10-1}-->">
+                                <span class="field-icon"><i class="fa fa-user"></i></span>
+                            </label>
+                        </div>
+                        <div class="section colm colm6">
+                            <label htmlFor="nickname" class="field-label">
+                                <!--{member90}-->
+                            </label>
+                            <label class="field prepend-icon">
+                                <input type="text" name="nickname" id="nickname" class="gui-input"
+                                    placeholder="<!--{member91}-->">
+                                <span class="field-icon"><i class="fa fa-user-o"></i></span>
+                            </label>
+                            <div style="padding: 0.3rem;font-size: .8rem;">
+                                <!--{member92}-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 이메일 -->
+                    <div class="section">
+                        <label htmlFor="userid" class="field-label">
+                            <!--{member62}-->
+                        </label>
+                        <input type="hidden" name="userid" id="userid" class="gui-input" placeholder="<!--{member12}-->">
+                        <!--{*
+                    	<label class="field prepend-icon">
+                        	<input type="hidden" name="userid" id="userid" class="gui-input" placeholder="<!--{member12}-->">
+                        <span class="field-icon"><i class="fa fa-envelope"></i></span>
+                        </label>
+                        *}-->
+                    </div><!-- end .form-body section -->
+
+                    <div class="section colm colm12">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <label class="field prepend-icon">
+                                    <input type="text" class="form-control gui-input text-muted" name="email" id="email" placeholder="<!--{member12}-->">
+                                    <span class="field-icon"><i class="fa fa-envelope"></i></span>
+                                </label>
+                                <span class="input-group-btn">
+                                    <button type="button" id="sendBtn" class="btn btn-primary" onClick="sendEmail()">
+                                        <!--{member77}-->
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="padding: 0.3rem;font-size: .8rem;">
+                            <!--{218}-->
+                        </div>
+                    </div>
+                    <div class="frm-row" id="emailVerify" style="display:none;">
+                        <div class="section colm colm12">
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input type="number" value="" class="form-control gui-input text-muted"
+                                        name="confirm_number" placeholder="<!--{member29}-->">
+                                    <span class="input-group-btn">
+                                        <button type="button" id="confirmEmail" class="btn btn-warning"
+                                            onClick="corfirmEmailCode()">
+                                            <!--{member78}-->
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mb-20 text-primary text-center" id="confirmedEmail" style="display:none;">
+                        <input type="hidden" name="bool_email" value="">
+                        <span style="font-size:14px;"><strong>-
+                                <!--{member48-2}--> -
+                            </strong></span>
+                    </div>
+
+                    <!-- 비밀번호 -->
+                    <div class="section">
+                        <label htmlFor="userpw" class="field-label">
+                            <!--{bbs12}-->
+                        </label>
+                        <label class="field prepend-icon">
+                            <input type="password" name="userpw" id="userpw" class="gui-input" placeholder="<!--{221}-->">
+                            <span class="field-icon"><i class="fa fa-lock"></i></span>
+                        </label>
+                    </div>
+                    <div class="section">
+                        <label class="field prepend-icon">
+                            <input type="password" name="userpw_a" id="userpw_a" class="gui-input" placeholder="<!--{222}-->">
+                            <span class="field-icon"><i class="fa fa-unlock-alt"></i></span>
+                        </label>
+                    </div>
+
+                    <!-- 소개자(아이디) -->
+                    <div class="section">
+                        <label htmlFor="userpw" class="field-label">
+                            소개자(아이디)
+                        </label>
+                        <label class="field prepend-icon">
+                            <input type="text" name="recomid" id="recomid" class="gui-input" placeholder="소개자(아이디)를 입력해주세요.">
+                            <span class="field-icon"><i class="fa fa-users"></i></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <button type="submit" class="btn btn-gold fs-20">
+                        <!--{223}-->
+                    </button>
+                </div><!-- end .form-footer section -->
+            </form>
+
+        </div><!-- end .smart-forms section -->
+    </div><!-- end .smart-wrap section -->
+
+    <div></div><!-- end section -->
+
+</body>
+
+</html>

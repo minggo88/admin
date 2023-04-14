@@ -1,0 +1,47 @@
+<table class="list_table">
+	<colgroup>
+		<col width="50">
+		<col width="60">
+		<col>
+		<col width="70">
+		<col width="40">
+		<col width="40">
+		<col width="80">
+	</colgroup>
+	<thead>
+	<tr>
+		<th class="pcenter">번호</th>
+		<th class="pcenter">타입</th>
+		<th class="pcenter">제목</th>
+		<th class="pcenter">이름</th>
+		<th class="pcenter">댓글</th>
+		<th class="pcenter">조회</th>
+		<th class="pcenter">날짜</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_bbs_main}-->
+	<tr>
+		<td class="pcenter"><!--{.no}--></td>
+		<td class="pcenter"><!--{.bbs_type}--></td>
+		<td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}--><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject}--></a>
+			<!--{? .cnt_comment>0}-->(<!--{.cnt_comment}-->)<!--{/}-->
+			<!--{? .use_new}--><img src="./images/icon_new.gif" /><!--{/}-->
+			<!--{? .use_hot}--><img src="./images/icon_hot.gif" /><!--{/}-->
+			<!--{? .use_secret}--><img src="./images/icon_secret.gif" /><!--{/}-->
+			<!--{? .use_img}--><img src="./images/icon_image.gif" /><!--{/}-->
+			<!--{? .use_file}--><img src="./images/icon_file.gif" /><!--{/}-->
+		</td>
+		<td class="pcenter"><!--{.author}--></td>
+		<td class="pcenter"><!--{.cnt_comment}--></td>
+		<td class="pcenter"><!--{.hit}--></td>
+		<td class="pcenter"><!--{=date('Y-m-d',.regdate)}--></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="7" class="ctext">등록된 글이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div id="navipage"><!--{navi_page}--></div>

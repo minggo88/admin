@@ -1,0 +1,211 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table.list_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#jsform').submit(function() {
+		var chk_option = [
+			{ 'target':'day_title', 'name':'타이틀', 'type':'blank', 'msg':'타이틀을 입력해주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+
+function delHoliday(idx) {
+	if(!confirm("삭제하시겠습니까?")) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx='+idx, function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+$(function() {
+	$('select[name=year]').val('<!--{year}-->');//select
+	$('select[name=month]').val('<!--{month}-->');//select
+});
+
+function writeHoliday(day)
+{
+	var year = $('#year').val();
+	var month = $('#month').val();
+	$('input[name=hdate]').val(year+'-'+month+'-'+day);
+	showPopup('drag_popup');
+}
+
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Grid.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">휴일설정</span></h1></div>
+<form method="get" name="dateform" id="dateform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<table class="form_table">
+	<colgroup>
+		<col width="15%" />
+		<col width="85%" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>년도/월</th>
+		<td>
+			<select name="year" id="year">
+				<option value="" selected="selected">:::년도:::</option>
+				<!--{@loop_year}-->
+				<option value="<!--{.value_}-->"><!--{.value_}-->년</option>
+				<!--{/}-->
+			</select>&nbsp;
+			<select name="month" id="month">
+				<option value="" selected="selected">:::월:::</option>
+				<option value="1">1월</option>
+				<option value="2">2월</option>
+				<option value="3">3월</option>
+				<option value="4">4월</option>
+				<option value="5">5월</option>
+				<option value="6">6월</option>
+				<option value="7">7월</option>
+				<option value="8">8월</option>
+				<option value="9">9월</option>
+				<option value="10">10월</option>
+				<option value="11">11월</option>
+				<option value="12">12월</option>
+			</select>	
+			<span class="button small black"><input type="submit" value="확 인" /></span>
+		</td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="clear_box"></div>
+<table id="calendar" class="list_table">
+	<colgroup>
+		<col width="15%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="15%" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th>일</th>
+			<th>월</th>
+			<th>화</th>
+			<th>수</th>
+			<th>목</th>
+			<th>금</th>
+			<th>토</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_week}-->
+	<tr>
+		<!--{@loop_day}-->
+		<td id="<!--{..day_month}-->" class="<!--{..css_class}-->" style="height:100px; vertical-align:top">
+			<dl>
+				<dt><!--{..day_month}--></dt>
+				<!--{? ..day_title}--><dd><!--{..day_title}--></dd><!--{/}-->
+				<dd>
+					<!--{? ..bool_button > 0}-->
+					<!--{? ..bool_holiday > 0}-->
+					<span class="button small red"><a href="javascript:;" onclick="delHoliday('<!--{..idx}-->')">휴일삭제</a></span>
+					<!--{:}-->
+					<span class="button small"><a href="javascript:;" onclick="writeHoliday('<!--{..day_month}-->')">휴일등록</a></span>
+					<!--{/}-->
+					<!--{/}-->
+				</dd>
+			</dl>
+		</td>
+		<!--{/}-->
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+
+<!--
+$interface->setPlugIn('popup');
+-->
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup').dragPopup({
+		popup_id: 'drag_popup',
+		popup_title: '휴일설정',
+		popup_width: 400,
+		popup_height: 200,
+		bool_today_close:false
+	});
+});
+//-->
+</script>
+<div id="popup" style="display:none;padding:20px;">
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden"  name="pg_mode" value="write" />
+<input type="hidden"  name="year" value="<!--{year}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="30%" />
+		<col width="70%"/>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>날짜</th>
+		<td><input type="text" name="hdate" value="" class="frm_input" style="width:100px" /></td>
+	</tr>
+	<tr>
+		<th>타이틀</th>
+		<td><input type="text" name="day_title" value="" class="frm_input" style="width:200px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button black"><input type="submit" value="저장" /></span>
+</div>
+</form>
+</div>

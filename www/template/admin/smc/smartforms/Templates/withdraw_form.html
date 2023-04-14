@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title> Smart Forms - Withdraw </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--<link rel="stylesheet" type="text/css"  href="css/smart-forms.css">
+    <link rel="stylesheet" type="text/css"  href="css/font-awesome.min.css">-->
+    
+
+    <!--[if lte IE 9]>
+    	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>    
+        <script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+    <![endif]-->    
+    
+    <!--[if lte IE 8]>
+        <link type="text/css" rel="stylesheet" href="css/smart-forms-ie8.css">
+    <![endif]-->
+       
+</head>
+
+<body class="woodbg">
+
+	<div class="smart-wrap">
+    	<div class="smart-forms smart-container pb-50">
+        
+        	<div class="form-header header-primary">
+            	<h4><i class="fa fa-pencil-square"></i><!--{230}--></h4>
+            </div><!-- end .form-header section -->
+            
+            <form method="post" action="/withdraw" id="withdraw">
+                <input type="hidden" name="pg_mode" value="withdraw" />
+                <input type="hidden" name="name" value="" />
+							
+            	<div class="form-body">
+                
+                    <div class="spacer-b30">
+                    	<div class="tagline"><span><!--{231}--></span></div><!-- .tagline -->
+                    </div>
+
+                    <div class="frm-row">
+                        <ul>
+                            <li> <!--{232}--></li>
+                            <li> <!--{233}--></li>
+                            <li> <!--{234}--></li>
+                        </ul>
+                    </div>
+
+                    <div class="frm-row">
+
+                        <div class="section colm colm12">
+                            <label htmlFor="userid" class="field-label"><!--{member64}--></label>
+                            <label class="field prepend-icon">
+                                <!--{_SESSION.USER_ID}-->
+                            </label>
+                        </div><!-- end section -->
+
+                        <div class="section colm colm12">
+                            <label htmlFor="name" class="field-label"><!--{member64}--></label>
+                            <label class="field prepend-icon">
+                                <!--{_SESSION.USER_NAME}-->
+                            </label>
+                        </div><!-- end section -->
+
+                        <div class="section colm colm12">
+                            <label htmlFor="contents" class="field-label"><!--{member63}--></label>
+                            <label class="field prepend-icon">
+                                <input type="text" name="contents" id="contents" class="gui-input" placeholder="<!--{member63}-->...">
+                                <span class="field-icon"><i class="fa fa-text"></i></span>
+                            </label>
+                        </div><!-- end section -->
+                        
+                    </div><!-- end .frm-row section -->
+                    
+                </div><!-- end .form-body section -->
+                <div class="input-group">
+                	<button type="submit" class="btn btn-gold fs-20"><!--{223}--></button>
+                </div><!-- end .form-footer section -->
+            </form>
+            
+        </div><!-- end .smart-forms section -->
+    </div><!-- end .smart-wrap section -->
+    
+    <div></div><!-- end section -->
+
+</body>
+</html>

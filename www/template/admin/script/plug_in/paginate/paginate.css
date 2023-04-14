@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+ul.simplePagerNav {margin:0 0 10px 300px;}
+ul.simplePagerNav li{
+    display:inline;
+    float:left;
+    padding: 3px;
+    margin-right:5px;
+    margin-bottom:10px;
+	border:1px solid #d6d6d6; 
+	font-size:12px;
+}
+
+ul.simplePagerNav li a{
+    color: #333;
+    text-decoration: none;
+}
+
+li.currentPage {
+    background: #ffcc00;	
+}

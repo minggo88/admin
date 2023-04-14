@@ -1,0 +1,117 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table.list_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function editForm(code) {
+	location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit<!--{srch_url}-->&idx='+code;
+}
+
+function listDel(code) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx='+code,function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				//location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//테이블 드래그
+$(function() {
+	$("#drag_table").tableDnD({
+		onDragClass: "dndover",
+		dragHandle: "dragHandle"
+	});
+});
+
+function saveRanking() {
+	if(!confirm(' 순서를 적용하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=save_ranking<!--{srch_url}-->&'+$('#drag_table').tableDnDSerialize(),function(data) {
+		if(data['bool']) {
+			alert('순서가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				//location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}	
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">연혁관리</span></h1></div>
+<form id="list_form">
+<table id="drag_table" class="list_table">
+	<colgroup>
+		<col width="30" />
+		<col width="120" />
+		<col width="*" />
+		<col width="100" />
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th></th>
+		<th>날자</th>
+		<th>내용</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr class="tr_list" id="<!--{.idx}-->">
+		<td class="dragHandle">▲<br />▼</td>
+		<td class="pred"><!--{.date_s}--></td>
+		<td class="pleft"><!--{.contents}--></td>
+		<td>
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&idx=<!--{.idx}--><!--{srch_url}-->">수 정</a></span>
+			<span class="button small black"><a href="javascript:;" onclick="listDel('<!--{.idx}-->')">삭 제</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="4">등록된 연혁이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><a href="javascript:;" onclick="saveRanking()">순서저장</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">등 록</a></span>
+	</div>
+</div>
+<div id="navipage"><!--{navi_page}--></div>

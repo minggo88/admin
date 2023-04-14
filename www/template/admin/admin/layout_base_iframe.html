@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+ <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>관리자 페이지</title>
+<!--{@ loop_css}-->
+<link rel="stylesheet" href="<!--{.value_}-->" type="text/css" />
+<!--{/}-->
+<!--{@ loop_script}-->
+<!--{? .value_ == '/template/script/plug_in/flot/excanvas.min.js'}-->
+<!--[if lte IE 8]><script src="<!--{.value_}-->" type="text/javascript"></script><![endif]-->
+<!--{:}-->
+<script src="<!--{.value_}-->" type="text/javascript"></script>
+<!--{/}-->
+<!--{/}-->
+<style type="text/css">
+	div#loading_box {
+		position: absolute;
+		border: 3px solid #b6b6b6;
+		background: #FFF;
+		height: 60px;
+		width: 60px;
+		z-index: 999;
+	}
+	div#loading_box>img {
+		margin:  5px;
+	}
+</style>
+</head>
+<body id="js_layout_base">
+<!--{# js_tpl_contents}-->
+<div id="loading_box" style="display:none">
+	<img src="./images/loading-image.gif" />
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<style type="text/css">
+<!--
+div#category_ranking_wrap{display:inline-block; width:100%; background-color:#fff; *zoom:1;}
+div#category_ranking_wrap:after{display:block; clear:both; content:'';}
+div#category_ranking_left { float:left; width:168px;margin:0px 0px 0px 0px; padding:10px; border:1px dashed #ccc; text-align:left; line-height:200%;}
+div#category_ranking_right {float:right; width:378px;margin:0px 0px 0px 0px; padding:10px; border:1px solid #ccc;}
+div#category_ranking_right ul#category_ranking li {width:366px;margin:0px; margin-bottom:5px; padding:5px; border:1px solid #ccc;}
+div#category_ranking_right ul#category_ranking li:hover {background-color:#ffcc00;}	
+//-->
+</style>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$("ul#category_ranking").dragsort();
+});
+
+function saveRanking() {
+	var code = $("#category_ranking li").map(function() { return $(this).attr('id'); }).get();
+	$.get('?pg_mode=save_ranking&code='+code, function(data) {
+		if(data['bool']) {
+			alert('카테고리 순위가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}	
+	},'json');
+};
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">카테고리 순위 변경</div>
+<div class="remark">상위 카테고리 : <span id="parent_category"><!--{category_path_desc}--></span></div>
+<div id="category_ranking_wrap">
+	<div id="category_ranking_left">
+	* 변경 방법<br />
+	1. 순서를 변경하고 하는 카테고리를 드래그하여 원하는 순서로 이동시킵니다.<br />
+	2. 이동이 완료되면 순위 저장 버튼을 클릭하시면 변경된 순위가 적용됩니다.
+	</div>
+	<div id="category_ranking_right">
+		<ul id="category_ranking">
+			<!--{@loop_ranking}-->
+			<li id="<!--{.category_code}-->"><!--{.category_name}--></li>
+			<!--{/}-->
+		</ul>
+	</div>
+</div>
+<div class="button_area">
+	<span class="button large black"><input type="button" value="카테고리 순위 저장" onclick="saveRanking()" /></span>
+</div>

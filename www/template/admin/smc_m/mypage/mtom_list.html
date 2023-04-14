@@ -1,0 +1,108 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header support-direct" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_2;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text"><a href="/faq"><?=Lang::main_31;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/notice"><?=Lang::main_32;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/mtom" class="active"><?=Lang::main_33;?></a></label>
+					</div>
+					<div class="layer active"></div>
+				</div>
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+				   <div class="row">
+
+
+					 <div class="col-sm-12 mb-0">
+					   <nav class="pull-right">
+						 <ol class="breadcrumb">
+						   <li><a href="/">Home</a></li>
+						   <li><a href="/faq">Support</a></li>
+						   <li class="active"><?=Lang::main_33;?></li>
+						 </ol>
+					   </nav>
+					 </div>
+
+					  <div class="col-sm-12 right-side-sidebar">
+						  <h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_33_2;?></span></h3>
+
+							<div class="col-md-12">
+								
+								<a href="/mtom/form_new" class="btn btn-primary btn-xs pull-right"><b>+</b> <?=Lang::main_204;?></a>
+								<table class="table table-hover custab">
+									<colgroup>
+										<col width="70" />
+										<col width="" />
+										<col width="150" />
+										<col width="100" />
+										<col width="100" />
+									</colgroup>
+									<thead>
+										<tr>
+											<th class="text-center"><?=Lang::main_No;?></th>
+											<th class="text-center"><?=Lang::main_Title;?></th>
+											<th class="text-center"><?=Lang::main_Status;?></th>
+											<th class="text-center"><?=Lang::main_Date;?></th>
+											<th class="text-center"><?=Lang::main_Action;?></th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--{@loop_mtom}-->
+										<tr>
+											<td class="text-center"><!--{.no}--></td>
+											<td><a href="/mtom/view/<!--{.idx}-->"><!--{.subject}--></a></td>
+											<td class="text-center"><!--{? .bool_rplcontents}--><span style="color: #555">[<?=Lang::main_202;?>]</span><!--{:}--><span style="color:#FF3366;">[<?=Lang::main_203;?>]</span><!--{/}--></td>
+											<td class="text-center"><!--{=date('Y-m-d',.regdate)}--></td>
+											<td class="text-center">
+												<!--{? !bool_rplcontents}-->
+												<a class='btn btn-info btn-xs' href="/mtom/form_edit/<!--{.idx}-->"><span class="glyphicon glyphicon-edit"></span> <?=Lang::main_Edit;?></a>
+												<!--{:}-->
+												<a href="javascript:;" onclick="del('<!--{.idx}-->')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> <?=Lang::main_Del;?></a>
+												<!--{/}-->
+											</td>
+										</tr>
+										<!--{:}-->
+										<tr>
+											<td colspan="5" class="text-center"><?=Lang::main_201;?></td>
+										</tr>
+										<!--{/}-->
+									</tbody>
+								</table>
+
+								<nav aria-label="Page navigation" class="pt-md">
+									<!--{navi_page}-->
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

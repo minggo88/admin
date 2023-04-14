@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+.curriculum_desk {width:500px;line-height:22px;font-size:15px;color:#ff6600;padding:0px;margin:0px;float:left;}
+.request {padding:0px;margin:0px;float:right;}
+.request span {letter-spacing:-1px;font-family: '나눔고딕','맑은 고딕',NanumGothicExtraBold,AppleGothic,sans-serif;}
+
+.title_d2 {border-bottom:1px solid #dcdcdc;width:750px;height:30px;line-height:30px;font-weight:bold;font-size:14px;letter-spacing:-1px;padding:0px 0px 0px 0px;margin:10px 0px 10px 0px;*zoom:1;clear:both;}
+.title_d2:after { content:""; clear:both; display:block; }
+
+.title_d3 {border-bottom:1px solid #dcdcdc;width:750px;height:30px;line-height:30px;font-weight:bold;font-size:14px;letter-spacing:-1px;padding:0px 0px 0px 0px;margin:10px 0px 10px 0px;*zoom:1;clear:both;}
+.title_d3:after { content:""; clear:both; display:block; }
+
+.contents {border:0px solid #dedede;line-height:1.7;font-size:13px;text-align:justify;color:#666666;padding:5px 0px 5px 0px;margin:0px 0px 20px 0px;clear:both;}
+
+
+.contents .part01 {border:0px solid #dedede;width:355px;text-align:justify;color:#666666;padding:5px 0px 5px 0px;margin:0px 0px 20px 0px;float:left;}
+.contents .part02 {border:0px solid #dedede;width:355px;text-align:justify;color:#666666;padding:5px 0px 5px 0px;margin:0px 0px 20px 0px;float:right;}
+
+.contents .divline {border-top:1px solid #ccc;padding:0px 0px 30px 0px;margin:70px 0px 0px 0px;}
+
+.contents .part03 {border:0px solid #dedede;width:540px;text-align:left;color:#666666;padding:5px 0px 5px 0px;margin:0px 0px 20px 0px;float:left;}
+.contents .part04 {border:0px solid #dedede;border-top:2px solid #469AAE;width:180px;padding:5px 0px 0px 0px;margin:10px 0px 20px 0px;float:right;}
+
+.contents .part04 ul {border:0px solid #dedede;border-top:2px solid #469AAE;width:180px;}
+.contents .part04 ul li {border:0px solid #dedede;border-bottom:1px solid #e4e4e4;color:#555;list-style-type:none;padding:10px 0px 10px 10px;margin:0px 0px 0px 0px;}
+.contents .part04 ul li a {font-size:13px;color:#00528c ;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+
+.contents .part05 {border:0px solid #dedede;width:200px;font-size:14px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;text-align:left;color:#00528c ;padding:0px 0px 5px 0px;margin:20px 0px 50px 0px;float:left;}
+.contents .part06 {border:0px solid #dedede;border-top:1px solid #dcdcdc;width:540px;padding:10px 0px 0px 0px;margin:20px 0px 50px 0px;float:right;}
+
+
+.contents ul {display:inline;padding:0px;margin:0px;clear:both;}
+.contents ul li {list-style-type:circle;padding:0px 0px 0px 0px;margin:0px 0px 0px 20px;}
+
+.contents span.aeta_title {line-height:30px;letter-spacing:-0.5px;color:#555;font-size:20px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+.contents span.sub_title_b {line-height:26px;letter-spacing:-0.5px;color:#444444;font-size:18px;font-family:'나눔고딕','맑은 고딕',NanumGothicBold,AppleGothic,sans-serif;clear:both;}
+.contents span.sub_title_g {line-height:26px;letter-spacing:-0.5px;color:#929292;font-size:18px;font-family:'나눔고딕','맑은 고딕',NanumGothicBold,AppleGothic,sans-serif;clear:both;}
+.contents span.sub_title {line-height:26px;letter-spacing:-0.5px;color:#00528c;font-size:18px;font-family:'나눔고딕','맑은 고딕',NanumGothicBold,AppleGothic,sans-serif;clear:both;}
+.contents span.sub_title01 {line-height:1.7;font-size:14px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+
+.contents span.bit_title_a{line-height:30px;letter-spacing:-0.5px;color:#1c81b9;font-size:22px;font-weight:normal;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+.contents span.bit_title_b{letter-spacing:-0.5px;color:#444;font-size:15px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+.contents span.bit_title_c{letter-spacing:-0.5px;color:#ff0000;font-size:17px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+.contents span.bit_title_d{letter-spacing:-0.5px;color:#444;font-size:12px;background:url('/data/editorTemp/139426448090290.jpg') 0px 0px no-repeat;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;padding:0px 0px 200px 150px;clear:both;}
+
+.contents span.bit_intro_a{line-height:30px;letter-spacing:-0.5px;color:#1c81b9;font-size:22px;font-weight:normal;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}
+.contents ul.bit_intro_ul_a{display:block;padding:10px 0 50px 0;}
+.contents ul.bit_intro_ul_a li{letter-spacing:-0.5px;color:#444;font-size:15px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;margin:0 0 10px 20px;}
+
+.contents_ {border:0px solid #dedede;line-height:1.7;font-size:13px;text-align:justify;color:#666666;background:url('/data/editorTemp/139426448090290.jpg') 0px 10px no-repeat;padding:5px 0px 5px 150px;margin:0px 0px 20px 0px;clear:both;}
+.contents_ span.bit_title_d{letter-spacing:-0.5px;color:#444;font-size:12px;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;clear:both;}

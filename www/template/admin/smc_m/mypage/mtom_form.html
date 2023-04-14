@@ -1,0 +1,107 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header support-direct" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_2;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text"><a href="/faq"><?=Lang::main_31;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/notice"><?=Lang::main_32;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/mtom" class="active"><?=Lang::main_33;?></a></label>
+					</div>
+					<div class="layer active"></div>
+				</div>
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+				   <div class="row">
+
+
+					 <div class="col-sm-12 mb-0">
+					   <nav class="pull-right">
+						 <ol class="breadcrumb">
+						   <li><a href="/">Home</a></li>
+						   <li><a href="/faq">Support</a></li>
+						   <li class="active"><?=Lang::main_33;?></li>
+						 </ol>
+					   </nav>
+					 </div>
+
+					 <div class="smart-wrap col-sm-12 right-side-sidebar">
+						 <h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_33_2;?></span></h3>
+							
+						 <div class="smart-forms smart-container wrap ">
+	
+							<form method="post" name="mtomform" id="mtomform" action="/mtom">
+								<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode =='form_new' }-->write<!--{:}-->edit<!--{/}-->" />
+								<input type="hidden" name="start" value="<!--{_GET.start}-->" />
+								<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+								<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+								<input type="hidden" name="author" value="<!--{_SESSION.USER_NAME}-->" />
+											
+								<div class="form-body">
+
+									<div class="frm-row">
+
+										<div class="section">
+											<label for="subject" class="field-label" style="font-weight:600"><?=Lang::main_Title;?> <em> * </em> </label>
+											<label class="field prepend-icon">
+												<input type="text" name="subject" id="subject" class="gui-input" value="<!--{subject}-->">
+												<span class="field-icon"><i class="fa fa-document-text"></i></span>
+											</label>
+										</div><!-- end section -->
+
+										<div class="section">
+												<label for="contents" class="field-label" style="font-weight:600"><?=Lang::main_Qustion;?> <em> * </em> </label>
+												<label class="field prepend-icon">
+													<textarea class="gui-textarea" name="contents" id="contents" ><!--{contents}--></textarea>
+													<span class="field-icon"><i class="fa fa-document-text"></i></span>
+												</label>
+											</div><!-- end section -->
+											
+										</div><!-- end .form-body section -->
+										
+									</div>
+									<div class="form-footer">
+										<!--{? subject}-->
+										<button type="submit" class="button btn-primary"  onclick="checkAgree()"><?=Lang::main_206;?></button>
+										<!--{:}-->
+										<button type="submit" class="button btn-primary"  onclick="checkAgree()"><?=Lang::main_205;?></button>
+										<!--{/}-->
+									</div><!-- end .form-footer section -->
+									
+								</div><!-- end .form-body section -->
+							</form>
+							
+						</div><!-- end .smart-forms section -->
+					</div><!-- end .smart-wrap section -->
+					
+					<div></div><!-- end section -->
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

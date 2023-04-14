@@ -1,0 +1,77 @@
+<script type="text/javascript">
+<!-- 
+$(function() {
+
+	$('#frmLogo').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Slider.png') 0px 0px no-repeat;">디자인관리</span> / <span class="title02">로고 관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">로고 이미지 관리</div>
+<form method="post" name="frmLogo" id="frmLogo" action="?">
+<input type="hidden" name="pg_mode" value="edit" />
+<table class="form_table">
+	<tbody>
+	<tr>
+		<th>메인로고</th>
+		<td><input type="file" name="img_logo" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<!--{? !empty(img_logo)}-->
+	<tr>
+		<td colspan="2" style="text-align:center"><img src="/data/design/<!--{img_logo}-->"></td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<th>서브로고</th>
+		<td><input type="file" name="img_sub_logo" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<!--{? !empty(img_sub_logo)}-->
+	<tr>
+		<td colspan="2" style="background:#f0f0f0;text-align:center"><img src="/data/design/<!--{img_sub_logo}-->"></td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<th>하단로고</th>
+		<td><input type="file" name="img_footer_logo" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<!--{? !empty(img_footer_logo)}-->
+	<tr>
+		<td colspan="2" style="background:#f0f0f0;text-align:center"><img src="/data/design/<!--{img_footer_logo}-->"></td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+</div>
+</form>

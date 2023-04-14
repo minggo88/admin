@@ -1,0 +1,91 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>상품상장관리</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>거래소 관리</a>
+            </li>
+            <li class="active">
+                <strong>상품상장관리</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 m-b-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>종목 추가 </h5>
+                    <div class="text-right"><a href="?" class="btn btn-info">목록</a></div>                    
+
+                </div>
+                <div class="ibox-content">
+                    
+                        <table class="table table-striped table-bordered table-hover dataTables-customers nowrap dataTable ">
+                            <tr>
+                                <th>년도</th>
+                                <th>매출</th>
+                                <th>영업이익</th>
+                                <th>순이익</th>
+                                <th>자산</th>
+                                <th>부채</th>
+                                <th>자본</th>
+                                <th>부채비율</th>
+                                <th>자기자본이익률</th>
+                                <th></th>
+                            </tr>
+                            <form method="post" class="form-horizontal" name="editform" action="">
+                                <tr class="box-add">
+                                    <input type="hidden"  name="symbol" value="<!--{_GET.symbol}-->" />
+                                    <input type="hidden"  name="pg_mode" value="finance_insert" />
+                                    <td><input type="text" name="years" value="" class="form-control" placeholder="년도를 입력해주세요."/></td>
+                                    <td><input type="text" name="sales" value="" class="form-control" placeholder="매출액을 입력해주세요."/></td>
+                                    <td><input type="text" name="opt_profit" value="" class="form-control" placeholder="영업이익을 입력해주세요."/></td>
+                                    <td><input type="text" name="net_profit" value="" class="form-control" placeholder="순이익을 입력해주세요."/></td>
+                                    <td><input type="text" name="assets" value="" class="form-control" placeholder="자산금액을 입력해주세요."/></td>
+                                    <td><input type="text" name="debt" value="" class="form-control" placeholder="부채금액를 입력해주세요."/></td>
+                                    <td><input type="text" name="equity" value="" class="form-control" placeholder="자본금액을 입력해주세요."/></td>
+                                    <td><input type="text" name="debt_ratio" value="" class="form-control" placeholder="부채비율을 입력해주세요."/></td>
+                                    <td><input type="text" name="roe" value="" class="form-control" placeholder="자기자본이익률(ROE)를 입력해주세요."/></td>
+                                    <td class="form-group text-center">
+                                        <input type="submit" class="btn btn-success" value="추가" name="btn-save"/>
+                                        <input type="reset" class="btn btn-default" value="초기화" name="btn-reset"/>
+                                    </td>
+                                </tr>
+                            </form>
+                            <!--{@ finance_list }-->
+                            <form method="post" class="form-horizontal" name="editform" action="">
+                                <tr>
+                                    <input type="hidden"  name="symbol" value="<!--{_GET.symbol}-->" />
+                                    <input type="hidden"  name="pg_mode" value="finance_update" />
+                                    <td><input type="text" name="years" value="<!--{.years}-->" data-previous_value="<!--{.years}-->" class="form-control" placeholder="년도를 입력해주세요."/></td>
+                                    <td><input type="text" name="sales" value="<!--{.sales}-->" data-previous_value="<!--{.sales}-->" class="form-control" placeholder="매출액을 입력해주세요."/></td>
+                                    <td><input type="text" name="opt_profit" value="<!--{.opt_profit}-->" data-previous_value="<!--{.opt_profit}-->" class="form-control" placeholder="영업이익을 입력해주세요."/></td>
+                                    <td><input type="text" name="net_profit" value="<!--{.net_profit}-->" data-previous_value="<!--{.net_profit}-->" class="form-control" placeholder="순이익을 입력해주세요."/></td>
+                                    <td><input type="text" name="assets" value="<!--{.assets}-->" data-previous_value="<!--{.assets}-->" class="form-control" placeholder="자산금액을 입력해주세요."/></td>
+                                    <td><input type="text" name="debt" value="<!--{.debt}-->" data-previous_value="<!--{.debt}-->" class="form-control" placeholder="부채금액를 입력해주세요."/></td>
+                                    <td><input type="text" name="equity" value="<!--{.equity}-->" data-previous_value="<!--{.equity}-->" class="form-control" placeholder="자본금액을 입력해주세요."/></td>
+                                    <td><input type="text" name="debt_ratio" value="<!--{.debt_ratio}-->" data-previous_value="<!--{.debt_ratio}-->" class="form-control" placeholder="부채비율을 입력해주세요."/></td>
+                                    <td><input type="text" name="roe" value="<!--{.roe}-->" data-previous_value="<!--{.roe}-->" class="form-control" placeholder="자기자본이익률(ROE)를 입력해주세요."/></td>
+                                    <td class="form-group text-center">
+                                        <input type="submit" class="btn btn-info" value="저장" name="btn-save"/>
+                                        <input type="reset" class="btn btn-default" value="초기화" name="btn-reset"/>
+                                        <input type="button" class="btn btn-warning" value="삭제" name="btn-delete"/>
+                                    </td>
+                                </tr>
+                            </form>
+                            <!--{/}-->
+                        </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

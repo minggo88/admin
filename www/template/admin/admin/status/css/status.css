@@ -1,0 +1,296 @@
+@charset "utf-8";
+
+#main_contents .category_list_title  {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin: 20px auto;clear:both;}
+#main_contents #category_list_title2  {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin:20px 0px 10px 0px;clear:both;}
+#main_contents .set_term {border:1px solid #aaa;width:auto;background:#F9F9F9;padding:5px 5px 5px 5px;margin:0px auto 0px auto;}
+#main_contents .set_term .scroll {border:1px solid #555;width:80px;height:20px;line-height:20px;background:#FFFBFB;font-size:9pt;font-weight:bold;color:#555;padding:0px 0px 0px 3px;margin:0px 3px 0px 3px;}
+
+.set_term input.btn_search_date  {border:1px #aaa solid;width:80px;height:20px;padding:2px 0px 2px 0px;margin:0px 1px 0px 1px;cursor:pointer;}
+
+
+
+/* 데이터관리 status.html*/
+#category_list {border:0px #ccc solid;width:100%;padding-bottom:10px;clear:both;}
+#category_list .category_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+#category_list #placeholder {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+#category_list_box {border:0px #ccc solid;width:100%;padding-bottom:10px;margin:0px auto 10px auto;clear:both;}
+
+.line_space {clear:both;}
+
+#category_list_box ul {border:0px #ccc solid;list-style: none;float:right;}
+#category_list_box ul li {border:1px #a60000 solid;width:162px;display:inline;list-style:none;background:#f5f5f5;padding:5px 5px 5px 10px;margin:5px;;float:left;}
+
+#time_list {border:0px #ccc solid;width:100%;padding-bottom:10px;}
+#time_list #time_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+#time_list #timegraph {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+
+#member_list {border:0px #ccc solid;width:100%;padding-bottom:10px;}
+#member_list #member_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+
+#visit_list {border:0px #ccc solid;width:100%;padding-bottom:10px;}
+#visit_list #visit_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+
+
+
+/* 매출통계 */
+
+#sales_day #sub_graph_day {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#sales_day #graph_day {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#sales_day #sub_graph_week  {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#sales_week #graph_week {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#sales_day #sub_graph_month {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#sales_month #graph_month {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+#sales_day #category_list_title2  {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin:20px 0px 10px 0px;}
+#sales_week #category_list_title2  {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin:20px 0px 10px 0px;}
+#sales_month #category_list_title2  {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin:20px 0px 10px 0px;}
+
+/* 시간대별 주문, 매출 현황 */
+#sales_day {}
+#sales_day table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#sales_day th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_day td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#sales_day table#sales_day_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+
+#sales_day table#sales_day_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_day table#sales_day_table th.time_th {text-align:center;background:#cccccc;}
+#sales_day table#sales_day_table th.order_th {text-align:center;background:#D30000;}
+#sales_day table#sales_day_table th.payment_th {text-align:center;background:#9CFF15;}
+#sales_day table#sales_day_table th.amount_th {text-align:center;background:#2F93F7;}
+
+#sales_day table#sales_day_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#sales_day table#sales_day_table td.index {text-align:center;background:#F7F7F7;}
+#sales_day table#sales_day_table td.order {text-align:center;background:#FFF1F0;}
+#sales_day table#sales_day_table td.payment {text-align:center;background:#FBFFF7;}
+#sales_day table#sales_day_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+
+/* 요일별 주문, 매출 현황 */
+#sales_week {}
+#sales_week table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#sales_week th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_week td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#sales_week table#sales_week_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#sales_week table#sales_week_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_week table#sales_week_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#sales_week table#sales_week_table td.index {text-align:center;background:#F7F7F7;}
+#sales_week table#sales_week_table td.order {text-align:center;background:#FFF1F0;}
+#sales_week table#sales_week_table td.payment {text-align:center;background:#FBFFF7;}
+#sales_week table#sales_week_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+
+/* 월별 주문, 매출 현황 */
+#sales_month {}
+#sales_month table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#sales_month th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_month td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#sales_month table#sales_month_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#sales_month table#sales_month_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#sales_month table#sales_month_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#sales_month table#sales_month_table td.index {text-align:center;background:#F7F7F7;}
+#sales_month table#sales_month_table td.order {text-align:center;background:#FFF1F0;}
+#sales_month table#sales_month_table td.payment {text-align:center;background:#FBFFF7;}
+#sales_month table#sales_month_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+#sales_week #time_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+#sales_month #time_list_title {border:0px #ccc solid;height:18px;background: url("../../images/line.gif") 1% 100% no-repeat;font-weight:bold ;color:#000000;margin-bottom: 10px;}
+
+
+
+/* 결제수단분석 */
+#payment #sub_graph_payment {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 10px auto;}
+#payment #graph_payment {border:1px #ddd solid;width:400px;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px; margin:10px 0px 10px 0px; float:left;}
+
+#payment {color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;}
+#payment table { border:0px #ccc solid;border-collapse: collapse;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt; margin:0px auto 0px auto;}
+#payment th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#payment td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#payment table#payment_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:350px; border-collapse: collapse; margin:10px 0px 10px 0px; float:right;}
+#payment table#payment_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#payment table#payment_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#payment table#payment_table td.index {text-align:center;background:#F7F7F7;}
+#payment table#payment_table td.order {text-align:center;background:#FFF1F0;}
+#payment table#payment_table td.payment {text-align:center;background:#FBFFF7;}
+#payment table#payment_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+
+/* 연령대 */
+
+#analysis_age #sub_graph_age {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_age #graph_age {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_region #sub_graph_region {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_region #graph_region {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_sex #sub_graph_sex  {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_sex #graph_sex {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+
+/* 연령대별 매출분석 */
+#analysis_age {}
+#analysis_age table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_age th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_age td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_age table#analysis_age_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 20px auto;}
+#analysis_age table#analysis_age_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_age table#analysis_age_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_age table#analysis_age_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_age table#analysis_age_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_age table#analysis_age_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_age table#analysis_age_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+/* 지역별 매출분석 */
+#analysis_region {}
+#analysis_region table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_region th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_region td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_region table#analysis_region_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 20px auto;}
+#analysis_region table#analysis_region_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_region table#analysis_region_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_region table#analysis_region_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_region table#analysis_region_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_region table#analysis_region_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_region table#analysis_region_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+/* 성별매출분석 */
+#analysis_sex {}
+#analysis_sex table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_sex th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_sex td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_sex table#analysis_sex_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 20px auto;}
+#analysis_sex table#analysis_sex_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_sex table#analysis_sex_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_sex table#analysis_sex_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_sex table#analysis_sex_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_sex table#analysis_sex_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_sex table#analysis_sex_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+
+/* 카테고리별 매출분석 */
+#analysis_category #sub_graph_category {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_category #graph_category {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+#analysis_category {}
+#analysis_category table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_category th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_category td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_category table#analysis_category_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 20px auto;}
+#analysis_category table#analysis_category_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_category table#analysis_category_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_category table#analysis_category_table td.index {text-align:left;background:#F7F7F7;padding-left:20px;}
+#analysis_category table#analysis_category_table td.hit {text-align:center;background:#FFF4F4;}
+#analysis_category table#analysis_category_table td.order {text-align:center;background:#EEFFE8;}
+#analysis_category table#analysis_category_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_category table#analysis_category_table td.amount {text-align:right;font-weight:bold;background:#F0FAFF;color:#a60000;}
+
+
+/* 상품별별 매출분석 */
+#analysis_goods #sub_graph_goods {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_goods #graph_goods {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+#analysis_goods {}
+#analysis_goods table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_goods th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_goods td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_goods table#analysis_goods_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 20px auto;}
+#analysis_goods table#analysis_goods_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_goods table#analysis_goods_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_goods table#analysis_goods_table td.index {text-align:left;background:#F7F7F7;padding-left:20px;}
+#analysis_goods table#analysis_goods_table td.hit {text-align:center;background:#FFF4F4;}
+#analysis_goods table#analysis_goods_table td.order {text-align:center;background:#EEFFE8;}
+#analysis_goods table#analysis_goods_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_goods table#analysis_goods_table td.amount {text-align:right;font-weight:bold;background:#F0FAFF;color:#a60000;}
+
+
+
+
+
+/* 방문자별 */
+/*2010-06-06
+#analysis_day {display:block;}
+#analysis_week {display:none;}
+#analysis_month {display:none;}
+#analysis_path {display:none;}
+#analysis_os {display:none;}
+#analysis_bw {display:none;}
+*/
+
+#analysis_day #sub_graph_visit_day {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_day #graph_visit_day {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_week #sub_graph_visit_week {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_week #graph_visit_week {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_month #sub_graph_visit_month {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_month #graph_visit_month {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+#analysis_path #sub_graph_path {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_path #graph_path {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_os #sub_graph_os {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_os #graph_os {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+#analysis_bw #sub_graph_bw {border:0px #ddd solid;width:100%;padding:0px;margin:0px auto 0px auto;}
+#analysis_bw #graph_bw {border:1px #ddd solid;width:100%;height:300px;color:#555;font-family:"Arial",  "Tahoma";font-size:9pt;background:#f5f5f5;padding:0px;margin:10px auto 10px auto;}
+
+
+/* 방문자 분석 */
+#analysis_cnt {}
+#analysis_cnt table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_cnt th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_cnt td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_cnt table#analysis_cnt_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_cnt table#analysis_cnt_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_cnt table#analysis_cnt_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_cnt table#analysis_cnt_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_cnt table#analysis_cnt_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_cnt table#analysis_cnt_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_cnt table#analysis_cnt_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+/* 접근경로 분석 */
+#analysis_path {}
+#analysis_path table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_path th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_path td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_path table#analysis_path_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_path table#analysis_path_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_path table#analysis_path_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_path table#analysis_path_table td.index {text-align:left;background:#F7F7F7;padding-left:10px;}
+#analysis_path table#analysis_path_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_path table#analysis_path_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_path table#analysis_path_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+/* 접근OS 분석 */
+#analysis_os {}
+#analysis_os table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_os th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_os td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_os table#analysis_os_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_os table#analysis_os_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_os table#analysis_os_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_os table#analysis_os_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_os table#analysis_os_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_os table#analysis_os_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_os table#analysis_os_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}
+
+/* 접근브라우져 분석 */
+#analysis_bw {}
+#analysis_bw table { border:0px #ccc solid;border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_bw th { border:0px #e4e4e4 solid; background:#f0f0f0; line-height:16px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_bw td {border:0px #e4e4e4 solid; line-height:16px;font-size:8pt; color:#555;padding:2px;}
+
+#analysis_bw table#analysis_bw_table { border:1px #ccc solid; border-top:1px #999 solid;border-bottom:1px #999 solid; width:100%; border-collapse: collapse; margin:0px auto 0px auto;}
+#analysis_bw table#analysis_bw_table th { border:1px #e4e4e4 solid; border-bottom:1px #999 solid; background:#f0f0f0; line-height:24px; text-align:center;font-weight:bold; padding:2px 0px 2px 5px;}
+#analysis_bw table#analysis_bw_table td {border:1px #e4e4e4 solid; line-height:18px; color:#555; padding:5px;}
+#analysis_bw table#analysis_bw_table td.index {text-align:center;background:#F7F7F7;}
+#analysis_bw table#analysis_bw_table td.order {text-align:center;background:#FFF1F0;}
+#analysis_bw table#analysis_bw_table td.payment {text-align:center;background:#FBFFF7;}
+#analysis_bw table#analysis_bw_table td.amount {text-align:right;font-weight:bold;background:#F4FDFF;color:#a60000;}

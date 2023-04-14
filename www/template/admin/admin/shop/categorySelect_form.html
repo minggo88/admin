@@ -1,0 +1,133 @@
+<style type="text/css">
+body {overflow-y:auto; overflow-x:hidden; background-image:none;}
+</style>
+<script type="text/javascript">
+<!--
+
+//카테고리 추가하기
+function addCategory() {
+	var select_category;
+	var arr_category_code = [];
+	var arr_category_name = [];
+	var index_a = $('#category_1')[0].selectedIndex;
+	var index_b = $('#category_2')[0].selectedIndex;
+	var index_c = $('#category_3')[0].selectedIndex;
+	var index_d = $('#category_4')[0].selectedIndex;
+
+	if((index_a+index_b+index_c+index_d) == 0) {
+		alert('카테고리를 선택하여 주세요.!');
+		return false;
+	}
+
+	if(index_a > 0) {
+		select_category = $('#category_1 option:selected').val();
+		array_push(arr_category_code,$('#category_1 option:selected').val());
+		array_push(arr_category_name,$('#category_1 option:selected').text());
+	}
+	if(index_b > 0) {
+		select_category = $('#category_2 option:selected').val();
+		array_push(arr_category_code,$('#category_2 option:selected').val());
+		array_push(arr_category_name,$('#category_2 option:selected').text());
+	}
+	if(index_c > 0) {
+		select_category = $('#category_3 option:selected').val();
+		array_push(arr_category_code,$('#category_3 option:selected').val());
+		array_push(arr_category_name,$('#category_3 option:selected').text());
+	}
+	if(index_d > 0) {
+		select_category = $('#category_4 option:selected').val();
+		array_push(arr_category_code,$('#category_4 option:selected').val());
+		array_push(arr_category_name,$('#category_4 option:selected').text());
+	}
+
+	//하위카테고리가 존재하는 여부를 확인한다.
+	var category_path = implode('',arr_category_code);
+	var obj = eval("category_object['"+category_path+"']");
+	if(typeof(obj) == 'object') {
+		if(sizeof(obj['code']) > 1) {
+			alert('하위카테고리가 존재합니다.!');
+			return false;
+		}
+	}
+
+	if(!confirm('카테고리를 추가 하시겠습니까?')) {
+		return false;
+	}
+	$('#frmAddCategory').ajaxSubmit({
+		success: function (data, statusText) {
+			if(data['bool']) {
+				alert('선택하신 상품들에 카테고리가 추가되었습니다.!');
+				parent.document.location.replace('<!--{=base64_decode(_GET.ret_url)}-->');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					parent.document.location.replace('/admin/auth.php?ret_url=<!--{=base64_decode(_GET.ret_url)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},
+		dataType:'json',
+		resetForm: false
+	});
+	return false;
+}
+//-->
+</script>
+<div class="area_remark">
+	추가하실 카테고리를 선택하여 주세요.
+</div>
+<!-- goods_sort -->
+<div id="search_area">
+<form method="post" name="frmAddCategory" id="frmAddCategory"  action="/shop/admin/goods.php" onsubmit="return false;">
+<input type="hidden" name="pg_mode" value="add_goods_category" />
+<input type="hidden" name="goodscodes" value="<!--{goodscodes}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>1차</th>
+		<td>
+			<select id="category_1" name="category_1">
+				<option value="">:::1차카테고리:::</option>
+			</select> 
+		</td>
+	</tr>
+	<tr>
+		<th>2차</th>
+		<td>
+			<select id="category_2" name="category_2">
+				<option value="">:::2차카테고리:::</option>
+			</select> 
+		</td>
+	</tr>
+	<tr>
+		<th>3차</th>
+		<td>
+			<select id="category_3" name="category_3">
+				<option value="">:::3차카테고리:::</option>
+			</select> 
+		</td>
+	</tr>
+	<tr>
+		<th>4차</th>
+		<td>
+			<select id="category_4" name="category_4">
+				<option value="">:::4차카테고리:::</option>
+			</select>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><a href="javascript:;" onclick="addCategory()">카테고리 추가</a></span>
+</div>
+</form>
+</div>

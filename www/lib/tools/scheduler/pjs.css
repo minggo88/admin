@@ -1,0 +1,25 @@
+BODY{ /*color:#107B08*/; font-size: 11pt; font-family:"Nanum Gothic","Malgun Gothic",Apple Gothic,Verdana;}
+.button {background-color:#94CE94; color:#107B08; font-weight: bold}
+em {color:#000;}
+
+table{font-size: 11pt; font-family: "Nanum Gothic","Malgun Gothic",Apple Gothic,Verdana; font-weight: normal}
+
+/* common css */
+.tleft{text-align:left;}
+.tright{text-align:right;}
+.tcenter{text-align:center;}
+.wfull{width:100%}
+
+
+/* FROM: http://spiffybox.com  - Bloody spiffing */
+.cssbox, .cssbox_body, .cssbox_head, .cssbox_head p
+    { background: transparent url(box-bk.png) no-repeat bottom right}
+.cssbox_head p {font-size:100%;color:#000;}
+.cssbox {padding-right:15px; margin:20px auto}
+.cssbox_head {background-position:top right; margin-right:-15px; padding-right:40px}
+.cssbox_head p
+    { background-position:top left; margin:0; border:0;
+      padding:10px 0 10px 40px;
+      height:auto !important;
+      height:1%} /* IE Holly Hack */
+.cssbox_body {background-position:bottom left; margin-right:25px; padding:1px 0 10px 0px}

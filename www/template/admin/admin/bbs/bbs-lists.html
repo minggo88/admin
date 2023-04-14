@@ -1,0 +1,230 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><!--{info_bbs.title}--></h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="/bbs/admin/bbsAdmin.php?pg_mode=list&bbscode=PY395"> 커뮤니티관리</a>
+            </li>
+            <li class="active">
+                <strong><!--{info_bbs.title}--></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce mb-50">
+
+    <!--{*
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="order_id">Order ID</label>
+                    <input type="text" id="order_id" name="order_id" value="" placeholder="Order ID" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="status">Order status</label>
+                    <input type="text" id="status" name="status" value="" placeholder="Status" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="customer">Customer</label>
+                    <input type="text" id="customer" name="customer" value="" placeholder="Customer" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="date_added">Date added</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_added" type="text" class="form-control" value="03/04/2014">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="date_modified">Date modified</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_modified" type="text" class="form-control" value="03/06/2014">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="amount">Amount</label>
+                    <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+    *}-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-bottom: 50px">
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <colgroup>
+                            <col width="70">
+                            <col width="80">
+                            <!--{? _GET.bbscode=='ZI771'}-->
+                            <col width="100">
+                            <!--{/}-->
+                            <col width="*">
+                            <col width="120">
+                            <col width="100">
+                            <col width="100">
+                            <col width="140">
+                            <col width="150">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th data-hide="phone,tablet"><input type="checkbox" id="all_check" /></th>
+                            <th data-hide="phone">No</th>
+                            <!--{? _GET.bbscode=='ZI771'}-->
+                            <th>Status</th>
+                            <!--{/}-->
+                            <th>Title</th>
+                            <th data-hide="phone">Name</th>
+                            <th data-hide="phone,tablet">Comment</th>
+                            <th data-hide="phone,tablet">Hit</th>
+                            <th data-hide="phone">Date</th>
+                            <th data-hide="phone,tablet" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{@ loop_bbs_notice}-->
+                        <tr>
+                            <td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" id="dp_<!--{.depth}-->" class="th_<!--{.thread}-->" /></td>
+                            <td><span class="label label-primary">공지</span></td>
+                            <!--{? _GET.bbscode=='ZI771'}-->
+                            <td></td>
+                            <!--{/}-->
+                            <td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}--><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject}--></a>
+                                <!--{? .bool_icon_new}--><img src="./images/icon_new.gif" alt="icon_new" /><!--{/}-->
+                                <!--{? .bool_icon_hot}--><img src="./images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+                                <!--{? .bool_icon_secret}--><img src="./images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+                                <!--{? .bool_icon_file}--><img src="./images/icon_file.gif" alt="icon_file" /><!--{/}-->
+                            </td>
+                            <td><!--{.author}--></td>
+                            <td><!--{.cnt_comment}--></td>
+                            <td><!--{.hit}--></td>
+                            <td><!--{=date('Y-m-d H:i:s',.regdate)}--></td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button class="btn-white btn btn-xs" onclick="location.href='?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->';">View</button>
+                                    <button class="btn-white btn btn-xs">Edit</button>
+                                    <button class="btn-white btn btn-xs">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--{/}-->
+                        <!--{@ loop_bbs_hit}-->
+                        <tr>
+                                <td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" id="dp_<!--{.depth}-->" class="th_<!--{.thread}-->" /></td>
+                                <td><span class="label label-success">히트</span></td>
+                                <!--{? _GET.bbscode=='ZI771'}-->
+                                <td></td>
+                                <!--{/}-->
+                                <td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}--><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject}--></a>
+                                    <!--{? .bool_icon_new}--><img src="./images/icon_new.gif" alt="icon_new" /><!--{/}-->
+                                    <!--{? .bool_icon_hot}--><img src="./images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+                                    <!--{? .bool_icon_secret}--><img src="./images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+                                    <!--{? .bool_icon_file}--><img src="./images/icon_file.gif" alt="icon_file" /><!--{/}-->
+                                </td>
+                                <td><!--{.author}--></td>
+                                <td><!--{.cnt_comment}--></td>
+                                <td><!--{.hit}--></td>
+                                <td><!--{=date('Y-m-d H:i:s',.regdate)}--></td>
+                                <td class="text-right">
+                                    <div class="btn-group">
+                                        <button class="btn-white btn btn-xs" onclick="location.href='?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->';">View</button>
+                                        <button class="btn-white btn btn-xs">Edit</button>
+                                        <button class="btn-white btn btn-xs">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--{/}-->
+                        <!--{@ loop_bbs_main}-->
+                        <tr>
+                            <td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" id="dp_<!--{.depth}-->_<!--{.idx}-->" class="th_<!--{.bbscode}-->_<!--{.thread}-->" /></td>
+                            <td><!--{.no}--></td>
+                            <!--{? _GET.bbscode=='ZI771'}-->
+                            <td><!--{?.bool_status==0}--><span class="text-danger">접수중</span>
+                                <!--{:.bool_status==1}--><span class="text-primary">작업대기</span>
+                                <!--{:.bool_status==2}--><span class="text-navy">작업중</span>
+                                <!--{:.bool_status==3}--><span class="text-success">작업완료</span>
+                                <!--{/}-->
+                            </td>
+                            <!--{/}-->
+                            <td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}-->
+                                <a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject}--></a>
+                                <!--{? .bool_icon_new}--><img src="./images/icon_new.gif" alt="icon_new" /><!--{/}-->
+                                <!--{? .bool_icon_hot}--><img src="./images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+                                <!--{? .bool_icon_secret}--><img src="./images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+                                <!--{? .bool_icon_file}--><img src="./images/icon_file.gif" alt="icon_file" /><!--{/}-->
+                            </td>
+                            <td><!--{.author}--></td>
+                            <td><!--{.cnt_comment}--></td>
+                            <td><!--{.hit}--></td>
+                            <td><!--{=date('Y-m-d H:i:s',.regdate)}--></td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button class="btn-white btn btn-xs" onclick="location.href='?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->';">View</button>
+                                    <button class="btn-white btn btn-xs">Edit</button>
+                                    <button class="btn-white btn btn-xs">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--{:}-->
+                        <tr> 
+                            <td colspan="8" class="ctext">등록된 글이 없습니다.</td>
+                        </tr>
+                        <!--{/}-->
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="8">
+                                <ul class="pagination pull-right"></ul>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary" type="button" onclick="location.href='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new<!--{srch_url}-->';">글쓰기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div class="button_area_both">
+            <div class="button_left pleft">
+                <form id="controlform">
+                <input type="radio" name="pg_mode" value="del_multi" checked="checked" />선택삭제
+                <input type="radio" name="pg_mode" value="move_multi"/>선택이동
+                <select id="movebbscode" name="bbscode" class="scroll" style="display:none">
+                    <option>::: Target :::</option>
+                    <!--{@ loop_bbs}-->
+                    <option value="<!--{.bbscode}-->"><!--{.title}--></option>
+                    <!--{/}-->
+                </select> <input type="button" value="확인"  onclick="multiControl()" class="btn btn-primary" />
+                </form>
+            </div>
+            <div class="button_right pright">
+                <span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new<!--{srch_url}-->">쓰기</a></span>
+            </div>
+        </div>
+        
+
+</div>

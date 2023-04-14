@@ -1,0 +1,27 @@
+<!-- 2: style.gallery.html -->		
+<div class="gallery_list">
+  <div class="gallery">
+		<!-- photo_news_list -->
+		<!--{@ loop_bbs_recent}-->
+		<div class="photo_news_list">
+			<a href="<!--{? .bool_secret}-->/gallery/<!--{:}-->/gallery/view/<!--{.idx}--><!--{/}-->">
+				<div class="s3_photo">
+					<!--{? .bool_thumb}--><!--{.img}--><!--{:}--><img src="/template/admin/smc/img/main/main-logo2__.png" /><!--{/}-->
+				</div>
+				<p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,25)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject_en,25)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,25)}--><!--{/}--></p>
+				<span><!--{=date('m.d',.regdate)}--></span>
+			</a>
+		</div>
+		<!--{:}-->
+		<div class="figure">
+			<!--{? _SESSION.lang == 'kr'}-->
+			등록된 이미지가 없습니다.
+			<!--{: _SESSION.lang == 'en'}-->
+			There is no image.
+			<!--{: _SESSION.lang == 'cn'}-->
+			沒有圖像.
+			<!--{/}-->
+		</div>
+		<!--{/}-->
+	</div>
+</div>

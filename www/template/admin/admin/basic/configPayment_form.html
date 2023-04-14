@@ -1,0 +1,191 @@
+<script type="text/javascript">
+<!-- 
+function adminAjaxSubmit(obj,tabs_idx) {
+	obj.ajaxSubmit({
+		success: function (data, statusText) {
+			if(data['bool']) {
+				alert('저장되었습니다.!');
+				location.replace('?tabs_idx='+tabs_idx);
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},
+		dataType:'json',
+		resetForm: false
+	});
+}
+
+$(function() {
+
+	$('#jsform1').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsform2').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$.get('?pg_mode=get_account',function(data) {
+		if(data['bool']) {
+			if(data['msg'].length > 0) {
+				$('table#table_account tbody tr').remove();
+				for(var i =0;i<data['msg'].length;i++) {
+					var obj = data['msg'][i];
+					var info = '<tr>';
+					info += '<td class="pcenter"><input type="text" name="bank_name[]" value="'+obj['bank_name']+'" class="frm_input" style="width:150px;" /></td>';
+					info += '<td class="pcenter"><input type="text" name="account_no[]" value="'+obj['account_no']+'" class="frm_input" style="width:350px;" /></td>';
+					info += '<td class="pcenter"><input type="text" name="account_user[]" value="'+obj['account_user']+'" class="frm_input" style="width:150px;" /></td>';
+					info += '<td class="pcenter"><span class="button small"><button>삭제</button></span></tr>';
+					$('table#table_account tbody').append(info);
+					delAccount();
+				}
+			}
+		}
+		else {
+			location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+		}
+	},'json');
+
+	$('input[name=bool_escrow]').val(['<!--{bool_escrow}-->']);
+
+});
+
+function addAccount() {
+	$('table#table_account>tbody>tr:last-child').clone().appendTo('table#table_account>tbody');
+	$('table#table_account>tbody>tr:last-child>td>input').val('');
+	delAccount();
+}
+
+function delAccount() {
+	$('table#table_account>tbody>tr:last-child>td>span>button ').bind('click',	function() {
+		var size_tr = $('table#table_account tr').size();
+		if(size_tr > 2) {
+			if(confirm('삭제하시겠습니까?')) {
+				$(this).parent().parent().parent().remove();
+			}
+		}
+		else {
+			alert('하나 이상의 계좌가 필요합니다.');
+		}
+	});
+}
+
+$(function() {
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_01.png') 0px 0px no-repeat;">몰기본관리</span> / <span class="title02">결제관련설정</span></h1></div>
+<ul class="tab_menu">
+	<li <!--{? empty(_GET.tabs_idx)}-->class="selected"<!--{/}-->><a href="#payment_form_1">결제방법설정</a></li>
+	<li <!--{? _GET.tabs_idx ==1}-->class="selected"<!--{/}-->><a href="#payment_form_2">은행계좌설정</a></li>
+</ul>
+<div class="tab_container">
+	<div id="payment_form_1" class="tab_content" <!--{? !empty(_GET.tabs_idx)}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">결제방법설정</div>
+		<form id="jsform1" name="jsform1" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="tabs_idx" value="0" />
+		<table class="form_table">
+			<colgroup>
+				<col width="140"></col>
+				<col width="*"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>허용결제방법</th>
+				<td>
+					<input type="checkbox" name="bool_cash" id="bool_cash" value="1" <!--{? bool_cash > 0}-->checked="checked"<!--{/}--> /> <label for="bool_cash">무통장입금</label>
+					<input type="checkbox" name="bool_card" id="bool_card" value="1" <!--{? bool_card > 0}-->checked="checked"<!--{/}--> /> <label for="bool_card">카드</label>
+					<input type="checkbox" name="bool_vaccount" id="bool_vaccount" value="1" <!--{? bool_vaccount > 0}-->checked="checked"<!--{/}--> /> <label for="bool_vaccount">가상계좌</label>
+					<input type="checkbox" name="bool_accounttrans" id="bool_accounttrans" value="1" <!--{? bool_accounttrans > 0}-->checked="checked"<!--{/}--> /> <label for="bool_accounttrans">계좌이체</label>
+				</td>
+			</tr>
+			<tr>
+				<th>신용카드 구매액 제한</th>
+				<td>
+					<input type="text" name="payment_mincardprice" value="<!--{payment_mincardprice}-->" class="frm_input" style="width:80px" />원 이상부터 신용카드 결제 가능 
+				</td>
+			</tr>
+			<tr>
+				<th>에스크로 사용여부</th>
+				<td>
+					<input type="radio" name="bool_escrow" id="bool_escrow_y" value="1" /> <label for="bool_escrow_y">사용함</label>
+					<input type="radio" name="bool_escrow" id="bool_escrow_n" value="0" /> <label for="bool_escrow_n">사용안함</label>
+				</td>
+			</tr>
+			<tr>
+				<th>에스크로 최소 금액</th>
+				<td>
+					<input type="text" name="escrow_minprice" value="<!--{escrow_minprice}-->" class="frm_input" style="width:80px" />원 이상부터 에스크로 적용 가능 
+				</td>
+			</tr>
+
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+	<div id="payment_form_2" class="tab_content" <!--{? _GET.tabs_idx !=1}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">은행계좌 설정 (무통장결제에 사용할 은행계좌를 등록하시기 바랍니다.) </div>
+		<form name="jsform2" id="jsform2" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit_account" />
+		<input type="hidden" name="tabs_idx" value="1" />
+		<p class="button_area_right"><span class="button black"><input type="button" value=" 계좌등록 " onclick="javascript:addAccount()" /></span></p>
+		<table id="table_account" class="form_table">
+			<colgroup>
+				<col width="180"></col>
+				<col width="*"></col>
+				<col width="180"></col>
+				<col width="80"></col>
+			</colgroup>
+			<thead>
+			<tr class="pcenter">
+				<th class="pcenter">은행명</th>
+				<th class="pcenter">계좌번호</th>
+				<th class="pcenter">예금주</th>
+				<th class="pcenter">삭제</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="pcenter"><input type="text" name="bank_name[]" class="frm_input" style="width:150px;" /></td>
+				<td class="pleft"><input type="text" name="account_no[]" class="frm_input" style="width:350px;" /></td>
+				<td class="pcenter"><input type="text" name="account_user[]" class="frm_input" style="width:150px;" /></td>
+				<td class="pcenter"><span class="button small"><button>삭제</button></span></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value="변경저장" /></span>
+		</div>
+		</form>
+	</div>
+</div>

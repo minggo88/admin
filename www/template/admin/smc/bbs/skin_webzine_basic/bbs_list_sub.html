@@ -1,0 +1,56 @@
+<!-- 1: style.webzine.html -->
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('div.webzine:even').css("background-color", "<!--{config.color_even}-->");
+	$('div.webzine:odd').css("background-color", "<!--{config.color_odd}-->");
+	$('div.webzine').mouseover(function() { $(this).css("background-color", "<!--{config.color_rollover}-->"); });
+	$('div.webzine').mouseout(function() { 
+		$('div.webzine:even').css("background-color", "<!--{config.color_even}-->");
+		$('div.webzine:odd').css("background-color", "<!--{config.color_odd}-->");
+	});
+});		
+//-->
+</script>
+
+<div id="webzine_list">
+		<!--{@ loop_bbs_main}-->
+		<!--{? .bool_secret}-->
+		<div class="webzine">
+			<div class="figure">
+				<div class="photo"><a href="javascript:showBbsPopup('?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->')"><!--{? .bool_thumb}--><img src="<!--{.img}-->" width="<!--{.img_width}-->" alt="<!--{.subject}-->"  /><!--{:}--><img src="../images/no_img.gif" width="<!--{config.thumb_width}-->" height="<!--{config.thumb_height}-->" alt="No Image" /><!--{/}--></a></div>
+			</div>
+			<div class="figure2">
+				 <div class="subject">				 
+					<a href="javascript:showBbsPopup('?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->')"><b><!--{=cutStr(.subject,50)}--></b></a><!--{? .use_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+				 </div>
+				<div class="author"><!--{.author}--></div>
+				<div class="date"><!--{=date('Y-m-d',.regdate)}--></div>
+				<div class="hit">조회수 <!--{.hit}--></div>
+				<div class="summary"><a href="javascript:showBbsPopup('?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->')"><!--{=cutStr(.contents,200)}--></a></div>
+			</div>
+		</div>
+		<!--{:}-->
+		<div class="webzine">
+			<div class="figure">
+				<div class="photo"><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{? .bool_thumb}--><img src="<!--{.img}-->" width="<!--{.img_width}-->" alt="<!--{.subject}-->"  /><!--{:}--><img src="../images/no_img.gif" width="<!--{config.thumb_width}-->" height="<!--{config.thumb_height}-->" alt="No Image" /><!--{/}--></a></div>
+			</div>
+			<div class="figure2">
+				 <div class="subject">				 
+					<a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><b><!--{=cutStr(.subject,50)}--></b></a><!--{? .use_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+				 </div>
+				<div class="author"><!--{.author}--></div>
+				<div class="date"><!--{=date('Y-m-d',.regdate)}--></div>
+				<div class="hit">조회수 <!--{.hit}--></div>
+				<div class="summary"><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{=cutStr(.contents,200)}--></a></div>
+			</div>
+		</div>
+		<!--{/}-->
+		<!--{:}-->
+		<div class="webzine">
+			<div class="figure">
+				<div class="photo">등록된 이미지가 없습니다.</div>
+			</div>
+		</div>
+		<!--{/}-->
+</div>

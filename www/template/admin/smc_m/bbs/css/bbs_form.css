@@ -1,0 +1,28 @@
+@charset "utf-8"; /* 한글 */
+
+div#bbs_content_form{width:100%;color:#777;margin:5px auto 5px auto;clear:both;}
+div#bbs_content_form table { border-top:0px #ccc solid; border-bottom:1px #ccc solid; width:100%; border-collapse: collapse; margin:0px auto;}
+div#bbs_content_form th { border-top:1px #469AAE solid; border-right:0px #ccc solid;border-bottom:1px #ccc solid;text-align:left; background:#f0f0f0; line-height:16px; font-weight:bold; padding:4px;}
+div#bbs_content_form td {border-right:0px #ccc solid;border-bottom:1px #ccc solid; line-height:16px; padding:4px;}
+div#bbs_content_form img{text-align:left;}
+div#bbs_content_form .entry{ background:#f0f0f0;font-weight:bold; }
+div#bbs_content_form .data{ background:#fff;}
+
+div#bbs_content_form #author{border:1px #ccc solid;width:120px;height:18px;line-height:18px;color:#555;}
+div#bbs_content_form #passwd{border:1px #ccc solid;width:120px;height:18px;line-height:18px;color:#555;}
+div#bbs_content_form #email{border:1px #ccc solid;width:320px;height:18px;line-height:18px;color:#555;}
+div#bbs_content_form #link{border:1px #ccc solid;width:320px;height:18px;line-height:18px;color:#555;}
+div#bbs_content_form #subject{border:1px #ccc solid;width:460px;height:18px;line-height:18px;color:#555;}
+
+#bbs_content_editor {border-top:1px #ccc solid;text-align:center; margin:10px 0px 10px 0px;}
+#bbs_content_editor #contents {width:750px;height:300px;}
+
+div#bbs_content_form #buttonArea {text-align:center;padding:10px;}
+div#bbs_content_form #buttonArea button.grad_bbs{width:70px;height:24px;font-size:12px;padding:0px 0px 0px 0px;margin:0px;}
+
+#bbs_content_bottom{text-align:center; margin-top:15px;}
+
+div#bbs_footer{border:0px #ccc solid;width:750px;margin:0px auto;}
+
+#fg_bbs_edit_form table { margin:5px auto 5px auto;}
+#fg_bbs_edit_form td { text-align:center;padding:3px;}

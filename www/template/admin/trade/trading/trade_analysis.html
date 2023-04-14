@@ -1,0 +1,129 @@
+<div class="wrapper wrapper-content animated fadeInRight"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="pl-3">
+                <div class="middle_div big mb-10">
+                    <div class="total_div npn">
+                        <span class="entry"><?=Lang::main_analysis_3;?> : </span>
+                        <span class="data" name="total.investment_income_percent"></span><span class="data">%</span>
+                    </div>
+                    <div class="left_div">
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_1;?>(KRW)</div>
+                            <div class="inner_div"><span name="total.investment_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_2;?>(KRW)</div>
+                            <div class="inner_div npn"><span name="total.investment_income">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_4;?></div>
+                            <div class="inner_div"><span name="total.basic_evaluation_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_5;?></div>
+                            <div class="inner_div"><span name="total.final_evaluation_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                    </div>
+                    <div class="right_div">
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_6;?></div>
+                            <div class="inner_div"><span name="total.available_withdraw_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_7;?></div>
+                            <div class="inner_div"><span name="total.available_order_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_8;?></div>
+                            <div class="inner_div"><span name="total.deposit_evaluation_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                        <div class="data_div">
+                            <div class="header_div"><?=Lang::main_analysis_9;?></div>
+                            <div class="inner_div"><span name="total.withdraw_evaluation_amount">0</span><?=Lang::main_analysis_won;?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive historyTb">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="18%" />
+                            <col width="10%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="15%" />
+                            <col width="" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="text-center"><?=Lang::main_analysis_10;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_11;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_12;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_13;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_14;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_15;?></th>
+                            <th class="text-center"><?=Lang::main_analysis_16;?></th>
+                        </tr>
+                        </thead>
+                        <tbody name="table_profit">
+                            <tr name="empty" style="display:none">
+                                <td colspan="7" class="text-center"><?=Lang::main_analysis_33;?></td>
+                            </tr>
+                            <tr name="loading">
+                                <td colspan="7" class="text-center"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                            </tr>
+                            <tr name="tpl" style="display:none">
+                                <td class="pcenter text-left mergeTd symbol light">
+                                    <!-- <span class="icon-24 icon-24-{coin.symbol} mr-5" style="margin-bottom: -5px;"></span> -->
+                                    <img src="{coin.icon_url}" style="height:24px;width:24px;">
+                                    {coin.name}
+                                </td>
+                                <td class="pcenter text-center mergeTd">
+                                    {coin.SYMBOL}
+                                </td>
+                                <td class="pcenter text-right numberDiv">
+                                    <div class="number_div">{coin.basic_balance}</div>
+                                    <div class="symbol_div">≈{coin.basic_evaluation_amount}KRW</div>
+                                </td>
+                                <td class="pcenter text-right numberDiv">
+                                    <div class="number_div">{coin.final_balance}</div>
+                                    <div class="symbol_div">≈{coin.final_evaluation_amount}KRW</div>
+                                </td>
+                                <td class="pcenter text-right mergeTd light">
+                                    <div class="number_div">{coin.deposit_evaluation_amount}<?=Lang::main_analysis_won;?></div>
+                                </td>
+                                <td class="pcenter text-right mergeTd light">
+                                    <div class="number_div">{coin.withdraw_evaluation_amount}<?=Lang::main_analysis_won;?></div>
+                                </td>
+                                <td class="pcenter text-center mergeTd light">
+                                    <a href="/trade/{coin.symbol}" class="btn btn-primary btn-xs {hide_trade_btn}">거래</a>
+                                    <a href="/trade/deposit/{coin.symbol}" class="btn btn-primary btn-xs {hide_deposit_btn}"><?=Lang::main_13;?></a>
+                                    <a href="/trade/withdrawal/{coin.symbol}" class="btn btn-danger btn-xs {hide_withdrawal_btn}"><?=Lang::main_14;?></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="smart-forms mt-20 mb-40">
+                    <h2 class="text-danger fw-400"><?=Lang::main_analysis_20;?></h2>
+                    <ul>
+                        <li><?=Lang::main_analysis_21;?><br />
+                            <?=Lang::main_analysis_22;?></li>
+                        <li><?=Lang::main_analysis_23;?></li>
+                        <li><?=Lang::main_analysis_24;?>
+                            <ul>
+                                <li><?=Lang::main_analysis_25;?></li>
+                                <li><?=Lang::main_analysis_26;?></li>
+                                <li><?=Lang::main_analysis_27;?></li>
+                                <li><?=Lang::main_analysis_28;?></li>
+                                <li><?=Lang::main_analysis_29;?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <?=Lang::main_analysis_30;?> : info@kmcse.com
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

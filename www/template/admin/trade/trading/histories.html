@@ -1,0 +1,121 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container  pl-50 pr-50">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					<?=Lang::main_38;?>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight wrap-withdrawal">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h3><?=Lang::main_38;?></h3>
+                    <div class="ibox-tools hidden">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <!--{@balanceList}-->
+                        <div class="col-sm-3">
+                            <div class="widget style1 bg-muted">
+                                <div class="row">
+                                    <div class="col-xs-12 text-right">
+                                        <!-- <h2 class="font-bold"><i class="icon-24 icon-24-{=strtolower(balanceList->symbol)}"></i> {balanceList->name}</h2> -->
+                                        <h3 class="text-left coin-name" style="height: 34px;"><span class="icon-24 icon-24-<!--{=strtolower(balanceList->symbol)}-->"></span><span class="name-con m-l-xs"><!--{balanceList->name}--></span></h3>
+                                        <span> <!--{balanceList->balance}--> <!--{balanceList->symbol}--> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{/}-->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="payment-card m-b scc-payment-card">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h3 class="text-black m-t-none">예금안내</h3>
+                                        <ul class="m-b">
+                                            <li><span class="text-green">(Bitcoin)</span> 을 판매하기 위해서는 먼저 회원님의 지갑(Wallet)에 판매할 <span class="text-green">(Bitcoin)</span>을 직접 입금 하시거나 다른 회원으로 부터 <span class="text-green">(Bitcoin)</span>을 구매해야 합니다.</li>
+                                            <li>회원님께 할당된 <span class="text-green">(Bitcoin)</span> 주소로 <span class="text-green">(Bitcoin)</span>을 전송하시면 자동으로 지갑에 반영됩니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul class="list-group scc-list-group m-b-none">
+                                        <li class="list-group-item">
+                                            <h4>Address</h4>
+                                            <div class="input-group">
+                                                <div class="text-muted">(Bitcoin)주소를 생성해주세요</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>Address</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control text-muted" disabled value="1PoW5WEaaCY3ykDTf7wtitQoeaPmVd8LXm">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>BTC Account</h4>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control text-muted append-uint" disabled value="10">
+                                                <span class="text-primary">scc</span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>QR Cord</h4>
+                                            <div class="input-group">
+                                                <div class="qr-code text-right"><img src="/template/trade/img/qrcode.png" alt=""></div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-12 text-center">
+                                    <button type="button" class="btn btn-primary btn-block btn-xl">Create BTC
+                                        Address</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div id="main_contents"></div> -->
+
+<!-- 
+    <!--{_GET.pg_mode}-->
+<br />
+<!--{_GET.coin}-->
+-->

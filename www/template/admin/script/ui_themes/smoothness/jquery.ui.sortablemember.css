@@ -1,0 +1,133 @@
+/* Sortable
+----------------------------------*/
+.ui-state-default {
+	border:1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+	width:156px;
+	height:20px;
+	line-height:20px;
+	background: #f9f9f9 url(/template/admin/images/arrow_off.gif) 3px 50% no-repeat !important;;
+	font-weight: normal;
+	color: #555555;
+	padding:5px 5px 5px 30px;
+	cursor:move;
+	margin:0px 0px 5px 0px;
+	outline: none;
+	z-index:500;
+}
+
+
+.ui-state-default a {
+	cursor:pointer;
+}
+
+.ui-state-hover {
+	border-right: 0px solid #999999;
+	background: #fff; 
+	font-weight: normal;
+	color: #555555;
+	padding:5px;
+	cursor:move;
+	margin:0px 0px 5px 0px;
+	outline: none;
+	z-index:500;
+}
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-highlight {
+	border-top: 1px solid #777;
+	border-right: 0px solid #777;
+	border-bottom: 1px solid #777;
+	border-left: 1px solid #777;
+	width:157px;
+	height:20px;
+	line-height:20px;
+	background: #fff url(/template/admin/images/arrow_over.gif) 3px 50% no-repeat !important;;
+	font-weight: bold; 
+	color: #a60000;
+	padding:5px 5px 5px 30px;
+	margin:0px -1px 5px 0px;
+	z-index:1000;
+}
+
+.ui-state-disabled {
+	border:1px dotted #9F0000;
+	opacity: .70; filter:Alpha(Opacity=70);
+	background-image: none;
+}
+
+/* gallery type
+----------------------------------*/
+.ui-state-highlight_easy_form {
+	border:1px dotted #a60000;
+	background:#FFDFDF;
+	width:86px;
+	height:119px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+
+/* gallery_a type
+----------------------------------*/
+.ui-state-highlight_easy_form_gallery_a {
+	border:1px dotted #a60000;
+	background:#FFDFDF;
+	width:86px;
+	height:110px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+
+/* 잠시 주석 ..
+.ui-state-highlight_easy_form_gallery_a {
+	border: 1px solid #a60000;
+	background:#a60000;
+	width:200px;
+	height:230px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+.ui-state-highlight_easy_form_gallery_a {
+	border: 1px solid #a60000;
+	background:#a60000;
+	width:1px;
+	height:1px;
+	color: #a60000;
+	text-align:center;
+	padding:1px;
+	margin:0px 0px 0px 0px;
+	float:left;
+	z-index:1000;
+}
+*/
+
+
+
+/* list type
+----------------------------------*/
+.ui-state-highlight_easy_form_list {
+	border: 1px dotted #a60000;
+	background:#FFDFDF;
+	width:225px;
+	height:80px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+

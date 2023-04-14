@@ -1,0 +1,173 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#goods_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#frmgrp').submit(function() {
+		var chk_option = [
+			{ 'target':'grp_name', 'name':'그룹명', 'type':'blank', 'msg':'그룹명을 입력해주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('그룹을 추가하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('그룹이 추가되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('#frmgrp1').submit(function() {
+		if(!confirm('수정사항을 저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장 되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+function grpDel(grp_code) {
+	if(!confirm("그룹을 삭제하시겠습니까?")) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del_grp&grp_code='+grp_code,function(data) {
+		if(data['bool']) {
+			alert('그룹이 삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else if(data['msg'] == 'err_exist') {
+				alert("선택한 그룹을 사용중인 메인항목이 존재합니다.\n\n사용중인 메인항목을 먼저 삭제하세요.!");
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+<div class="title_d1"><h1>메인페이지진열</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">메인 생성 폼</div>
+<form method="post" name="frmgrp" id="frmgrp" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="write_grp" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="70%"></col>
+		<col width="15%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>그룹명</th>
+		<td><input type="text" name="grp_name" value="" class="frm_input" style="width:150px" /></td>
+		<td><span class="button middle black"><input type="submit" value="추가하기" /></span></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="title_d2"><img src="../images/bullet.gif">메인 그룹 관리</div>
+<form method="post" name="frmgrp1" id="frmgrp1" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit_grp" />	
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="50"></col>
+		<col width="*"></col>
+		<col width="400"></col>
+		<col width="100"></col>
+		<col width="50"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>순번</th>
+		<th>그룹코드</th>
+		<th>그룹명</th>
+		<th>사용여부</th>
+		<th>삭제</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_grp}-->
+	<tr id="<!--{.grp_code}-->">
+		<td><!--{.index_+1}--></td>
+		<td>
+			<input type="hidden" name="grp_code[]" value="<!--{.grp_code}-->" />
+			<!--{.grp_code}-->
+		</td>
+		<td><input type="text" name="grp_name[]" value="<!--{.grp_name}-->" class="frm_input" style="width:150px" /></td>
+		<td>
+			<select name="bool_use[]">
+				<option value="1" <!--{? .bool_use > 0}-->selected="selected"<!--{/}-->>사용함</option>
+				<option value="0" <!--{? .bool_use == 0}-->selected="selected"<!--{/}-->>사용안함</option>
+			</select>
+		</td>
+		<td><span class="button small black"><a href="javascript:;" onclick="grpDel('<!--{.grp_code}-->')">삭제</a></span></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="5">등록된 그룹이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_both">
+	<div class="button_left">
+		<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->">메인관리가기</a></span>
+	</div>
+	<div class="button_right">
+		<span class="button black"><input type="submit" value="저 장" /></span>
+	</div>
+</div>
+</form>

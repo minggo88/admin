@@ -1,0 +1,105 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$('#main_goods').tableDnD();
+	$("#main_goods tbody tr").hover(
+		function() { $(this.cells[0]).addClass('showDragHandle'); },
+		function() { $(this.cells[0]).removeClass('showDragHandle');	});
+});
+
+function delDiv(main_code) {
+	$.getJSON('/shop/admin/shopmain.php?pg_mode=del&main_code='+main_code,
+		function(data){
+			if(data['bool']) { 
+				alert('삭제되었습니다.');
+				location.href = '/shop/admin/shopmain.php';
+			}
+			else { alert('재시도 해주세요!'); }
+		});
+}
+
+function setOrder()
+{
+	$.getJSON('/shop/admin/shopmain.php?pg_mode=set_order&'+$('#main_goods').tableDnDSerialize(),
+		function(data) {
+			if(data['bool']) { alert('적용되었습니다.'); }
+			else { alert('재시도 해주세요!'); }
+		});
+}
+
+//-->
+</script>
+
+
+
+<!--
+category_code
+bool_category_goods
+set_category_scope
+bool_hit_goods
+set_hit_method
+hit_goods
+bool_recommend_goods
+set_recommand_method
+recommend_goods
+bool_new_goods
+set_new_method
+new_goods
+layout_category_goods
+display_type
+
+-->
+<div id="fg_layout_contitle"><h1>상품DB 다운로드</h1></div>
+<div id="main_contents">
+	<div id="shop_category_goods">
+		<div id="shop_category_goods_title"><img src="../images/bullet.gif"> 분류페이지 상단상품 관리</div>
+		<table>
+			<col width="140">
+			<col width="75">
+			<col width="75">
+			<col width="75">
+			<col width="75">
+			<col width="75">
+			<col width="75">
+			<col width="90">
+			<col width="75">
+			<col width="43">
+			<thead>
+			<tr>
+				<th rowspan="2">분류명</th>
+				<th colspan="2">히트상품</th>
+				<th colspan="2">추천상품</th>
+				<th colspan="2">신상품</th>
+				<th rowspan="2">적용범위</th>
+				<th rowspan="2">사용여부</th>
+				<th rowspan="2">수정</th>
+			</tr>
+			<tr>
+				<th>등록상품</th>
+				<th>적용방법</th>
+				<th>등록상품</th>
+				<th>적용방법</th>
+				<th>등록상품</th>
+				<th>적용방법</th>
+			</tr>
+			</thead>
+			<tbody>
+			<!--{@ loop_category}-->
+			<tr>
+				<td class="pleftpd5"><!--{.category_name}--></td>
+				<td class="ctext"><!--{.cnt_hit}--></td>
+				<td class="ctext"><!--{.set_hit_method}--></td>
+				<td class="ctext"><!--{.cnt_recommend}--></td>
+				<td class="ctext"><!--{.set_recommand_method}--></td>
+				<td class="ctext"><!--{.cnt_new}--></td>
+				<td class="ctext"><!--{.set_new_method}--></td>
+				<td class="ctext"><!--{? .set_category_scope == 'all'}-->전체적용<!--{:}-->해당카테고리<!--{/}--></td>
+				<td class="ctext"><!--{? .bool_category_goods}--><span class="red"><img src="../images/btn_no_use.gif" alt="사용안함"></span><!--{:}--><span class="black"><img src="../images/btn_use.gif" alt="사용함"></span><!--{/}--></td>
+				<td class="ctext"><a href="?pg_mode=form_edit&category_code=<!--{.category_code}-->"><img src="../images/btn_modify.gif" alt="수정"></a></td>
+			</tr>
+			<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+</div>

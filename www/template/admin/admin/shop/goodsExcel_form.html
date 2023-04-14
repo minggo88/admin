@@ -1,0 +1,84 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#frmExcel').submit(function() {
+		var file_excel = $('input[name=file_excel]').val();
+		if(!file_excel) {
+			alert('csv파일을 선택하여 주세요.!');
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('상품등록이 완료되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+//-->
+</script>
+<div class="title_d1"><h1>엑셀상품등록</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">상품등록</div>
+<form method="post" name="frmExcel" id="frmExcel" action="<!--{_SERVER.SCRIPT_NAME}-->" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="write_csv"/>
+<div class="area_remark">
+<ul>
+	<li class="underline highlight">* 등록방법</li>
+	<li class="underline dotted">1. 입력포맷을 다운받는다. <span class="button small black"><a href="/shop/admin/exampleCsv.php">입력포맷다운로드</a></span></li>
+	<li class="underline dotted">2. 예제화일에 상품정보를 입력합니다.</li>
+	<li class="underline dotted">3. 파일형식 : CSV (쉼표로 분리)를 선택하여 저장합니다.</li>
+	<li class="underline dotted">4. 저장된 CSV파일을 아래 엑셀화일에서 찾아보기를 클릭하여 해당 CSV파일을 선택한 후 확인을 클릭하시면 해당 상품이 저장됩니다.</li>
+	<li class="underline dotted">5. 엑셀 상품 등록시 옵션은 10개 항목까지 입력이 가능합니다.</li>
+	<li class="underline dotted"> ex) 사이즈-1@대-200|중-100</li>
+	<li class="underline dotted"> @앞은 옵션의 항목을 항목명 다음에 나오는 1 또는 0는 필수항목 여부를 설정하는 것입니다.</li>
+	<li class="underline dotted"> @뒤는 옵션을 기술합니다 옵션-가격 순으로 구분은 | 으로 하면 됩니다.</li>
+</ul>
+<ul>
+	<li class="underline highlight">*  상품 설명 및 상품 이미지 등록방법</li>
+	<li class="underline dotted">1. 엑셀화일을 통한 상품등록에서 상품설명은 한개 이미지로 등록가능합니다.</li>
+	<li class="underline dotted">2. FTP프로그램으로 접속하여 웹루트 폴더 아래에 /data/uploadTemp/안에 이미지 파일을 업로드 합니다.</li>
+	<li class="underline dotted">3. 엑셀예제에서 상품설명 항목에 업로드한 이미지파일명을 입력하시면 됩니다.(예: img001.jpg)</li>
+	<li class="underline dotted">-  이미지 명은 영문과 한글로 입력을 권장합니다.</li>
+	<li class="underline dotted">4. 상품이미지 등록 방법도 1,2,3 항목과 동일합니다.</li>
+	<li class="underline dotted">5. 상품이미지 등록시 이미지 사이즈를 500px X 500px로 조정하여 등록하시면 안정적인 상품이미지 등록이 가능합니다.</li>
+</ul>
+<ul>
+	<li class="underline highlight">* 카테고리 등록방법</li>
+	<li class="underline dotted">1. 등록된 상품정보는 상품목록관리에서 카테고리 추가를 통해서 원하시는 카테고리 등록이 가능합니다.</li>
+</ul>
+</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>엑셀화일</th>
+		<td><input type="file" name="file_excel" value="" class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>
+</div>
+</form>

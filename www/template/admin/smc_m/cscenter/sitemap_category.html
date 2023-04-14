@@ -1,0 +1,16 @@
+<!-- // 카테고리 -->
+<!--{@loop_sitemap}-->
+<div class="d_<!--{.index_%3}-->">
+	<dl>
+		<dt><a href="<!--{?empty(.link_name)}--><!--{.link_url}--><!--{:}-->/<!--{.link_name}--><!--{/}-->"><!--{.contents_name}--></a></dt>
+		<dd>
+			<ul class="cols_0<!--{.index_+1}-->">
+			<!--{@loop_sub}-->
+				<li class="col_0<!--{..index_%4+1}-->"><span class="s_menu"><a href="<!--{?empty(..link_name)}--><!--{..link_url}--><!--{:}-->/<!--{..link_name}--><!--{/}-->"><!--{..contents_name}--></a></span></li>
+			<!--{/}-->
+			</ul>
+		</dd>
+	</dl>
+</div>
+<!--{?.index_%3==2}--><div class="clearline"></div><!--{/}-->
+<!--{/}-->

@@ -1,0 +1,129 @@
+<div class="container white_bg">
+	<div class="row">
+		<div class="col-sm-12 text-white  navy_bg">
+			<h4 class="section-title body-font text-left fs-18 pt-10 pb-20">
+					<!--{? _GET.bbscode=='PY395'}-->
+					<?=Lang::main_6;?>
+					<!--{: _GET.bbscode=='NW620'}-->
+					<?=Lang::main_125;?>
+					<!--{: _GET.bbscode=='CN719'}-->
+					<?=Lang::main_126;?>
+					<!--{: _GET.bbscode=='PT038'}-->
+					<?=Lang::main_127;?>
+					<!--{/}-->
+					<small class="fs-30 pl-20 pt-10" style="color:#536475;"><?=Lang::main_2;?></small>
+				</h4>
+		</div>
+	</div>
+		<div class="row">
+			<div class="hidden-md-down col-lg-2 Rectangle-6-copy-8 hidden">
+				<div class="Rectangle-6-copy-4 first">
+					<label class="Rectangle-Text"><a href="/faq"><?=Lang::main_31;?></a></label>
+				</div>
+				<div class="layer"></div>
+				<div class="Rectangle-6-copy-4 <!--{? _GET.bbscode=="PY395"}-->active<!--{/}-->">
+					<label class="Rectangle-Text <!--{? _GET.bbscode=="PY395"}-->active<!--{/}-->"><a href="/notice" <!--{? _GET.bbscode=="PY395"}-->class="active"<!--{/}-->><?=Lang::main_32;?></a></label>
+				</div>
+				<div class="layer <!--{? _GET.bbscode=="PY395"}-->active<!--{/}-->"></div>
+				<div class="Rectangle-6-copy-4 <!--{? _GET.bbscode=="NW620"}-->active<!--{/}-->">
+					<label class="Rectangle-Text <!--{? _GET.bbscode=="NW620"}-->active<!--{/}-->"><a href="/mbnews"><?=Lang::main_125;?></a></label>
+				</div>
+				<div class="layer <!--{? _GET.bbscode=="NW620"}-->active<!--{/}-->"></div>
+				<div class="Rectangle-6-copy-4 <!--{? _GET.bbscode=="CN719"}-->active<!--{/}-->">
+					<label class="Rectangle-Text <!--{? _GET.bbscode=="CN719"}-->active<!--{/}-->"><a href="/coinnews"><?=Lang::main_126;?></a></label>
+				</div>
+				<!--{*
+				<div class="layer <!--{? _GET.bbscode=="CN719"}-->active<!--{/}-->"></div>
+				<div class="Rectangle-6-copy-4 <!--{? _GET.bbscode=="PT038"}-->active<!--{/}-->">
+					<label class="Rectangle-Text <!--{? _GET.bbscode=="PT038"}-->active<!--{/}-->"><a href="/gallery"><?=Lang::main_127;?></a></label>
+				</div> 
+				*}-->
+				<div class="layer <!--{? _GET.bbscode=="PT038"}-->active<!--{/}-->"></div>
+				<div class="Rectangle-6-copy-4">
+					<label class="Rectangle-Text"><a href="/mtom"><?=Lang::main_33;?></a></label>
+				</div>
+				<div class="layer"></div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30">
+				 <div class="row">
+	
+	
+				<div class="col-sm-12 mb-0 hidden">
+					 <nav class="pull-right">
+					 <ol class="breadcrumb">
+						 <li><a href="/">Home</a></li>
+						 <li><a href="/faq">Support</a></li>
+						 <li class="active">
+							 <!--{? _GET.bbscode=='PY395'}-->
+							 <?=Lang::main_6;?>
+							 <!--{: _GET.bbscode=='NW620'}-->
+							 <?=Lang::main_125;?>
+							 <!--{: _GET.bbscode=='CN719'}-->
+							 <?=Lang::main_126;?>
+							 <!--{: _GET.bbscode=='PT038'}-->
+							 <?=Lang::main_127;?>
+							 <!--{/}-->
+						 </li>
+					 </ol>
+					 </nav>
+				</div>
+	
+				<div class="col-sm-12">
+	
+					<h3 class="xspecial-heading v2 fs-18 hidden">
+						<!--{? _GET.bbscode=='PY395'}-->
+						<span><?=Lang::main_6;?></span>
+						<!--{: _GET.bbscode=='NW620'}-->
+						<span><?=Lang::main_125;?></span>
+						<!--{: _GET.bbscode=='CN719'}-->
+						<span><?=Lang::main_126;?></span>
+						<!--{: _GET.bbscode=='PT038'}-->
+						<span><?=Lang::main_127;?></span>
+						<!--{/}-->
+					</h3>
+	
+
+	
+					<div id="gallery" class="gallery_list col-md-12 mt-50 mb-50">	  
+							<!--{@ loop_bbs_main}-->
+							<div class="figure col-md-3">
+								<div class="photo">
+									<!--{? .bool_secret}-->
+									<a href="javascript:showBbsPopup('/gallery/view/<!--{.idx}-->')"><!--{? .bool_thumb}--><!--{.img}--><!--{:}--><img src="/template/admin/smc/img/main/main-logo2__.png" alt="No Image" width="<!--{info_bbs.thumb_width}-->" height="<!--{info_bbs.thumb_height}-->" /><!--{/}--></a>
+									<!--{:}-->
+									<a href="/gallery/view/<!--{.idx}-->"><!--{? .bool_thumb}--><!--{.img}--><!--{:}--><img src="/template/admin/smc/img/main/main-logo2__.png" alt="No Image"  /><!--{/}--></a>
+									<!--{/}-->			
+								</div>
+								 <div class="subject">
+									<!--{? .bool_secret}-->
+									<a href="javascript:showBbsPopup('/gallery/view/<!--{.idx}-->')"><!--{? _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,9)}--><!--{:}--><!--{=cutStr(.subject_kr,9)}--><!--{/}--></a>
+									<!--{:}-->
+									<a href="/gallery/view/<!--{.idx}-->"><!--{? _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,9)}--><!--{:}--><!--{=cutStr(.subject_kr,9)}--><!--{/}--></a>
+									<!--{/}-->
+									<!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}-->
+								 </div>
+								<div class="author"><!--{.author}--></div>
+								<div class="date"><!--{=date('Y-m-d',.regdate)}--></div>
+								<div class="hit">조회수 <!--{.hit}--></div>
+							</div>
+							<!--{:}-->
+							<div class="figure">
+								<div class="photo">등록된 이미지가 없습니다.</div>
+							</div>
+							<!--{/}-->
+						</div>
+	
+				<div class="row  col-md-12 mb-50">
+					<div class="col-md-12">
+	
+						<nav aria-label="Page navigation example">
+							<!--{navi_page}-->
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+	
+		</div>
+	</div>

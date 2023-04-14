@@ -1,0 +1,14 @@
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_03.png') 0px 0px no-repeat;">회원관리</span> / <span class="title02">실명인증 회원정보</span></h1></div>
+
+<ul class="tab_menu">
+	<li><a href="/member/admin/memberAdmin.php?pg_mode=view&userid=<!--{_GET.userid}-->">회원정보</a></li>
+	<!--{?plusInfo=='fc'}-->
+	<li><a href="/plan/admin/planHistory.php?pg_mode=plan_history&userid=<!--{_GET.userid}-->">입찰 및 낙찰이력</a></li>
+	<li><a href="/payment/admin/paymentHistory.php?pg_mode=payment_history&userid=<!--{_GET.userid}-->">결제목록(충전 및 차감내역)</a></li>
+	<!--{: plusInfo=='user'}-->
+	<li><a href="/plan/admin/planAdmin.php?pg_mode=plan_history&userid=<!--{_GET.userid}--><!--{srch_url}-->">플랜요청이력</a></li>
+	<!--{/}-->
+</ul>
+<div id="member_contents">
+<!--{# js_tpl_main_sub}-->
+</div>

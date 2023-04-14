@@ -1,0 +1,83 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+
+<!--{? info_bbs.bool_editor}-->
+var myeditor = new cheditor("myeditor");
+<!--{/}-->
+$(function() {
+	$('#jsform').submit(function() {
+		<!--{? info_bbs.bool_editor}-->
+		myeditor.outputBodyHTML();
+		<!--{/}-->
+		var chk_option = [
+			{ 'target':'author', 'name':'이름', 'type':'blank', 'msg':'작성자 이름을 입력하세요.!' },
+			{ 'target':'passwd', 'name':'비밀번호', 'type':'blank', 'msg':'비밀번호를 입력하세요.!' },
+			{ 'target':'subject', 'name':'제목', 'type':'blank', 'msg':'글 제목을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		
+		if(!confirm('입력하신 글을 등록하시겠습니까?')) {
+			return false;
+		}
+
+		<!--{? !config_basic.bool_ssl}-->
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+		<!--{:}-->
+		this.ret_url.value = base64_encode('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->');
+		<!--{/}-->
+	});
+});
+
+//쓰기 취소
+$(function  () {
+	$('#btn_cancel').click(function() {
+		history.go(-1);
+	});
+});
+
+//-->
+</script>
+
+<!--{? info_bbs.bool_header > 0 && !empty(info_bbs.header)}-->
+<div id="bbs_header">
+<!--{info_bbs.header}-->
+</div>
+<!--{/}-->
+<div id="bbs_content_form">
+<!--{# js_tpl_main_sub}-->
+</div>
+
+<!--{? info_bbs.bool_footer}-->
+<div id="bbs_footer"><!--{info_bbs.footer}--></div>
+<!--{/}-->
+
+<!--{? info_bbs.bool_editor}-->
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'contents';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>
+<!--{/}-->

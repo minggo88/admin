@@ -1,0 +1,157 @@
+
+<footer class="footer stylelamas bg-block-top-shadow">
+	<div class="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6">
+					<section>
+						<!--<div class="heading">
+							<h4 class="title">Newsletter</h4>
+						</div>
+						<p class="mb-10">
+								Enter your e-mail and subscribe to our newsletter.
+						</p>
+
+						<div class="clearfix">
+							<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST" novalidate="novalidate">
+								<div class="input-group">
+								<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+								<span class="input-group-btn">
+									<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+								</span>
+								</div>
+							</form>
+						</div>-->
+
+						<div class="heading">
+							<h4 class="title"><?=Lang::main_9;?></h4>
+						</div>
+
+						<div class="clearfix social-wrap">
+							<ul class="list-inline">
+								<li>
+								<a href="http://twitter.com/3wjoof7xzMvJXqD" class="asc_twitter clearfix">
+									<span class="social-icon"><i class="ion-social-twitter"></i></span>
+									<div class="meta clearfix">
+										<strong class="asc_count">Follow</strong>
+										<div class="name">on Twitter</div>
+									</div>
+								</a>
+								</li>
+								<li>
+								<a href="http://facebook.com/profile.php?id=100026164983506" class="asc_facebook clearfix">
+									<span class="social-icon"><i class="ion-social-facebook"></i></span>
+									<div class="meta clearfix">
+										<strong class="asc_count">Follow</strong>
+										<div class="name">on Facebook</div>
+									</div>
+								</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+				</div>
+				<div class="col-md-3 col-sm-6 hidden-sm-down">
+					<section>
+						<div class="heading">
+							<h4 class="title">Trading Link</h4>
+						</div>
+						<div class="tag-cloud clearfix mb-30">
+							<ul class="tag-cloud-inner">
+								<li class="col-md-4"><a href="/trade/gws" class="p-l-10">GWS</a></li>
+								<li class="col-md-4"><a href="/trade/htc" class="p-l-10">HTC</a></li>
+								<li class="col-md-4"><a href="<!--{? getSymbolactive('BDC')=='N'}-->javascript:alert('준비중입니다.');<!--{:}-->/trade/bdc<!--{/}-->" class="p-l-10">BDC</a></li>
+								<li class="col-md-4"><a href="/trade/btc">BTC</a></li>
+								<li class="col-md-4"><a href="/trade/eth">ETH</a></li>
+								<li class="col-md-4"><a href="/trade/ltc">LTC</a></li>
+								<li class="col-md-4"><a href="/trade/bch">BCH</a></li>
+								<li class="col-md-4"><a href="/trade/etc">ETC</a></li>
+								<li class="col-md-4"><a href="/trade/qtum">Qtum</a></li>
+								<!--{
+									<li class="col-md-4"><a href="/trade/apc">APC</a></li>
+									<li class="col-md-6"><a href="/trade/xmr">XMR</a></li>
+								}-->
+							</ul>
+						</div>
+					</section>
+				</div>
+				<div class="col-md-2 col-sm-6 hidden-sm-down">
+					<section>
+						<div class="heading">
+							<h4 class="title mb-15">Wallet Links</h4>
+						</div>
+						<div class="clearfix">
+							<ul class="list-unstyled mb-none">
+								<li>
+								<i class="fa fa-angle-double-right"></i>
+								<a href="/trade/wallet">My Wallet</a>
+								</li>
+								<li>
+								<i class="fa fa-angle-double-right"></i>
+								<a href="/trade/deposit">Deposit</a>
+								</li>
+								<!--<li>
+								<i class="fa fa-angle-double-right"></i>
+								<a href="/trade/exchange">Exchange</a>
+								</li>-->
+								<li>
+								<i class="fa fa-angle-double-right"></i>
+								<a href="/trade/withdrawal">Withdrawal</a>
+								</li>
+							</ul>
+						</div>
+					</section>
+				</div>
+
+				<div class="col-md-4 col-sm-6">
+					<section>
+						<div class="heading">
+							<h4 class="title"><?=Lang::main_216;?></h4>
+						</div>
+						<div class="map-img">
+							<ul class="pl-none">
+								<li><p><i class="fa fa-building"></i><!--{config_basic.license_company}--> </p></li>
+								<li><p><i class="fa fa-map-marker"></i><?=Lang::main_CompanyAddress;?> </p></li>
+								<li><p><i class="fa fa-envelope"></i><strong>Email:</strong> <a class="b-link" href="mailto:<!--{config_basic.shop_admin_email}-->"><!--{config_basic.shop_admin_email}--></a></p></li>
+								<!--{?config_basic.shop_phone}-->
+								<li><p><i class="fa fa-phone"></i><strong>Phone:</strong> <!--{config_basic.shop_phone}--></p></li>
+								<!--{/}-->
+								<!--{?config_basic.shop_fax}-->
+								<li><p><i class="fa fa-print"></i><strong>Fax:</strong> <!--{config_basic.shop_fax}--></p></li>
+								<!--{/}-->
+							</ul>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+					<ul class="list-inline fs-13 mb-none">
+						<li><p class="mb-0 fw-6">© 2019 <!--{config_basic.license_company}--></p></li>
+						<li class=" hidden-sm-down"><a href="/"><?=Lang::main_217;?></a></li>
+						<li class=" hidden-sm-down"><a href="/"><?=Lang::main_216;?></a></li>
+						<li><a href="/"><?=Lang::main_82;?></a></li>
+					</ul>
+				</div>
+				<div class="col-sm-4 hidden-xs-up">
+					<div class="clearfix pull-right">
+						<ul class="list-inline mb-0">
+							<li><a href="#"><div class="flag flag-us"></div></a> </li>
+							<li><a href="#"><div class="flag flag-england"></div></a> </li>
+							<li><a href="#"><div class="flag flag-th"></div></a> </li>
+							<li><a href="#"><div class="flag flag-kr"></div></a> </li>
+							<li><a href="#"><div class="flag flag-jp"></div></a> </li>
+							<li><a href="#"><div class="flag flag-cn"></div></a> </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</footer>

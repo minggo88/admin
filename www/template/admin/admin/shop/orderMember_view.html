@@ -1,0 +1,307 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('ul.tab_menu li:eq(1)').addClass('selected');
+});
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">회원정보 (<!--{userid}--> / <!--{name}-->)</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>아이디</th>
+		<td><b><!--{userid}--></b></td>
+		<th>회원가입일</th>
+		<td><!--{regdate}--></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><!--{phone}--></td>
+		<th>휴대전화</th>
+		<td><!--{mobile}--></td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td colspan="3" class="pleft"><!--{email}--></td>
+	</tr>
+	<tr>
+		<th>주문건수</th>
+		<td><b><!--{cnt_order}--></b> 건</td>
+		<th>보유적립금</th>
+		<td><b><!--{=number_format(total_emoney)}--></b> ⓟ</td>
+	</tr>
+	<tr>
+	<tr>
+		<th>총주문금액</th>
+		<td><b><!--{=number_format(total_order_amount)}--></b> 원</td>
+		<th>총결제금액</th>
+		<td><b><!--{=number_format(total_pay_amount)}--></b> 원</td>
+	</tr>
+	</tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif"> 주문상세내역 (<span>현재 주문에 대한 상세한 내역을 조회하고 수정하실 수 있습니다</span>) [<span  class="printButton">주문서인쇄</span>]</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>주문번호</th>
+		<td><!--{order_code}--></td>
+		<th>주문시간</th>
+		<td><!--{regdate}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 주문상품</div>
+
+<table class="list_table">
+	<colgroup>
+		<col width="40" /><!---->
+		<col width="70" /><!-- 상품명 사진-->
+		<col width="*" /><!-- 상품명 -->
+		<col width="100" /><!-- 판매가 -->
+		<col width="80" /><!--옵션 -->
+		<col width="50" /><!--수량1-->
+		<col width="80" /><!--합계-->
+		<col width="80" /><!--적립금-->
+	</colgroup>
+	<thead>
+	<tr>
+		<th>번호</th>
+		<th colspan="2">상품명</th>
+		<th class="right">판매가</th>
+		<th class="right">옵션</th>
+		<th>수량</th>
+		<th class="right">합계</th>
+		<th class="right">적립금</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_order}-->
+	<tr>
+		<td><!--{.index_+1}--></td>
+		<td><div class="goods_photo"><a href="/shop/shop.php?pg_mode=view_goods&goods_code=<!--{.goods_code}-->"><img src="/data/shop_a/<!--{.img_goods_a}-->" width="50" height="50" alt="<!--{.goods_name}-->" /></a></div></td>
+		<td style="text-align:left"><span class="subject"><!--{.goods_name}--></span>
+				<!--{? .cnt_option > 0}-->
+				<!--{.sel_option}-->
+				<!--{/}-->
+		</td> 
+		<td><!--{=number_format(.selling_price)}--> 원</td>
+		<td><!--{=number_format(.sub_total_option)}--> 원</td>
+		<td><!--{.order_qty}--></td>
+		<td><!--{=number_format(.sub_total)}--> 원</td>
+		<td><!--{=number_format(.emoney)}--> 원</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="8" class="ctext">선택한 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 진행상황</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>진행상황</th>
+		<td><!--{process_desc}--></td>
+	</tr>
+	</tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif"> 결제금액정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>주문금액</th>
+		<td><!--{=number_format(order_amount)}--> 원</td>
+		<th>배송비용</th>
+		<td><!--{=number_format(delivery_charge)}--> 원</td>
+	</tr>
+	<tr>
+		<th>사용적립금</th>
+		<td><!--{=number_format(pay_emoney)}--> 원</td>
+		<th>사용쿠폰</th>
+		<td>
+			<!--{? empty(coupon_dc)}-->
+			쿠폰사용내역이 없습니다.
+			<!--{:}-->
+			쿠폰코드 : <!--{coupon_code}--> / 할인금액 : <!--{=number_format(coupon_dc)}--> 원
+			<!--{/}-->
+		</td>
+	</tr>
+	<tr>
+		<th>결제금액</th>
+		<td><!--{=number_format(pay_amount)}--> 원</td>
+		<th>발생적립금</th>
+		<td><!--{=number_format(emoney)}--> 원</td>
+	</tr>
+	</tbody>
+</table>
+	
+<div class="title_d2"><img src="../images/bullet.gif"> 주문자정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>이름</th>
+		<td><!--{order_name}--> ( <!--{userid}--> )</td>
+		<th>이메일</th>
+		<td><!--{order_email}--></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><!--{order_phone}--></td>
+		<th>휴대전화</th>
+		<td><!--{order_mobile}--></td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td colspan="3">( <!--{order_zipcode}--> ) <!--{order_address}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 수령자정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>수령자</th>
+		<td><!--{rsv_name}--></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><!--{rsv_phone}--></td>
+	</tr>
+	<tr>
+		<th>휴대전화</th>
+		<td><!--{rsv_mobile}--></td>
+	</tr>
+	<tr>
+		<th>우편번호</th>
+		<td><!--{rsv_zipcode}--></td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td><!--{rsv_address}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="area_both">
+	<div class="area_child_left" style="width:48%">	
+		<div class="title_d2"><img src="../images/bullet.gif"> 결제정보</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="30%"></col>
+				<col width="70%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>결제종류</th>
+				<td><!--{payment_method_desc}--></td>
+			</tr>
+			<!--{? payment_method == 'vbank'}-->
+			<tr>
+				<th>입금계좌</th>
+				<td><!--{payment_bank}--> / <!--{payment_account}--></td>
+			</tr>
+			<tr>
+				<th>입금기한</th>
+				<td><!--{vbank_payment_date}--></td>
+			</tr>
+			<!--{/}-->
+			<!--{? payment_method == 'cash'}-->
+			<tr>
+				<th>입금계좌</th>
+				<td><!--{payment_bank}--></td>
+			</tr>
+			<tr>
+				<th>입금자</th>
+				<td><!--{payment_name}--></td>
+			</tr>
+			<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+	<div class="area_child_right" style="width:48%">
+		<div class="title_d2"><img src="../images/bullet.gif"> 배송정보</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="30%"></col>
+				<col width="70%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>배송방법</th>
+				<td><!--{delivery_method_desc}--></td>
+			</tr>
+			<tr>
+				<th>송장번호</th>
+				<td><!--{delivery_no}--></td>
+			</tr>
+			<tr>
+				<th>배송일(출고일)</th>
+				<td><!--{delivery_date}--></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="title_d2"><img src="../images/bullet.gif"> 고객요쳥사항</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>고객요청사항</th>
+		<td><!--{request_comment}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif"> 특이사항</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>특이사항</th>
+		<td><!--{remark}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록보기</a></span>
+</div>

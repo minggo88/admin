@@ -1,0 +1,112 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#orders_today>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+	$("#orders_cancel>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+
+	//$('#orders_today').load('/shop/admin/orderAdmin.php?pg_mode=today_order_list');
+});
+
+$(function () {
+	var d=[<!--{graph_data}-->];
+	var plot1 = $.jqplot('placeholder', [d], {
+		seriesColors: ["#64b2ff","#FFA64D","#A0CFA0"],
+		grid: {background:'#FFFFF7', gridLineColor:'#e1e1e1', color:'#555'},
+		axes:{
+			xaxis:{renderer:$.jqplot.CategoryAxisRenderer},
+			yaxis:{showTicks:false}
+		},
+		series:[{lineWidth:2, markerOptions:{style:'circle'}}]
+	});
+});
+
+//-->
+</script>
+
+
+<!-- contents -->
+<div id="fg_layout_contitle"><h1>주문관리</h1></div>
+
+<div id="main_contents">
+
+	<div id="orders_graph">
+		<div class="orders_title"><img src="../images/bullet.gif"><!--{=date("m")}-->월 주문현황</div>
+		<div id="placeholder"></div>
+	</div>
+
+	<div class="line_space"></div>
+
+	<div id="orders_today">
+		<div class="orders_title"><img src="../images/bullet.gif">최근주문현황</div>
+		<a href="/shop/admin/orderAdmin.php" id="today_more"><img src="../images/more.gif" alt="more" /></a>
+		<table>
+		<col width="35">
+		<col>
+		<col width="65">
+		<col width="130">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>주문현황</th>
+				<th>결제금액</th>
+				<th>결제현황</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!--{@loop_order}-->
+			<tr class="loop">
+				<td><!--{.index_+1}--></td>
+				<td class="pleft"><a href="/shop/admin/orderAdmin.php?pg_mode=order_view&order_code=<!--{.order_code}-->&search_method=or&process_a=<!--{.process_code}-->"><!--{.order_code}--></a><br /><!--{.goods_name}--></td>
+				<td class="pright pred"><!--{=number_format(.order_amount)}--></td>
+				<td> <span class="pblue"><!--{.payment_method}--></span> / <span class="pred"><!--{.process_a}--></span><br /><!--{=date('Y-m-d H:m:i',.regdate)}--></td>
+			</tr>
+			<!--{:}-->
+			<tr>
+				<td colspan="4" id="empty">Empty!</td>
+			</tr>
+			<!--{/}-->
+		</tbody>
+		</table>
+	</div>
+	<div id="orders_cancel">
+		<div class="orders_title"><img src="../images/bullet.gif">주문 취소/반송 요청건</div>
+		<a href="/shop/admin/orderAdmin.php?mode=x" id="cancel_more"><img src="../images/more.gif" alt="more" /></a>
+		<table>
+		<col width="35">
+		<col>
+		<col width="65">
+		<col width="130">
+		<thead>
+			<tr>
+				<th>구분</th>
+				<th>주문현황</th>
+				<th>결제금액</th>
+				<th>결제현황</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!--{@loop}-->
+			<tr class="loop">
+				<td><!--{.process}--></td>
+				<td class="pleft"><a href="/shop/admin/orderAdmin.php?pg_mode=order_view&mode=x&order_code=<!--{.order_code}-->&search_method=or&process_a=ax"><!--{.order_code}--></a><br /><!--{.goods_name}--></td>
+				<td class="pright pred"><!--{=number_format(.order_amount)}--></td>
+				<td> <span class="pblue"><!--{.payment_method}--></span><br /><!--{=date('Y-m-d H:m:i',.regdate)}--></td>
+			</tr>
+			<!--{:}-->
+			<tr>
+				<td colspan="5" id="empty">Empty!</td>
+			</tr>
+			<!--{/}-->
+		</tbody>
+		</table>	
+	</div>
+
+	<div class="line_space"></div>
+
+</div>

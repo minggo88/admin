@@ -1,0 +1,106 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#list_coupon>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+
+
+/*
+	$("#goods_table").tableDnD({
+		onDragClass: "dndover "
+	});
+*/
+});
+
+function couponDel(code) {
+	//발급된 쿠폰이 있는지 살펴본다.
+	$.get('?pg_mode=get_issue&coupon_code='+code, function(data) {
+		var confirm_msg;
+		if(data['bool']) {
+			confirm_msg = '발행된 쿠폰이 있습니다.\n\n회원에 발행된 쿠폰도 삭제됩니다.\n\n삭제하시겠습니까?';
+		}
+		else {
+			confirm_msg = '삭제하시겠습니까?';
+		}
+		if(confirm(confirm_msg)) {
+			$.get('?pg_mode=del&coupon_code='+code,	function(data) {
+				if(data['bool']) {
+					alert('삭제되었습니다.');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else if(bool['msg'] == 'err_mem') {
+						alert('발급된 회원 쿠폰이 삭제되지 않았습니다.!');
+					}
+					else {
+						alert('재시도 해주세요!'); }
+				}
+			},'json');
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<!-- contents -->
+<div class="title_d1"><h1>쿠폰관리</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 쿠폰설정/생성 </div>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">쿠폰등록</a></span>
+</div>
+<table id="list_coupon" class="list_table">
+	<colgroup>
+		<col width="50"></col>
+		<col width="100"></col>
+		<col width="*"></col>
+		<col width="120"></col>
+		<col width="80"></col>
+		<col width="130"></col>
+	</colgroup>
+	<thead>
+		<th>No</th>
+		<th>Code</th>
+		<th>쿠폰명</th>
+		<th>할인금액</th>
+		<th>사용여부</th>
+		<th>관리</th>
+	</thead>
+	<tbody>
+	<!--{@loop_coupon}-->
+	<tr>
+		<td><!--{.no}--></td>
+		<td><!--{.coupon_code}--></td>
+		<td>
+			<ul>
+				<li class="underline highlight pcenter"><!--{.coupon_name}--></li>
+				<li class="pcenter">( <!--{? .kinds_period=='always'}-->기간제한없음<!--{:}-->발급후 <!--{.validity_day}-->간 사용가능<!--{/}--> )</li>
+			</ul>
+		</td>
+		<td><!--{=number_format(.discount_price)}--> 원</td>
+		<td><!--{? .bool_coupon}--><img src="../images/btn_use.gif" alt="사용함"><!--{:}--><img src="../images/btn_no_use.gif" alt="사용안함"><!--{/}--></td>
+		<td>
+			<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&coupon_code=<!--{.coupon_code}-->">수정</a></span>
+			<span class="button black"><input type="button" value="삭제" onclick="couponDel('<!--{.coupon_code}-->')" class="delete_btn" /></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="6">등록된 쿠폰이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">쿠폰등록</a></span>
+</div>
+<!-- Page Navigation -->
+<div id="navipage"><!--{navi_page}--></div>

@@ -1,0 +1,65 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>입출금관리</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>거래소 관리</a>
+            </li>
+            <li class="active">
+                <strong>배당</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 m-b-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>배당</h5>
+                    <div class="text-right"><a href="?pg_mode=list&symbol=<!--{_GET.symbol}-->" class="btn btn-info">목록</a></div>
+                </div>
+                <div class="ibox-content">
+                    <p style="margin-top:10px"><strong>배당 : </strong> <!--{= strtoupper(_GET.symbol) }--></p>
+                    <div class="row" >
+                        <div class="col-sm-5">
+                            <input type="hidden"  name="symbol" value="<!--{_GET.symbol}-->" />
+                            <div class="form-group">
+                                <label class="">지급 대상자 </label>
+                                <div class="well" style="padding:0;margin:0;height:300px" id="target_list"></div>
+                                <p class="help-block form-inline">
+                                    <input type="button" name="downloadexcelfile" class="btn btn-info" value="다운로드"/>
+                                    <input type="button" name="resetexcelfile" class="btn btn-warning" value="모두삭제"/>
+                                    <input type="button" name="unqueexcelfile" class="btn btn-warning" value="중복제거"/>
+                                    <input type="file" name="readexcelfile" class="form-control " placeholder="파일 업로드" value="업로드"/>
+                                </p>
+                                <p class="help-block">* 배당을 받을 회원의 아이디, 배당금액을 입력해주세요.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            
+                            <a name="do_dividend" class="btn btn-primary" href="#" role="button" style="@media (min-width: 768px) {margin-top:150px}"><i class="fa fa-arrow-right hidden-xs" aria-hidden="true"></i><i class="fa fa-arrow-down hidden-sm hidden-md hidden-lg" aria-hidden="true"></i> 지급</a>
+                            
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label class="">결과</label>
+                                <div class="well" style="padding:0;margin:0;height:300px" id="result_list"></div>
+                                <p class="help-block form-inline">
+                                    <input type="button" name="downloadresult" class="btn btn-info" value="다운로드"/>
+                                </p>
+                                <p class="help-block">* 처리 결과입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

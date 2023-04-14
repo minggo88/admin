@@ -1,0 +1,128 @@
+<div class="page has-sidebar has-right-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header support-faq" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_2;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first active">
+						<label class="Rectangle-Text active"><a href="/faq" class="active"><?=Lang::main_31;?></a></label>
+					</div>
+					<div class="layer active"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/notice"><?=Lang::main_32;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/mtom"><?=Lang::main_33;?></a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+				   <div class="row">
+
+
+					 <div class="col-sm-12 mb-0">
+					   <nav class="pull-right">
+						 <ol class="breadcrumb">
+						   <li><a href="/">Home</a></li>
+						   <li><a href="/faq">Support</a></li>
+						   <li class="active">F.A.Q</li>
+						 </ol>
+					   </nav>
+					 </div>
+
+					<div class="col-sm-12 right-side-sidebar">
+
+						<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_56;?></span></h3>
+
+						<div class="accordion clean-accordion" id="accordion5" role="tablist" aria-multiselectable="true">
+
+							<!--{@ loop_faq}-->
+							<div class="card">
+								<div class="card-header" role="tab" id="heading<!--{.index_}-->">
+									<h5>
+									<a data-toggle="collapse" data-parent="#accordion5" href="#a<!--{.index_}-->" aria-expanded="<!--{?.index_==0}-->true<!--{:}-->false<!--{/}-->" aria-controls="a<!--{.index_}-->" class="<!--{?.index_==0}--><!--{:}-->collapsed<!--{/}-->">
+										<i class="fa fa-folder-open"></i> <!--{.subject}-->
+									</a>
+									</h5>
+								</div>
+
+								<div id="a<!--{.index_}-->" class="collapse <!--{?.index_==0}-->show<!--{/}-->" role="tabpanel" aria-labelledby="heading<!--{.index_}-->">
+									<div class="card-block">
+									<!--{=htmlspecialchars_decode(.contents)}-->
+									</div>
+								</div>
+							</div>
+							<!--{/}-->
+
+							<nav aria-label="Page navigation" class="pt-md">
+								<!--{navi_page}-->
+							</nav>
+							
+						</div>
+
+						<hr class="invisible medium" />
+
+					</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>
+
+<!--{*
+<div class="remark_box">
+	<div>
+	 자주하시는 질문을 정리하여 빠르게 궁금증을 찾을 수 있습니다.<br />
+	 질문을 하시기 전 자주하는 질문에서 우선적으로 검색을 하여 주시면 빠르게 궁금증을 해소 하실 수 있습니다.
+	</div>
+</div>
+
+
+<div class="faq">
+	<div class="faqHeader">
+		<span class="grad_bbs"><a href="javascript:;" onclick="showAll()">답변 모두 열고 닫기</a></span>
+	</div>
+	<ul class="faqBody">
+		<!--{@ loop_faq}-->	
+		<li class="article" id="a<!--{.idx}-->">
+			<p class="q"><a href="#a<!--{.idx}-->"><img src="../images/faq_.gif" align="absmiddle" alt="질문" /> <!--{.subject}--></a></p>
+			<p class="a"><!--{=htmlspecialchars_decode(.contents)}--></p>
+		</li>
+		<!--{/}-->
+	</ul>
+</div>
+
+
+<div id="navipage"><!--{navi_page}--></div>
+
+<div class="search_area" style="text-align:center">
+	<input type="text" name="s_val" id="s_val" title="검색어" class="frm_input" />&nbsp;<a href="javascript:;" onclick="searchCheck();"><img src="../images/button_search.gif" alt="찾기" style="vertical-align:bottom" /></a>&nbsp;
+	<a href="javascript:;" onclick="searchCancel()"><img src="../images/button_nosearch.gif" alt="검색해제" style="vertical-align:bottom" /></a>
+</div>
+*}-->

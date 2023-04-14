@@ -1,0 +1,52 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	//첫번째 탭은 활성화
+	$('div.tab>ul>li').click(function(event){
+		$('div.tab>ul>li').removeClass("on");
+		$(this).addClass("on");
+		$('div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		$(this).blur();
+		return false;
+	});
+});
+
+//-->
+</script>
+
+<style>
+.tab_content {margin:32px 0px 20px 0px;}
+#information01 {border:0px solid #dcdcdc;width:748px;padding:0px 0px 0px 0px;margin:32px auto 20px auto;clear:both;}
+#information02 {border:0px solid #dcdcdc;width:748px;padding:0px 0px 0px 0px;margin:32px auto 20px auto;clear:both;}
+#information03 {border:0px solid #dcdcdc;width:748px;padding:0px 0px 0px 0px;margin:32px auto 20px auto;clear:both;}
+
+/* 약도 */
+#map_tabs  {border:0px solid #dcdcdc;width:750px;text-align:center;padding:0px 0px 0px 0px;margin:0px auto 0px auto;clear:both;}
+#map_tabs .map {border:1px solid #dcdcdc;width:748px;height:480px;padding:0px 0px 0px 0px;margin:0px auto 5px auto;clear:both;}
+
+#map_tabs table {border:0px #EBEBEB solid;width:100%; border-collapse: collapse;padding: 0px 0px 0px 0px;margin:0px 0px 0px 0px;}
+#map_tabs thead th {border-top:2px solid #699EE6;padding:8px 0 7px; background:#F4F4F4;}
+#map_tabs thead td {border-top:2px solid #699EE6;padding:8px 0 7px; background:#fff;}
+
+#map_tabs tbody th {padding:8px 0 7px; background:#F4F4F4;}
+#map_tabs tbody td {padding:8px 0 7px; background:#fff;}
+#map_tabs th.tal, 
+#map_tabs td.tal {border-top:1px solid #ccc; padding-left:20px; text-align:left;}
+#map_tabs td {padding:10px 10px 10px 10px;text-align:left;}
+</style>
+
+<div class="tab">
+	<ul>
+		<li class="on"><a href="#information01">운영규칙</a></li>
+	</ul>
+</div>
+<div id="information01" class="tab_content area_both">
+<!--{@loop_info}--><!--{=htmlspecialchars_decode(.clause_information01)}--><!--{/}-->
+</div>
+<div id="information02"class="tab_content area_both" style="display:none">
+<!--{@loop_info}--><!--{=htmlspecialchars_decode(.clause_information02)}--><!--{/}-->
+</div>
+<div id="information03"class="tab_content area_both" style="display:none">
+<!--{@loop_info}--><!--{=htmlspecialchars_decode(.clause_information03)}--><!--{/}-->
+</div>

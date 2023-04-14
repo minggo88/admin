@@ -1,0 +1,130 @@
+<script type="text/javascript">
+<!-- 
+
+$(document).ready(function() {
+
+	$('#mobileform').submit(function() {
+		var obj = $(this);
+		var frm = obj[0];
+		$.getJSON('/lib/getFormKey.php',function(data) {
+			if(data['bool']) {
+				frm.form_key.value = data['msg'];
+				$('#mobileform').ajaxSubmit({
+					success: function (data, statusText) {
+						if(data['bool']) {
+							alert('입력되었습니다.!');
+							location.replace('<!--{_SERVER.REQUEST_URI}-->');
+						}
+						else {
+							if(data['msg'] == 'err_access') {
+								alert('비정상적인 접근입니다.');
+								$('input[type=submit]').show();
+							}
+							else if(data['msg'] == 'err_sess') {
+								location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+							}
+							else {
+								alert('재시도 해주세요.!');
+								$('input[type=submit]').show();
+							}
+						}
+					},
+					dataType:'json',
+					resetForm: false
+				});
+			}
+		});
+		return false;
+	});
+
+	$('input[name=bool_mobile]').val(['<!--{bool_mobile}-->']);
+
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">모바일 설정</span></h1></div>
+<div id="fg_basic">
+
+	<div id="basic_title"><img src="../images/bullet.gif">모바일 설정</div>
+	
+	<div id="fg_basic_form">
+
+		<div id="etc_form_1">
+			<form method="post" name="mobileform" id="mobileform" action="/admin/shopinfoBasic.php" enctype="multipart/form-data">
+			<input type="hidden" name="pg_mode" value="edit" />
+			<input type="hidden" name="code" value="basic" />
+			<input type="hidden" name="form_key" value="" />
+			<table id="table_adminpasswd">
+				<colgroup>
+					<col width="150"></col>
+					<col></col>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th>모바일사용여부</th>
+					<td><input type="radio" name="bool_mobile" value="1" /> 사용함 <input type="radio" name="bool_mobile" value="0" /> 사용안함</td>
+				</tr>
+				<tr>
+					<th>모바일 주소</th>
+					<td>http://<input type="text" name="mobile_url" value="<!--{mobile_url}-->" /></td>
+				</tr>
+				<tr>
+					<th>로고이미지</th>
+					<td><input type="file" name="mobile_img_a" /> (형식: GIF, JPG / 권장 사이즈 : 130 X 50 ) 
+							※ 로고를 등록하지 않을 경우 기존 쇼핑몰의 로고가 사용되게 됩니다.<br />
+							<!--{? !empty(mobile_img_a)}--><img src="<!--{mobile_img_a}-->" /><!--{/}--></td>
+				</tr>
+				<tr>
+					<th>아이콘이미지</th>
+					<td><input type="file" name="mobile_img_b" /><br /><!--{? !empty(mobile_img_b)}--><img src="<!--{mobile_img_b}-->" /><!--{/}--><br />
+					- 아이폰에서만 적용되는 기능 입니다.<br />
+					- 사이즈는 반드시 57 * 57 로해야 하고 png 파일이여야 합니다.
+
+					</td>
+				</tr>
+				</tbody>
+			</table><br /><br />
+
+			<p class="buttonArea"><input type="submit" value=" 확 인 " class="button_ok"/></p>
+			</form>
+		</div>
+
+		<dl>
+			<dt>* 모바일쇼핑몰 운영안내 :
+			<dd>
+				모바일쇼핑몰은 별도 신청없이 자동으로 사용하실 수 있으며, 별도 관리 없이 운영하시는 인터넷 쇼핑몰과 완전 연동됩니다.
+
+			<dt>* 스마트폰 서비스 접속방법 :
+			<dd>
+				사파리나 스마트폰 브라우저를 이용하여 설정하신 모바일 주소 로 접속하시면 이용하실 수 있습니다.<br />재접속을 위해 홈버튼 추가를 통해 스마트폰 내 아이콘을 생성하실 수 있습니다.
+
+			<dt>* 카테고리 노출 안내 :
+			<dd>
+				기본적으로 보다 쉬운 스마트폰샵 관리여부를 위해 온라인 쇼핑몰에 노출되는 카테고리가 자동으로 노출되게 됩니다. <br />모바일쇼핑몰에 노출되는 카테고리명의 운영은 운영하시는 쇼핑몰과 동일하게 관리 됩니다.
+
+			<dt>* 디자인변경 :
+			<dd>
+				 FGShop 에서 제공되는 기본디자인으로 운영이 됩니다. <br />
+				 만일 디자인을 변경 하고자 하시면 /template/m  폴더의 내용을 수정 하시면 됩니다.
+
+		</dl>
+
+		
+		<div class="info_guide">
+			<div class="guide_title">GUIDE</div>
+			<div class="guide_desc">
+				<dl>
+					<dt><b>모바일 설정</b>
+					<dd>
+						※ 현재 스마트폰샵은 상품 조건에 따라 결제 지원이 되지 않는 경우가 있사오니 참고하시길 바랍니다.<br />
+						※ 신용카드 사용을 위해서는 스마트폰샵 결제(PG)ID를 등록하셔야 사용하실 수 있습니다.<br />
+						※ 신용카드 결제의 경우 현재 안드로이드폰에서 지원되지 않습니다.<br /> 
+						※ 현재 온라인 쇼핑몰에서 가상계좌를 사용 중이시라면 해당 PG로 연결되어 사용 가능합니다.
+				</dl>
+			</div>
+			<div class="clearline"></div>
+		</div>
+	</div>
+</div>

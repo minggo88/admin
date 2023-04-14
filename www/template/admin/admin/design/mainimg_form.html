@@ -1,0 +1,96 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('#jsform').submit(function() {
+		var chk_option = [
+			{ 'target':'title', 'name':'이미지 타이틀', 'type':'blank', 'msg':'이미지 타이틀을 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					<!--{? _GET.pg_mode == 'form_new'}-->
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&bannercode=<!--{banner_info.bannercode}-->';
+					<!--{:}-->
+					if(confirm('계속 수정하시겠습니까?')) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&bannercode=<!--{banner_info.bannercode}-->';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else if(data['msg'] == 'err_size') {
+						alert('가로 <!--{banner_info.size_x}--> px X 세로 <!--{banner_info.size_y}--> px 크기로 이미지 화일을 올려주세요.!');
+					}
+					else {
+						alert('재시도 해주세요!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	$('input[name=bool_banner]').val(['<!--{bool_banner}-->']);
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Slider.png') 0px 0px no-repeat;">디자인관리</span> / <span class="title02">메인이미지 관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 메인이미지등록 </div>
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->"enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+<!--{? _GET.pg_mode == 'form_edit'}-->
+<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tr> 
+		<th>타이틀</th>
+		<td><input type="text" name="title" value="<!--{title}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>사용여부</th>
+		<td>
+			<input type="radio" name="bool_banner" id="bool_banner_n" value="0" /> <label for="bool_banner_n">사용안함</label>
+			<input type="radio" name="bool_banner" id="bool_banner_y" value="1" /> <label for="bool_banner_y">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>메인이미지</th>
+		<td><input type="file" name="img_banner" class="frm_input" style="width:300px" />  (가로  1920 px X 세로  400 px  크기로 이미지 화일을 올려주세요.)</td>
+	</tr>
+	<!--{? !empty(img_banner)}-->
+	<tr>
+		<td colspan="2" style="text-align:center"><img src="/data/design/<!--{img_banner}-->" style="width:770px;"></td>
+	</tr>
+	<!--{/}-->
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&bannercode=<!--{banner_info.bannercode}-->">취 소</a></span>
+</div>
+</form>

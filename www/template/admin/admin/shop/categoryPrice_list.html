@@ -1,0 +1,224 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#goods_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function listSort(sort_div, sort_method) {
+	sort_method = sort_method || 'asc';
+	$('input[name=sort_div]').val(sort_div);
+	$('input[name=sort_method]').val(sort_method);
+	if($('select#loop_scale')[0].selectedIndex > 0) {
+		$('input[name=loop_scale]').val($('select#loop_scale option:selected').val());
+	}
+	$('#frmSearch').submit();
+}
+
+//검색폼 값지정
+$(function() {
+	<!--{? !empty(_GET.category_1)}-->
+	$('#category_1').val('<!--{_GET.category_1}-->');
+	categoryChange(1,'<!--{_GET.category_1}-->',select_category);
+	<!--{? !empty(_GET.category_2)}-->
+	$('#category_2').val('<!--{_GET.category_2}-->');
+	categoryChange(2,'<!--{_GET.category_1}--><!--{_GET.category_2}-->',select_category);	
+	<!--{? !empty(_GET.category_3)}-->
+	$('#category_3').val('<!--{_GET.category_3}-->');
+	categoryChange(3,'<!--{_GET.category_1}--><!--{_GET.category_2}--><!--{_GET.category_3}-->',select_category);	
+	<!--{? !empty(_GET.category_4)}-->
+	$('#category_4').val('<!--{_GET.category_4}-->');
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+
+	$('select[name=loop_scale]').val(['<!--{_GET.loop_scale}-->']);
+});
+
+$(function() {
+	$('#frmprice').submit(function() {
+		$('input[name=category_1]',this).val($('select#category_1 option:selected').val());
+		$('input[name=category_2]',this).val($('select#category_2 option:selected').val());
+		$('input[name=category_3]',this).val($('select#category_3 option:selected').val());
+		$('input[name=category_4]',this).val($('select#category_4 option:selected').val());
+
+		var ratio = $('input[name=ratio]').val();
+		if(!ratio) {
+			alert('비율을 입력하여 주세요.!');
+			return false;
+		}
+
+		if(!confirm('입력하신 비율로 조정하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	$('.img_goods').tooltip({
+		delay: 0,
+		showURL: false,
+		bodyHandler: function() {
+			return $("<img/>").attr("src", this.src);
+		}
+	});
+});
+
+//-->
+</script>
+<div class="title_d1"><h1>카테고리별 가격 관리</h1></div>
+<!--상품목록 시작-->
+<div class="title_d2"><img src="../images/bullet.gif">상품검색</div>
+<!-- goods_sort -->
+<form method="get" name="frmSearch" id="frmSearch"  action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="list_category_price" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="70%"></col>
+		<col width="15%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>카테고리	</th>
+		<td>
+			<select id="category_1" name="category_1">
+				<option value="">:::1차카테고리:::</option>
+			</select> 
+			<select id="category_2" name="category_2">
+				<option value="">:::2차카테고리:::</option>
+			</select> 
+			<select id="category_3" name="category_3">
+				<option value="">:::3차카테고리:::</option>
+			</select> 
+			<select id="category_4" name="category_4">
+				<option value="">:::4차카테고리:::</option>
+			</select>
+		</td>
+		<td rowspan="2" class="pcenter">
+			<span class="button large black strong"><input type="submit" value="검 색" /></span>
+		</td>
+	</tr>
+	<tr>
+		<th>출력목록수</th>
+		<td>
+			<select name="loop_scale" id="loop_scale">
+				<option value="">:::출력목록수 선택:::</option>
+				<option value="1">1개출력</option>
+				<option value="10">10개출력</option>
+				<option value="20">20개출력</option>
+				<option value="30">30개출력</option>
+				<option value="40">40개출력</option>
+				<option value="60">60개출력</option>
+				<option value="100">100개출력</option>
+			</select>		
+		</td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="title_d2"><img src="../images/bullet.gif">상품가격일괄조정</div>
+<form method="post" name="frmprice" id="frmprice"  action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="category_ratio_change" />
+<input type="hidden" name="category_1" />
+<input type="hidden" name="category_2" />
+<input type="hidden" name="category_3" />
+<input type="hidden" name="category_4" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="25%"></col>
+		<col width="15%"></col>
+		<col width="*"></col>
+		<col width="15%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>등록상품수</th>
+		<td><span class="emphasis"><!--{total}--></span> 건</td>
+		<th>조정율</th>
+		<td>
+			<input type="text" name="ratio" class="frm_input" style="width:40px" /> %
+			<select name="mtd_ratio" class="frm_select">
+				<option value="plus" selected="selected">인상</option>
+				<option value="minus">인하</option>
+			</select>
+		</td>
+		<td class="pcenter">
+			<span class="button black"><input type="submit" value="적 용" /></span>
+		</td>
+	</tr>
+	</tbody>
+</table>
+</form>
+
+<div class="title_d2"><img src="../images/bullet.gif">상품목록</div>
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="40"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th class="pcenter">No</th>
+		<th colspan="2" class="pcenter">상품명</th>
+		<th class="pright">판매가격</th>
+		<th class="pright">카테고리가격</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_goods}-->
+	<tr>
+		<td class="none_move"><input type="hidden" name="goods_code[]" value="<!--{.goods_code}-->" /><!--{.no}--></td>
+		<td>
+			<!--{? empty(.img_goods_a)}-->
+			<img src="/template/images/no_img.gif" width="40" height="40" />
+			<!--{:}-->
+			<img src="/data/shop_a/<!--{.img_goods_a}-->" width="40" height="40" class="img_goods" />
+			<!--{/}-->
+		</td>
+		<td>
+			<ul>
+				<li class="underline dotted emphasis"><!--{.category_path_desc}--></li>
+				<li class="underline none"><!--{.goods_name}--></li>
+			</ul>
+		</td>
+		<td><!--{=number_format(.basic_price)}--> 원</td>
+		<td><!--{=number_format(.selling_price)}--> 원</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="6" class="ctext">등록된 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div id="navipage"><!--{navi_page}--></div>

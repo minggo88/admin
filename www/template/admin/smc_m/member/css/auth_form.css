@@ -1,0 +1,23 @@
+@charset "utf-8";
+div#remark_auth {margin:10px; padding:10px; font-size:13px; font-weight:bold; line-height:150%; text-align:left;}
+
+div#area_auth,
+div#area_order_check {width:707px; margin-top:10px; padding:0px 0;}
+
+div#area_auth > div.area_child_left,
+div#area_order_check > div.area_child_left {width:357px;}
+div#area_auth > div.area_child_left table,
+div#area_order_check > div.area_child_left table {float:left; margin:15px;}
+div#area_auth > div.area_child_left table th,
+div#area_order_check > div.area_child_left table th{font-weight:normal; text-align:right;}
+div#area_auth > div.area_child_left table td,
+div#area_order_check > div.area_child_left table td{padding-left:10px;}
+
+div.area_btn {position:relative; float:right; width:120px;margin:0px;; }
+div.area_btn input {width:90px;height:44px;font-size:14px;font-weight:bold;text-align:center;margin:2px 0px 0px 0px;}
+div.area_btn input:hover {width:90px;height:44px;font-size:14px;font-weight:bold;text-align:center;margin:2px 0px 0px 0px;}
+
+div#area_order_check > div.area_child_right,
+div#area_auth > div.area_child_right {width:330px; padding:0px; padding-top:10px; padding-right:30px; overflow:hidden; text-align:center;}
+div#area_auth > div.area_child_right ul li {width:320; height:20px; padding-left:10px;float:left;;}
+div#area_auth > div.area_child_right ul li span {float:left;}

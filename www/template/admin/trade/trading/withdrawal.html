@@ -1,0 +1,420 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10 pl-20">
+					<?=Lang::main_14;?>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container white_bg">
+    <div class="wrapper wrapper-content wrap-withdrawal">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <!--{? realname_info.permission_lv < 4}-->
+                    <div class="row">
+                        <div class="smart-wrap">
+                            <div class="smart-forms smart-forms-ledger smart-container wrap">
+                                <div class="form-body smart-steps steps-progress">
+                                        <form method="post" action="/edit" id="smart-form" role="application" class="wizard clearfix" novalidate="novalidate" enctype="multipart/form-data">
+                                        <input type="hidden" name="init_idx" value="1" />
+                                        <input type="hidden" name="current_idx" value="1" />
+                                        <input type="hidden" name="max_idx" value="1" />
+                                        <input type="hidden" name="phoneRegYn" value="0" />
+                                        <input type="hidden" name="displayType" value="W" />
+                                        <div class="steps clearfix">
+                                            <ul role="tablist">
+                                                <li role="tab" class="first current" aria-disabled="false" aria-selected="true"><a id="smart-form-t-0" href="javascript:direct(0);" aria-controls="smart-form-p-0"><span class="current-info audible">current step: </span><span class="number">1</span> <span class="spanTxt"><?=Lang::main_58;?></span></a></li>
+                                                <li role="tab" class="disabled" aria-disabled="true"><a id="smart-form-t-1" href="javascript:direct(1);" aria-controls="smart-form-p-1"><span class="number">2</span> <span class="spanTxt"><?=Lang::main_59;?></span></a></li>
+                                                <li role="tab" class="disabled" aria-disabled="true"><a id="smart-form-t-2" class="spanBank" href="javascript:direct(2);" aria-controls="smart-form-p-2"><span class="number">3</span> <span class="spanTxt"><?=Lang::main_60;?></span></a></li>
+                                                <li role="tab" class="disabled last" aria-disabled="true"><a id="smart-form-t-3" href="#" aria-controls="smart-form-p-3"><span class="number">4</span> <span class="spanTxt"><?=Lang::main_61;?></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <h2 id="smart-form-h-0" tabindex="-1" class="title current">Phone</h2>
+                                            <fieldset id="smart-form-p-0" role="tabpanel" aria-labelledby="smart-form-h-0" class="body current" aria-hidden="false">
+                                                <div class="frm-row">
+                                                    <div class="spacer-t30 spacer-b30">
+                                                        <div class="tagline"><span><?=Lang::main_62;?></span></div>
+                                                    </div>
+                                                    <div class="section colm colm12">
+                                                        <h4 class="mb-10"><?=Lang::main_63;?></h4>
+                                                        <div class="input-group phone first" style="width: 86%;">
+                                                            <div class="input-group phone">
+                                                                <select name="mobile_country_code">
+                                                                    <option value="AU">Australia +61</option>
+                                                                    <option value="CA">Canada +1</option>
+                                                                    <option value="CN">China +86</option>
+                                                                    <option value="HK">Hong Kong +852</option>
+                                                                    <option value="ID">Indonesia +62</option>
+                                                                    <option value="JP">Japan +81</option>
+                                                                    <option value="MO">Macau +853</option>
+                                                                    <option value="MY">Malaysia +60</option>
+                                                                    <option value="MN">Mongolia +976</option>
+                                                                    <option value="SG">Singapore +65</option>
+                                                                    <option value="KR">South Korea +82</option>
+                                                                    <option value="TH">Thailand +66</option>
+                                                                    <option value="UK">United Kingdom +44</option>
+                                                                    <option value="US">United States +1</option>
+                                                                </select>
+                                                                <input type="hidden" value="" name="mobile_country_code_origin">
+                                                                <input type="tel" value="<!--{realname_info.mobile_origin}-->" class="form-control text-muted" name="phone_number" placeholder="<?=Lang::main_92;?>">
+                                                                <span class="input-group-btn">
+                                                                <button type="button" id="sendBtn" class="btn btn-primary" onClick="sendNumber()"><?=Lang::main_64;?></button>
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end section -->
+                                                </div><!-- end .frm-row section -->
+                                                <div class="frm-row">
+                                                    <div class="section colm colm12">
+                                                        <h4 class="mb-10 mt-10"><?=Lang::main_65;?></h4>
+                                                        <div class="input-group" style="width: 89%;">
+                                                            <div class="input-group">
+                                                                <input type="number" value="" class="form-control text-muted" name="confirm_number" placeholder="<?=Lang::main_92;?>">
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end section -->
+                                                </div><!-- end .frm-row section -->
+                                                <div class="section mt-10 text-primary" id="phoneVerify" style="display:none;">
+                                                    <span style="font-size:16px;"><strong><?=Lang::main_92;?></strong></span>
+                                                    <div class="left_time" style="display: inline-block;">
+                                                        <ul class="countdown" style="margin-bottom:0; padding-top: 5px; text-align:center;">
+                                                            <li>
+                                                                <span>( </span>
+                                                                <span class="minutes">00</span>
+                                                            </li>
+                                                            <li class="seperator">:</li>
+                                                            <li>
+                                                                <span class="seconds">00</span>
+                                                                <span> )</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+    
+                                            <h2 id="smart-form-h-1" tabindex="-1" class="title"><?=Lang::main_59;?></h2>
+                                            <fieldset id="smart-form-p-1" role="tabpanel" aria-labelledby="smart-form-h-1" class="body" aria-hidden="true" style="display: none;">
+                                                <input type="hidden" name="pg_mode" value="edit_photo" />
+                                                <input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+                                                <input type="hidden" name="bool_realname" value="<!--{realname_info.bool_realname}-->" />
+                                                <input type="hidden" name="token" value="" />
+                                                <div class="frm-row">
+                                                    <div class="spacer-t30 spacer-b30">
+                                                        <div class="tagline"><span><?=Lang::main_96;?></span></div>
+                                                    </div>
+                                                    <!--{? realname_info.bool_realname < 1 }-->
+                                                    <!--{? realname_info.image_identify_url && realname_info.image_mix_url }-->
+                                                    <div class="colm colm12 text-center">
+                                                        <strong><?=Lang::main_97;?></strong>
+                                                    </div>
+                                                    <!--{:}-->
+                                                    <div class="colm colm12 text-center">
+                                                        <strong>
+                                                            <?=Lang::main_98;?><br/>
+                                                            <div style="height: 10px;"></div>
+                                                            <span style="font-style: italic; color: #999;"><?=Lang::main_99;?></span>
+                                                        </strong>
+                                                    </div>
+                                                    <!--{/}-->
+                                                    <!--{:}-->
+                                                    <div class="colm colm12 text-center">
+                                                        <strong><?=Lang::main_209;?></strong>
+                                                    </div>
+                                                    <!--{/}-->
+                                                    <div class="colm colm6">
+                                                        <div class="avatar-edit">
+                                                            <!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+                                                            <input type='file' name="file_data[]" id="imageIdentify" />
+                                                            <input type="hidden" name="image_identify_url_new" value=""/>
+                                                            <input type="hidden" name="image_identify_url_old" value="<!--{realname_info.image_identify_url}-->"/>
+                                                            <label for="imageIdentify"></label>
+                                                        </div>
+                                                        <div class="avatar-preview">
+                                                            <!--{? !realname_info.image_identify_url }-->
+                                                            <div id="imagePreview1">
+                                                                <div class="text-center imageEmpty">
+                                                                    <!--<p><?=Lang::main_114;?></p>-->
+                                                                </div>
+                                                            </div>
+                                                            <!--{:}-->
+                                                            <div id="imagePreview1" style="background-image: url('<!--{realname_info.image_identify_url}-->')">
+                                                                <div class="text-center imageEmpty" style="display:none;">
+                                                                    <p><?=Lang::main_114;?></p>
+                                                                </div>
+                                                            </div>
+                                                            <!--{/}-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="colm colm6">
+                                                        <div class="avatar-edit">
+                                                            <!--<input type='file' name="imageMix" id="imageMix" accept=".png, .jpg, .jpeg" />-->
+                                                            <input type='file' name="file_data[]" id="imageMix" />
+                                                            <input type="hidden" name="image_mix_url_new" value=""/>
+                                                            <input type="hidden" name="image_mix_url_old" value="<!--{realname_info.image_mix_url}-->"/>
+                                                            <label for="imageMix"></label>
+                                                        </div>
+                                                        <div class="avatar-preview">
+                                                            <!--{? !realname_info.image_mix_url }-->
+                                                            <div id="imagePreview2">
+                                                                <div class="text-center imageEmpty mix">
+                                                                    <!--<p>Input person <br/>with identification</p>-->
+                                                                </div>
+                                                            </div>
+                                                            <!--{:}-->
+                                                            <div id="imagePreview2" style="background-image: url('<!--{realname_info.image_mix_url}-->')">
+                                                                <div class="text-center imageEmpty mix" style="display:none;">
+                                                                    <p>Input person <br/>with identification</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--{/}-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+    
+                                            <h2 id="smart-form-h-2" tabindex="-1" class="title"><?=Lang::main_60;?></h2>
+                                            <fieldset id="smart-form-p-2" role="tabpanel" aria-labelledby="smart-form-h-2" class="body" aria-hidden="true" style="display: none;">
+                                                <div class="frm-row">
+                                                    <div class="spacer-t30 spacer-b30">
+                                                        <div class="tagline"><span><?=Lang::main_70;?></span></div>
+                                                    </div>
+                                                    <div class="section colm colm12">
+                                                        <h4 class="mb-10"><?=Lang::main_71;?></h4>
+                                                        <div class="input-group">
+                                                            <div class="input-group">
+                                                                <input type="text" value="" class="form-control text-muted" name="bank_name" placeholder="<?php echo Lang::main_210;?>">
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end section -->
+                                                </div><!-- end .frm-row section -->
+                                                <div class="frm-row">
+                                                    <div class="section colm colm12">
+                                                        <h4 class="mb-10 mt-10"><?=Lang::main_72;?></h4>
+                                                        <div class="input-group">
+                                                            <div class="input-group">
+                                                                <input type="text" value="" class="form-control text-muted" name="bank_account" placeholder="<?php echo Lang::main_211;?>">
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end section -->
+                                                </div><!-- end .frm-row section -->
+                                                <div class="frm-row">
+                                                    <div class="section colm colm12">
+                                                        <h4 class="mb-10 mt-10"><?=Lang::main_73;?></h4>
+                                                        <div class="input-group">
+                                                            <div class="input-group">
+                                                                <input type="text" value="" class="form-control text-muted" name="bank_owner" placeholder="<?php echo Lang::main_212;?>">
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end section -->
+                                                </div><!-- end .frm-row section -->
+                                            </fieldset>
+    
+                                            <h2 id="smart-form-h-3" tabindex="-1" class="title"><?=Lang::main_61;?></h2>
+                                            <fieldset id="smart-form-p-3" role="tabpanel" aria-labelledby="smart-form-h-3" class="body" aria-hidden="true" style="display: none;">
+                                                <div class="spacer-t30 spacer-b30">
+                                                    <div class="tagline"><span><?=Lang::main_61;?></span></div>
+                                                </div>
+    
+                                                <div class="section">
+                                                    <div class="notification alert-info">
+                                                        <?=Lang::main_100;?>
+                                                    </div>
+                                                </div><!-- end section -->
+                                                <div class="result"></div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="actions clearfix mt-20">
+                                            <ul role="menu" aria-label="Pagination">
+                                                <!--<li class="disabled" aria-disabled="true" id="previousLi"><a href="#" role="menuitem" onClick="pre()">Go Back</a></li>
+                                                <li aria-hidden="false" aria-disabled="false" id="nextLi"><a href="#" role="menuitem" onClick="next();">Continue</a></li>-->
+                                                <!--<li class="disabled" aria-disabled="true" id="backLi"><a href="#" role="menuitem" onClick="back();">Current Step</a></li>-->
+                                                <li class="disabled" aria-disabled="true" id="previousLi"><a href="#" role="menuitem" onClick="pre()"><?=Lang::main_68;?></a></li>
+                                                <li class="disabled" aria-disabled="true" id="saveLi"><a href="#" role="menuitem" onClick="save_photo();"><?=Lang::main_69;?></a></li>
+                                                <li aria-hidden="false" aria-disabled="false" id="nextLi"><a href="#" role="menuitem" onClick="next();"><?=Lang::main_67;?></a></li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- end .smart-forms section -->
+                        </div><!-- end .smart-wrap section -->
+    
+                        <div></div><!-- end section -->
+                    </div>
+                    <!--{:}-->
+                    <div>
+                        <input name="real_bank_name" type="hidden" value="<!--{realname_info.bank_name}-->" />
+                        <input name="real_bank_account" type="hidden" value="<!--{realname_info.bank_account}-->" />
+                        <input name="real_bank_owner" type="hidden" value="<!--{realname_info.bank_owner}-->" />
+                    </div>
+                    <div id="withdrawal">
+                        <div id="root"></div>
+                    </div>
+                    <!--{/}-->
+                    <!--<div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group m-b">
+                                    <div class="input-group-btn">
+                                        <button tabindex="-1" class="btn btn-white" type="button">
+                                            <div class="coin-name">
+                                                <h4 class="">
+                                                    <span class="icon-24 icon-24-scc"></span>
+                                                    <span class="name-con m-l-xs">Smart crypto currency </span>
+                                                </h4>
+                                            </div>
+                                        </button>
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">
+                                                <div class="coin-name">
+                                                    <h4 class="">
+                                                        <span class="icon-24 icon-24-scc"></span>
+                                                        <span class="name-con m-l-xs">Smart crypto currency </span>
+                                                    </h4>
+                                                </div>
+                                            </a></li>
+                                            <li><a href="#">
+                                                <div class="coin-name">
+                                                    <h4 class="">
+                                                        <span class="icon-24 icon-24-btc"></span>
+                                                        <span class="name-con m-l-xs">bitcoind</span>
+                                                    </h4>
+                                                </div>
+                                            </a></li>
+                                            <li><a href="#">
+                                                <div class="coin-name">
+                                                    <h4 class="">
+                                                        <span class="icon-24 icon-24-eth"></span>
+                                                        <span class="name-con m-l-xs">Ethereum</span>
+                                                    </h4>
+                                                </div>
+                                            </a></li>
+                                            <li><a href="#">
+                                                <div class="coin-name">
+                                                    <h4 class="">
+                                                        <span class="icon-24 icon-24-ltc"></span>
+                                                        <span class="name-con m-l-xs">Litecoin</span>
+                                                    </h4>
+                                                </div>
+                                            </a></li>
+                                            &lt;!&ndash; <li class="divider"></li>
+                                            <li><a href="#">Separated link</a></li> &ndash;&gt;
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="payment-card m-b scc-payment-card">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h3 class="text-black m-t-none">출금안내</h3>
+                                            <ul class="m-b">
+                                                <li><span class="text-green"><span class="text-green">(Bitcoin)</span></span> 지갑으로 부터 외부지갑으로 <span class="text-green">(Bitcoin)</span>을 출금합니다.</li>
+                                                <li>출금 거래 마다 수수료 Transaction Fee 가 <span class="text-green">(Bitcoin)</span>전산망에 납부되오니 실제 수령액은 이를 차감한 것입니다.</li>
+                                                <li><span class="text-red">모든 출금은 관리자 확인 후 실행 됩니다.</span></li>
+                                            </ul>
+                                            <h3 class="text-black m-t-none">수수료안내</h3>
+                                            <ul class="list-group scc-list-group">
+                                                <li class="list-group-item">
+                                                    <span class="text-green">0.000001 SCC</span>
+                                                    출금수수료
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="text-green">0.1 SCC</span>
+                                                    출금최소금액
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="text-green">10.0 SCC</span>
+                                                    출금최대금액
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>평일 오전 10시까지 신청/확인된 건: <br>
+                                                <span class="text-red">오전 12시 이전처리</span></li>
+                                                <li>평일 오후 4시까지 신청/확인된 건: <br><span class="text-red">오후 6시 이전처리</span></li>
+                                                <li>토,일 모두 오전 10시까지 신청/확인된 건: <br><span class="text-red">오전 11시 처리</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="list-group scc-list-group m-b-none">
+                                            <li class="list-group-item">
+                                                <h4>출금가능액</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted append-uint" disabled value="265">
+                                                    <span class="text-primary">scc</span>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>1일 출금한도 여분액</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted append-uint" disabled value="10">
+                                                    <span class="text-primary">scc</span>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>출금액</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted append-uint" disabled value="9">
+                                                    <span class="text-primary">scc</span>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>수수료</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted append-uint" disabled value="0.000001">
+                                                    <span class="text-primary">scc</span>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>실제 출금액</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted append-uint" disabled value="8.999999">
+                                                    <span class="text-primary">scc</span>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>Pin 번호</h4>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control text-muted "  value="XXXXXXXXXXXXXXXXXXXXXX">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h4>(Bitcoin)출금주소</h4>
+                                                <div class="input-group">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control text-muted "  value="XXXXXXXXXXXXXXXXXXXXXX">
+                                                        <span class="input-group-btn"> <button type="button" class="btn btn-grey">주소확인</button> </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-12 text-center">
+                                <button type="button" class="btn btn-primary btn-block btn-xl">Request</button>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div id="main_contents"></div> -->

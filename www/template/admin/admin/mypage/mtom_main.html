@@ -1,0 +1,38 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$(".bbs_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#ededed'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	).css('cursor','pointer');
+});
+
+function bbsView(go_url) {
+	location.href = go_url;
+}
+//-->
+</script>
+
+<div class="bbs_list_inner">
+<table>
+	<col>
+	<col style="width:70px;">
+	<col style="width:60px;">
+	<tbody>
+	<!--{@ loop_main}-->
+	<tr>
+		<td style="padding-left:5px;text-align:left"> · <a href="/mypage/admin/mtomAdmin.php<!--{.url_view}-->"><!--{=cutStr(.subject,16)}--></a>
+			<!--{? .use_new}--><img src="../images/icon_new.gif" /><!--{/}-->
+			<!--{? .use_hot}--><img src="../images/icon_hot.gif" /><!--{/}-->
+		</td>
+		<td class="pcenter"><!--{.regdate_m}--></td>
+		<td class="pcenter"><!--{? .bool_rplcontents}--><span style="color: #555">[답변대기]</span><!--{:}--><span style="color:#FF6600">[답변완료]</span><!--{/}--></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="3">등록된 글이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</div>

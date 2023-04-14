@@ -1,0 +1,85 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function () {
+	//$('#view_button img, ').css('cursor','hand');
+
+	//이전글 보기 버튼
+	$('#btn_bbs_up').click(function() {
+		<!--{? up_info.bool_no_list}-->
+		alert('이전글이 없습니다.!');
+		<!--{:}-->
+		<!--{? up_info.bool_secret}-->
+		showBbsPopup('?pg_mode=view&idx=<!--{up_info.idx}-->&list_cnt=<!--{up_info.list_cnt}-->&start=<!--{up_info.start}--><!--{up_info.srch_url}-->');
+		<!--{:}-->
+		location.href = '?pg_mode=view&idx=<!--{up_info.idx}-->&list_cnt=<!--{up_info.list_cnt}-->&start=<!--{up_info.start}--><!--{up_info.srch_url}-->';
+		<!--{/}-->
+		<!--{/}-->
+	});
+
+	//다음글 보기 버튼
+	$('#btn_bbs_down').click(function() {
+		<!--{? down_info.bool_no_list}-->
+		alert('다음글이 없습니다.!');
+		<!--{:}-->
+		<!--{? down_info.bool_secret}-->
+		showBbsPopup('?pg_mode=view&idx=<!--{down_info.idx}-->&list_cnt=<!--{down_info.list_cnt}-->&start=<!--{down_info.start}--><!--{down_info.srch_url}-->');
+		<!--{:}-->
+		location.href = '?pg_mode=view&idx=<!--{down_info.idx}-->&list_cnt=<!--{down_info.list_cnt}-->&start=<!--{down_info.start}--><!--{down_info.srch_url}-->';
+		<!--{/}-->
+		<!--{/}-->
+	});
+
+	$('#btn_bbs_list').click(function() {
+		location.href = '?pg_mode=list<!--{srch_url}-->';
+	});
+
+	<!--{? bool_btn_write}-->
+	$('#btn_bbs_write').click(function() {
+		location.href = '?pg_mode=form_new<!--{srch_url}-->';
+	});
+
+	$('#btn_bbs_reply').click(function() {
+		location.href = '?pg_mode=form_reply&idx=<!--{_GET.idx}--><!--{srch_url}-->';
+	});
+
+	$('#btn_bbs_update').click(function() {
+		showBbsPopup('?pg_mode=form_edit&idx=<!--{_GET.idx}-->&pos=<!--{pos}-->&thread=<!--{thread}-->&depth=<!--{depth}--><!--{srch_url}-->');
+	});
+	<!--{/}-->
+	<!--{? bool_btn_del}-->
+	$('#btn_bbs_del').click(function() {
+		var ret_url = base64_encode('?pg_mode=list<!--{srch_url}-->');
+		showBbsPopup('?pg_mode=del&bbscode=<!--{_GET.bbscode}-->&idx=<!--{_GET.idx}-->&ret_url='+ret_url);
+	});
+	<!--{/}-->
+
+
+	$("#bbs_content_view img").click(function() {
+		var img = $(this).attr('src');
+		$.slimbox(img);
+	});
+
+//	$('#bbs_content_view img').css('width','750px');
+});
+//-->
+</script>
+
+<div class="page has-sidebar has-right-sidebar bordered">
+
+	<div class="page-inner">
+		<!--{# js_tpl_main_sub}-->
+
+		<!--{# js_bbs_popup}-->
+			
+	</div>
+
+	<!--{? info_bbs.bool_comment}-->
+	<!--{? bool_comment_form}-->
+	<div id="fg_bbs_comment_form"><!--{# js_tpl_main_comment_form}--></div>
+	<!--{/}-->
+	<div id="fg_bbs_comment_list"><!--{# js_tpl_main_comment_list}--></div>
+	<!--{/}-->
+
+<!--{# js_tpl_footer}-->
+	
+</div>

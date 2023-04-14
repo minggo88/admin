@@ -1,0 +1,96 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$("#list_issue>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function issueCancel(idx) {
+	if(!confirm('선택하신 쿠폰 발행을 취소하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx='+idx,function(data) {
+		if(data['bool']) {
+			alert('발행이 취소 되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+//-->
+</script>
+<div class="title_d1"><h1>쿠폰관리발행내역</h1></div>
+<!-- contents -->
+<div class="title_d2"><img src="../images/bullet.gif"> 쿠폰발행 및 사용내역 </div>
+<table id="list_issue" class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="180"></col>
+		<col></col>
+		<col width="70"></col>
+		<col width="150"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>No</th>
+		<th>발행일시 | 쿠폰명</th>
+		<th>내용</th>
+		<th>사용유무</th>
+		<th>사용내역</th>
+		<th>발행취소</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_issue}-->
+	<tr>
+		<td><!--{.no}--></td>
+		<td>
+			<ul>
+				<li class="underline highlight"><!--{.coupon_name}--></li>
+				<li class="underline dotted">회원아이디 : <!--{.userid}--></li>
+				<li>발행일 : <!--{.regdate}--></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li class="underline dotted">쿠폰내용 : <!--{=number_format(.discount_price)}--> 원 할인</li>
+				<li>유효기간 : <!--{.validdate}--></li>
+			</ul>
+		</td>
+		<td><!--{? .bool_use == 1}-->사용<!--{:}--><span class="orange">미사용</span><!--{/}--></td>
+		<td>
+			<!--{? .bool_use == 1}-->
+			<ul>
+				<li class="underline dotted">주문번호 : <!--{.order_code}--></li>
+				<li>사용일 : <!--{.usedate}--></li>
+			</ul>
+			<!--{:}-->
+			사용정보가 없음
+			<!--{/}-->
+		</td>
+		<td>
+			<span class="button black"><a href="javascript:;" onclick="issueCancel('<!--{.idx}-->')">발행취소</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="6">발행 내역이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div id="navipage"><!--{navi_page}--></div>

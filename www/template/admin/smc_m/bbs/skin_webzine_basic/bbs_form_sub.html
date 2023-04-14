@@ -1,0 +1,65 @@
+<form name="jsform" id="jsform" action="/bbs/bbs.php" method="post" enctype="multipart/form-data">
+<input type="hidden" name="bbscode" value="<!--{_GET.bbscode}-->" />
+<input type="hidden" name="pg_mode" value="<!--{pg_mode}-->" />
+<input type="hidden" name="start" value="<!--{_GET.start}-->" />
+<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+<!--{? _GET.pg_mode == 'form_reply'}-->
+<input type="hidden" name="pos" id="pos" value="<!--{pos}-->" />
+<input type="hidden" name="thread" id="thread" value="<!--{thread}-->" /> 
+<input type="hidden" name="depth" id="depth" value="<!--{depth}-->" />
+<!--{/}-->
+<!-- <img src="images/write_tit.gif"> -->
+<table summary="게시판 글쓰기폼">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tr>
+		<th class="entry"><label for="author">이름</label></th>
+		<th class="data"><input name="author" id="author" type="text" value="<!--{author}-->" /></th>
+		<th class="entry"><label for="passwd">암호</label></th>
+		<th class="data"><input name="passwd" id="passwd" type="password" /></th>
+	</tr>
+	<!--{? config.bool_secret}-->
+	<tr>
+		<td class="entry"><label for="bool_secret_yes">비밀글</label></td>
+		<td colspan="3"><input type="radio" name="bool_secret" value="1" id="bool_secret_yes" />예<input type="radio" name="bool_secret" value="0"  id="bool_secret_no" checked="checked" />아니요</td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<td class="entry"><label for="email">이메일</label></td>
+		<td colspan="3"><input name="email" id="email" type="text" value="<!--{email}-->" /></td>
+	</tr>
+	<tr> 
+		<td class="entry"><label for="link">홈페이지</label></td>
+		<td colspan="3"><input name="link" id="link" type="text" value="http://" /></td>
+	</tr>
+	<tr>
+		<td class="entry"><label for="subject">제목</label></td>
+		<td colspan="3"><input name="subject" id="subject" type="text" maxlength="80" value="<!--{subject}-->" /></td>
+	</tr>
+</table>
+<div id="bbs_content_editor">
+	<textarea rows="" cols="" id="contents" name="contents"  title="내용입력" <!--{? config.bool_editor}-->style="display:none"<!--{/}-->><!--{contents}--></textarea>
+</div>
+<!--{? config.bool_file}-->
+<table>
+	<col width="15%">
+	<col>
+	<tr> 
+		<td class="entry"><label for="file">첨부화일</label></td>
+		<td><input name="file" id="file" type="file" size="40" /></td>
+	</tr>
+</table>
+<!--{/}-->
+<div id="buttonArea">
+	<button class="grad_bbs"  id="btn_confirm" >확인</button>
+	<button class="grad_bbs"  id="btn_cancel" >취소</button>
+	{*
+	<input type="image" src="../images/button_ok.gif" alt="확인" />&nbsp;&nbsp;&nbsp;
+	<img src="../images/button_cancel.gif" alt="취소" id="btn_cancel" />
+	*}
+</div>
+</form>

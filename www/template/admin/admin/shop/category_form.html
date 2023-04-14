@@ -1,0 +1,184 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	<!--{? _GET.depth == 1}-->
+	var editor_option = { width: 580, height: 300 };
+	$("#title_html").cleditor(editor_option)[0].focus();
+	<!--{/}-->
+
+	$('#categoryform').submit(function() {
+		//필수입력사항 체크
+		var chk_option = [
+			{'target':'category_name','name':'카테고리명','type':'blank','msg':'카테고리명은 필수 입력사항입니다.!'},
+			{'target':'level_code','name':'이용권한설정','type':'select','msg':'이용권한 레벨을 선택하여 주세요.!'}
+		];
+
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? pg_mode == 'write' || pg_mode == 'write_child'}-->
+					alert('등록되었습니다.');
+					location.replace('?');
+					<!--{:}-->
+					alert('수정되었습니다.');
+					if(confirm('계속 수정하시겠습니까?')) {
+						$('#js_category_form').load('?pg_mode=form_edit&depth=<!--{_GET.depth}-->&category_path=<!--{_GET.category_path}-->&category_code=<!--{_GET.category_code}-->');
+					}
+					else {
+						location.replace('?');
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.SCRIPT_NAME)}-->');
+					}
+					else if(data['msg'] == 'err_sub') {
+						alert('서브카테고리 입력 실패하였습니다.!');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	//기본설정값
+	$('input[name=bool_use]').val(['<!--{bool_use}-->']);
+	$('input[name=bool_display]').val(['<!--{bool_display}-->']);
+	$('input[name=type_display]').val(['<!--{type_display}-->']);
+	$('select[name=level_code]').val('<!--{level_code}-->');
+	<!--{? _GET.depth == 1}-->
+	$('input[name=pos_title_html]').val(['<!--{pos_title_html}-->']);
+	$('input[name=bool_title_html]').val(['<!--{bool_title_html}-->']);
+	<!--{/}-->
+	selectLevel($('select[name=level_code]')[0]);
+	$('select[name=level_code]').change(function() {
+		selectLevel(this);
+	});
+});
+
+function selectLevel(obj) {
+	var select_idx = obj.selectedIndex;
+	var arr = [];
+	if(select_idx > 0) {
+		for(var i =1; i <= select_idx; i++) {
+			array_push(arr,$('option:eq('+i+')',obj).text());
+		}
+		$('span#accept_level').html(implode(',',arr));
+	}
+}
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">카테고리 등록하기</div>
+<form method="post" name="categoryform" id="categoryform" action="?">
+<input type="hidden" name="pg_mode" value="<!--{pg_mode}-->"/>
+<!--{? pg_mode == 'write_child'}-->
+<input type="hidden" name="parent_code" value="<!--{_GET.parent_code}-->"/>
+<input type="hidden" name="parent_path" value="<!--{_GET.parent_path}-->"/>
+<!--{/}-->
+<!--{? pg_mode == 'edit'}-->
+<input type="hidden" name="category_code" value="<!--{_GET.category_code}-->" />
+<input type="hidden" name="category_path" value="<!--{category_path}-->" />
+<!--{/}-->
+<input type="hidden" name="depth" value="<!--{depth}-->"/>
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<!--{? _GET.depth > 1}-->
+	<tr>
+		<th>상위카테고리</th>
+		<td><span id="parent_category"><!--{category_path_desc}--></span></td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<th>사용여부</th>
+		<td>
+			<input type="radio" name="bool_use" id="bool_use_y" value="1" /> <label for="bool_use_y">사용함</label> 
+			<input type="radio" name="bool_use" id="bool_use_n" value="0" /> <label for="bool_use_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>분류명</th>
+		<td><input type="text" name="category_name" id="category_name" value="<!--{category_name}-->" /></td>
+	</tr>
+	<tr>
+		<th>상품진열타입</th>
+		<td>
+			<input type="radio" name="type_display" id="type_display_gallery" value="gallery" /> <label for="type_display_gallery">갤러리스타일</label>
+			<input type="radio" name="type_display" id="type_display_list" value="list" /> <label for="type_display_list">목록스타일</label>
+			<input type="radio" name="type_display" id="type_display_webzine" value="webzine" /> <label for="type_display_webzine">웹진스타일</label>
+		</td>
+	</tr>
+	<tr>
+		<th>상품출력수</th>
+		<td><input type="text" name="display_scale" id="display_scale" size="5" value="<!--{display_scale}-->"/></td>
+	</tr>
+	<tr>
+		<th>이용권한설정</th>
+		<td><select name="level_code" id="level_code">
+				<option value="" selected="selected">:::회원레벨:::</option>
+				<!--{@ loop_level}-->
+				<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+				<!--{/}-->
+			</select> 이상 허용 (허용레벨 : <span id="accept_level"></span>)
+	</tr>
+	<tr>
+		<th>성인전용</th>
+		<td>
+			<!--{? _GET.pg_mode == 'form_child' && bool_adult > 1}-->
+			<input type="hidden" name="bool_adult" value="1" />
+			<span style="color:#ff3300;">성인전용</span> <span>* 성인전용을 해제 하실려면 상위카테고리 성인전용 설정을 해제하시면 됩니다.</span>
+			<!--{:}-->
+			<input type="radio" name="bool_adult" id="bool_adult_y" value="1" <!--{? bool_adult == 1}-->checked="checked"<!--{/}--> /> <label for="bool_adult_y">예</label>
+			<input type="radio" name="bool_adult" id="bool_adult_n" value="0"  <!--{? bool_adult == 0}-->checked="checked"<!--{/}--> /> <label for="bool_adult_n">아니요</label>
+			<!--{/}-->
+		</td>
+	</tr>
+	<!--{? _GET.depth == 1}-->
+	<tr>
+		<th>상단설명사용</th>
+		<td>
+			<input type="radio" name="bool_title_html" id="bool_title_html_y" value="1" /> <label for="bool_title_html_y">예</label>
+			<input type="radio" name="bool_title_html" id="bool_title_html_n" value="0" /> <label for="bool_title_html_n">아니요</label>
+		</td>
+	</tr>
+	<tr>
+		<th>설명위치</th>
+		<td>
+			<input type="radio" name="pos_title_html" id="pos_title_html_up" value="up" /> <label for="pos_title_html_up">상단</label>
+			<input type="radio" name="pos_title_html" id="pos_title_html_down" value="down" /> <label for="pos_title_html_down">하단</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<textarea name="title_html" id="title_html"><!--{title_html}--></textarea>
+		</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value="저장하기"/></span>
+</div>
+</form>
+<div id="help_level" class="none">
+	* 비회원 이상 선택시 하위 분류는 동일한 설정으로 권한 제한됩니다. <br />
+	* 하위 분류에서 설정한 레벨이하의 설정은 불가하며 상위레벨이상의 접근제한설정은 가능합니다.
+</div>

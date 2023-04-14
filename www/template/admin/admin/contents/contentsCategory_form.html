@@ -1,0 +1,275 @@
+<script type="text/javascript">
+<!--
+
+<!--{? depth == 1}-->
+var myeditor = new cheditor("myeditor");
+<!--{/}-->
+$(function() {
+	$('#jsform').submit(function() {
+
+		<!--{? depth == 1}-->
+		myeditor.outputBodyHTML();
+		<!--{/}-->
+		var chk_option = [];
+		chk_option[0] = { 'target':'contents_name', 'name':'메뉴명', 'type':'blank', 'msg':'메뉴명을 입력하여 주세요.!' };
+
+		<!--{? depth > 1}-->
+		var kinds_contents = $('input[name=kinds_contents]:checked').val();
+		if(kinds_contents == 'bbs' || kinds_contents == 'cts' ||kinds_contents == 'curriculum' ) {
+			chk_option[1] = { 'target':'contents_code', 'name':'컨텐츠', 'type':'select', 'msg':'연결 컨텐츠를 선택하여 주세요.!' };
+		}
+		<!--{/}-->
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list');
+					<!--{:}-->
+					if(confirm('계속 수정하시겠습니까?')) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '?pg_mode=list';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+						//location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	<!--{? depth==1}-->
+		$('input[name=bool_display]').val(['<!--{bool_display}-->']);//radio,checkbox
+		$('input[name=bool_footer]').val(['<!--{bool_footer}-->']);//radio,checkbox
+	<!--{/}-->
+	<!--{? _GET.pg_mode== 'form_edit' && depth==1}-->
+	$('select[name=link_code]').val('<!--{link_code}-->');//select
+	<!--{/}-->
+	$('input[name=kinds_contents]').click(function() {
+		var check_val = $(this).val();
+		loadSelectCode(check_val);
+	});
+});
+
+$(function() {
+	$('input[name=kinds_contents]').val(['<!--{kinds_contents}-->']);//radio,checkbox
+	<!--{? _GET.pg_mode == 'form_new' && depth > 1 }-->
+	loadSelectCode('<!--{kinds_contents}-->');
+	<!--{/}-->
+
+	<!--{? _GET.pg_mode == 'form_edit' && depth > 1 }-->
+	<!--{? kinds_contents == 'bbs'}-->
+	$('#select_code').show();
+	$('#contents_code').empty().append('<option value="">:::게시판선택:::</option>');
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_bbs_code',function(data) {
+		$.each(data, function(i,v) {
+			if(v['bbscode'] == '<!--{contents_code}-->') {
+				$('#contents_code').append('<option value="'+v['bbscode']+'" selected="selected">'+v['title']+'</option>');
+			}
+			else {
+				$('#contents_code').append('<option value="'+v['bbscode']+'">'+v['title']+'</option>');
+			}
+		});
+	},'json');
+	<!--{: kinds_contents == 'cts'}-->
+	$('#select_code').show();
+	$('#contents_code').empty().append('<option value="" selected="selected">:::컨텐츠선택:::</option>');
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_cts_code',function(data) {
+		$.each(data, function(i,v) {
+			if(v['cts_code'] == '<!--{contents_code}-->') {
+				$('#contents_code').append('<option value="'+v['cts_code']+'" selected="selected">'+v['title']+'</option>');
+			}
+			else {
+				$('#contents_code').append('<option value="'+v['cts_code']+'">'+v['title']+'</option>');
+			}
+		});
+	},'json');
+	<!--{: kinds_contents == 'curriculum'}-->
+	$('#select_code').show();
+	$('#contents_code').empty().append('<option value="" selected="selected">:::컨텐츠선택:::</option>');
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_curriculum_code',function(data) {
+		$.each(data, function(i,v) {
+			if(v['category_code'] == '<!--{contents_code}-->') {
+				$('#contents_code').append('<option value="'+v['category_code']+'" selected="selected">'+v['category_name']+'</option>');
+			}
+			else {
+				$('#contents_code').append('<option value="'+v['category_code']+'">'+v['category_name']+'</option>');
+			}
+		});
+	},'json');
+	<!--{/}-->
+	<!--{/}-->
+});
+
+function loadSelectCode(check_val) {
+	if(check_val == 'bbs') {
+		$('#select_code').show();
+		$('#contents_code').empty().append('<option value="" selected="selected">:::게시판선택:::</option>');
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_bbs_code',function(data) {
+			$.each(data, function(i,v) {
+				$('#contents_code').append('<option value="'+v['bbscode']+'">'+v['title']+'</option>');
+			});
+		},'json');
+	}
+	else if(check_val == 'cts') {
+		$('#select_code').show();
+		$('#contents_code').empty().append('<option value="" selected="selected">:::컨텐츠선택:::</option>');
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_cts_code',function(data) {
+			$.each(data, function(i,v) {
+				$('#contents_code').append('<option value="'+v['cts_code']+'">'+v['title']+'</option>');
+			});
+		},'json');
+	}
+	else if(check_val == 'curriculum') {
+		$('#select_code').show();
+		$('#contents_code').empty().append('<option value="" selected="selected">:::컨텐츠선택:::</option>');
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=get_curriculum_code',function(data) {
+			$.each(data, function(i,v) {
+				$('#contents_code').append('<option value="'+v['cts_code']+'">'+v['title']+'</option>');
+			});
+		},'json');
+	}
+	else {
+		$('#select_code').hide();
+	}
+}
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TreeView.png') 0px 0px no-repeat;">컨텐츠관리</span> / <span class="title02">메뉴 관리</span></h1></div>
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->" enctype="multipart/form-data">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode== 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />	
+<input type="hidden" name="depth" value="<!--{depth}-->" />
+
+<!--{? _GET.pg_mode== 'form_edit'}-->
+<input type="hidden" name="cate_code" value="<!--{cate_code}-->" />	
+<!--{/}-->
+<!--{? depth == 1}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>메뉴명</th>
+		<td><input type="text" name="contents_name" value="<!--{contents_name}-->" class="frm_input" style="width:200px" /></td>
+	</tr>
+	<!--{? _GET.pg_mode== 'form_edit'}-->
+	<tr>
+		<th>연결하위메뉴</th>
+		<td><select name="link_code">
+			<option value="" selected="selected">:::하위메뉴선택:::</option>
+			<!--{@loop_menu}-->
+			<option value="<!--{.cate_code}-->"><!--{.contents_name}--></option>
+			<!--{/}-->
+		</select></td>
+	</tr>
+	<!--{/}-->
+	<tr>
+		<th>노출여부</th>
+		<td>
+			<input type="radio" name="bool_display" id="bool_display01" value="0" /> <label for="bool_display01">노출안함</label>
+			<input type="radio" name="bool_display" id="bool_display02" value="1" /> <label for="bool_display02">노출함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>하단메뉴</th>
+		<td>
+			<input type="radio" name="bool_footer" id="bool_footer01" value="0" /> <label for="bool_footer01">사용안함</label>
+			<input type="radio" name="bool_footer" id="bool_footer02" value="1" /> <label for="bool_footer02">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>배경이미지</th>
+		<td><input type="file" name="bg_img" class="frm_input" style="border:1px solid #ccc;width:300px;" /><img src="/data/attach/<!--{bg_img}-->" style="width:300px;"></td>
+	</tr>
+	<tr>
+		<th>타이틀카피문구</th>
+		<td><textarea name="title_copy" id="title_copy" style="width:100%;height:300px;"><!--{title_copy}--></textarea></td>
+	</tr>
+	</tbody>
+</table>
+<!--{:}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="85%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>상위메뉴</th>
+		<td>
+			<input type="hidden" name="parent_code" value="<!--{parent_code}-->" />
+			<!--{parent_menu}-->
+		</td>
+	</tr>
+	<tr>
+		<th>메뉴명</th>
+		<td><input type="text" name="contents_name" value="<!--{contents_name}-->" class="frm_input" style="width:200px" /></td>
+	</tr>
+	<tr>
+		<th>컨텐츠 타입</th>
+		<td style="line-height:24px;">
+			<input type="radio" name="kinds_contents" id="kinds_contents01" value="bbs" /> <label for="kinds_contents01">게시판</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents02" value="cts" /> <label for="kinds_contents02">컨텐츠</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents03" value="faq" /> <label for="kinds_contents03">자주묻는질문</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents04" value="curriculum" /> <label for="kinds_contents04">교육과정</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents05" value="history" /> <label for="kinds_contents05">연혁</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents06" value="staff" /> <label for="kinds_contents06">직원안내</label><br />
+			<input type="radio" name="kinds_contents" id="kinds_contents07" value="request" /> <label for="kinds_contents07">신청</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents08" value="support" /> <label for="kinds_contents08">고객지원</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents09" value="manual" /> <label for="kinds_contents09">직접지정</label>
+			<input type="radio" name="kinds_contents" id="kinds_contents10" value="kinder" /> <label for="kinds_contents10">회사소개</label>
+		</td>
+	</tr>
+	<tr id="select_code" <!--{? kinds_contents != 'bbs' && kinds_contents != 'cts' && kinds_contents != 'curriculum'}-->style="display:none"<!--{/}-->>
+		<th>컨텐츠 선택</th>
+		<td>
+			<select name="contents_code" id="contents_code">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>링크주소</th>
+		<td><input type="text" name="link_url" value="<!--{link_url}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<!--{/}-->
+<div class="button_area">
+	<span class="button black"><input type="submit" value="확  인" /></span>
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목 록</a></span>
+</div>
+</form>
+<!--{? depth == 1}-->
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'title_copy';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>
+<!--{/}-->

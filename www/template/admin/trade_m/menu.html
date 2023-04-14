@@ -1,0 +1,64 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element text-center"> <a href="/home"><span><img alt="image" src="/template/admin/smc/img/main/kmcse-stock-logo.png" /></span></a>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <span class="clear"> <span class="block m-t-md"> <strong class="font-bold"><!--{_SESSION.USER_ID}--></strong></span> 
+                    <span class="text-muted text-xs block m-t-xs"><!--{_SESSION.USER_NAME}--><b class="caret"></b></span> </span> </a>
+                    <!--{? _SESSION.USER_NAME }-->
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                    <!--{/}-->
+                </div>
+                <div class="logo-element text-center">
+                    <a href="/home"><img alt="image" src="img/sclogo_trade2.png" /></a>
+                </div>
+            </li>
+
+            <li>
+                <a href="/home"><img src="../smc/img/m_home.png" class="img_menu" />  <span class="nav-label">Home</span></a>
+            </li>
+            <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && active_trade_menu}-->class="active"<!--{/}-->>
+                <a href="/trade/jin"><img src="../smc/img/m_trade.png" class="img_menu" /> <span class="nav-label"><?=Lang::main_0;?></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <!--{@ currency_codes}-->
+                    <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && strtoupper(_GET.pg_mode)==.value_ }-->class="active"<!--{/}-->>
+                    <a href="/trade/<!--{=strtolower(.value_)}-->">
+                        <!--{? .value_=='JIN'||.value_=='APC'||.value_=='SCC' }-->
+                        <!--{? .value_==strtoupper(_GET.pg_mode) }-->
+                        <img src="img/<!--{=strtolower(.value_)}-->_small_active.gif" style="margin-right: 6px;"/>
+                        <!--{:}-->
+                        <img src="img/<!--{=strtolower(.value_)}-->_small.gif" style="margin-right: 6px;"/>
+                        <!--{/}-->
+                        <!--{:}-->
+                        <i class="cc <!--{? .value_=='SCC'}-->SCOT<!--{:}--><!--{.value_}--><!--{/}-->"></i>
+                        <!--{/}-->
+                        <!--{=strtoupper(.value_)}--></a>
+                    </li>
+                    <!--{/}-->
+                </ul>
+            </li>
+
+            <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && preg_match('/^(wallet|deposit|exchange|withdrawal)$/',_GET.pg_mode)}-->class="active"<!--{/}-->>
+                <a href="/trade/jin"><img src="../smc/img/m_wallet.png" class="img_menu" /> <span class="nav-label"><?=Lang::main_1;?></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && _GET.pg_mode=='wallet' }-->class="active"<!--{/}-->><a href="/trade/wallet"><i class="fa fa-credit-card"></i> <?=Lang::main_12;?></a></li>
+                    <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && _GET.pg_mode=='deposit' }-->class="active"<!--{/}-->><a href="/trade/deposit/<!--{_GET.coin}-->"><i class="fa fa-flask"></i> <?=Lang::main_13;?></a></li>
+                    <!--<li &lt;!&ndash;{? _SERVER.SCRIPT_NAME=='/trading/index.php' && _GET.pg_mode=='exchange' }&ndash;&gt;class="active"&lt;!&ndash;{/}&ndash;&gt;><a href="/trade/exchange/&lt;!&ndash;{_GET.coin}&ndash;&gt;"><i class="fa fa-handshake-o"></i> Exchange</a></li>-->
+                    <li <!--{? _SERVER.SCRIPT_NAME=='/trading/index.php' && _GET.pg_mode=='withdrawal' }-->class="active"<!--{/}-->><a href="/trade/withdrawal/<!--{_GET.coin}-->"><i class="fa fa-diamond"></i> <?=Lang::main_14;?></a></li>
+
+                </ul>
+                
+            </li>
+            <li>
+                <a href="/faq"><img src="../smc/img/m_support.png" class="img_menu" /> <span class="nav-label"><?=Lang::main_2;?></span></a>
+            </li>
+            <li>
+                <a href="/certification"><img src="../smc/img/m_myaccount.png" class="img_menu" /> <span class="nav-label"><?=Lang::main_3;?></span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

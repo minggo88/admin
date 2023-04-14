@@ -1,0 +1,213 @@
+<script type="text/javascript">
+//<![CDATA[ 
+var sel_textarea;
+
+$(function() {
+	$('#emailfrm').submit(function() {
+
+		if($('input[name=bool_email_join]:checked').val() == 1 && this.skin_email_join.selectedIndex == 0) {
+			 alert('가입확인메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_order]:checked').val() == 1 && this.skin_email_order.selectedIndex == 0) {
+			 alert('주문확인메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_payment]:checked').val() == 1 && this.skin_email_payment.selectedIndex == 0) {
+			 alert('결제완료메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_delivery]:checked').val() == 1 && this.skin_email_delivery.selectedIndex == 0) {
+			 alert('배송안내메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_ordercancel]:checked').val() == 1 && this.skin_email_ordercancel.selectedIndex == 0) {
+			 alert('주문취소확인메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_passwd]:checked').val() == 1 && this.skin_email_passwd.selectedIndex == 0) {
+			 alert('주문취소확인메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_passwd]:checked').val() == 1 && this.skin_email_passwd.selectedIndex == 0) {
+			 alert('비밀번호안내메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+		if($('input[name=bool_email_withdraw]:checked').val() == 1 && this.skin_email_withdraw.selectedIndex == 0) {
+			 alert('비밀번호안내메일 스킨을 선택하여 주세요');
+			 return false;
+		}
+
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}		
+
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	//기본값 설정
+	$('input[name=bool_auto_email]').val(['<!--{bool_auto_email}-->']);
+	$('input[name=bool_email_join]').val(['<!--{bool_email_join}-->']);
+	$('select[name=skin_email_join]').val(['<!--{skin_email_join}-->']);
+	$('input[name=bool_email_order]').val(['<!--{bool_email_order}-->']);
+	$('select[name=skin_email_order]').val(['<!--{skin_email_order}-->']);
+	$('input[name=bool_email_payment]').val(['<!--{bool_email_payment}-->']);
+	$('select[name=skin_email_payment]').val(['<!--{skin_email_payment}-->']);
+	$('input[name=bool_email_delivery]').val(['<!--{bool_email_delivery}-->']);
+	$('select[name=skin_email_delivery]').val(['<!--{skin_email_delivery}-->']);
+	$('input[name=bool_email_ordercancel]').val(['<!--{bool_email_ordercancel}-->']);
+	$('select[name=skin_email_ordercancel]').val(['<!--{skin_email_ordercancel}-->']);
+	$('input[name=bool_email_passwd]').val(['<!--{bool_email_passwd}-->']);
+	$('select[name=skin_email_passwd]').val(['<!--{skin_email_passwd}-->']);
+	$('input[name=bool_email_withdraw]').val(['<!--{bool_email_withdraw}-->']);
+	$('select[name=skin_email_withdraw]').val(['<!--{skin_email_withdraw}-->']);
+
+});
+//]]>
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">마케팅관리</span> / <span class="title02">자동메일 설정</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">자동메일 설정</div>
+<form method="post" name="emailfrm" id="emailfrm" action="/admin/email.php">
+<input type="hidden" name="pg_mode" value="edit" />
+<table class="form_table">
+	<colgroup>
+		<col width="15%">
+		<col width="85%">
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>보내는 사람</th>
+		<td><input type="text" name="from_name" value="<!--{from_name}-->" class="frm_input" style="width:200px" /> * 미지정시 기본설정의 교육원 이름이 적용됩니다.</td>
+	</tr>
+	<tr>
+		<th>메일주소</th>
+		<td><input type="text" name="from_email_addr" value="<!--{from_email_addr}-->" class="frm_input" style="width:200px" /> * 미지정시 기본설정의 운영자 이메일이 적용됩니다.</td>
+	</tr>
+	<tr>
+		<th>자동메일 사용여부</th>
+		<td>
+			<input type="radio" name="bool_auto_email" id="bool_auto_email_y" value="1" /> <label for="bool_auto_email_y">사용함</label> 
+			<input type="radio" name="bool_auto_email" id="bool_auto_email_n" value="0" /> <label for="bool_auto_email_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>가입확인메일</th>
+		<td>
+			<input type="radio" name="bool_email_join" id="bool_email_join_y" value="1" /> <label for="bool_email_join_y">발송함</label> 
+			<select name="skin_email_join" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_join}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_join" id="bool_email_join_n" value="0" /> <label for="bool_email_join_n">발송안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>주문확인메일</th>
+		<td>
+			<input type="radio" name="bool_email_order" id="bool_email_order_y" value="1" /> <label for="bool_email_order_y">발송함</label> 
+			<select name="skin_email_order" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_order}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_order" id="bool_email_order_n" value="0" /> <label for="bool_email_order_n">발송안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>결제완료메일</th>
+		<td>
+			<input type="radio" name="bool_email_payment" id="bool_email_payment_y" value="1" /> <label for="bool_email_payment_y">발송함</label> 
+			<select name="skin_email_payment" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_payment}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_payment" id="bool_email_payment_n" value="0" /> <label for="bool_email_payment_n">발송안함</label>
+		</td>
+	</tr>
+	<!--{*
+	<tr>
+		<th>배송안내메일</th>
+		<td>
+			<input type="radio" name="bool_email_delivery" id="bool_email_delivery_y" value="1" /> <label for="bool_email_delivery_y">발송함</label> 
+			<select name="skin_email_delivery" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_delivery}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_delivery" id="bool_email_delivery_n" value="0" /> <label for="bool_email_delivery_n">발송안함</label>
+		</td>
+	</tr>
+	*}-->
+	<tr>
+		<th>주문취소확인메일</th>
+		<td>
+			<input type="radio" name="bool_email_ordercancel" id="bool_email_ordercancel_y" value="1" /> <label for="bool_email_ordercancel_y">발송함</label> 
+			<select name="skin_email_ordercancel" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_ordercancel}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_ordercancel" id="bool_email_ordercancel_n" value="0" /> <label for="bool_email_ordercancel_n">발송안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>비밀번호안내메일</th>
+		<td>
+			<input type="radio" name="bool_email_passwd" id="bool_email_passwd_y" value="1" /> <label for="bool_email_passwd_y">발송함</label> 
+			<select name="skin_email_passwd" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_passwd}-->	
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_passwd" id="bool_email_passwd_n" value="0" /> <label for="bool_email_passwd_n">발송안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>회원탈퇴확인메일</th>
+		<td>
+			<input type="radio" name="bool_email_withdraw" id="bool_email_withdraw_y" value="1" /> <label for="bool_email_withdraw_y">발송함</label> 
+			<select name="skin_email_withdraw" style="width:200px" >
+				<option value="">:::스킨선택:::</option>
+				<!--{@loop_withdraw}-->
+				<option value="<!--{.key_}-->"><!--{.value_}--></option>
+				<!--{/}-->
+			</select> 
+			<input type="radio" name="bool_email_withdraw" id="bool_email_withdraw_n" value="0" /> <label for="bool_email_withdraw_n">발송안함</label>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value=" 확 인 " /></span>
+</div>
+</form>

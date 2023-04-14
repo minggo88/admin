@@ -1,0 +1,407 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+
+window.name ="Parent_window";
+function fnPopup(){
+	window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+	document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+	document.form_chk.target = "popupChk";
+	document.form_chk.submit();
+}
+function fnSendPhone(){
+	if($('#mobile_a').val()=='' || $('#mobile_b').val()=='' || $('#mobile_c').val()==''){
+		alert('올바른 핸드폰 번호를 입력해주세요.');
+		return false;
+	}
+	var new_phone_number = $('#mobile_a').val() +'-'+ $('#mobile_b').val() +'-'+ $('#mobile_c').val();
+	_new_phone_number = new_phone_number.replace(/[^0-9]/g, '');
+	var confirm_mobile = $('#confirm_mobile').val().replace(/[^0-9]/g, '');
+	if(confirm_mobile == _new_phone_number) {
+		alert('이미 인증된 핸드폰 번호입니다.');
+	} else {
+		$.post('/member/memberEdit.php', {'pg_mode':'send_confirm_number', 'phone_number':new_phone_number}, function(r){
+			$('#mobile_a, #mobile_b, #mobile_c').attr('readonly', true);
+			if( typeof r!=typeof undefined && r.bool ) {
+				alert('핸드폰으로 인증번호를 발송했습니다. 인증번호를 입력해 주세요.');
+				$('#box_write_confirm_number').show();
+				window.new_phone_number = new_phone_number;
+			}
+		},'json');
+	}
+	return false;
+}
+function fnConfirmPhone(){
+	var new_phone_number = ($('#mobile_a').val() + $('#mobile_b').val() + $('#mobile_c').val()).replace(/[^0-9]/g, '');
+	if( window.new_phone_number.replace(/[^0-9]/g, '') != new_phone_number ) {
+		alert('인증번호를 발송할때 이용한 핸드폰 번호를 입력해주세요.');
+		return false;
+	}
+	var confirm_number = $('#confirm_sms').val();
+	$.post('/member/memberEdit.php', {'pg_mode':'confirm_number', 'confirm_number':confirm_number}, function(r){
+		if( typeof r!=typeof undefined && r.bool ) {
+			alert('핸드폰으로 인증이 완료되었습니다.');
+			$('#confirm_mobile').val(window.new_phone_number);
+			$('#box_write_confirm_number').hide();
+			$('#btn_send_confirm_number').hide();
+			$('#btn_confirmed_mobile').show();
+			$('#mobile_a, #mobile_b, #mobile_c').attr('readonly', false);
+		}
+	},'json');
+	return false;
+}
+$(function() {
+	$('#frmEdit').submit(function() {
+		var chk_option = [
+//			{ 'target':'zipcode', 'name':'우편번호', 'type':'digit', 'msg':'우편번호는 필수 입력사항입니다.' },
+//			{ 'target':'address_a', 'name':'주소', 'type':'blank', 'msg':'주소는 필수 입력사항입니다.' },
+//			{ 'target':'address_b', 'name':'상세주소', 'type':'blank', 'msg':'상세주소는 필수 입력사항입니다.' },
+//			{ 'target':'phone_a', 'name':'전화번호', 'type':'select', 'msg':'지역번호를 선택하여 주세요.!' },
+//			{ 'target':'phone_b', 'name':'전화번호', 'type':'digit', 'msg':'전화국번을 입력하여 주세요.!' },
+//			{ 'target':'phone_c', 'name':'전화번호', 'type':'digit', 'msg':'전화번호를 입력하여 주세요.!' },
+//			{ 'target':'mobile_a', 'name':'휴대전화번호', 'type':'select', 'msg':'휴대전화번호를 선택하여 주세요.!' },
+//			{ 'target':'mobile_b', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' },
+//			{ 'target':'mobile_c', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' }
+//			{ 'target':'email_a', 'name':'이메일', 'type':'blank', 'msg':'이메일을 입력하여 주세요.!' },
+//			{ 'target':'email_b', 'name':'이메일', 'type':'blank', 'msg':'이메일 도메인을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this, chk_option)) {
+			return false;
+		}
+		if(this.securimagecode.value == '') {
+			alert('그림인증문자를 입력해주세요.');
+			this.securimagecode.focus();
+			return false;
+		}
+		if(this.bool_passwd.checked) {
+			if(this.userpw.value == '') {
+				alert('비밀번호를 입력하여 주세요.!');
+				this.bool_passwd.focus();
+				return false;
+			}
+			if(this.userpw.value.length < 8) {
+				alert('비밀번호를 8자리 이상으로 입력하여 주세요.!');
+				this.bool_passwd.focus();
+				return false;
+			}
+		}
+//		if( $('#btn_send_confirm_number').is(':visible') ) {
+//			alert('새로운 핸드폰 번호의 인증을 진행해주세요.');
+//			return false;
+//		}
+		if(!confirm('입력하신 정보로 수정하시겠습니까?')) {
+			return false;
+		}
+		<!--{? !config_basic.bool_ssl}-->
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('회원님의 정보가 수정되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+		<!--{:}-->
+//		$(this).attr('target', 'hiddenframe');
+		<!--{/}-->
+	});
+
+	$('select[name=phone_a]').val('<!--{phone_a}-->');
+	$('select[name=mobile_a]').val('<!--{mobile_a}-->');
+
+//	$('#email_domain').change(function() {
+//		var select_idx = this.selectedIndex;
+//		var domain = $(this).val();
+//		if(select_idx > 0) {
+//			if(domain == 'etc') {
+//				$('#email_b').val('');
+//			}
+//			else {
+//				$('#email_b').val(domain);
+//			}
+//		}
+//	});
+	// 핸드폰 번호가 바뀌면 인증하라고 한다.
+//	var check_confirm_mobile = function(){
+//		var confirm_mobile = $('#confirm_mobile').val().replace(/[^0-9]/g, '');
+//		var new_phone_number = ($('#mobile_a').val() + $('#mobile_b').val() + $('#mobile_c').val()).replace(/[^0-9]/g, '');
+//		if(confirm_mobile != new_phone_number) {
+//			$('#btn_send_confirm_number').show();
+//			$('#btn_confirmed_mobile').hide();
+//			$('#bool_confirm_mobile').val(0);
+//		} else {
+//			$('#btn_send_confirm_number').hide();
+//			$('#btn_confirmed_mobile').show();
+//			$('#bool_confirm_mobile').val(1);
+//		}
+//	};
+//	$('#mobile_a, #mobile_b, #mobile_c').keyup(check_confirm_mobile).change(check_confirm_mobile);
+//	$('#btn_send_confirm_number').click(fnSendPhone);
+//	$('#btn_confirm_mobile').click(fnConfirmPhone);
+});
+//-->
+</script>
+
+<!--{*
+<div class="remark_announce">
+	<span class="sub_title_b">(주)SCC는</span><br />
+	<span class="sub_title_g">sss</span><br />
+	<span class="sub_title_g">tttt</span><br />
+	<span class="sub_title">ggg</span><span class="sub_title_g">hhh.</span><br /><br />
+</div>
+*}-->
+
+
+<div class="title_h2"><a name="realname"></a><img src="../images/bullet.gif" >본인인증</div>
+<table class="form_table">
+<colgroup>
+	<col width="20%"/>
+	<col width="80%"/>
+</colgroup>
+<tbody>
+<tr>
+	<th>본인인증</th>
+	<td style="line-height:24px;">
+		<!--{? realname_info.userid }-->
+		<span class="button large blue"><a href="#">본인인증완료</a></span><br />
+		
+        <p>성명: <strong><!--{realname_info.name}--></strong></p>
+        <!--{*<p>휴대폰: <strong><!--{realname_info.userid }--></strong></p>*}-->
+        <p>생년월일: <strong><!--{=substr(realname_info.birthdate,0,4)}-->-<!--{=substr(realname_info.birthdate,4,2)}-->-<!--{=substr(realname_info.birthdate,6,2)}--></strong></p>
+        <p>성별: <strong><!--{? realname_info.gender=='1' }-->남성<!--{:}-->여성<!--{/}--></strong></p>
+        <p>휴대전화 <strong><!--{realname_info.mobile_number}--></strong> <span id="btn_send_confirm_number" class="button middle red"><a href="javascript:fnPopup();">변경</a></span></p>
+
+		<!--{:}-->
+		<span class="button large red"><a href="javascript:fnPopup();">본인인증하기</a></span><br />
+		본인인증이 어려우신 분께서는 <a href="mailto:info@kmcse.com">info@kmcse.com</a>으로 신분증사본(여권)과 이메일주소를 보내주십시오. 신속하게 처리해드리겠습니다.
+		<!--{/}-->
+	</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="title_h2"><img src="../images/bullet.gif" >비밀번호 변경</div>
+<form method="post" name="frmEdit" id="frmEdit"  action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+<table class="form_table">
+<colgroup>
+	<col width="20%"/>
+	<col width="80%"/>
+</colgroup>
+<tbody>
+<!--{*
+<tr>
+	<th><label for="userid">아이디</label> <span class="color">*</span></th>
+	<td><!--{userid}--></td>
+</tr>
+*}-->
+<tr>
+	<th><label for="email">이메일</label> <span class="color">*</span></th>
+	<td><!--{userid}--><input type='hidden' name='email' value='<!--{userid}-->' />
+	</td>
+</tr>
+<tr>
+	<th><label for="userpw">비밀번호</label> <span class="color">*</span></th>
+	<td>
+		<input type="password" name="userpw" maxlength="15" class="frm_input" style="width:100px" /> <input type="checkbox" name="bool_passwd" value="1" /> 비밀번호 변경&nbsp;(영문 대소문자, 숫자, 특수문자 포함 8자리 이상으로 설정)</td>
+</tr>
+<!--{*
+	<tr>
+		<th><label for="name">이름</label> <span class="color">*</span></th>
+		<td><input type="text" name="name" value="<!--{name}-->" maxlength="20" class="frm_input" style="width:100px" /></td>
+	</tr>
+
+	<tr>
+		<th><label for="zipcode">주소</label> <span class="color">*</span></th>
+		<td>
+			<input type="text" name="zipcode" id="zipcode"  value="<!--{zipcode}-->" readonly="readonly" class="frm_input" style="width:100px;margin-bottom:3px" /> 
+			<span class="button small red"><a href="javascript:;" onclick="srchZipcode('zipcode','address_a')">우편번호검색</a></span><br />
+			<input type="text" name="address_a" id="address_a" value="<!--{address_a}-->" readonly="readonly" class="frm_input" style="width:350px;margin-bottom:3px" /><br />
+			<input type="text" name="address_b" id="address_b" value="<!--{address_b}-->" class="frm_input" style="width:200px" /> (나머지 주소를 입력하세요)
+		</td>
+	</tr>
+	<tr>
+		<th><label for="phone_a">전화번호</label> <span class="color">*</span></th>
+		<td>
+			<select name="phone_a" style="width:60px;">
+				<!--{=loopPhoneA()}-->
+			</select> - 
+			<input type="text" name="phone_b" value="<!--{phone_b}-->" maxlength="4" class="frm_input" style="width:50px" /> -
+			<input type="text" name="phone_c" value="<!--{phone_c}-->" maxlength="4" class="frm_input" style="width:50px" />
+		</td>
+	</tr>
+	<tr>
+		<th><label for="mobile_a">휴대전화</label> <span class="color">*</span></th>
+		<td>
+			<input type="hidden" name="confirm_mobile" id="confirm_mobile" value="<!--{? bool_confirm_mobile=='1'}--><!--{mobile}--><!--{/}-->" /><input type="hidden" name="bool_confirm_mobile" id="bool_confirm_mobile" value="<!--{bool_confirm_mobile}-->" />
+			<select name="mobile_a" id="mobile_a" style="width:60px;">
+				<!--{=loopMobileA()}-->
+			</select> - 
+			<input type="text" name="mobile_b" id="mobile_b" value="<!--{mobile_b}-->" maxlength="4" class="frm_input" style="width:50px" /> -
+			<input type="text" name="mobile_c" id="mobile_c" value="<!--{mobile_c}-->" maxlength="4" class="frm_input" style="width:50px" />&nbsp;&nbsp;
+			
+			<span id="btn_confirmed_mobile" class="button middle blue" style="display:<!--{? bool_confirm_mobile}--><!--{:}-->none<!--{/}-->"><a >핸드폰인증완료</a></span>
+			<span id="btn_send_confirm_number" class="button middle red" <!--{? bool_confirm_mobile}-->style="display:none"<!--{/}-->><a href="#">핸드폰인증번호발송</a></span> (비밀번호 변경시 입력)
+			
+			<div id="box_write_confirm_number" style="display:none">핸드폰 인증번호: <input type='text' name='confirm_number' id='confirm_sms' value='' class="frm_input" style="width:50px" /><span class="button middle red"><a id="btn_confirm_mobile" href="#">핸드폰인증</a></span> </div>
+			<div>(연락가능한 전화번호를 입력해주세요)</div>
+		</td>
+	</tr>
+
+	<tr>
+		<th><label for="mobile_a">휴대전화</label> <span class="color">*</span></th>
+		<td>
+			<!--{mobile}-->&nbsp;&nbsp;
+			<span id="btn_send_confirm_number" class="button middle red"><a href="javascript:fnPopup();">변경</a></span>
+			<div>(연락가능한 전화번호를 입력해주세요)</div>
+		</td>
+	</tr>
+*}-->
+
+<tr>
+	<th><label for="securimagecode">그림인증문자</label> <span class="color">*</span></th>
+	<td>
+		<script language="javascript" type="text/javascript">
+		  function RefreshCaptcha()
+		  {
+		  var captchaImage = document.getElementById('captcha');
+		  captchaImage.src = '/lib/PHPFusion7_CAPTCHA/securimage/securimage_show.php?sid=' + Math.random(); 
+		  return false
+		  }
+		</script>
+		<img src="/lib/PHPFusion7_CAPTCHA/securimage/securimage_show.php?sid=<!--{=time()}-->" alt="Validation Code:" 
+			 name="captcha" width="145" height="45" align="left" id="captcha"/> 
+		<a onclick="RefreshCaptcha();" href="#"> 
+			<img align="top" alt="" src="/lib/PHPFusion7_CAPTCHA/securimage/images/refresh.gif"/> </a> 
+		<a href="/lib/PHPFusion7_CAPTCHA/securimage/securimage_play.php"> 
+			<img align="top" style="margin-bottom: 1px;" alt="" 
+				 src="/lib/PHPFusion7_CAPTCHA/securimage/images/audio_icon.gif"/> 
+		</a><br />
+		<input type="text" name="securimagecode" id="securimagecode" value="" class="frm_input" style="width:350px;margin-bottom:3px" autocomplete="off" />
+		<div>위 문자열과 동일하게 입력하세요</div>
+	</td>
+</tr>
+</tbody>
+</table>
+
+
+<!--{*
+ * 2014-07-27 : 황인석작업 - 2014-07-27 이길한대표 이메일 요청 사항
+	3.회원정보란에 이메일출금기능  SMS 수신송신 체크하는거 있지 않습니까?
+	그거 되는것 하나도 없습니다. 그려만 놓고 기능은 안되고...
+	작업요청한지 한달 넘었는데, 비용문제로 한근희씨 작업 못하고 있었고요...
+	초기에 작업하신다고 해놓았는데
+	그냥 삭제해주세요... 안되는거 계속 있기만 하면 신뢰가 떨어질 것 같습니다.....
+	서로 부담안되게 작업안하는게 맞을 것 같습니다....
+
+
+<div class="title_h2"><img src="../images/bullet.gif" >이메일 및 SMS 수신설정</div>
+<table class="form_table">
+<colgroup>
+	<col width="20%"/>
+	<col width="40%"/>
+	<col width="40%"/>
+</colgroup>
+<tbody>
+<tr>
+	<th></th>
+	<th class='pcenter'>이메일 수신</th>
+	<th class='pcenter'>SMS 수신</th>
+</tr>
+<tr>
+	<th>KRW 입금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_krw_input" value="1" <!--{? bool_email_krw_input === '1' || bool_email_krw_input==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_email_krw_input" value="0" <!--{? bool_email_krw_input === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+	<td class='pcenter'><input type="radio" name="bool_sms_krw_input" value="1" <!--{? bool_sms_krw_input === '1' || bool_sms_krw_input==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_sms_krw_input" value="0" <!--{? bool_sms_krw_input === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+</tr>
+<tr>
+	<th>KRW 출금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_krw_output" value="1" <!--{? bool_email_krw_output === '1' || bool_email_krw_output==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_email_krw_output" value="0" <!--{? bool_email_krw_output === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+	<td class='pcenter'><input type="radio" name="bool_sms_krw_output" value="1" <!--{? bool_sms_krw_output === '1' || bool_sms_krw_output==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_sms_krw_output" value="0" <!--{? bool_sms_krw_output === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+</tr>
+<tr>
+	<th>BTC 거래체결</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_trade" value="1" <!--{? bool_email_btc_trade === '1' || bool_email_btc_trade==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_email_btc_trade" value="0" <!--{? bool_email_btc_trade === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+<tr>
+	<th>BTC 입금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_input" value="1" <!--{? bool_email_btc_input === '1' || bool_email_btc_input==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_email_btc_input" value="0" <!--{? bool_email_btc_input === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+<tr>
+	<th>BTC 출금반영</th>
+	<td class='pcenter'><input type="radio" name="bool_email_btc_output" value="1" <!--{? bool_email_btc_output === '1' || bool_email_btc_output==''}-->checked="checked"<!--{/}-->/> 수신 <input type="radio" name="bool_email_btc_output" value="0" <!--{? bool_email_btc_output === '0'}-->checked="checked"<!--{/}-->/> 수신안함</td>
+	<td class='pcenter'>-</td>
+</tr>
+*}-->
+<!--{*
+	<tr>
+		<th>뉴스레터 수신</th>
+		<td>
+			<input type="checkbox" name="bool_email" value="1" <!--{? bool_email > 0}-->checked="checked"<!--{/}--> /> <br />뉴스레터를 수신하겠습니다. (쿠키앤클레이 관련 정보를 메일로 보내드립니다.)
+		</td>
+	</tr>
+	<tr>
+		<th>SMS 수신</th>
+		<td>
+			<input type="checkbox" name="bool_sms" value="1" <!--{? bool_sms > 0}-->checked="checked"<!--{/}--> /> <br />SMS를 수신하겠습니다. (쿠키앤클레이 관련 정보를 휴대폰문자로 보내드립니다.)
+		</td>
+	</tr>
+*}-->
+</tbody>
+</table>
+<div class='button_area'>
+	<input type="submit" value="정보수정" class="grad"/>
+	{*<span class="button large red strong"><input type="submit" value="정보수정" /></span>*}
+</div>
+</form>
+
+
+<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
+<form name="form_chk" method="post">
+	<input type="hidden" name="m" value="checkplusSerivce">						<!-- 필수 데이타로, 누락하시면 안됩니다. -->
+	<input type="hidden" name="EncodeData" value="<!--{enc_data}-->">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
+	<!-- 업체에서 응답받기 원하는 데이타를 설정하기 위해 사용할 수 있으며, 인증결과 응답시 해당 값을 그대로 송신합니다.
+		 해당 파라미터는 추가하실 수 없습니다. -->
+	<input type="hidden" name="param_r1" value="">
+	<input type="hidden" name="param_r2" value="">
+	<input type="hidden" name="param_r3" value="">
+</form>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_zipcode').dragPopup({
+		popup_id: 'drag_popup_zipcode',
+		popup_title: '우편번호검색',
+		popup_width: 350,
+		popup_height: 300,
+		bool_today_close:false
+	});
+});
+
+function srchZipcode(target_zipcode,target_addr) {
+	$('#iframe_zipcode').attr('src','/zipcode/zipcode.php?target_zipcode='+target_zipcode+'&target_addr='+target_addr);
+	showPopup('drag_popup_zipcode',{kind_pos:'center'});
+}
+//-->
+</script>
+
+<div id="popup_zipcode" style="display:none;padding:10px;">
+	<iframe id="iframe_zipcode"  frameborder="0" style="width:330px;height:250px;border:0px;"></iframe>
+</div>

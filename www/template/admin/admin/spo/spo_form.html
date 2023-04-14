@@ -1,0 +1,124 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+			<h2>공모주관리</h2>
+			<ol class="breadcrumb">
+					<li>
+							<a href="index.html">Home</a>
+					</li>
+					<li>
+							<a href="/kspo/admin/spoAdmin.php">공모주관리</a>
+					</li>
+					<li class="active">
+							<strong>공모주관리</strong>
+					</li>
+			</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper search-wrapper-content animated fadeInRight mb-50">
+	<div class="row">
+			<div class="col-lg-12">
+
+					
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+							<h5> 공모주 등록/수정 </h5>
+					</div>
+					<div class="ibox-content">
+						<div class="table-responsive">
+
+							<form method="post" name="spoform" id="spoform" action="?" enctype="multipart/form-data" class="form-horizontal">
+								<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+								<!--{? _GET.pg_mode == 'form_edit'}-->
+								<input type="hidden" name="idx" value="<!--{idx}-->" />
+								<!--{/}-->
+
+                                <div class="form-group">
+									<label class="col-sm-2 control-label">진행상황</label>
+                                    <div class="col-sm-4">
+										<div class="col-sm-4" style="padding-left:0px">
+											<select name="process" id="process" class="form-control">
+												<option value="">:::진행상황 선택:::</option>
+												<option value="p">진행중</option>
+												<option value="f">종료</option>
+												<option value="r">환불중</option>
+											</select>
+										</div>
+									</div>
+									<label class="col-sm-2 control-label">목록이미지</label>
+									<div class="col-sm-4"><input type="file" name="list_img" value="<!--{list_img}-->" class="form-control" /></div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">회사명</label>
+									<div class="col-sm-4"><input type="text" name="company" value="<!--{company}-->" class="form-control" /></div>
+									<label class="col-sm-2 control-label">공모주수</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label> <input type="text" name="spo_cnt" value="<!--{spo_cnt}-->" class="form-control" /></label></div>
+										<div class="col-sm-1" style="line-height: 30px;padding-left:0px;padding-right:0px;text-align: left;"><label>주</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">청약기간</label>
+									<div class="col-sm-4">
+										<div id="reportrange" class="col-sm-4 form-control">
+											<i class="fa fa-calendar"></i>
+											<span></span> <b class="caret"></b>
+										</div>
+									</div>
+									<label class="col-sm-2 control-label">상장예정일</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label><input type="text" name="spo_date" value="<!--{spo_date}-->" class="form-control" /></label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">공모가</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label> <input type="text" name="spo_price" value="<!--{spo_price}-->" class="form-control" /></label></div>
+										<div class="col-sm-1" style="line-height: 30px;padding-left:0px;padding-right:0px;text-align: left;"><label>원</label></div>
+									</div>
+									<label class="col-sm-2 control-label">액면가</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label> <input type="text" name="basic_price" value="<!--{basic_price}-->" class="form-control" /></label></div>
+										<div class="col-sm-1" style="line-height: 30px;padding-left:0px;padding-right:0px;text-align: left;"><label>원</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">청약증거금률</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label> <input type="text" name="spo_margin_rate" value="<!--{spo_margin_rate}-->" class="form-control" /></label></div>
+										<div class="col-sm-1" style="line-height: 30px;padding-left:0px;padding-right:0px;text-align: left;"><label>%</label></div>
+									</div>
+									<label class="col-sm-2 control-label">최대청약주수</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label> <input type="text" name="spo_max_number" value="<!--{spo_max_number}-->" class="form-control" /></label></div>
+										<div class="col-sm-1" style="line-height: 30px;padding-left:0px;padding-right:0px;text-align: left;"><label>주</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">환불일</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label><input type="text" name="refund_date" value="<!--{refund_date}-->" class="form-control" /></label></div>
+									</div>
+									<label class="col-sm-2 control-label">출금일</label>
+									<div class="col-sm-4" style="padding-left:0px">
+                                        <div class="col-sm-4"><label><input type="text" name="withdrawal_date" value="<!--{withdrawal_date}-->" class="form-control" /></label></div>
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+
+								<div class="form-group">
+									<div class="col-md-12 mt-50 mb-50">
+										<input type="submit" value="확인" class="btn btn-primary" />&nbsp;
+										<a href="<!--{_SERVER.SCRIPT_NAME}-->" class="btn btn-info">목록</a>
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+</div>

@@ -1,0 +1,153 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container  pl-50 pr-50">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					<?=Lang::main_38;?>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+			<div class="row">
+
+				<div class="hidden-md-down col-lg-2 Rectangle-6-copy-8 hidden">
+					<!-- <div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text "><a href="/edit" ><?=Lang::main_35;?></a></label>
+					</div> -->
+					<div class="Rectangle-6-copy-4 ">
+						<label class="Rectangle-Text "><a href="/certification" ><?=Lang::main_36;?></a></label>
+					</div>
+					<div class="layer "></div>
+					<!-- <div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/editpin"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer"></div> -->
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/histories" class="active"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer active"></div>
+				</div>
+
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30">
+						<div class="row">
+						  <div class="col-sm-12 mb-0 hidden">
+								<nav class="pull-right">
+									<ol class="breadcrumb">
+									<li><a href="/">Home</a></li>
+									<li><a href="/certification">My Account</a></li>
+									<li class="active">Histories</li>
+									</ol>
+								</nav>
+						  </div>
+
+						   <div class="col-sm-12">
+								<h3 class="xspecial-heading v2 fs-18 hidden"><span><?=Lang::main_38;?></span></h3>
+										<di class="col-md-12">
+											<div class="row">
+												<!--{@balanceList}-->
+													<div class="col-sm-3">
+														<a class="feature-box-core" href="javascript:change_symbol('<!--{balanceList->symbol}-->');">
+															<div class="row">
+
+																<div>
+																	<h4 class="p-none m-none">
+																		<!--{=___('main',balanceList->name)}-->
+																	</h4>
+																	<p class="feature-box-core-category" href="#">
+																		<!--{balanceList->balanceTxt}--> <!--{balanceList->ea_unit}-->
+																	</p>
+																</div>
+															</div>
+														</a>
+													</div>
+												<!--{/}-->
+											</div>
+											<div class="section">
+												<h4><?=Lang::main_38;?></h4>
+											</div>
+											<div class="table-responsive" style="overflow-y: auto;">
+												<table class="table" style="min-width: 668px;">
+													<colgroup>
+														<col width="" />
+														<col width="" />
+														<col width="" />
+														<col width="" />
+														<col width="" />
+														<col width="" />
+														<col width="" />
+													</colgroup>
+													<thead>
+													<tr class="top">
+														<th class="text-center"><?=Lang::main_106;?></th>
+														<th class="text-center"><?=Lang::main_109;?></th>
+														<!--{? transactionList->symbol=='USD'}-->
+														<th class="text-center"><?=Lang::main_107;?></th>
+														<th class="text-center"><?=Lang::main_108;?></th>
+														<th class="text-center"><?=Lang::main_110;?></th>
+														<th class="text-center"><?=Lang::main_111;?></th>
+														<!--{:}-->
+														<th class="text-center">금액</th>
+														<th class="text-center">가격</th>
+														<th class="text-center">주문수량</th>
+														<th class="text-center">남은수량</th>
+														<!--{/}-->
+														<th class="text-center"><?=Lang::main_112;?></th>
+													</tr>
+													</thead>
+													<tbody>
+														<!--{@transactionList}-->
+														<tr>
+															<td class="text-center"><!--{transactionList->date_str}--></td>
+															<td class="text-center"><!--{transactionList->direction}--></td>
+															<!--{? transactionList->symbol=='USD'}-->
+															<td class="text-center"><!--{transactionList->amount}--></td>
+															<td class="text-center"><!--{transactionList->fee}--></td>
+															<td class="text-center" title="<!--{transactionList->from_address}-->"><!--{transactionList->from_address}--></td>
+															<td class="text-center" title="<!--{transactionList->to_address}-->"><!--{transactionList->to_address}--></td>
+															<!--{:}-->
+															<td class="text-center" title="<!--{transactionList->amount}-->"><!--{transactionList->amount}--></td>
+															<td class="text-center" title="<!--{transactionList->price}-->"><!--{transactionList->price}--></td>
+															<td class="text-center" title="<!--{transactionList->volumn}-->"><!--{transactionList->volume}--></td>
+															<td class="text-center" title="<!--{transactionList->volume_remain}-->"><!--{transactionList->volume_remain}--></td>
+															<!--{/}-->
+															<td class="text-center">
+																<!--{? transactionList->status_txt == 'Complete' && transactionList->transaction_outlink != ''}-->
+																<a href="<!--{transactionList->transaction_outlink}-->" target="_blank"><!--{transactionList->status_txt}--></a>
+																<!--{:}-->
+																<!--{transactionList->status_txt}-->
+																<!--{/}-->
+															</td>
+														</tr>
+														<!--{:}-->
+														<tr>
+															<td colspan="7" class="text-center"><?=Lang::main_bbs20;?></td>
+														</tr>
+														<!--{/}-->
+													</tbody>
+												</table>
+											</div>
+
+											<nav aria-label="Page navigation" class="pt-md">
+												<!--{navi_page}-->
+											</nav>
+
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

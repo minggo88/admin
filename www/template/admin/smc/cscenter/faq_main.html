@@ -1,0 +1,18 @@
+<ul>
+    <!--{@ loop}-->
+    <li>
+        <a href="/faq/<!--{.idx}-->"><p><!--{? _SESSION.lang == 'kr'}--><!--{=cutStr(.subject_kr,50)}--><!--{: _SESSION.lang == 'en'}--><!--{=cutStr(.subject,34)}--><!--{: _SESSION.lang == 'cn'}--><!--{=cutStr(.subject_cn,34)}--><!--{/}--></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></p>
+      <span><!--{=date('m.d',.regdate)}--></span>
+    </li>
+    <!--{:}-->
+    <li>
+      <!--{? _SESSION.lang == 'kr'}-->
+      등록된 글이 없습니다.
+      <!--{: _SESSION.lang == 'en'}-->
+      There is no article.
+      <!--{: _SESSION.lang == 'cn'}-->
+      沒有文章.
+      <!--{/}-->
+    </li>
+    <!--{/}-->
+  </ul>

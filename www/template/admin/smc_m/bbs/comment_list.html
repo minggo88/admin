@@ -1,0 +1,103 @@
+<style>
+/* comment_reply_form 답글 */
+div#loop_comment .comment_reply_form {
+	border:0px solid #ccc;
+	width:100%;
+	padding:0px 0px 0px 0px;
+	margin: 0px auto 0px auto;
+	clear:both;
+}
+div#loop_comment .comment_reply_form .comment_form {
+	border:1px solid #ccc;
+	color:#777;
+	background:#f6f6f6;
+	padding:10px 20px 10px 20px;
+	margin: 0px 0px 20px 0px;
+	clear:both;
+}
+div#loop_comment .comment_reply_form .comment_form table { border-top:0px #ccc solid; border-bottom:0px #ccc solid; width:90%; border-collapse: collapse; margin:0px auto 0px auto;}
+div#loop_comment .comment_reply_form .comment_form th { border-top:0px #ccc solid; border-right:0px #ccc solid;border-bottom:1px #ccc solid; background:#e3e3e3; line-height:20px;text-align:center;font-weight:bold; padding:3px 0px 3px 0px;}
+div#loop_comment .comment_reply_form .comment_form td {border-right:0px #ccc solid;border-bottom:1px #ccc solid; line-height:16px;padding:3px 0px 3px 0px;}
+div#loop_comment .comment_reply_form .comment_form .replyItem { border-bottom:2px dotted #eaeaea;padding:.6em .8em .6em .6em; line-height:1.25em; clear:both; list-style:none;}
+div#loop_comment .comment_reply_form .comment_form p { display:inline; margin-bottom:1em;}
+div#loop_comment .comment_reply_form .comment_form .author {border:1px #ccc solid;float:left;font-size:11px;}
+div#loop_comment .comment_reply_form .comment_form .author a { margin-right:10px; text-decoration:none; }
+div#loop_comment .comment_reply_form .comment_form .date { float:right; margin:0px 5px 0px 0px; font-size:11px;}
+div#loop_comment .comment_reply_form .comment_form .replyOption {float:right;}
+div#loop_comment .comment_reply_form .comment_form .replyOption img { vertical-align:middle;}
+div#loop_comment .comment_reply_form .comment_form .replyContent { border-top:1px dashed #eaeaea; padding:5px 0px 5px 0px; clear:left; }
+div#loop_comment .comment_reply_form .comment_form .replyContent p { display:block; }
+div#loop_comment .comment_reply_form .comment_form .replyWrite {border-bottom:1px solid #eaeaea;width:100%;height:20px;text-align:right;margin-top:10px;}
+div#loop_comment .comment_reply_form .comment_form .replyWrite img { vertical-align:middle;margin-right:8px;}
+div#loop_comment .comment_reply_form .comment_form #author {border:1px #ccc solid;height:16px;font-size:8pt;background:#fff;}
+div#loop_comment .comment_reply_form .comment_form #passwd {border:1px #ccc solid;height:16px;font-size:8pt;background:#fff;}
+div#loop_comment .comment_reply_form .comment_form #contents{border:1px #ccc solid;width:99%;height:60px;font-size:8pt;font-family:verdana;background:#fff;}
+
+div#loop_comment button.btn_comment_del {width:50px;height:20px;font-size:11px;margin:0px 0px 0px 3px;}
+div#loop_comment button.btn_comment_edit {width:50px;height:20px;font-size:11px;margin:0px 0px 0px 3px;}
+div#loop_comment button.btn_comment_reply {width:50px;height:20px;font-size:11px;margin:0px 0px 0px 3px;}
+
+
+
+
+</style>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+<!--{? bool_btn_del}-->
+$(function() {
+	$('.btn_comment_del').click(function() {
+		var arr = explode('_',$(this).attr('id'));
+		showBbsPopup('/bbs/comment.php?pg_mode=del&bbscode=<!--{_GET.bbscode}-->&idx='+arr[2]+'&ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+	});
+});
+<!--{/}-->
+
+$(function() {
+	$('.btn_comment_reply').click(function() {
+		$('.comment_reply_form').empty();
+		var arr = explode('_',$(this).attr('id'));
+		$('#comment_reply_form_'+arr[2]).load('/bbs/comment.php?pg_mode=form_reply&bbscode=<!--{_GET.bbscode}-->&link_idx=<!--{_GET.idx}-->&idx='+arr[2]+'&ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+	});
+});
+
+$(function() {
+	$('.btn_comment_edit').click(function() {
+		var arr = explode('_',$(this).attr('id'));
+		showCommentPopup('comment_list_'+arr[2],'/bbs/comment.php?pg_mode=form_edit&idx='+arr[2]+'&ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+	});
+});
+
+//-->
+</script>
+
+<div id="loop_comment">
+<!--{@ loop_comment}-->
+<div style="<!--{? .depth > 1}-->border-top:1px dotted #999;padding:5px 0px 5px 20px;<!--{:}-->border-top:1px solid #aaa;padding:5px 0px 5px 0px;<!--{/}-->" id="comment_list_<!--{.idx}-->">
+	<table summary="댓글목록" style="width:100%">
+		<colgroup>
+			<col width="50%"></col>
+			<col width="50%"></col>
+		</colgroup>
+		<tr>
+			<td style="border-bottom:1px #e3e3e3 solid;text-align:left;padding:2px 0px 2px 0px;"><!--{.author}--></td>
+			<td style="border-bottom:1px #e3e3e3 solid;text-align:right;padding:2px 0px 2px 0px;">
+				<!--{.regdate}-->&nbsp;
+				<!--{? bool_btn_write}-->
+				<button class="btn_comment_edit grad_bbs" id="comment_edit_<!--{.idx}-->">수정</button><!-- 수정 -->
+				<!--{? .depth == 1}-->
+				<button class="btn_comment_reply grad_bbs" id="comment_reply_<!--{.idx}-->">답글</button><!-- 답글 -->
+				<!--{/}--><!--{/}-->
+				<!--{? bool_btn_del}-->
+				<button class="btn_comment_del grad_bbs" id="comment_del_<!--{.idx}-->">삭제</button><!-- 삭제 -->
+				<!--{/}-->
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><div id="comment_contents<!--{.idx}-->"><!--{.contents}--></div></td>
+		</tr>
+	</table>
+</div>
+<div id="comment_reply_form_<!--{.idx}-->" class="comment_reply_form"></div>
+<!--{/}-->
+</div>

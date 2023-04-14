@@ -1,0 +1,61 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container">
+			<div class="row spo-title-box">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					공모주 청약
+				</h2>
+				<div class="col-sm-12 pl-10">
+					<h3 class="spo_title">청약 방법</h3>
+					<p class="spo_info">    공모주 청약방법은 청약 개시일 전일까지 당사에 계정을 보유하고 있는 모든 회원에게 자격이 부여되며,
+						청약방법은 당사 홈페이지를 통하여 청약을 받고 있습니다.
+					</p>
+					<h3 class="spo_title">청약 한도</h3>
+					<p class="spo_info">    당사에서 진행하는 공모주 청약은 청약 한도가 없습니다.
+						단, 주간사가 청약한도를 청한 경우에는 그에 맞게 결정 될 수 있습니다.
+					</p>
+					<h3 class="spo_title">청약 수수료</h3>
+					<p class="spo_info">    당사 홈페이지를 통한 청약은 수수료가 면제 됩니다.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+			<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30 ">
+				<h2 class="section-title body-font text-left fs-24 pb-10">
+				공모주 청약 목록
+				</h2>
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-0 pr-0">
+					<div class="row">
+						<!--{@loop_spo}-->
+						<div class="col-lg-4 col-md-4 col-sm-6 pb-20 fs-16">
+						<!-- <img src="<!--{.list_img}-->" alt="list_img" style="height:240px;"/> -->
+						<a href="/spo/view/<!--{.idx}-->" id="list_<!--{.idx}-->"><img src="/data/spo/list-<!--{.index_%3+1}-->.png" /></a><br />
+						<!--{?.process=='p'}--><span style="color: #2f63f1">청약 진행중</span>
+						<!--{:.process=='f'}--><span style="color:#FF3366;">청약종료</span>
+						<!--{:.process=='r'}--><span style="color:#196805;">환불중</span><!--{/}-->
+						</div>
+		
+						<!--{:}-->
+						<div class="col-lg-12 col-md-12 col-sm-12 fs-16">공모주 청약 목록이 없습니다.</div>
+						<!--{/}-->
+					</div>
+				</div>
+
+				<nav aria-label="Page navigation" class="pt-md">
+				<!--{navi_page}-->
+				</nav>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

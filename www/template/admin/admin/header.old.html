@@ -1,0 +1,66 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$("#header_btn_home").click(function() {
+		location.href = '/admin/';
+	});
+
+	$("#header_btn_config").click(function() {
+		location.href = '/admin/configBasic.php';
+	});
+	$("#header_btn_goods").click(function() {
+		location.href = '/contents/admin/contentsCategory.php';
+	});
+	$("#header_btn_member").click(function() {
+		location.href = '/member/admin/memberAdmin.php';
+	});
+	$("#header_btn_community").click(function() {
+		location.href = '/bbs/admin/bbsAdmin.php';
+	});
+	$("#header_btn_marketing").click(function() {
+		location.href = '/admin/popupAdmin.php';
+	});
+	$("#header_btn_design").click(function() {
+		location.href = '/admin/banner.php?pg_mode=list_info';
+	});
+	
+	$("#header_btn_analysis").click(function() {
+		location.href = '/analysis/admin/analysis.php?site_name=korbit';
+	});
+	$("#header_btn_bitcoin").click(function() {
+		location.href = '/bitcoin/admin/bitcoinAdmin.php';
+	});
+	$("#header_btn_data").click(function() {
+		location.href = '/admin/analysis.php?pg_mode=visit';
+	});
+	
+});	
+//-->
+</script>
+
+<div id="js_header">
+	<div class="area_both">
+		<div class="area_child_left">
+			<!--{? empty(config_basic.img_sub_logo)}-->
+				<a href="/admin/"><!--{config_basic.shop_name}--></a>
+			<!--{:}-->
+				<a href="/admin/"><img src="/data/design/<!--{config_basic.img_footer_logo}-->" alt="<!--{config_basic.shop_name}-->" height="33" ></a>
+			<!--{/}-->
+		</div>
+		<div class="area_child_right">
+			<!--{? _SESSION.ADMIN_ID}--><a href="/admin/auth.php?pg_mode=out">로그아웃</a><!--{:}--><a href="/admin/">로그인</a><!--{/}-->
+		</div>
+	</div>
+	<ul id="header_menu">
+		<li id="header_btn_home" class="first">관리자메인</li>
+		<li id="header_btn_config" class="middle">기본관리</li>
+		<li id="header_btn_goods" class="middle">컨텐츠관리</li>
+		<li id="header_btn_member" class="middle">회원관리</li>
+		<li id="header_btn_bitcoin" class="middle">비트거래관리</li>
+		<li id="header_btn_analysis" class="middle">경쟁업체분석</li>
+		<li id="header_btn_community" class="middle">커뮤니티</li>
+		<li id="header_btn_marketing" class="middle">마케팅관리</li>
+		<li id="header_btn_design" class="middle">디자인관리</li>
+		<li id="header_btn_data" class="last">데이터관리</li>
+	</ul>
+</div>

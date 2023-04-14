@@ -1,0 +1,140 @@
+<style type="text/css">
+<!--
+body {overflow-y:auto; overflow-x:hidden; background-image:none;}
+//-->
+</style>
+<script type="text/javascript">
+<!--
+function pickGoodsCode(c_code,goods_code,category_code) {
+	top.addGoods(c_code,goods_code,category_code);
+}
+
+//검색폼 값지정
+$(function() {
+	<!--{? !empty(_GET.category_1)}-->
+	$('#category_1').val('<!--{_GET.category_1}-->');
+	categoryChange(1,'<!--{_GET.category_1}-->',select_category);
+	<!--{? !empty(_GET.category_2)}-->
+	$('#category_2').val('<!--{_GET.category_2}-->');
+	categoryChange(2,'<!--{_GET.category_1}--><!--{_GET.category_2}-->',select_category);	
+	<!--{? !empty(_GET.category_3)}-->
+	$('#category_3').val('<!--{_GET.category_3}-->');
+	categoryChange(3,'<!--{_GET.category_1}--><!--{_GET.category_2}--><!--{_GET.category_3}-->',select_category);	
+	<!--{? !empty(_GET.category_4)}-->
+	$('#category_4').val('<!--{_GET.category_4}-->');
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+	<!--{/}-->
+	$('input[name=sort_target]').val(['<!--{_GET.sort_target}-->']);
+});
+
+$(function() {
+	$('.img_goods').tooltip({
+		delay: 0,
+		showURL: false,
+		bodyHandler: function() {
+			return $("<img/>").attr("src", this.src);
+		}
+	});
+});
+
+//-->
+</script>
+<!--상품목록 시작-->
+<div class="title_d2"><img src="../images/bullet.gif">상품검색 : <span id="category_name"></span></div>
+<!-- goods_sort -->
+<form method="get" name="frmSearch" id="frmSearch"  action="?">
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<td colspan="4" class="pcenter">
+			<select id="category_1" name="category_1">
+				<option value="">:::1차카테고리:::</option>
+			</select> 
+			<select id="category_2" name="category_2">
+				<option value="">:::2차카테고리:::</option>
+			</select> 
+			<select id="category_3" name="category_3">
+				<option value="">:::3차카테고리:::</option>
+			</select> 
+			<select id="category_4" name="category_4">
+				<option value="">:::4차카테고리:::</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><input type="text" name="goods_name" value="<!--{_GET.goods_name}-->" class="frm_input" /></td>
+		<th>정렬</th>
+		<td>
+			<input type="radio" name="sort_target"  id="sort_target_goods_name" value="goods_name" /><label>상품명순</label>
+			<input type="radio" name="sort_target"  id="sort_target_goods_name" value="regdate" /><label>등록일순</label>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="검 색" /></span>
+	<span class="button large black strong"><input type="button" value="초기화" onclick="location.href='<!--{_SERVER.SCRIPT_NAME}-->'" /></span>
+</div>
+</form>
+<div class="title_d2"><img src="../images/bullet.gif">상품목록<span id="category_name"></span></div>
+<form name="goodslist" id="goodslist" onsubmit="return false;">
+<table id="goods_table" class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="40"></col>
+		<col width="*"></col>
+		<col width="70"></col>
+		<col width="60"></col>
+		<col width="70"></col>
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th class="pcenter">No</th>
+		<th colspan="2" class="pcenter">상품명</th>
+		<th class="pright">판매가격</th>
+		<th class="pcenter">상태</th>
+		<th class="pcenter">선택</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_goods}-->
+	<tr id="<!--{.goods_code}-->_<!--{.index_}-->">
+		<td class="pcenter"><!--{.index_+1}--></td>
+		<td class="goods_img">
+			<!--{? empty(.img_goods_a)}-->
+			<img src="/template/images/no_img.gif" width="40" height="40" />
+			<!--{:}-->
+			<img src="/data/shop_a/<!--{.img_goods_a}-->" width="40" height="40" class="img_goods" />
+			<!--{/}-->
+		</td>
+		<td>
+			<ul>
+				<li class="underline highlight"><!--{.goods_name}--></li>
+				<li class="underline dotted"><!--{? empty(.goods_option)}--><span>옵션 미등록</span><!--{:}--><!--{.goods_option}--><!--{/}--></li>
+				<li><!--{? empty(.category_path)}--><span>카테고리 미등록</span><!--{:}--><!--{.category_path}--><!--{/}--></li>
+			</ul>
+		</td>
+		<td class="pright goods_price"><span id="price_<!--{.goods_code}-->"><!--{=number_format(.selling_price)}--></span> <img src="../images/icon_won.gif" /><br /><!--{=number_format(.emoney)}--> <img src="../images/icon_point.gif" /></td>
+		<td class="pcenter goods_soldout"><!--{? .bool_sold_out}-->품절<!--{:}-->판매중<!--{/}--></td>
+		<td class="pcenter">
+			<span class="button small black"><input type="button" value="제품선택" onclick="pickGoodsCode('<!--{.c_code}-->','<!--{.goods_code}-->','<!--{.category_code}-->')" /></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="6" class="pcenter">등록된 상품이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<!--상품목록 끝-->

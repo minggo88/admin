@@ -1,0 +1,205 @@
+<script type="text/javascript">
+<!--
+$(function () {
+	$("input[name=start_date]").datepicker();
+	$("input[name=end_date]").datepicker();
+
+	$('select[name=period]').change(function() {
+		if(this.selectedIndex == 0) {
+			$(this).siblings("input[name=start_date]").val('');
+			$(this).siblings("input[name=end_date]").val('');	
+		}
+		else {
+			var today = new Date();
+			var yyyy, mm, dd;
+			yyyy = today.getFullYear();
+			mm = today.getMonth()+1;
+			dd = today.getDate();
+			$(this).siblings("input[name=end_date]").val(yyyy + '-' + addzero(mm) + '-' + addzero(dd));
+			var t = $(this).val();
+			var startDate = new Date(Date.parse(today) - t * 1000 * 60 * 60 * 24);
+			yyyy = startDate.getFullYear();
+			mm = startDate.getMonth()+1;
+			dd = startDate.getDate();
+			$(this).siblings("input[name=start_date]").val(yyyy + '-' + addzero(mm) + '-' + addzero(dd));	
+		}
+	});
+
+	$('.btn_search_date').click(function() {
+		var start_day = $(this).siblings('input[name=start_date]').val();
+		var end_day = $(this).siblings('input[name=end_date]').val();
+		if(start_day == '' || end_day == '') { alert('기간을 설정 주세요.!'); }
+		else {
+			var arr_s = start_day.split('-');
+			var arr_e = end_day.split('-');
+			var sdate = new Date(arr_s[0],arr_s[1],arr_s[2]);
+			var edate = new Date(arr_e[0],arr_e[1],arr_e[2]);
+			var gap = Date.parse(edate) - Date.parse(sdate);
+			if(gap >= 0) {
+				var load_id = $(this).attr('load');
+				var pg_mode;
+				if(load_id === 'sub_graph_visit_day') { pg_mode = 'visit_day'; }
+				else if(load_id === 'sub_graph_visit_week') { pg_mode = 'visit_week'; }
+				else if(load_id === 'sub_graph_visit_month') { pg_mode = 'visit_month'; }
+				else if(load_id === 'sub_graph_path') { pg_mode = 'visit_path'; }
+				else if(load_id === 'sub_graph_os') { pg_mode = 'visit_os'; }
+				else { pg_mode = 'visit_bw'; }
+				//location.href = '?pg_mode='+pg_mode+'&start_day='+start_day+'&end_day='+end_day;
+				$('#'+load_id).load('?pg_mode='+pg_mode+'&start_day='+start_day+'&end_day='+end_day);
+			}
+			else { alert('기간설정을 다시 해주세요.!'); }
+		}
+	});
+
+});
+
+function addzero(n) {
+	return n < 10 ? "0" + n : n;
+}
+
+
+//-->
+</script>
+
+
+<!-- contents -->
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Chart.png') 0px 0px no-repeat;">데이터관리</span> / <span class="title02">방문자분석</span></h1></div>
+<div id="main_contents">
+	<div id="tabs">
+		<ul>
+			<li><a href="#analysis_day">방문자 분석(일간)</a></li>
+			<li><a href="#analysis_week">방문자 분석(주간)</a></li>
+			<li><a href="#analysis_month">방문자 분석(월간)</a></li>
+			<li><a href="#analysis_path">접근경로 분석</a></li>
+			<li><a href="#analysis_os">접근OS 분석</a></li>
+			<li><a href="#analysis_bw">접근브라우져 분석</a></li>
+		</ul>
+
+		<div id="analysis_day">
+			<div class="category_list_title"><img src="../images/bullet.gif">방문자 분석(일간)</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_visit_day"/>
+			</div>
+			<div id="sub_graph_visit_day" style="width:760px;"><!--{# sub_graph_visit_day}--></div>			
+		</div>
+
+		<div id="analysis_week">
+			<div class="category_list_title"><img src="../images/bullet.gif">방문자 분석(주간)</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_visit_week"/>
+			</div>
+			<div id="sub_graph_visit_week" style="width:760px;"><!--{# sub_graph_visit_week}--></div>			
+		</div>
+		<div id="analysis_month">
+			<div class="category_list_title"><img src="../images/bullet.gif">방문자 분석(주간)</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_visit_month"/>
+			</div>
+			<div id="sub_graph_visit_month"><!--{# sub_graph_visit_month}--></div>			
+		</div>
+
+		<div id="analysis_path">
+			<div class="category_list_title"><img src="../images/bullet.gif">접근경로 분석</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_path"/>
+			</div>
+			<div id="sub_graph_path" style="width:760px;"><!--{# sub_graph_path}--></div>			
+		</div>
+
+		<div id="analysis_os">
+			<div class="category_list_title"><img src="../images/bullet.gif">접근OS 분석</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_os"/>
+			</div>
+			<div id="sub_graph_os" style="width:760px;"><!--{# sub_graph_os}--></div>			
+		</div>
+
+		<div id="analysis_bw">
+			<div class="category_list_title"><img src="../images/bullet.gif">접근브라우져 분석</div>
+			<div class="set_term">
+					+ 기간설정 : <input type="text" name="start_date"   class="start_date frm_input" />~<input type="text" name="end_date"  class="end_date frm_input" />
+					<!--{*
+					<select name="period" class="scroll">
+						<option selected="selected">전체</option>
+						<option value="1">1일</option>
+						<option value="7">7일</option>
+						<option value="15">15일</option>
+						<option value="30">30일</option>
+						<option value="60">60일</option>
+						<option value="90">90일</option>
+						<option value="365">1년</option>
+					</select>
+					*}-->
+					&nbsp;<input type="button" value="검색" class="btn_search_date" load="sub_graph_bw"/>
+			</div>
+			<div id="sub_graph_bw" style="width:760px;"><!--{# sub_graph_bw}--></div>			
+		</div>
+	
+	</div>
+</div>

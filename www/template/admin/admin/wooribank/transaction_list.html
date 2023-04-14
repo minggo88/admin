@@ -1,0 +1,91 @@
+<script type="text/javascript">
+<!--
+
+function listLoad(id,url) {
+	$('#'+id).load(url);
+}
+
+function excel_download() {
+	var date_s = $('#date_s').val();
+	if($.trim(date_s)==''){ alert('검색날짜의 시작일을 선택해주세요.');return false;}
+	var date_e = $('#date_e').val();
+	if($.trim(date_e)==''){ alert('검색날짜의 종료일을 선택해주세요.');return false;}
+	var _url = '?pg_mode=list_xls&site_name=<!--{_GET.site_name}-->&date_s='+date_s+'&date_e='+date_e;
+	//$('#hiddenframe').attr('url', _url);
+	$('form[name=form_excel]').find('input[name=date_s]').val(date_s);;
+	$('form[name=form_excel]').find('input[name=date_e]').val(date_e);;
+	$('form[name=form_excel]').attr('action','about:blank').attr('action', _url).submit();
+	return false;
+}
+
+$(function() {
+	$("#date_s, #date_e").kendoDatePicker({
+		culture: "ko-KR"
+	});
+});
+
+$(function() {
+	$(":button, input:submit").button();
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Grid.png') 0px 0px no-repeat;">우리은행 입출금관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">거래내역 </div>
+<div>
+	<div class="area_left" style="margin-bottom:10px; float: left;">
+		<form name="form_search" id="form_search" action="?" method="get">
+			<input type="hidden" name="site_name" value="<!--{_GET.site_name}-->" />
+			<input type="text" name="date_s" id="date_s" value="<!--{_GET.date_s}-->" class="frm_input" /> ~ <input type="text" name="date_e" id="date_e" value="<!--{_GET.date_e}-->" class="frm_input" /> <span class="button black"><a href="javascript:;" onclick="javascript:$('#form_search').submit();">검색</a></span>
+		</form>
+	</div>
+	<div class="area_right" style="margin-bottom:10px; float: right;">
+		<form name="form_excel" id="form_excel" target="hiddenframe" style="float:left;" action="?pg_mode=list_xls&date_s=<!--{_GET.date_s}-->&date_e=<!--{_GET.date_e}-->">
+		<input type="hidden" name="pg_mode" value="list_xls"/>
+		<input type="hidden" name="date_s" value="<!--{_GET.date_s}-->"/>
+		<input type="hidden" name="date_e" value="<!--{_GET.date_e}-->"/>
+		<!--<span class="button black"><a href="javascript:;" onclick="excel_download()" target="hiddenframe">엑셀출력</a></span>-->
+		</form>
+	</div>
+</div>
+<table class="list_table">
+	<colgroup>
+		<col width="130"/>
+		<col width="*"/>
+		<col width="110"/>
+		<col width="120"/>
+		<col width="130"/>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>거래일시</th>
+		<th>거래구분</th>
+		<th>거래금액(원)</th>
+		<th>입금인성명</th>
+		<th>가상계좌번호</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr class="loop">
+		<td><!--{.TRNX_DATETIME}--></td>
+		<td class="pleft"><!--{.TRNX_TYPE}--></td>
+		<td class="pright"><!--{=number_format(.AMOUNT)}--></td>
+		<td><!--{.REQUESTER_NAME}--></td>
+		<td <!--{?.CMS_NO=='000000000000000'}--> class="pgray"<!--{/}-->><!--{.CMS_NO}--></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="7" id="empty">거래내역이 없습니다.!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<!-- Page Navigation -->
+<div class="navipage"><!--{navi_page}--></div>
+<div class="remark">
+임금인성명이 회원실명과 다를경우는 계좌에 입금은 되나 회원 계좌에 적용이 안됩니다.<br />
+따라서 회원의 실명을 확인하고 직업 수동으로 [<a href="/bitcoin/admin/krwAdmin.php">USD 입출금관리 > USD 입금</a>] 메뉴에서 회원계좌에 입금을 해 주셔야 합니다.
+</div>
+<iframe name="hiddenframe" id="hiddenframe" style="width:0;height:0;display:none;"></iframe>

@@ -1,0 +1,129 @@
+<style>
+.msg { overflow: hidden; width:150px; height: 85px; font-size: 9pt; border:0 solid; color: black; background-color: #BBEFFE; }
+.input {height:16px; font-size:9pt; text-align:right; border-width:0px; background-color:#f1f1f1; color:gray;}
+.input_none {font-size: 12px; border: none; background-color: transparent;}
+</style>
+<script>
+<!--
+
+function DoClear(tg) {
+    if (tg.value == tg.defaultValue) {
+        tg.value = '';
+    }
+    CalByte(tg);
+}
+
+function CalByte(tg){
+    var curText;
+    var strLen;
+    var byteIs;
+    var lastByte;
+    var thisChar;
+    var escChar;
+    var curTotalMsg;
+    var okMsg;
+    curText = new String(tg.value);
+    strLen = curText.length;
+    byteIs = 0;
+    for(i=0; i<strLen; i++) {
+        thisChar = curText.charAt(i);
+        escChar = escape(thisChar);
+        if (escChar.length > 4) {
+            byteIs += 2;  //특수문자 한글인 경우.
+        }
+		else if(thisChar != '\r') {  //개행을 제외한 이외의 경우
+            byteIs += 1;
+        }
+        if(byteIs > 80){
+            alert('[안 내] 80바이드(한글40자)를 초과하실 수 없습니다.');
+            thisText = curText.substring(0, i);
+            tg.value = thisText;
+            byteIs = lastByte;
+            break;
+        }
+        lastByte = byteIs;
+    }
+    document.all.byte.value = byteIs;
+}
+
+function ClearMsg(){
+    document.all.tran_msg.value = '';
+    CalByte(document.frmSms.tran_msg);
+    document.frmSms.tran_msg.focus();
+}
+
+$(function() {
+	$('#frmSms').submit(function() {
+		var chk_option = [
+			{ 'target':'tran_phone', 'name':'휴대전화', 'type':'blank', 'msg':'휴대전화번를 입력하여 주세요.!' },
+			{ 'target':'tran_msg', 'name':'문자내용', 'type':'blank', 'msg':'전송하실 문자내용을 입력하세요.!' }
+		];
+		if(this.tran_msg.value == this.tran_msg.defaultValue){
+			alert("전송하실 문자내용을 입력하세요.!");
+			ClearMsg();
+			return false;
+		}
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('전송하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('전송되었습니다.!');
+					$('#drag_popup_sms',parent.document).hide();
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+//-->
+</script>
+<form method="post" name="frmSms" id="frmSms" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="send_sms" />
+<input type="hidden" name="userid" value="<!--{userid}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="30%"></col>
+		<col width="70%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>회원아이디</th>
+		<td><!--{_GET.userid}--></td>
+	</tr>
+	<tr>
+		<th>휴대전화</th>
+		<td><input type="text" name="tran_phone" value="<!--{_GET.tran_phone}-->" class="frm_input" style="width:100px" /></td>
+	</tr>
+	<tr>
+		<th>전송내용</th>
+		<td><textarea name="tran_msg" class="msg" onclick="DoClear(this)" onselect="DoClear(this)" onkeydown="CalByte(this)" onchange="CalByte(this)" onkeyup="CalByte(this)">[안내] 이곳에 메시지를 입력하세요.</textarea></td>
+	</tr>
+	<tr>
+		<th>글자수</th>
+		<td><input type="text" name="byte" value="0" size="2" maxlength="3" class="input" readonly="readonly" /> byte <span class="button small black"><a href="javascript:;" onclick="ClearMsg()">지우기</a></span></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button middle black"><input type="submit" value="문자전송" /></span>
+</div>
+</form>

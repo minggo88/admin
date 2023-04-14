@@ -1,0 +1,22 @@
+<div id="view_contents">
+	<table summary="게시판 상세보기">
+		<tr>
+			<th class="align2" colspan="2"> <!--{subject}--></th>
+		</tr>
+		<tr>
+			<td class="align3 lh24">글쓴이 : <!--{author}--></td>
+			<td class="align lh24">날짜 : <!--{=date('Y-m-d H:m:i',regdate)}--> &nbsp; 조회 : <!--{hit}--> </td>
+		</tr>
+		<!--{? bool_file}-->
+		<tr>
+			<td colspan="2" class="lh24">첨부화일 : <a href="./bbs_download.php?file_name=<!--{file}-->&file_name_src=<!--{=base64_encode(file_src)}-->"><!--{file_src}--></a></td>
+		</tr>
+		<!--{/}-->
+		<tr>
+			<td colspan="2">
+				<div id="lightbox-container"></div>
+				<div id="bbs_contents" ><!--{=htmlspecialchars_decode(contents)}--></div>
+			</td>
+		</tr>
+	</table>
+</div>

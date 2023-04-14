@@ -1,0 +1,76 @@
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><!--{info_bbs.title}--></h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="/bbs/admin/bbsAdmin.php?pg_mode=list&bbscode=PY395">게시판</a>
+            </li>
+            <li class="active">
+                <strong><!--{info_bbs.title}--></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight article  mb-50">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                        <!--{?bool_status==0}--><button class="btn btn-danger" type="button">접수중</button>
+                        <!--{:bool_status==1}--><button class="btn btn-primary" type="button">작업대기</button>
+                        <!--{:bool_status==2}--><button class="btn btn-info" type="button">작업중</button>
+                        <!--{:bool_status==3}--><button class="btn btn-success" type="button">작업완료</button>
+                        <!--{/}-->
+                    </div>
+                    <div class="text-center article-title">
+                        <span class="text-muted"><i class="fa fa-clock-o"></i><!--{=date('Y-m-d H:m:i',regdate)}--></span>
+                        <h2>
+                            <!--{subject}-->
+                        </h2>
+                    </div>
+                    <p><!--{=htmlspecialchars_decode(contents)}--></p>
+                    <!--{*
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5>Tags:</h5>
+                                <button class="btn btn-primary btn-xs" type="button">Tag1</button>
+                                <button class="btn btn-white btn-xs" type="button">Tag2</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div> <i class="fa fa-comments-o"> </i> 56 comments </div>
+                                <i class="fa fa-eye"> </i> 144 views
+                            </div>
+                        </div>
+                    </div>
+                    *}-->
+
+                    <!--{*
+                    <div class="row">
+
+                        <!--{# js_tpl_main_comment_list}-->
+                        <!--{# js_tpl_main_comment_form}-->
+                        <!--{# js_tpl_main_sub_list}-->
+
+                    </div>
+                    *}-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

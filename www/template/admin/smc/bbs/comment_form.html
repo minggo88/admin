@@ -1,0 +1,109 @@
+<style>
+div.comment_form {
+	border:0px solid #ccc;
+	color:#777;
+	background:#f6f6f6;
+	padding:10px 20px 10px 20px;
+	margin: 0px 0px 0px 0px;
+	clear:both;
+}
+div.comment_form table { border-top:0px #ccc solid; border-bottom:0px #ccc solid; width:90%; border-collapse: collapse; margin:0px auto 0px auto;}
+div.comment_form th { border-top:0px #ccc solid; border-right:0px #ccc solid;border-bottom:1px #ccc solid; background:#e3e3e3; line-height:20px;text-align:center;font-weight:bold; padding:3px 0px 3px 0px;}
+div.comment_form td {border-right:0px #ccc solid;border-bottom:1px #ccc solid; line-height:16px;padding:3px 0px 3px 0px;}
+div.comment_form .replyItem { border-bottom:2px dotted #eaeaea;padding:.6em .8em .6em .6em; line-height:1.25em; clear:both; list-style:none;}
+div.comment_form p { display:inline; margin-bottom:1em;}
+div.comment_form .author {border:1px #ccc solid;float:left;font-size:11px;}
+div.comment_form .author a { margin-right:10px; text-decoration:none; }
+div.comment_form .date { float:right; margin:0px 5px 0px 0px; font-size:11px;}
+div.comment_form .replyOption {float:right;}
+div.comment_form .replyOption img { vertical-align:middle;}
+div.comment_form .replyContent { border-top:1px dashed #eaeaea; padding:5px 0px 5px 0px; clear:left; }
+div.comment_form .replyContent p { display:block; }
+div.comment_form .replyWrite {border-bottom:1px solid #eaeaea;width:100%;height:20px;text-align:right;margin-top:10px;}
+div.comment_form .replyWrite img { vertical-align:middle;margin-right:8px;}
+div.comment_form #author {border:1px #ccc solid;height:16px;font-size:8pt;background:#fff;}
+div.comment_form #passwd {border:1px #ccc solid;height:16px;font-size:8pt;background:#fff;}
+div.comment_form #contents{border:1px #ccc solid;width:99%;height:60px;font-size:8pt;font-family:verdana;background:#fff;}
+</style>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+
+$(function() {
+	$('#commentForm').submit(function() { 
+
+		var chk_option = [
+			{ 'target':'author', 'name':'이름', 'type':'blank', 'msg':'작성자 이름을 입력하세요.!' },
+			{ 'target':'passwd', 'name':'비밀번호', 'type':'blank', 'msg':'비밀번호를 입력하세요.!' },
+			{ 'target':'contents', 'name':'본문', 'type':'blank', 'msg':'댓글 내용을 입력하세요.!' }
+		];
+
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) { 
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		}); 
+		return false; 
+	}); 
+});
+
+//-->
+</script>
+<div class="comment_form">
+<form name="commentForm" id="commentForm" action="/bbs/comment.php" method="post">
+<input type="hidden" name="bbscode" id="bbscode" value="<!--{_GET.bbscode}-->" />
+<input type="hidden" name="pg_mode" id="pg_mode" value="write" />
+<input type="hidden" name="link_idx" id="link_idx" value="<!--{_GET.idx}-->" />
+<div class="comment_form_new">
+	<table summary="댓글입력">
+		<colgroup>
+			<col width="120"></col>
+			<col width="200"></col>
+			<col width="120"></col>
+			<col width="200"></col>
+		</colgroup>
+		<tr>
+			<td colspan="4">
+				<ul>
+					<li>- 짧은 댓글일수록 더욱 신중하게.</li>
+					<li>- 서로에 대한 배려로 건전한 댓글을 만들어 갑시다.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="author">이름</label></th>
+			<td style="text-align:left;">&nbsp;<input name="author" id="author" type="text" value="" /></td>
+			<th><label for="passwd">비번</label></th>
+			<td style="text-align:left;">&nbsp;<input name="passwd" id="passwd" type="password" /></td>
+		</tr>
+		<tr>
+			<td colspan="4"><textarea name="contents" id="contents"></textarea></td>
+		</tr>
+	</table>
+	<div id="view_button">
+		<button class="grad_bbs"  id="btn_comment_confirm" >확인</button>
+		{*
+		<input type="image" src="images/button_ok.gif" alt="확인" />
+		*}
+	</div>
+</div>
+</form>
+</div>

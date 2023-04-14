@@ -1,0 +1,143 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+    <div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header myacc-histories" style="display: block;">
+        <div class="container z-index-1">
+            <div class="row">
+                <div class="col-sm-12 text-center text-white">
+                    <h2 class="section-title body-font fs-50 lh-70 fw-7">
+												<?=Lang::main_3;?>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+			
+
+			<div class="row">
+
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text "><a href="/edit" ><?=Lang::main_35;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 ">
+						<label class="Rectangle-Text "><a href="/certification" ><?=Lang::main_36;?></a></label>
+					</div>
+					<div class="layer "></div>
+					<div class="Rectangle-6-copy-4 large">
+						<label class="Rectangle-Text small"><a href="/editpin"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 active">
+						<label class="Rectangle-Text active"><a href="/histories" class="active"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer active"></div>
+				</div>
+
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+						<div class="row">
+						  <div class="col-sm-12 mb-0">
+							<nav class="pull-right">
+							  <ol class="breadcrumb">
+								<li><a href="/">Home</a></li>
+								<li><a href="/certification">My Account</a></li>
+								<li class="active">Histories</li>
+							  </ol>
+							</nav>
+						  </div>
+	
+						   <div class="col-sm-12 right-side-sidebar">
+								<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_38;?></span></h3>
+										<di class="col-md-12">
+											<div class="row">
+												<!--{@balanceList}-->
+													<div class="col-sm-3">
+														<a class="feature-box-core" href="javascript:change_symbol('<!--{balanceList->symbol}-->');">
+															<div class="row">
+
+																<div>
+																	<h4 class="p-none m-none">
+																		<!--{balanceList->name}-->
+																	</h4>
+																	<p class="feature-box-core-category" href="#">
+																		<!--{balanceList->balance}--> <!--{balanceList->symbol}-->
+																	</p>
+																</div>
+															</div>
+														</a>
+													</div>
+												<!--{/}-->
+											</div>
+											<div class="section">
+												<h4>Histories of statements</h4>
+											</div>
+											<div class="table-responsive" style="height: 316px; overflow-y: auto;">
+												<table class="table table-bordered table-striped" style="min-width: 668px;">
+													<colgroup>
+														<col width="160" />
+														<col width="100" />
+														<col width="100" />
+														<col width="100" />
+														<col width="*" />
+														<col width="*" />
+														<col width="80" />
+													</colgroup>
+													<thead>
+													<tr class="top">
+														<th class="text-center">Date</th>
+														<th class="text-center">Amount</th>
+														<th class="text-center">Fee</th>
+														<th class="text-center">Type</th>
+														<th class="text-center">From address</th>
+														<th class="text-center">To Address</th>
+														<th class="text-center">Status</th>
+													</tr>
+													</thead>
+													<tbody>
+														<!--{@transactionList}-->
+														<tr>
+															<td class="text-center"><!--{transactionList->date_str}--></td>
+															<td class="text-center"><!--{transactionList->amount}--></td>
+															<td class="text-center"><!--{transactionList->fee}--></td>
+															<td class="text-center"><!--{transactionList->direction}--></td>
+															<td class="text-center" title="<!--{transactionList->from_address}-->"><!--{transactionList->from_address_txt}--></td>
+															<td class="text-center" title="<!--{transactionList->to_address}-->"><!--{transactionList->to_address_txt}--></td>
+															<td class="text-center">
+																<!--{? transactionList->status_txt == 'Complete' && transactionList->transaction_outlink != ''}-->
+																<a href="<!--{transactionList->transaction_outlink}-->" target="_blank"><!--{transactionList->status_txt}--></a>
+																<!--{:}-->
+																<!--{transactionList->status_txt}-->
+																<!--{/}-->
+															</td>
+														</tr>
+														<!--{:}-->
+														<tr>
+															<td colspan="7" class="text-center"><?=Lang::main_bbs20;?></td>
+														</tr>
+														<!--{/}-->
+													</tbody>
+												</table>
+											</div>
+
+											<nav aria-label="Page navigation" class="pt-md">
+												<!--{navi_page}-->
+											</nav>
+
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

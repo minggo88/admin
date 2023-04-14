@@ -1,0 +1,529 @@
+<style type="text/css">
+<!--
+.bbs_tip {color:#0033ff;}
+//-->
+</style>
+
+<script type="text/javascript">
+<!--
+var buttons;
+var tabs_idx= 0;
+var level =[];
+<!--{@loop_right}-->
+level[<!--{.level_rank}-->] ='<!--{.level_name}-->';
+var <!--{.level_code}--> = <!--{.level_rank}-->;
+<!--{/}-->
+
+//스킨정보를 가지고 온다.
+var skin = {};
+<!--{@loop_skin_type}-->
+skin['<!--{.skin_type}-->'] = [];
+<!--{@loop_skin}-->
+skin['<!--{.skin_type}-->'][<!--{..index_}-->] = '<!--{..value_}-->';
+<!--{/}-->
+<!--{/}-->
+var myeditor1 = new cheditor("myeditor1");
+var myeditor2 = new cheditor("myeditor2");
+
+$(function() {
+	$('#bbs_setup').submit(function() {
+		myeditor1.outputBodyHTML();
+		myeditor2.outputBodyHTML();
+		var chk_option = [
+			{ 'target':'title', 'name':'게시판 명', 'type':'blank', 'msg':'게시판명을 입력하세요.!' },
+			{ 'target':'skin', 'name':'게시판 스킨', 'type':'select', 'msg':'게시판 스킨을 선택하여 주세요.' }
+		];
+
+		if(!jsForm($(this)[0],chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$('input[type=submit]').hide();
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					$('input[type=submit]').show();
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+					<!--{:}-->
+					if(confirm("저장되었습니다.!\n\n계속 수정하시겠습니까?")) {
+						location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&bbscode=<!--{_GET.bbscode}-->&tabs_idx='+tabs_idx);
+					}
+					else {
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+						$('input[type=submit]').show();
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+						$('input[type=submit]').show();
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	//기본값 및 입력된 값을 설정
+	$('input[name=kind_menu]').val(['<!--{kind_menu}-->']);
+	$('input[name=bbs_type]').val(['<!--{bbs_type}-->']);
+	$('input[name=bool_category]').val(['<!--{bool_category}-->']);
+	$('input[name=bool_file]').val(['<!--{bool_file}-->']);
+	$('input[name=bool_comment]').val(['<!--{bool_comment}-->']);
+	$('input[name=bool_anti_spam]').val(['<!--{bool_anti_spam}-->']);
+	$('input[name=bool_notice]').val(['<!--{bool_notice}-->']);
+	$('input[name=bool_info_layer]').val(['<!--{bool_info_layer}-->']);
+	$('input[name=bool_no_badword]').val(['<!--{bool_no_badword}-->']);
+	$('input[name=bool_view_list]').val(['<!--{bool_view_list}-->']);
+	$('input[name=bool_secret]').val(['<!--{bool_secret}-->']);
+	$('input[name=bool_main]').val(['<!--{bool_main}-->']);
+	$('input[name=bool_header]').val(['<!--{bool_header}-->']);
+	$('input[name=bool_footer]').val(['<!--{bool_footer}-->']);
+	$('input[name=bool_newmark]').val(['<!--{bool_newmark}-->']);
+	$('input[name=bool_hotmark]').val(['<!--{bool_hotmark}-->']);
+	$('input[name=bool_limit_hit]').val(['<!--{bool_limit_hit}-->']);
+	$('input[name=bool_editor]').val(['<!--{bool_editor}-->']);
+	$('input[name=bool_kisu]').val(['<!--{bool_kisu}-->']);
+
+	$('select[name=right_access]').val('<!--{right_access}-->');
+	$('select[name=right_view]').val('<!--{right_view}-->');
+	$('select[name=right_write]').val('<!--{right_write}-->');
+	$('select[name=right_del]').val('<!--{right_del}-->');
+	$('select[name=right_comment]').val('<!--{right_comment}-->');
+});
+
+$(function() {
+	//스킨타입을 클릭했을때 해당하는 스킨을 뿌려준다.
+	$('input[name=bbs_type]').click(function(event) {
+		var check_val = $(this).val();
+		$('select[name=skin]').empty();
+		$('select[name=skin]').append('<option value="">:::스킨선택:::</option>');
+		$.each(skin[check_val], function() {
+			$('select[name=skin]').append('<option value="'+this+'">'+this+'</option>');
+		}); 
+		event.stopPropagation();
+	});
+
+	$('select[name=skin]').append('<option value="">:::스킨선택:::</option>');
+	$.each(skin['<!--{bbs_type}-->'], function() {
+		if(this == '<!--{skin}-->') {
+			$('select[name=skin]').append('<option value="'+this+'" selected="selected">'+this+'</option>');
+		}
+		else {
+			$('select[name=skin]').append('<option value="'+this+'">'+this+'</option>');
+		}
+	}); 
+
+	//권한설정 허용레벨 보여주기
+	$('select[name=right_access]').change(function() {
+		var select_level = $(this)[0].selectedIndex;
+		$('#level_access').text(level[select_level]);
+	});
+	$('select[name=right_view]').change(function() {
+		var select_level = $(this)[0].selectedIndex;
+		$('#level_view').text(level[select_level]);
+	});
+	$('select[name=right_write]').change(function() {
+		var select_level = $(this)[0].selectedIndex;
+		$('#level_write').text(level[select_level]);	
+	});
+	$('select[name=right_del]').change(function() {
+		var select_level = $(this)[0].selectedIndex;
+		$('#level_del').text(level[select_level]);		
+	});
+	$('select[name=right_comment]').change(function() {
+		var select_level = $(this)[0].selectedIndex;
+		$('#level_comment').text(level[select_level]);			
+	});
+
+	<!--{? _GET.pg_mode == 'form_new'}-->
+	$('select[name=right_access]').val('<!--{level_code}-->');
+	$('#level_access').text(level[<!--{level_code}-->]);
+	$('select[name=right_view]').val('<!--{level_code}-->');
+	$('#level_view').text(level[<!--{level_code}-->]);
+	$('select[name=right_write]').val('<!--{level_code}-->');
+	$('#level_write').text(level[<!--{level_code}-->]);
+	$('select[name=right_del]').val('<!--{level_code}-->');
+	$('#level_del').text(level[<!--{level_code}-->]);
+	$('select[name=right_comment]').val('<!--{level_code}-->');
+	$('#level_comment').text(level[<!--{level_code}-->]);
+	<!--{:}-->
+	$('select[name=right_access]').val('<!--{right_access}-->');
+	$('#level_access').text(level[<!--{right_access}-->]);
+	$('select[name=right_view]').val('<!--{right_view}-->');
+	$('#level_view').text(level[<!--{right_view}-->]);
+	$('select[name=right_write]').val('<!--{right_write}-->');
+	$('#level_write').text(level[<!--{right_write}-->]);
+	$('select[name=right_del]').val('<!--{right_del}-->');
+	$('#level_del').text(level[<!--{right_del}-->]);
+	$('select[name=right_comment]').val('<!--{right_comment}-->');
+	$('#level_comment').text(level[<!--{right_comment}-->]);
+	<!--{/}-->
+});
+
+function loadList() {
+	location.href = '/bbs/admin/bbs_setup.php';
+}
+
+$(function() {
+	//첫번째 탭은 활성화
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		var arr = explode('_',$(this).attr("id"));
+		tabs_idx = arr[1];
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/PanelBar.png') 0px 0px no-repeat;">커뮤니티</span> / <span class="title02">게시판 설정관리 : <!--{title}--></span></h1></div>
+<ul class="tab_menu">
+	<li id="tabs_0" <!--{? empty(_GET.tabs_idx)}-->class="selected"<!--{/}-->><a href="#tab01">기본 설정</a></li>
+	<li id="tabs_1" <!--{? _GET.tabs_idx ==1}-->class="selected"<!--{/}-->><a href="#tab02">권한 설정</a></li>
+	<li id="tabs_2" <!--{? _GET.tabs_idx ==2}-->class="selected"<!--{/}-->><a href="#tab03">디자인 설정</a></li>
+	<li id="tabs_3" <!--{? _GET.tabs_idx ==3}-->class="selected"<!--{/}-->><a href="#tab04">부가 설정</a></li>
+</ul>
+<form name="bbs_setup" id="bbs_setup" method="post" action="?">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->"/>
+<input type="hidden" name="bbscode" value="<!--{_GET.bbscode}-->"/>
+<input type="hidden" name="bool_category" value="<!--{bool_category}-->"/>
+<!--기본설정-->
+<div class="tab_container">
+	<div id="tab01" class="tab_content" <!--{? !empty(_GET.tabs_idx)}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">기본 설정</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>게시판명</th>
+				<td><input type="text" name="title" value="<!--{title}-->" class="frm_input" style="width:200px" /></td>
+			</tr>
+			<tr>
+				<th>게시판 구분</th>
+				<td>
+					<input type="radio" name="kind_menu" id="kind_menu_eta" value="eta" /> <label for="kind_menu_eta">SCC 소개</label> 
+					<input type="radio" name="kind_menu" id="kind_menu_cs" value="cs" /> <label for="kind_menu_cs">이용안내</label> 
+					<input type="radio" name="kind_menu" id="kind_menu_comm" value="comm" /> <label for="kind_menu_comm">커뮤니티</label> 
+					<span class="bbs_tip"> (게시판 메뉴 구분)</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>카테고리 사용여부</label></th>
+				<td><input type="radio" name="bool_category" id="bool_category_1" value="1" /><label for="bool_category_1">사용함</label>  <input type="radio" name="bool_category"  id="bool_category_0" value="0" /> <label for="bool_category_0">사용안함</label> </td>
+			</tr>
+			<tr>
+				<th><label>기수별 접근제한</label></th>
+				<td><input type="radio" name="bool_kisu" id="bool_kisu01" value="1" /><label for="bool_kisu01">제한함</label>  <input type="radio" name="bool_kisu"  id="bool_kisu02" value="0" /> <label for="bool_kisu25">제한안함</label> </td>
+			</tr>
+			<tr>
+				<th><label>카테고리 설정</label></th>
+				<td><textarea name="bbs_category" id="bbs_category" rows="" cols="" style="border:1px solid #ccc;width:300px;height:60px"><!--{bbs_category}--></textarea> ex) aaa@한글,bbb@거북선</td>
+			</tr>
+			<tr>
+				<th>게시판타입</th>
+				<td>
+					<input type="radio" name="bbs_type" id="bbs_type_list" value="list" /> <label for="bbs_type_list">목록형</label>
+					<input type="radio" name="bbs_type" id="bbs_type_gallery" value="gallery" /> <label for="bbs_type_gallery">갤러리</label>
+					<input type="radio" name="bbs_type" id="bbs_type_webzine" value="webzine" /> <label for="bbs_type_webzine">혼합형(갤러리+목록형)</label>
+				</td>
+			</tr>
+			<tr>
+				<th>게시판스킨</th>
+				<td><select name="skin"></select></td>
+			</tr>
+			<tr>
+				<th>메인노출여부</th>
+				<td>
+					<input type="radio" name="bool_main" id="bool_main_y" value="1" /> <label for="bool_main_y">사용함</label> 
+					<input type="radio" name="bool_main" id="bool_main_n" value="0" /> <label for="bool_main_n">사용안함</label> 
+					<span class="bbs_tip"> (메인 목록에 노출여부)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>첨부화일</th>
+				<td>
+					<input type="radio" name="bool_file" id="bool_file_y" value="1" /> <label for="bool_file_y">사용함</label>
+					<input type="radio" name="bool_file" id="bool_file_n" value="0" /> <label for="bool_file_n">사용안함</label> 
+					<span class="bbs_tip"> (이미지 화일을 제외한 각종 파일을 첨부시키는 기능)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>댓글 사용여부</th>
+				<td>
+					<input type="radio" name="bool_comment" id="bool_comment_y" value="1" /> <label for="bool_comment_y">사용함</label>
+					<input type="radio" name="bool_comment" id="bool_comment_n" value="0" /> <label for="bool_comment_n">사용안함</label>
+					<span class="bbs_tip"> (보기페이지에서 댓글 사용유무)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>스팸방지</th>
+				<td>
+					<input type="radio" name="bool_anti_spam" id="bool_anti_spam_y" value="1" /> <label for="bool_anti_spam_y">사용함</label>
+					<input type="radio" name="bool_anti_spam" id="bool_anti_spam_n" value="0" /> <label for="bool_anti_spam_n">사용안함</label>
+					<span class="bbs_tip"> (스팸 방지 기능으로 10초 이내 동일 IP에서 글쓰기를 방지합니다.)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>공지글기능</th>
+				<td>
+					<input type="radio" name="bool_notice" id="bool_notice_y" value="1" /> <label for="bool_notice_y">사용함</label>
+					<input type="radio" name="bool_notice" id="bool_notice_n" value="0" /> <label for="bool_notice_n">사용안함</label>
+					<span class="bbs_tip"> (목록상단에 관리자가 해당 게시판에 대한 공지사항을 나타낼 수 있는 기능)</span>
+				</td>
+			</tr>
+	<!--
+			<tr>
+				<th><label>작성자 정보보기</label></th>
+				<td><input type="radio" name="bool_info_layer" value="1" /> 사용함 <input type="radio" name="bool_info_layer" value="0" /> 사용안함 <span class="bbs_tip"> (작성자 클릭시 정보보기 레이어 표시기능)</span></td>
+			</tr>
+	-->
+			<tr>
+				<th>욕글방지</th>
+				<td>
+					<input type="radio" name="bool_no_badword" id="bool_no_badword_y" value="1" /> <label for="bool_no_badword_y">사용함</label>
+					<input type="radio" name="bool_no_badword" id="bool_no_badword_n" value="0" /> <label for="bool_no_badword_n">사용안함</label>
+					<span class="bbs_tip"> (욕글관리에 등록된 단어들을 필터링하는 기능)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>뷰페이지 글목록</th>
+				<td>
+					<input type="radio" name="bool_view_list" id="bool_view_list_y" value="1" /> <label for="bool_view_list_y">사용함</label>
+					<input type="radio" name="bool_view_list" id="bool_view_list_n" value="0" /> <label for="bool_view_list_n">사용안함</label>
+					<span class="bbs_tip"> (보기페이지 내용 하단에 목록이 나타나게 하는 기능)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>비밀글</th>
+				<td>
+					<input type="radio" name="bool_secret" id="bool_secret_y" value="1" /> <label for="bool_secret_y">사용함</label>
+					<input type="radio" name="bool_secret" id="bool_secret_n" value="0" /> <label for="bool_secret_n">사용안함</label>
+					<span class="bbs_tip"> (비밀글 선택시 글작성자와 관리자만이 보기 권한이 됩니다.)</span>
+				</td>
+			</tr>
+
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+			<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">목록</a></span>
+		</div>
+	</div>
+
+	<!--권한설정-->
+	<div id="tab02" class="tab_content" <!--{? _GET.tabs_idx != 1}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">권한 설정</div>
+		<input type="hidden" name="right_access" />
+		<input type="hidden" name="right_view" />
+		<input type="hidden" name="right_write" />
+		<input type="hidden" name="right_comment" />
+		<input type="hidden" name="right_del" />
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>접근권한</th>
+				<td><select name="right_access">
+					<option value="" selected="selected">:::회원등급:::</option>
+					<!--{@loop_level}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+				</select> 허용레벨 : <span id="level_access" class="bbs_tip"></span></td>
+			</tr>
+			<tr>
+				<th>읽기권한</th>
+				<td><select name="right_view">
+					<option value="" selected="selected">:::회원등급:::</option>
+					<!--{@loop_level}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+				</select> 허용레벨 : <span id="level_view" class="bbs_tip"></span></td>
+			</tr>
+			<tr>
+				<th>쓰기권한</th>
+				<td><select name="right_write">
+					<option value="" selected="selected">:::회원등급:::</option>
+					<!--{@loop_level}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+				</select> 허용레벨 : <span id="level_write" class="bbs_tip"></span></td>
+			</tr>
+			<tr>
+				<th>댓글쓰기권한</th>
+				<td><select name="right_comment">
+					<option value="" selected="selected">:::회원등급:::</option>
+					<!--{@loop_level}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+				</select> 허용레벨 : <span id="level_comment" class="bbs_tip"></span></td>
+			</tr>
+			<tr>
+				<th>삭제권한</th>
+				<td><select name="right_del">
+					<option value="" selected="selected">:::회원등급:::</option>
+					<!--{@loop_level}-->
+					<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+					<!--{/}-->
+				</select> 허용레벨 : <span id="level_del" class="bbs_tip"></span></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+			<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">목록</a></span>
+		</div>
+	</div>
+
+	<!--디자인설정-->
+	<div id="tab03" class="tab_content"  <!--{? _GET.tabs_idx != 2}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">디자인 설정</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>색상설정</th>
+				<td>
+					롤오버 <input type="text" name="color_rollover" id="color_rollover" size="15" value="<!--{color_rollover}-->" class="frm_input" style="width:70px" />
+					짝수줄 <input type="text" name="color_even" id="color_even" size="15" value="<!--{color_even}-->" class="frm_input" style="width:70px" />
+					홀수줄 <input type="text" name="color_odd" id="color_odd" size="15" value="<!--{color_odd}-->" class="frm_input" style="width:70px" /> <span class="bbs_tip">미입력시 기본값 흰색(#FFFFFF)으로 설정됩니다.</span>
+				</td>
+			</tr>
+			<tr>
+				<th>상단디자인</th>
+				<td><input type="checkbox" name="bool_header" id="bool_header" value="1" /> <label for="bool_header">사용함</label>
+					<span class="bbs_tip">(목록상단에 컨텐츠추가시 사용하시면 됩니다.)</span></td>
+			</tr>
+			</tbody>
+		</table><br />
+		<textarea name="header" id="header" style="width:800px;height:300px;"><!--{header}--></textarea><br />
+
+
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>하단디자인</th>
+				<td><input type="checkbox" name="bool_footer" id="bool_footer" value="1" /> <label for="bool_footer">사용함 </label>
+				<span class="bbs_tip">(목록하단에 컨텐츠추가시 사용하시면 됩니다.)</span></td>
+			</tr>
+			</tbody>
+		</table><br />
+		<textarea name="footer" id="footer" style="width:800px;height:300px;"><!--{footer}--></textarea><br /><br />
+
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+			<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">목록</a></span>
+		</div>
+	</div>
+
+	<!--상세설정-->
+	<div id="tab04" class="tab_content"  <!--{? _GET.tabs_idx != 3}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">부가 설정</div>
+		<table class="form_table">
+			<colgroup>
+				<col width="15%"></col>
+				<col width="85%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>썸네일사이즈</th>
+				<td>
+					가로 <input type="text" name="thumb_width" value="<!--{thumb_width}-->" class="frm_input" style="width:50px" /> px X 
+					세로 <input type="text" name="thumb_height" value="<!--{thumb_height}-->" class="frm_input" style="width:50px" /> px
+				</td>
+			</tr>
+			<tr>
+				<th>목록수</th>
+				<td><input type="text" name="loop_scale" value="<!--{loop_scale}-->" class="frm_input" style="width:50px" /> (목록에 보여지는 게시글 수)</td>
+			</tr>
+			<tr>
+				<th>페이지수</th>
+				<td><input type="text" name="page_scale" value="<!--{page_scale}-->" class="frm_input" style="width:50px" /> (목록 아래 페이지 수)</td>
+			</tr>
+			<tr>
+				<th>NEW 사용</th>
+				<td>
+					<input type="radio" name="bool_newmark" id="bool_newmark_y" value="1" /> <label for="bool_newmark_y">사용함</label>
+					( 글등록후 <input type="text" name="term_newmark" value="<!--{term_newmark}-->" class="frm_input" style="width:50px" />시간 동안 표시함 )
+					<input type="radio" name="bool_newmark" id="bool_newmark_n" value="0" /> <label for="bool_newmark_n">사용안함</label>
+				</td>
+			</tr>
+			<tr>
+				<th>HOT 사용</th>
+				<td>
+					<input type="radio" name="bool_hotmark" id="bool_hotmark_y" value="1" /> <label for="bool_hotmark_y">사용함</label>
+					( 조회수 <input type="text" name="term_hotmark" value="<!--{term_hotmark}-->" class="frm_input" style="width:50px" />이상일때 표시 )
+					<input type="radio" name="bool_hotmark" id="bool_hotmark_n" value="0" /> <label for="bool_hotmark_n">사용안함</label>
+				</td>
+			</tr>
+			<tr>
+				<th>조회수 제한</th>
+				<td>
+					<input type="radio" name="bool_limit_hit" id="bool_limit_hit_y" value="1" /> <label for="bool_limit_hit_y">제한</label>
+					( <input type="text" name="term_cookie" value="<!--{term_cookie}-->" class="frm_input" style="width:50px" /> 시간이내 다시 글보기시 조회수 증가시키지 않음. )
+					<input type="radio" name="bool_limit_hit" id="bool_limit_hit_n" value="0" /> <label for="bool_limit_hit_n">제한안함</label>
+				</td>
+			</tr>
+			<tr>
+				<th>웹에디터</th>
+				<td>
+					<input type="radio" name="bool_editor" id="bool_editor_y" value="1" /> <label for="bool_editor_y">사용함</label>
+					<input type="radio" name="bool_editor" id="bool_editor_n" value="0" /> <label for="bool_editor_n">사용안함</label>
+				</td>
+			</tr>
+			</tbody>
+		</table>		
+		<div class="button_area">
+			<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+			<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">목록</a></span>
+		</div>
+	</div>
+</div>
+</form>
+
+
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor1.config.editorHeight = '300px'; 
+myeditor1.config.editorWidth = '100%';
+myeditor1.inputForm = 'header';
+myeditor1.config.imgMaxWidth = 670;
+myeditor1.run();
+
+myeditor2.config.editorHeight = '300px'; 
+myeditor2.config.editorWidth = '100%';
+myeditor2.inputForm = 'footer';
+myeditor2.config.imgMaxWidth = 670;
+myeditor2.run();
+//-->
+</script>

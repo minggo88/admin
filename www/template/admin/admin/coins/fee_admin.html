@@ -1,0 +1,123 @@
+<script type="text/javascript">
+function save() {
+
+	if($('#btc_trading_rate').val() == '') {
+		alert('비트코인 거래수수료율율 입력하세요');
+		$('#btc_trading_rate').val(0);
+		$('#btc_trading_rate').focus();
+		return false;
+	}
+
+	if($('#btc_trading_rate').val() != '' && !$.isNumeric($('#btc_trading_rate').val())) {
+		alert('비트코인 거래수수료율은 숫자만 입력하세요');
+		$('#btc_trading_rate').val(0);
+		$('#btc_trading_rate').focus();
+		return false;
+	}
+
+	if($('#site_trading_rate').val() == '') {
+		alert('사이트 거래수수료율율 입력하세요');
+		$('#site_trading_rate').val(0);
+		$('#site_trading_rate').focus();
+		return false;
+	}
+
+	if($('#site_trading_rate').val() != '' && !$.isNumeric($('#site_trading_rate').val())) {
+		alert('사이트 거래수수료율은 숫자만 입력하세요');
+		$('#site_trading_rate').val(0);
+		$('#site_trading_rate').focus();
+		return false;
+	}
+
+	if($('#withdrawal_fee').val() == '') {
+		alert('출금수수료금액율 입력하세요');
+		$('#withdrawal_fee').val(0);
+		$('#withdrawal_fee').focus();
+		return false;
+	}
+
+	if($('#withdrawal_fee').val() != '' && !$.isNumeric($('#withdrawal_fee').val())) {
+		alert('출금수수료금액은 숫자만 입력하세요');
+		$('#withdrawal_fee').val(0);
+		$('#withdrawal_fee').focus();
+		return false;
+	}
+
+	if($('#krw_request_amount').val() == '') {
+		alert('일일KRW출금가능한도를 입력하세요');
+		$('#krw_request_amount').val(0);
+		$('#krw_request_amount').focus();
+		return false;
+	}
+
+	if($('#krw_request_amount').val() != '' && !$.isNumeric($('#krw_request_amount').val())) {
+		alert('일일KRW출금가능한도는 숫자만 입력하세요');
+		$('#krw_request_amount').val(0);
+		$('#krw_request_amount').focus();
+		return false;
+	}
+
+	if($('#btc_request_amount').val() == '') {
+		alert('일일BTC출금가능한도를 입력하세요');
+		$('#btc_request_amount').val(0);
+		$('#btc_request_amount').focus();
+		return false;
+	}
+
+	if($('#btc_request_amount').val() != '' && !$.isNumeric($('#btc_request_amount').val())) {
+		alert('일일BTC출금가능한도는 숫자만 입력하세요');
+		$('#btc_request_amount').val(0);
+		$('#btc_request_amount').focus();
+		return false;
+	}
+
+	var answer = confirm("수수료 정보를 저장하시겠습니까?");
+
+	if(answer) {
+		$.post("/bitcoin/admin/feeAdmin.php?type=save", $( "#fee_form" ).serialize(), function(data){
+			alert('수수료 정보를 저장했습니다');
+			location.reload();
+		});
+	}
+}
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Grid.png') 0px 0px no-repeat;">비트거래관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 거래수수료관리 </div>
+
+<form id="fee_form">
+<table class="list_table">
+    <colgroup>
+        <col width="170"/>
+        <col width="*"/>
+    </colgroup>
+    <tbody>
+		<tr>
+			<th>비트코인 거래수수료율</th>
+			<td class="pleft"><input type="text" id="btc_trading_rate" name="btc_trading_rate" class="frm_input" style="width:200px;text-align:right;padding-right:3px;" value="<!--{BTC_TRADING_RATE}-->"/> BTC</td>
+		</tr>
+		<tr>
+			<th>사이트 거래수수료율</th>
+			<td class="pleft"><input type="text" id="site_trading_rate" name="site_trading_rate" class="frm_input" style="width:200px;text-align:right;padding-right:3px;" value="<!--{SITE_TRADING_RATE}-->"/> %</td>
+		</tr>
+		<tr>
+			<th>출금수수료금액</th>
+			<td class="pleft"><input type="text" id="withdrawal_fee" name="withdrawal_fee" class="frm_input" style="width:200px;text-align:right;padding-right:3px;" value="<!--{WITHDRAWAL_FEE}-->"/> USD</td>
+		</tr>
+		<tr>
+			<th>일일KRW출금가능한도</th>
+			<td class="pleft"><input type="text" id="krw_request_amount" name="krw_request_amount" class="frm_input" style="width:200px;text-align:right;padding-right:3px;" value="<!--{KRW_REQUEST_AMOUNT}-->"/> USD</td>
+		</tr>
+		<tr>
+			<th>일일BTC출금가능한도</th>
+			<td class="pleft"><input type="text" id="btc_request_amount" name="btc_request_amount" class="frm_input" style="width:200px;text-align:right;padding-right:3px;" value="<!--{BTC_REQUEST_AMOUNT}-->"/> BTC</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+<div class="button_area">
+	<span class="button black"><input type="button" onclick="save();" value="저  장" /></span>
+</div>
+<!-- Page Navigation -->
+<iframe name="hiddenframe" id="hiddenframe" style="width:0;height:0;display:none;"></iframe>

@@ -1,0 +1,41 @@
+<?php /* Template_ 2.2.6 2022/12/09 17:06:26 /home/ubuntu/www/admin/www/template/admin/admin/member/customer-balance-lists.html 000000931 */ ?>
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+<div class="col-lg-12 m-b-md">
+<div class="ibox float-e-margins">
+<div class="ibox-content">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover dataTables-customers-balance">
+<thead>
+<tr>
+<th>회원번호 </th>
+<th>아이디 </th>
+<th>이름</th>
+<th class="text-center">SYMBOL</th>
+<th>SYMBOL 이름</th>
+<th>등급</th>
+<th>금액</th>
+<th>지갑주소</th>
+<th>거래내역</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th>회원번호 </th>
+<th>아이디 </th>
+<th>이름</th>
+<th class="text-center">SYMBOL</th>
+<th>SYMBOL 이름</th>
+<th>등급</th>
+<th>금액</th>
+<th>지갑주소</th>
+<th>거래내역</th>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

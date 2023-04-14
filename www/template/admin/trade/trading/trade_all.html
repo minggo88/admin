@@ -1,0 +1,76 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-26 fw-600 pt-50 pb-10 pl-20">
+					전체종목
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container white_bg">
+  <div class="wrapper wrapper-content wrap-analysis">
+    <div class="row">
+      <div class="col-lg-12 pb-50">
+          <div class="ibox float-e-margins">
+            
+            <div class="table-responsive totalListTb">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="22%" />
+                        <!-- <col width="18%" /> -->
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <!-- <col width="15%" /> -->
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="text-left">종목</th>
+                        <!-- <th class="text-right">기업가치</th> -->
+                        <th class="text-right">기준가</th>
+                        <th class="text-right">가격변동</th>
+                        <th class="text-right">거래대금(1주일)</th>
+                        <!-- <th class="text-right">차트</th> -->
+                    </tr>
+                    </thead>
+                    <tbody name="table_profit">
+                        <tr name="empty" style="display:none">
+                            <td colspan="6" class="empty text-center">종목이 없습니다.</td>
+                        </tr>
+                        <tr name="loading">
+                            <td colspan="6" class="loading text-center"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                        </tr>
+                        <tr name="tpl" style="display:none">
+                            <td class="text-left mergeTd symbol light">
+                                <a href="/trade/{coin.symbol}"><img src={coin.icon_url} alt="logo" />
+                                {coin.name}</a>
+                            </td>
+                            <!-- <td class="text-center mergeTd light">
+                                <div class="number_div">{coin.market_cap}</div>
+                            </td> -->
+                            <td class="text-right mergeTd">
+                                <div class="number_div">{coin.base_price}</div>
+                            </td>
+                            <td class="text-right mergeTd">
+                                <div class="number_div">{coin.trade_max_volume}</div>
+                            </td>
+                            <td class="text-right mergeTd light">
+                                <div class="number_div">{coin.circulating_supply}</div>
+                            </td>
+                            <!-- <td class="text-right mergeTd">
+                                <span id="sparkline_{coin.symbol}" ></span>
+                                <span class="bar">5,-10,-30,-20,-13,-4,-7,20,30,15,16,27,38,60</span>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

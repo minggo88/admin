@@ -1,0 +1,81 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#frmbbs').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/PanelBar.png') 0px 0px no-repeat;">커뮤니티</span> / <span class="title02">게시판 메뉴 관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">게시판 목록</div>
+<form method="post" name="frmbbs" id="frmbbs" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit_menu" />
+<table class="list_table">
+	<colgroup>
+		<col width="100"></col>
+		<col width="300"></col>
+		<col></col>
+	</colgroup>
+	<thead>
+	<tr> 
+		<th>코드</th>
+		<th>게시판명</th>
+		<th>메뉴구분</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_bbs}-->
+	<tr>
+		<td><!--{.bbscode}--></td>
+		<td><!--{.title}--></td>
+		<td>
+			<input type="hidden" name="bbscode[]" value="<!--{.bbscode}-->" />
+			<input type="radio" name="<!--{.bbscode}-->_kind_menu" id="<!--{.bbscode}-->_kind_menu_eta" value="eta" <!--{? .kind_menu == 'eta'}-->checked="checked"<!--{/}-->/> <label for="<!--{.bbscode}-->_kind_menu_eta">SCC 소개</label> 
+			<input type="radio" name="<!--{.bbscode}-->_kind_menu" id="<!--{.bbscode}-->_kind_menu_cs" value="cs" <!--{? .kind_menu == 'cs'}-->checked="checked"<!--{/}-->/> <label for="<!--{.bbscode}-->_kind_menu_cs">이용안내</label> 
+			<input type="radio" name="<!--{.bbscode}-->_kind_menu" id="<!--{.bbscode}-->_kind_menu_comm" value="comm" <!--{? .kind_menu == 'comm'}-->checked="checked"<!--{/}--> /> <label for="<!--{.bbscode}-->_kind_menu_comm">커뮤니티</label> 
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="3" class="ctext">등록된 게시판이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="button_area_right">
+	<span class="button black"><input type="submit" value="메뉴 설정 저장"/></span>
+</div>
+</form>

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>이미지보기</title>
+</head>
+<body topmargin="0" leftmargin="0">
+<img src="{_config.web_dir}/{img}" border="0" align="absmiddle" onclick="self.close();" width="{width}" height="{height}" style="cursor:hand">
+<script language=javascript>
+function winResize() {
+	self.resizeTo({width},{height});
+}
+winResize();
+</script>
+</body>
+</html>

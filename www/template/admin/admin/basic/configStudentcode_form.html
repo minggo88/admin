@@ -1,0 +1,67 @@
+<script type="text/javascript">
+<!-- 
+
+function adminAjaxSubmit(obj) {
+	obj.ajaxSubmit({
+		success: function (data, statusText) {
+			if(data['bool']) {
+				alert('저장되었습니다.!');
+				location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},
+		dataType:'json',
+		resetForm: false
+	});
+}
+
+$(function() {
+	$('#jsform1').submit(function() {
+		var chk_option = [
+			{ 'target':'code_prefix', 'name':'회원코드', 'type':'blank', 'msg':'회원코드를 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		adminAjaxSubmit($(this));
+		return false;
+	});
+});
+
+//-->
+</script>
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">학생코드설정</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">학생코드 설정</div>
+<form method="post" name="jsform1" id="jsform1" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="edit" />
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>회원코드 설정</th>
+		<td>
+			<input type="text" name="code_prefix" value="<!--{code_prefix}-->" class="frm_input" style="width:100px;" /> * 회원코드 생성시 코드 앞에 붙어짐.
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+</div>
+</form>

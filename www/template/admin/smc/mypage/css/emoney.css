@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+div.metapo {width:770px;margin: 0 auto 0 auto;}
+
+div#emoney_content {border:0px #EBEBEB solid;width:770px;margin:0px auto;}
+div#emoney_content table { border:0px #EBEBEB solid; width:100%; border-collapse: collapse; margin:0px;}
+div#emoney_content th { border-top:1px #d4d4d4 solid; border-bottom:1px #d4d4d4 solid; background:#E8E8E8; line-height:1.7; font-weight:bold; padding:3px; color:#9b9b9b;}
+div#emoney_content td {border-bottom:1px #d4d4d4 solid; line-height:18px; padding:2px 0px;}
+
+#total_emoney {margin-top:10px;text-align:right;font-weight:bold;}
+#total_emoney span{color:#FF6600;}
+#emoney {border:0px #777777 solid;width:770px;background:#ffffff; margin:10px auto 0px auto;}
+#emoney table {border-top:0px #d4d4d4 solid; border-bottom:0px #d4d4d4 solid; border-collapse: collapse;}
+#emoney table thead th{border-top :2px #d4d4d4 solid; border-bottom :1px #d4d4d4 solid;font-size:12px;font-weight:bold;text-align: center;color:#9b9b9b;padding:2px;}
+#emoney table thead .left{text-align:left;}
+#emoney table thead .right{text-align:right;}
+#emoney table tbody th{border-top :1px #d4d4d4 solid; border-bottom :1px #d4d4d4 solid;text-align: center;height:20px;color:#9b9b9b;padding:2px;}
+#emoney table tbody td{border-top :1px #d4d4d4 solid; border-bottom :1px #d4d4d4 solid;text-align: center;height:20px;padding:2px;}
+#emoney table tbody .left{text-align:left;padding-left:3px;}
+#emoney table tbody .right{text-align:right;padding-right:3px;}
+#emoney table tbody .emoney_unit{color:#6A6A6A;font-weight:bold;font-size:12px;}
+#emoney table tbody .emoney_total{color:#5F5F5F;  font-weight:bold;}
+#emoney table tbody .icon_del {text-align: center;}
+#emoney table tbody .icon_del img {border: solid 1px #E3E3E3; padding:0px;margin:0px;}
+#emoney table tbody .icon_del img:hover{border-color:#FF9900;background-image:url("/template/user/shop/images/icon_del_over.gif");text-align: center;}
+#emoney table tbody .bottomline{border-bottom:0px solid #E3E3E3; background:#F8F7F7; } 
+
+#emoney table tfoot th { border-bottom:0px solid #E3E3E3; border-top:0px solid #E3E3E3;padding: 3px;text-align: right; background:#F8F7F7; } 
+#emoney table tfoot td { padding: 3px 3px 3px 3px; border: #d4d4d4 solid 0px; text-align:right; background:#F8F7F7; } 
+#emoney table tfoot .pred{border-bottom:0px solid #E3E3E3;color: #C70000;  font-weight:bold;text-align:right;background:#F8F7F7; }

@@ -1,0 +1,43 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$('#all_check').click(function() {
+		if($('#all_check')[0].checked) { $("#memberList table tbody").checkCheckboxes(); }
+		else { $("#memberList table tbody").unCheckCheckboxes(); }
+	});
+});
+
+//-->
+</script>
+<div id="memberList">
+	<div id="member_title"><img src="../images/bullet.gif"> 전체회원리스트</div>
+	<table>
+		<thead>
+		<tr>
+			<th><input type="checkbox" id="all_check" /></th>
+			<th>No</th>
+			<th>이름</th>
+			<th>아이디</th>
+			<th>휴대전화</th>
+		</tr>
+		</thead>
+		<tbody>
+		<!--{@loop}-->
+		<tr class="loop">
+			<td class="mem_check"><input type="checkbox" name="mobile[]" value="<!--{.mobile}-->"></td>
+			<td class="mem_no"><!--{.no}--></td>
+			<td class="mem_name"><!--{.name}--> </td>
+			<td class="mem_userid"><!--{.userid}--></td>
+			<td class="mem_mobile"><!--{.mobile}--></td>
+		</tr>
+		<!--{:}-->
+		<tr>
+			<td colspan="5" id="empty">Empty!</td>
+		</tr>
+		<!--{/}-->
+		</tbody>
+	</table>
+</div>
+<!-- Page Navigation -->
+<div class="boardNavigation"><!--{navi_page}--></div>

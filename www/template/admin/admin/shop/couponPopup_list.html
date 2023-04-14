@@ -1,0 +1,35 @@
+<!-- contents -->
+<div class="title_d2"><img src="../images/bullet.gif"> 쿠폰 목록</div>
+<table class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+	</colgroup>
+	<thead>
+		<th>No</th>
+		<th>쿠폰내용</th>
+		<th>관리</th>
+	</thead>
+	<tbody>
+	<!--{@loop_coupon}-->
+	<tr>
+		<td><!--{.no}--></td>
+		<td>
+			<ul>
+				<li class="underline dotted pcenter"><!--{.coupon_name}-->(<!--{.coupon_code}-->)</li>
+				<li class="underline dotted pcenter"><!--{=number_format(.discount_price)}--> 원</li>
+				<li class="underline none pcenter">( <!--{? .kinds_period=='always'}-->기간제한없음<!--{:}-->발급후 <!--{.validity_day}-->간 사용가능<!--{/}--> )</li>
+			</ul>
+		</td>
+		<td>
+			<span class="button small black"><a href="javascript:;" onclick="issueCoupon('<!--{.coupon_code}-->')">쿠폰지급</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="5">등록된 쿠폰이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>

@@ -1,0 +1,418 @@
+<div class="wrapper wrapper-content animated fadeInRight"></div>
+    <div class="row">
+        <div class="col-lg-12 pl-0 pr-0">
+            <input type="hidden" name="symbol" id="symbol" value="<!--{_GET.pg_mode}-->" />
+            <input type="hidden" name="user_no" id="user_no" value="<!--{_SESSION.USER_NO}-->" />
+            <div class="pl-3">
+                <div class="tabs-container mt-25 mb-15">
+                    
+                    <ul class="nav nav-tabs nav-new mb-none">
+                        <li class="active"><a data-toggle="tab" href="#tab-1" id="sell" class="myOrder history tab1" aria-expanded="true">팝니다</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2" id="buy" class="myOrder history tab2" aria-expanded="false">삽니다</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3" id="information" class="myOrder history tab3" aria-expanded="false">정보</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-4" id="property" class="myOrder history tab4" aria-expanded="false">재무</a></li>
+                        <!-- <li class=""><a data-toggle="tab" href="#tab-5" id="talk" class="myOrder history tab5" aria-expanded="false">토론</a></li> -->
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body minHeightPanel">
+                                <div class="table-responsive directListTb">
+                                    <table class="table table-bordered hidden-xs hidden-sm">
+                                        <colgroup>
+                                            <col width="20%" />
+                                            <col width="10%" />
+                                            <col width="15%" />
+                                            <col width="12%" />
+                                            <col width="12%" />
+                                            <col width="18%" />
+                                            <!-- <col width="12%" /> -->
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">거래시각</th>
+                                            <th class="text-center">거래번호</th>
+                                            <th class="text-center">가격</th>
+                                            <th class="text-center">거래가능수량</th>
+                                            <th class="text-center">주문수량</th>
+                                            <th class="text-center">거래방식</th>
+                                            <!-- <th class="text-center">마지막활동</th> -->
+                                        </tr>
+                                        </thead>
+                                        <tbody name="direct_sell">
+                                            <tr name="empty" style="display:none" class="hidden-xs hidden-sm">
+                                                <td colspan="7" class="text-center">팝니다 목록이 없습니다.</td>
+                                            </tr>
+                                            <tr name="loading" class="hidden-xs hidden-sm">
+                                                <td colspan="7" class="text-center"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                                            </tr>
+                                            <tr name="tpl" style="display:none" class="hidden-xs hidden-sm">
+                                                <td class="text-center">
+                                                    {sell.time_order}
+                                                </td>
+                                                <td class="text-center">
+                                                    {sell.orderid}
+                                                </td>
+                                                <td class="text-center">
+                                                    {sell.price}
+                                                </td>
+                                                <td class="text-center">
+                                                    {sell.volume_remain}주
+                                                </td>
+                                                <td class="text-center">
+                                                    {sell.volume}주
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-primary btn_direct_buy {sell.hide_trade_btn}" data-toggle="tooltip" data-placement="top" title="바로체결" data-orderid={sell.orderid} data-price={sell.price} data-volume={sell.volume_remain} data-userno={sell.userno}>바로체결</button>
+                                                    <button class="btn btn-default btn_cancel {sell.hide_cancel_btn}" style="color:#000" data-toggle="tooltip" data-placement="top" title="취소" data-orderid="{sell.orderid}"  data-order-type="sell">취소</button>
+                                                </td>
+                                                <!-- <td class="text-center">
+                                                    {sell.trading_type}
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-bordered hidden-xl hidden-lg hidden-md">
+                                        <colgroup>
+                                            <col width="80%" />
+                                            <col width="20%" />
+                                        </colgroup>
+                                        <tbody name="direct_sell">
+                                            <tr name="empty" style="display:none" class="hidden-xl hidden-lg hidden-md">
+                                                <td colspan="7" class="text-center hidden-xl hidden-lg hidden-md">팝니다 목록이 없습니다.</td>
+                                            </tr>
+                                            <tr name="loading">
+                                                <td colspan="7" class="text-center hidden-xl hidden-lg hidden-md"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                                            </tr>
+                                            <tr name="tpl" style="display:none" class="hidden-xl hidden-lg hidden-md">
+                                                <td class="text-center hidden-xl hidden-lg hidden-md">
+                                                    <div class="entry">거래번호</div>
+                                                    <div class="data">{sell.orderid}</div>
+                                                    <div class="entry">가격</div>
+                                                    <div class="data">{sell.price}원</div>
+                                                    <div class="entry">거래가능수량</div>
+                                                    <div class="data">{sell.volume_remain}주</div>
+                                                    <div class="entry">주문수량</div>
+                                                    <div class="data">{sell.volume}주</div>
+                                                    <div class="entry">거래시각</div>
+                                                    <div class="data">{sell.time_order}</div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-primary btn_direct_buy {sell.hide_trade_btn}" data-toggle="tooltip" data-placement="top" title="바로체결" data-orderid={sell.orderid} data-price={sell.price} data-volume={sell.volume_remain} data-userno={sell.userno}>바로체결</button>
+                                                    <button class="btn btn-default btn_cancel {sell.hide_cancel_btn}" style="color:#000" data-toggle="tooltip" data-placement="top" title="취소" data-orderid="{sell.orderid}"  data-order-type="sell">취소</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body minHeightPanel">
+                                <div class="table-responsive directListTb">
+                                    <table class="table table-bordered hidden-xs hidden-sm">
+                                        <colgroup>
+                                            <col width="20%" />
+                                            <col width="10%" />
+                                            <col width="15%" />
+                                            <col width="12%" />
+                                            <col width="12%" />
+                                            <col width="18%" />
+                                            <!-- <col width="12%" /> -->
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">거래시각</th>
+                                            <th class="text-center">거래번호</th>
+                                            <th class="text-center">가격</th>
+                                            <th class="text-center">거래가능수량</th>
+                                            <th class="text-center">주문수량</th>
+                                            <th class="text-center">거래방식</th>
+                                            <!-- <th class="text-center">마지막활동</th> -->
+                                        </tr>
+                                        </thead>
+                                        <tbody name="direct_buy">
+                                            <tr name="empty" style="display:none" class="hidden-xs hidden-sm">
+                                                <td colspan="7" class="text-center">삽니다 목록이 없습니다.</td>
+                                            </tr>
+                                            <tr name="loading" class="hidden-xs hidden-sm">
+                                                <td colspan="7" class="text-center"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                                            </tr>
+                                            <tr name="tpl" style="display:none" class="hidden-xs hidden-sm">
+                                                <td class="text-center">
+                                                    {buy.time_order}
+                                                </td>
+                                                <td class="text-center">
+                                                    {buy.orderid}
+                                                </td>
+                                                <td class="text-center">
+                                                    {buy.price}원
+                                                </td>
+                                                <td class="text-center">
+                                                    {buy.volume_remain}주
+                                                </td>
+                                                <td class="text-center">
+                                                    {buy.volume}주
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-danger btn_direct_sell {buy.hide_trade_btn}" data-toggle="tooltip" data-placement="top" title="바로체결" data-orderid={buy.orderid} data-price={buy.price} data-volume={buy.volume_remain} data-userno={buy.userno}>바로체결</button>
+                                                    <button class="btn btn-default btn_cancel {buy.hide_cancel_btn}" style="color:#000" data-toggle="tooltip" data-placement="top" title="취소" data-orderid="{buy.orderid}" data-order-type="buy">취소</button>
+                                                </td>
+                                                <!-- <td class="text-center">
+                                                    {buy.trading_type}
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-bordered hidden-xl hidden-lg hidden-md">
+                                        <colgroup>
+                                            <col width="80%" />
+                                            <col width="20%" />
+                                        </colgroup>
+                                        <tbody name="direct_buy">
+                                            <tr name="empty" style="display:none" class="hidden-xl hidden-lg hidden-md">
+                                                <td colspan="7" class="text-center hidden-xl hidden-lg hidden-md">삽니다 목록이 없습니다.</td>
+                                            </tr>
+                                            <tr name="loading">
+                                                <td colspan="7" class="text-center hidden-xl hidden-lg hidden-md"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"><?=Lang::main_analysis_34;?></td>
+                                            </tr>
+                                            <tr name="tpl" style="display:none" class="hidden-xl hidden-lg hidden-md">
+                                                <td class="text-center hidden-xl hidden-lg hidden-md">
+                                                    <div class="entry">거래번호</div>
+                                                    <div class="data">{buy.orderid}</div>
+                                                    <div class="entry">가격</div>
+                                                    <div class="data">{buy.price}원</div>
+                                                    <div class="entry">거래가능수량</div>
+                                                    <div class="data">{buy.volume_remain}주</div>
+                                                    <div class="entry">주문수량</div>
+                                                    <div class="data">{buy.volume}주</div>
+                                                    <div class="entry">거래시각</div>
+                                                    <div class="data">{buy.time_order}</div>
+                                                </td>
+                                                <td class="text-center hidden-xl hidden-lg hidden-md">
+                                                    <button class="btn btn-danger btn_direct_sell {buy.hide_trade_btn}" data-toggle="tooltip" data-placement="top" title="바로체결" data-orderid={buy.orderid} data-price={buy.price} data-volume={buy.volume_remain} data-userno={buy.userno}>바로체결</button>
+                                                    <button class="btn btn-default btn_cancel {buy.hide_cancel_btn}" style="color:#000" data-toggle="tooltip" data-placement="top" title="취소" data-orderid="{buy.orderid}" data-order-type="buy">취소</button>
+                                                </td>
+                                                <!-- <td class="text-center">
+                                                    {buy.trading_type}
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane">
+                            <div class="panel-body minHeightPanel">
+                                
+                                    <!--{*  차트인데 중복되서 제외
+                                    <h3 class="fs-20">기준가변화</h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20" style="text-align:center">
+                                        <!--{? empty(info01)}-->
+                                        <div class="fs-16 text-center pt-50 pb-50">기준가 변화 정보가 없습니다.</div>
+                                        <!--{:}--><img src="<!--{info01}-->" alt="info01" /><!--{/}-->
+                                    </div>
+                                    *}-->
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20">
+                                        <ul class="nav nav-tabs nav-new mb-none">
+                                            <li class="sub_tab active"><a data-toggle="tab" href="#tab-news" id="news" class="myOrder history news" aria-expanded="true">뉴스</a></li>
+                                            <li class="sub_tab"><a data-toggle="tab" href="#tab-notice" id="notice" class="myOrder history notice" aria-expanded="false">공시</a></li>
+                                        </ul>
+                                        <div class="tab-content pt-20">
+                                            <div id="tab-news" class="tab-pane active" name="box-news">
+                                                <input type="hidden" name="box-news-info" data-link_idx="<!--{_GET.pg_mode}-->" data-bbscode="NW620" >
+                                                <!--{? manager_userid === _SESSION.USER_ID}-->   
+                                                <h3 class="fs-20">글쓰기
+                                                    <button class="fs-14 btn btn-default" name="btn-cancel" style="float:right;">취소</button>
+                                                    <button class="fs-14 btn btn-primary" name="btn-save" style="float:right" data-link_idx="<!--{_GET.pg_mode}-->" data-bbscode="NW620" <!--{?_SESSION['USER_NO']==''}-->disabled=""<!--{/}--> >저장</button>
+                                                </h3>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20">
+                                                    <label for="news-subject">제목</label> <input type="text" class="news_input" id="news-subject" name="news-subject" placeholder="제목을 입력하세요" />
+                                                    <label for="news-media">미디어 이름</label> <input type="text" class="news_input" id="news-media" name="news-media" placeholder="미디어 입력하세요" />
+                                                    <label for="news-logo_img">미디어 로고</label> <input type="file" class="news_input" id="news-logo_img" name="news-logo_img" placeholder="미디어 로고를 입력하세요"/> <input type="hidden" name="file_src" >
+                                                    <textarea type="text" class="news_box" name="news-contents" placeholder="내용을 입력하세요"></textarea>
+                                                </div>
+                                                <!--{/}-->
+
+                                                <div name="box-news-tpl" style="display:none">
+                                                    <div name="tpl" id="news-{idx}" class="news_list col-lg-12 col-md-12 col-sm-12 col-xs-12  pt-10 pr-0 pb-10 pl-0 mb-20" >
+                                                        <div class="image pb-10 {hide_file_src}" style="background: url({file_src}) no-repeat 50% 50%/contain transparent"></div>
+                                                        <div class="subject pb-10" name="subject">{subject}</div>
+                                                        <div class="news" name="news">{news}</div>
+                                                        <div class="media pb-10" ><span class="newsmedia" name="media">{media}</span> &nbsp; <span class="date" name="date">{date}</span></div>
+                                                        <!--{? manager_userid === _SESSION.USER_ID}-->   
+                                                        <div class="like">
+                                                            <p class="block">
+                                                                <a href="#" name="btn-edit-news" data-idx="{idx}">수정</a>
+                                                                <a href="#" name="btn-delete-news" data-idx="{idx}">삭제</a>
+                                                            </p>
+                                                        </div>
+                                                        <!--{/}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="box_news_list" name="box-news-list">
+                                                    <div class="fs-16 text-center pt-50 pb-50">등록된 뉴스가 없습니다.</div>
+                                                </div>
+
+                                            </div>
+                                            <div id="tab-notice" class="tab-pane" name="box-notices">
+                                                <input type="hidden" name="box-notice-info" data-link_idx="<!--{_GET.pg_mode}-->" data-bbscode="TU395" >
+                                                <!--{? manager_userid === _SESSION.USER_ID}-->   
+                                                <h3 class="fs-20">글쓰기
+                                                    <button class="fs-14 btn btn-default" name="btn-cancel" style="float:right;">취소</button>
+                                                    <button class="fs-14 btn btn-primary" name="btn-save" style="float:right" data-link_idx="<!--{_GET.pg_mode}-->" data-bbscode="TU395" <!--{?_SESSION['USER_NO']==''}-->disabled=""<!--{/}--> >저장</button>
+                                                </h3>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20">
+                                                    <label for="notice-subject">제목</label> <input type="text" class="notice_input" name="notice-subject" placeholder="제목을 입력하세요" />
+                                                    <textarea type="text" class="notice_box" name="notice-contents" placeholder="내용을 입력하세요"></textarea>
+                                                </div>
+                                                <!--{/}-->
+
+                                                <div name="box-notice-tpl" style="display:none">
+                                                    <div name="tpl" id="notice-{idx}" class="notice_list col-lg-12 col-md-12 col-sm-12 col-xs-12  pt-10 pr-0 pb-10 pl-0 mb-20" >
+                                                        <div class="subject pb-10" name="subject">{subject}</div>
+                                                        <div class="notice" name="notice">{notice}</div>
+                                                        <div class="date pb-10">{date}</div>
+                                                        <!--{? manager_userid === _SESSION.USER_ID}-->   
+                                                        <div class="like">
+                                                            <p class="block">
+                                                                <a href="#" name="btn-edit-notice" data-idx="{idx}">수정</a>
+                                                                <a href="#" name="btn-delete-notice" data-idx="{idx}">삭제</a>
+                                                            </p>
+                                                        </div>
+                                                        <!--{/}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="box_notice_list" name="box-notices-list">
+                                                    <div class="fs-16 text-center pt-50 pb-50">등록된 공시글이 없습니다.</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="fs-20">기업정보</h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20" style="text-align:center">
+                                        <!--{? empty(info02)}-->
+                                        <div class="fs-16 text-center pt-50 pb-50">기업정보가 없습니다.</div>
+                                        <!--{:}-->
+                                        <img src="<!--{info02}-->" alt="info01" />
+                                        <!--{/}-->
+                                    </div>
+                                    <h3 class="fs-20">홈페이지</h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20" style="text-align:center;position:relative">
+                                        <!--{? empty(company_hompage)}-->
+                                        <div class="fs-16 text-center pt-50 pb-50">등록된 홈페이지가 없습니다.</div>
+                                        <!--{:}-->
+                                        <a href="<!--{company_hompage}-->" target="_blank"><div style="position:absolute;width:100%;height:100%"></div></a>
+                                        <iframe src="/api/v1.0/proxy/?url=<!--{=urlencode(company_hompage)}-->" alt="홈페이지" style="width:100%;height:50rem;display:block;    border: 1px solid gray;"></iframe>
+                                        <!--{/}-->
+                                    </div>
+                                    <!-- <h3 class="fs-20">투자정보</h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20" style="text-align:center">
+                                        <!--{? empty(info03)}-->
+                                        <div class="fs-16 text-center pt-50 pb-50">투자정보가 없습니다.</div>
+                                        <!--{:}--><img src="<!--{info03}-->" alt="info01" /><!--{/}-->
+                                    </div> -->
+                            </div>
+                        </div>
+                        <div id="tab-4" class="tab-pane">
+                            <div class="panel-body minHeightPanel">
+                                <h3 class="fs-20">실적</h3>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 pl-5 pr-5">
+                                    <!-- <img src="../img/chart01.png"  alt="chart01" /> -->
+                                    <h4 class="fs-18">손익
+                                        <small style="line-height:22px;float:right;">(단위: 억원)</small>
+                                    </h4>
+                                    <div class="ibox-content pl-0 pr-0">
+                                        <div class="barChart" name="barChart1">
+                                            <div class="empty" name="empty1" style="display:none">
+                                                데이터가 없습니다.
+                                            </div>
+                                            <!-- <div class="loading" name="loading1">
+                                                <img src="/template/admin/images/loading-buffering.gif" style="width:21px;">
+                                            </div> -->
+                                            <canvas id="barChart_01" height="300" style="background: url(/template/admin/trade/img/nodata_chart_icon.webp) no-repeat 50% 50% transparent;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 pl-5 pr-5">
+                                    <!-- <img src="../img/chart02.png"  alt="chart02" /> -->
+                                    <h4 class="fs-18">재무상태
+                                        <small style="line-height:22px;float:right;">(단위: 억원)</small>
+                                    </h4>
+                                    <div class="ibox-content pl-0 pr-0">
+                                        <div class="barChart" name="barChart2">
+                                            <div class="empty" name="empty2" style="display:none">
+                                                데이터가 없습니다.
+                                            </div>
+                                            <!-- <div class="loading" name="loading2">
+                                                <img src="/template/admin/images/loading-buffering.gif" style="width:21px;">
+                                            </div> -->
+                                            <canvas id="barChart_02" height="300" style="background: url(/template/admin/trade/img/nodata_chart_icon.webp) no-repeat 50% 50% transparent;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 pl-5 pr-5">
+                                    <!-- <img src="../img/chart03.png"  alt="chart03" /> -->
+                                    <h4 class="fs-18">주요지표
+                                        <small style="line-height:22px;float:right;">(단위: 백분율)</small>
+                                    </h4>
+                                    <div class="ibox-content pl-0 pr-0">
+                                        <div class="barChart" name="barChart3">
+                                            <div class="empty" name="empty3" style="display:none">
+                                                데이터가 없습니다.
+                                            </div>
+                                            <!-- <div class="loading" name="loading3">
+                                                <img src="/template/admin/images/loading-buffering.gif" style="width:21px;">
+                                            </div> -->
+                                            <canvas id="barChart_03" height="300" style="background: url(/template/admin/trade/img/nodata_chart_icon.webp) no-repeat 50% 50% transparent;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-pane" name="box-comments">
+                            <div class="panel-body minHeightPanel">
+                                <h3 class="fs-20">의견 <!--{comment_cnt}-->  
+                                    <button class="fs-14 btn btn-default" name="btn-cancel" style="float:right;display:none">취소</button>
+                                    <button class="fs-14 btn btn-primary" name="btn-save" style="float:right" data-link_idx="<!--{_GET.pg_mode}-->" data-bbscode="trade_item" <!--{?_SESSION['USER_NO']==''}-->disabled=""<!--{/}--> >저장</button>
+                                </h3>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pl-0 pr-0 mb-20">
+                                    <textarea type="text" class="comment_box" name="comment-contents" placeholder="<!--{?_SESSION['USER_NO']==''}-->로그인해주세요.<!--{:}-->의견을 남겨 주세요.<!--{/}-->" <!--{?_SESSION['USER_NO']==''}-->disabled=""<!--{/}-->></textarea>
+                                </div>
+
+                                <div name="box-comment-tpl" style="display:none">
+                                    <div name="tpl" id="comment-{idx}" class="comment_list col-lg-12 col-md-12 col-sm-12 col-xs-12  pt-10 pr-0 pb-10 pl-0 mb-20" >
+                                        <div class="nickname pb-10">{date}  {nickname}</div>
+                                        <div class="comment pb-20" name="comment">{comment}</div>
+                                        <div class="like">
+                                            <!-- <p class="like_count"><img src="../img/like.png"  alt="like" /> {like_count}</p> -->
+                                            <p class="block">
+                                                <!-- <a href="#">차단</a>  -->
+                                                <!-- <a href="#">신고</a> -->
+                                                <a href="#" class="{hide_ctrl}" name="btn-edit-comment" data-idx="{idx}">수정</a>
+                                                <a href="#" class="{hide_ctrl}" name="btn-delete-comment" data-idx="{idx}">삭제</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div name="box-comments-list">
+
+                                </div>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

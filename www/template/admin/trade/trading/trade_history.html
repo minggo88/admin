@@ -1,0 +1,463 @@
+<div class="wrapper wrapper-content">
+    <section class="section" style="min-height: 580px;">
+        <div id="root"></div>
+        <div id="root1">
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="pl-3">
+                                <div class="v-heading-v3">
+                                    <h3 class="mt-50 mb-10">
+                                        <span class="span_under big">거래내역</span>
+                                        <span class="hidden-xs hidden-sm" id="trade">&nbsp;</span>
+                                        <span class="hidden-md hidden-lg" id="trade_m">&nbsp;</span>
+                                    </h3>
+                                </div>
+                                <div class="tabs-container mt-25 mb-15">
+                                    <ul class="nav nav-tabs nav-new mb-none">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1" id="tradeClose" class="myOrder history tab1" aria-expanded="true">현금 입/출금 내역</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2" id="tradeOpen" class="myOrder history tab2" aria-expanded="false">코인 입/출금 내역</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="panel-body minHeightPanel" style="min-height: 426px;">
+                                                <div class="table-responsive historyTb">
+                                                    <table class="table table-bordered mb-none">
+                                                        <colgroup>
+                                                            <col width="10%" />
+                                                            <col width="10%" />
+                                                            <col width="16%" />
+                                                            <col width="16%" />
+                                                            <col width="16%" />
+                                                            <col width="16%" />
+                                                            <col width="16%" />
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center">거래시각</th>
+                                                            <th class="text-center">코드</th>
+                                                            <th class="text-center">거래수량</th>
+                                                            <th class="text-center">체결가격</th>
+                                                            <th class="text-center">거래금액</th>
+                                                            <th class="text-center">수수료</th>
+                                                            <th class="text-center">정산금액</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    KRW
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_plus">+3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    ETC/KRW
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">1,000,000</div>
+                                                                    <div class="symbol_div">ETC</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">10,000,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_minus">-2,000,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    KRW
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_plus">+3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    KRW/STEEM
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">STEEM</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_plus">+3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    KRW
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_plus">+3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pcenter text-center">
+                                                                    <div>2018-07-24</div>
+                                                                    <div>11:04:24</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    KRW
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div">3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                                <td class="pcenter text-center mergeTd">
+                                                                    -
+                                                                </td>
+                                                                <td class="pcenter text-center numberDiv">
+                                                                    <div class="number_div number_plus">+3,000</div>
+                                                                    <div class="symbol_div">KRW</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="custom_paging mt-40 mb-none">
+                                                        <ul class="pagination">
+                                                            <li class="page_prev">
+                                                                <img src="../../smc/img/new/page_prev.png" />
+                                                            </li>
+                                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                                                            <li class="page_next">
+                                                                <img src="../../smc/img/new/page_next.png" />
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="panel-body minHeightPanel" style="min-height: 426px;">
+                                                <div class="table-responsive transactionTb">
+                                                    <table class="table table-bordered mb-none">
+                                                        <colgroup>
+                                                            <col width="15%" />
+                                                            <col width="10%" />
+                                                            <col width="50%" />
+                                                            <col width="15%" />
+                                                            <col width="10%" />
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center">거래시각</th>
+                                                            <th class="text-center">입/출금</th>
+                                                            <th class="text-center">거래주소</th>
+                                                            <th class="text-center">거래량</th>
+                                                            <th class="text-center">상태</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                진행
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                입금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_error">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_error">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                오류
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                2018-07-24 16:05:19
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                출금
+                                                            </td>
+                                                            <td class="pcenter text-left text_small color_approve">
+                                                                0c477f40852666ad88845122275aa2565233322sddsd65552221dsasd522363666
+                                                            </td>
+                                                            <td class="pcenter text-right text_small color_approve">
+                                                                2 BTC
+                                                            </td>
+                                                            <td class="pcenter text-center">
+                                                                승인
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="custom_paging mt-40 mb-none">
+                                                        <ul class="pagination">
+                                                            <li class="page_prev">
+                                                                <img src="../../smc/img/new/page_prev.png" />
+                                                            </li>
+                                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                                                            <li class="page_next">
+                                                                <img src="../../smc/img/new/page_next.png" />
+                                                            </li>
+                                                        </ul>
+                                                        &lt;!&ndash;<nav aria-label="Page navigation example">
+                                                            &lt;!&ndash;{navi_page}&ndash;&gt;
+                                                        </nav>&ndash;&gt;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

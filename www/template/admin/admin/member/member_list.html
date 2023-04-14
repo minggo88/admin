@@ -1,0 +1,289 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#member_list>tbody>tr").hover(
+		function () { $(this).css('background-color','#ffd5ce'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#csvform').submit(function() {
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function () {
+	$('#all_check').click(function() {
+		if(this.checked) {
+			$("table#member_list tbody :checkbox").attr('checked','checked');
+		}
+		else {
+			$("table#member_list tbody :checkbox").removeAttr('checked');
+		}
+	});
+
+	$('#loop_scale').change(function() {
+		var loop_scale = $(this).val();
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?<!--{srch_url_loop}-->&loop_scale='+loop_scale;
+	});
+});
+
+
+function checkDel() {
+	var num_checked = $('#listform tbody checkbox:checked').length;
+	if(num_checked == 0) {
+		alert('삭제하실 회원을 선택하여 주세요.!');
+		return false;
+	}
+	if(!confirm("회원 정보를 삭제하시겠습니까?\n\n삭제된 회원정보는 복구가 되지 않습니다.")) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=multi_del&'+$('#listform').serialize(), function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+function listSort() {
+	location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url_sort}-->&sort_target='+$('select[name=sort_target]').val()+'&sort_method='+$('select[name=sort_method]').val();
+}
+
+
+$(function() {
+	$('select[name=sort_target]').val('<!--{? !empty(_GET.sort_target)}--><!--{_GET.sort_target}--><!--{:}-->regdate<!--{/}-->');//select
+	$('select[name=sort_method]').val('<!--{? !empty(_GET.sort_method)}--><!--{_GET.sort_method}--><!--{:}-->desc<!--{/}-->');//select
+});
+
+
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">회원목록</div>
+
+<form method="post" name="csvform" id="csvform" action="<!--{_SERVER.SCRIPT_NAME}-->"  enctype="multipart/form-data">
+<input type="hidden"  name="pg_mode" value="xls_insert" />
+<table class="form_table" style="margin:0px 0px 10px 0px;">
+	<colgroup>
+		<col width="140" />
+		<col width="*" />
+		<col width="140" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>회원등록등록</th>
+		<td><input type="file" name="xls" value="" class="frm_input" style="width:300px;float:left;" /> <span class="button blue" style="float:left;"><input type="submit" value="엑셀화일등록" /></span></td>
+		<td>
+			<span class="button black"><a href="?pg_mode=member_xls<!--{srch_url}-->">엑셀출력</a></span>
+		</td>
+	</tr>
+	</tbody>
+</table>
+</form>
+
+<!--회원관리에서 검색후 소팅이 가능하게 .-->
+<form id="listform">
+<div class="area_both">
+	<div class="area_child_left" style="width:48%;">
+		<span class="button black"><a href="javascript:;" onclick="checkDel()">선택삭제</a></span>
+		<select name="sort_target">
+			<option value="regdate" selected="selected">가입일순</option>
+			<option value="name">이름</option>
+			<option value="userid">아이디</option>
+			<option value="visit_num">방문횟수</option>
+		</select>
+		<select name="sort_method">
+			<option value="asc">오름차순</option>
+			<option value="desc">내림차순</option>
+		</select>
+		<span class="button black"><a href="javascript:;" onclick="listSort()">정렬</a></span>
+	</div>
+	<div class="area_child_right" style="width:48%; text-align:right;">
+		<select name="loop_scale" id="loop_scale">
+			<option value="" selected="selected">::목록수::</option>
+			<option value="10">10</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="200">200</option>
+		</select>
+		<select id="kind_target">
+			<option value="sm" selected="selected">선택회원</option>
+			<option value="am">전체회원</option>
+		</select>
+		<span class="button black"><a href="javascript:;" onclick="popupMail()">메일전송</a></span>
+	</div>
+</div>
+<div class="clear_box"></div>
+<table id="member_list" class="list_table">
+	<colgroup>
+		<col width="70"></col>
+		<col width="42%"></col>
+		<col width="*"></col>
+		<col width="140"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th class="pcenter"><input type="checkbox" name="all_check" id="all_check" /></th>
+		<th class="pcenter">회원정보</th>
+		<th class="pcenter">연락처 / 이메일 / 주소</th>
+		<th class="pcenter">관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td class="pcenter"><!--{.no}--><br /><input type="checkbox" name="userid[]" value="<!--{.userid}-->" /></td>
+		<td>
+			<ul>
+                            <li class="underline highlight"><!--{?.member_gender==0}--><span class="pblue bold"><i class="fa fa-male"></i></span> <!--{:}--><span class="pred bold"><i class="fa fa-female"></i></span> <!--{/}-->&nbsp;[<!--{.name}--> : <!--{.nick}-->](<!--{.userid}-->) <!--{? !empty(.facebook)}--><a href="<!--{.facebook}-->" target="_blank"><i class="fa fa-facebook"></i></a><!--{/}--></li>
+				<li class="underline dotted"><i class="fa fa-level-up"></i>&nbsp;회원레벨 : <!--{.member_type}-->(<!--{.member_level}-->) <!--{? preg_match('/110|115|120|130|140/', .member_level) }--> / <!--{.company}--> <!--{.company_tel}--><!--{/}--></li>
+				<li class="underline dotted"><i class="fa fa-map-marker"></i>&nbsp;지역 : <!--{.area}--></li>
+				<li class="underline dotted"><i class="fa fa-user"></i>&nbsp;가입일자 : <!--{=date('Y-m-d H:i:s',.regdate)}--> (<!--{.reg_ip}-->)</span></li>
+				<li class="underline none"><i class="fa fa-calendar"></i>&nbsp;최근접속 : <!--{=date('Y-m-d H:i:s',.visit_time)}--> (<!--{.visit_ip}-->)</span></li>
+				<!--{?.request_biz==1}-->
+					<!--{?.bool_bizmember==1}-->
+					<li class="underline none">사업자인증 : <!--{.bool_bizmember}--></li>
+					<!--{:}-->
+					<li class="underline none">사업자등록인증신청 : <!--{.requestdate}--></li>
+					<!--{/}-->
+				<!--{/}-->
+			</ul>
+		 </td>
+		<td>
+			<ul>
+				<li class="underline dotted"><i class="fa fa-calendar-o"></i>&nbsp;생년월일 : <!--{?.member_birthday!='--'}--><!--{.member_birthday}-->  <i class="fa fa-check"></i><!--{:}--><!--{?!empty(.tel)}-->실명인증DB 체크 <i class="fa fa-check"></i> <!--{:}-->실명인증안함 <!--{/}--><!--{/}--></li>
+				<li class="underline dotted"><i class="fa fa-mobile"></i>&nbsp;휴대전화 : <!--{.tel}--></li>
+				<li class="underline dotted"><i class="fa fa-pencil-square-o"></i>&nbsp;기간만료(잔액) : <span class="pred pbold">
+					<!--{?.member_level == 500}-->-
+					<!--{: .member_level == 110 || .member_level == 120 || .member_level == 130 || .member_level == 140  }-->
+						<!--{?.expire_date > 0}-->
+						<!--{=date('Y-m-d',.expire_date)}-->
+						<!--{:}-->
+						-
+						<!--{/}-->
+					<!--{:}--><!--{=number_format(.yellow_amount)}--> 원</span>
+					<!--{/}--></li>
+				<li class="underline dotted"><i class="fa fa-plus-square-o"></i>&nbsp;플랜 / 방문횟수 : <!--{.member_plan}-->건 / <!--{.visit_num + 1}-->회</li>
+				<li class="underline none"><i class="fa fa-sign-in"></i>&nbsp;낙찰/입찰 : <!--{.c_count}-->회 / <!--{.b_count}-->회</li>
+			</ul>
+		 </td>
+		<td class="pcenter">
+			<!--{? mode == 'member'}-->
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&userid=<!--{.userid}--><!--{srch_url}-->">수정</a></span>
+			<!--{/}-->
+			<span class="button small blue"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=view&userid=<!--{.userid}--><!--{srch_url}-->">보기</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="4" class="ctext">Empty!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<!-- Page Navigation -->
+<div class="navipage"><!--{navi_page}--></div>
+
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_email').dragPopup({
+		popup_id: 'drag_popup_email',
+		popup_title: '메일 전송',
+		popup_width: 650,
+		popup_height: 580,
+		bool_today_close:false
+	});
+});
+
+function popupMail(mail_to,mail_to_name) {
+	var kind_target = $('#kind_target option:selected').val();
+	if (kind_target == 'am') {
+		$('#iframe_email').attr('src','/admin/email.php?pg_mode=form_email2&kind_target=am');
+	}
+	else {
+		var num_checked = $('#listform tbody :checkbox:checked').length;
+		if(num_checked == 0) {
+			alert('회원을 선택하여 주세요.!');
+			return false;
+		}
+		$('#iframe_email').attr('src','/admin/email.php?pg_mode=form_email2&kind_target=sm&'+$('#listform').serialize());
+	}
+	showPopup('drag_popup_email',{kind_pos:'center'});
+}
+
+$(function() {
+	$('#popup_sms').dragPopup({
+		popup_id: 'drag_popup_sms',
+		popup_title: '문자전송 전송',
+		popup_width: 300,
+		popup_height: 300,
+		bool_today_close:false
+	});
+});
+
+function popupSms() {
+	var kind_target = $('#kind_target option:selected').val();
+	if (kind_target == 'am') {
+		$('#iframe_sms').attr('src','/admin/sms.php?pg_mode=form_sms2&kind_target=am');
+	}
+	else {
+		var num_checked = $('#listform tbody :checkbox:checked').length;
+		if(num_checked == 0) {
+			alert('회원을 선택하여 주세요.!');
+			return false;
+		}
+		$('#iframe_sms').attr('src','/admin/sms.php?pg_mode=form_sms2&kind_target=sm&'+$('#listform').serialize());
+	}
+	showPopup('drag_popup_sms',{kind_pos:'center'});
+}
+
+//-->
+</script>
+
+<div id="popup_email" style="display:none;padding:10px;">
+	<iframe id="iframe_email"  frameborder="0" style="width:628px;height:528px;border:0px;"></iframe>
+</div>
+
+<div id="popup_sms" style="display:none;padding:10px;">
+	<iframe id="iframe_sms"  frameborder="0" style="width:280px;height:248px;border:0px;"></iframe>
+</div>

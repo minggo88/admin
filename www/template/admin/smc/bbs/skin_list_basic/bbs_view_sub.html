@@ -1,0 +1,101 @@
+
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container  pl-50 pr-50">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					<!--{? _GET.bbscode=='PY395'}-->
+					공지사항
+					<!--{: _GET.bbscode=='NW620'}-->
+					<?=Lang::main_125;?>
+					<!--{: _GET.bbscode=='CN719'}-->
+					<?=Lang::main_126;?>
+					<!--{: _GET.bbscode=='PT038'}-->
+					<?=Lang::main_127;?>
+					<!--{/}-->
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container white_bg">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30 ">
+		   <div class="row">
+				<div class="col-sm-12 mb-50">
+					<div id="view_contents">
+						<div id="subject" class="align2 box_title">
+							<!--{? _SESSION.lang == "cn"}--><!--{subject_cn}-->
+							<!--{: _SESSION.lang == "en"}--><!--{subject_en}-->
+							<!--{:}--><!--{subject_kr}--><!--{/}-->
+						</div>
+						<div class="box_info">
+							<div id="writer" class="align3 lh24"><?=___('main','Author')?> : <!--{author}--></div>
+							<div id="regdate" class="align lh24"><?=___('main','Date')?> : <!--{=date('Y-m-d',regdate)}--></div>
+						</div>
+						<div class="clearline"></div>
+						<!--{? bool_file}-->
+						<div id="attach"></div>
+						<!--{/}-->
+						<div id="bbs_contents" class="box_contents">
+							<!--{? _SESSION.lang == "cn"}--><!--{contents_cn}-->
+							<!--{: _SESSION.lang == "en"}--><!--{contents_en}-->
+							<!--{:}--><!--{contents_kr}--><!--{/}-->
+						</div>
+
+						<!--{*
+						<table summary="게시판 상세보기">
+						<tbody>
+							<tr>
+								<th class="align2" colspan="2"> <!--{subject}--></th>
+							</tr>
+							<tr>
+								<td class="align3 lh24"><?=___('main','Author')?> : <!--{author}--></td>
+								<td class="align lh24"><?=___('main','Date')?> : <!--{=date('Y-m-d',regdate)}--></td>
+							</tr>
+							<!--{? bool_file}-->
+							<tr>
+								<td colspan="2" class="lh24"><?=___('main','Attache File')?> : <a href="./bbs_download.php?file_name=<!--{file}-->&file_name_src=<!--{=urlencode(file_src)}-->"><!--{file_src}--></a> </td>
+							</tr>
+							<!--{/}-->
+							<tr>
+								<td colspan="2">
+									<div id="bbs_contents" ><!--{=htmlspecialchars_decode(contents)}--></div>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+						*}-->
+
+						<!--<div id="button_np">
+							<button class="grad_bbs"  id="btn_bbs_up" >이전</button>
+							<button class="grad_bbs"  id="btn_bbs_down" >다음</button>
+						</div>-->
+
+						<div class="row">
+							<div class="col-md-12">
+								<nav aria-label="Page navigation example">
+
+									<ul class="pagination">
+										<li class="page-item disabled">
+											<a class="page-link" href="<!--{? down_info.idx!=0 }-->/<!--{info_bbs.kind_menu}-->/view/<!--{down_info.idx}--><!--{:}-->#<!--{/}-->" tabindex="-1">< <?=___('main','Previous Post')?></a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="/<!--{info_bbs.kind_menu}-->/list/<!--{? ((up_info.list_cnt % 10) + 1) <=10}-->0<!--{:}--><!--{(up_info.list_cnt % 10) + 1}--><!--{/}-->"><?=___('main','Lists')?></a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="<!--{? up_info.idx!=0 }-->/<!--{info_bbs.kind_menu}-->/view/<!--{up_info.idx}--><!--{:}-->#<!--{/}-->"><?=___('main','Next Post')?> ></a>
+										</li>
+									</ul>
+
+								</nav>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,104 @@
+/* coin */
+.icon-64, .icon-48, .icon-32, .icon-24 {
+    display: inline-block;
+    background-image: url(../img/main/coins48.png?t=202102231525);
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.icon-24 {width: 24px; height: 24px; background-size: 24px;}
+.icon-24.menu {float: left; margin-right: 10px;}
+.icon-24-usd { background-position: 0 -4248px; } /*177*/
+.icon-24-jin { background-position: 0 -4296px; } /*178*/
+.icon-24-apc { background-position: 0 -4320px; } /*178*/
+.icon-24-scc { background-position: 0 -4272px; } /*178*/
+.icon-24-btc { background-position: 0 -480px; }  /*20*/
+.icon-24-eth { background-position: 0 -1223px; } /*51*/
+.icon-24-ltc { background-position: 0 -2136px; } /*89*/
+.icon-24-bch { background-position: 0 -240px; } /*10*/
+.icon-24-qtum { background-position: 0 -2976px; } /*124*/
+.icon-24-eos { background-position: 0 -1152px; } /*48*/
+.icon-24-xrp { background-position: 0 -4056px; } /*169*/
+.icon-24-xmr { background-position: 0 -4032px; } /*168*/
+.icon-24-etc { background-position: 0 -1200px; } /*50*/
+.icon-24-jin { background-position: 0 -4296px; } /*179*/
+.icon-24-apc { background-position: 0 -4320px; } /*180*/
+.icon-24-fint { background-position: 0 -4344px; } /*124*/
+
+.icon-32 { width: 32px; height: 32px; background-size: 32px; }
+.icon-32-usd { background-position: 0 -5664px;} /*177*/
+.icon-32-jin { background-position: 0 -5696px;} /*178*/
+.icon-32-apc { background-position: 0 -5696px;} /*178*/
+.icon-32-scc { background-position: 0 -5696px;} /*178*/
+.icon-32-btc { background-position: 0 -640px; }  /* 20 */
+.icon-32-eth { background-position: 0 -1631px; } /* 51 */
+.icon-32-ltc { background-position: 0 -2848px; } /*89*/
+.icon-32-bch { background-position: 0 -320px; } /*10*/
+.icon-32-qtum { background-position: 0 -3968px; } /*124*/
+.icon-32-eos { background-position: 0 -1536px; } /*48*/
+.icon-32-xrp { background-position: 0 -5408px; } /*169*/
+.icon-32-xmr { background-position: 0 -5376px; } /*168*/
+.icon-32-etc { background-position: 0 -1600px; } /*50*/
+.icon-32-jin { background-position: 0 -5728px; } /*179*/
+.icon-32-apc { background-position: 0 -5760px; } /*180*/
+.icon-32-fint { background-position: 0 -5792px; } /*180*/
+
+.icon-48 { width: 48px; height: 48px; background-size: 48px; }
+.icon-48-usd { background-position: 0 -8496px;} /*177*/
+.icon-48-jin { background-position: 0 -8544px;} /*178*/
+.icon-48-apc { background-position: 0 -8544px;} /*178*/
+.icon-48-scc { background-position: 0 -8544px;} /*178*/
+.icon-48-btc { background-position: 0 -960px; }  /* 20 */
+.icon-48-eth { background-position: 0 -2447px; } /* 51 */
+.icon-48-ltc { background-position: 0 -4272px; } /*89*/
+.icon-48-bch { background-position: 0 -480px; } /*10*/
+.icon-48-qtum { background-position: 0 -5952px; } /*124*/
+.icon-48-eos { background-position: 0 -2304px; } /*48*/
+.icon-48-xrp { background-position: 0 -8112px; } /*169*/
+.icon-48-xmr { background-position: 0 -8064px; } /*168*/
+.icon-48-etc { background-position: 0 -2400px; } /*50*/
+.icon-48-jin { background-position: 0 -8592px; } /*179*/
+.icon-48-apc { background-position: 0 -8640px; } /*180*/
+.icon-48-fint { background-position: 0 -8688px; } /*180*/
+
+.icon-64 { width: 64px; height: 64px; background-size: 64px; }
+.icon-64-usd { background-position: 0 -11328px;} /*177*/
+.icon-64-jin { background-position: 0 -11392px;} /*178*/
+.icon-64-apc { background-position: 0 -11392px;} /*178*/
+.icon-64-scc { background-position: 0 -11392px;} /*178*/
+.icon-64-btc { background-position: 0 -1280px; }  /* 20 */
+.icon-64-eth { background-position: 0 -3262px; } /* 51 */
+.icon-64-ltc { background-position: 0 -5694px; } /*89*/
+.icon-64-bch { background-position: 0 -640px; } /*10*/
+.icon-64-qtum { background-position: 0 -7936px; } /*124*/
+.icon-64-eos { background-position: 0 -3072px; } /*48*/
+.icon-64-xrp { background-position: 0 -10816px; } /*169*/
+.icon-64-xmr { background-position: 0 -10752px; } /*168*/
+.icon-64-etc { background-position: 0 -3200px; } /*50*/
+.icon-64-jin { background-position: 0 -11456px; } /*179*/
+.icon-64-apc { background-position: 0 -11520px; } /*180*/
+.icon-64-fint { background-position: 0 -11584px; } /*180*/
+
+.coin-name{
+    display: flex;
+    align-items: center;
+}
+.coin-name .m-none{
+    height: 50px;
+}
+.coin-name .name-con{
+    vertical-align: top;
+    font-weight: 600;
+    text-transform: uppercase
+}
+.coin-name h1{
+    font-size: 24px;
+}
+@media (min-width: 768px) {
+    .coin-name .m-none{
+        height: 40px;
+    }
+    .coin-name h1{
+        font-size: 30px;
+    }
+}

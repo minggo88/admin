@@ -1,0 +1,139 @@
+<style type="text/css">
+#bbs_top_left {width:380px; margin:10px 0 10px 0; text-align:left;}	
+#bbs_top_right {width:380px; margin:10px 0 10px 0; text-align:right}	
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+			<h2><!--{info_bbs.title}--></h2>
+			<ol class="breadcrumb">
+					<li>
+							<a href="index.html">Home</a>
+					</li>
+					<li>
+							<a>커뮤니티관리</a>
+					</li>
+					<li class="active">
+							<strong><!--{info_bbs.title}--></strong>
+					</li>
+			</ol>
+	</div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+	<div class="row">
+			<div class="col-lg-12">
+					<div class="ibox ">
+							<div class="ibox-title">
+									<h5><!--{info_bbs.title}--></h5>
+									<div style="float:right">
+										<select name="language">
+											<option value="kr" <!--{?_GET.language=='kr'}-->selected=""<!--{/}--> >한국어</option>
+											<option value="en" <!--{?_GET.language=='en'}-->selected=""<!--{/}-->>영어</option>
+											<option value="cn" <!--{?_GET.language=='cn'}-->selected=""<!--{/}-->>중국어</option>
+										</select>
+										<select name="category">
+											<option value="" <!--{? !_GET.category}-->selected=""<!--{/}--> >전체</option>
+											<!--{@ loop_category_key}-->
+											<option value="<!--{.value_}-->" <!--{?_GET.category==.value_}-->selected=""<!--{/}--> ><!--{.value_}--></option>
+											<!--{/}-->
+										</select>
+									</div>
+							</div>
+							<div class="ibox-content">
+
+
+								<div class="area_both">
+									<div id="bbs_top_left" class="area_child_left">
+										등록글수 : <span class="emphasis"><!--{total}--></span>
+									</div>
+								</div>
+								<form id="list_form">
+								<table class="list_table table table-striped table-bordered table-hover ">
+									<colgroup>
+										<col width="20">
+										<col width="60">
+										<col width="120">
+										<col>
+										<col width="100">
+										<col width="60">
+										<col width="60">
+										<col width="110">
+									</colgroup>
+									<thead>
+									<tr>
+										<th><input type="checkbox" id="all_check" /></th>
+										<th class="text-center">번호</th>
+										<!--{? info_bbs.bool_category}--><th class="text-center">카테고리</th><!--{/}-->
+										<th>제목</th>
+										<th class="text-center">이름</th>
+										<th class="text-center">댓글</th>
+										<th class="text-center">조회</th>
+										<th class="text-center">날짜</th>
+									</tr>
+									</thead>
+									<tbody>
+									<!--{@ loop_bbs_notice}-->
+									<tr style="background:#e3e3e3;">
+										<td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" id="dp_<!--{.depth}-->" class="th_<!--{.thread}-->" /></td>
+										<td class="text-center">공지</td>
+										<!--{? info_bbs.bool_category}--><td class="text-center"><!--{.category}--></td><!--{/}-->
+										<td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}--><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject}--></a>
+											<!--{? .bool_icon_new}--><img src="./images/icon_new.gif" alt="icon_new" /><!--{/}-->
+											<!--{? .bool_icon_hot}--><img src="./images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+											<!--{? .bool_icon_secret}--><img src="./images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+											<!--{? .bool_icon_file}--><img src="./images/icon_file.gif" alt="icon_file" /><!--{/}-->
+										</td>
+										<td class="text-center"><!--{.author}--></td>
+										<td class="text-center"><!--{.cnt_comment}--></td>
+										<td class="text-center"><!--{.hit}--></td>
+										<td class="text-center"><!--{=date('Y-m-d',.regdate)}--></td>
+									</tr>
+									<!--{/}-->
+									<!--{@ loop_bbs_main}-->
+									<tr>
+										<td><input type="checkbox" name="idxs[]" value="<!--{.idx}-->" id="dp_<!--{.depth}-->_<!--{.idx}-->" class="th_<!--{.bbscode}-->_<!--{.thread}-->" /></td>
+										<td class="text-center"><!--{.no}--></td>
+										<!--{? info_bbs.bool_category}--><td class="text-center"><!--{.category}--></td><!--{/}-->
+										<td style="padding-left:<!--{.depth*10}-->px;text-align:left"><!--{? .depth >1 }-->└[re] <!--{/}--><a href="?pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.list_cnt}--><!--{srch_url}-->"><!--{.subject_kr}--></a>
+											<!--{? .bool_icon_new}--><img src="./images/icon_new.gif" alt="icon_new" /><!--{/}-->
+											<!--{? .bool_icon_hot}--><img src="./images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+											<!--{? .bool_icon_secret}--><img src="./images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+											<!--{? .bool_icon_file}--><img src="./images/icon_file.gif" alt="icon_file" /><!--{/}-->
+										</td>
+										<td class="text-center"><!--{.author}--></td>
+										<td class="text-center"><!--{.cnt_comment}--></td>
+										<td class="text-center"><!--{.hit}--></td>
+										<td class="text-center"><!--{=date('Y-m-d',.regdate)}--></td>
+									</tr>
+									<!--{:}-->
+									<tr> 
+										<td colspan="7" class="ctext">등록된 글이 없습니다.</td>
+									</tr>
+									<!--{/}-->
+									</tbody>
+								</table>
+								</form>
+								<div class="col-md-12">
+									<div class="col-md-6 text-left no-padding">
+										<form id="controlform" class="">
+											<input type="radio" name="pg_mode" value="del_multi" checked="checked" />선택삭제
+											<input type="radio" name="pg_mode" value="move_multi"/>선택이동
+											<select id="movebbscode" name="bbscode" class="scroll" >
+												<option>::: Target :::</option>
+												<!--{@ loop_bbs}-->
+												<option value="<!--{.bbscode}-->"><!--{.title}--></option>
+												<!--{/}-->
+											</select> 
+											<span class="btn"><input type="button" value="확인"  onclick="multiControl()" class="btn btn-primary"/></span>
+										</form>
+									</div>
+									<div class="col-md-6 text-right no-padding"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new<!--{srch_url}-->"  class="btn btn-primary" >쓰기</a></div>
+								</div>
+								<div id="navipage"><!--{navi_page}--></div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>

@@ -1,0 +1,141 @@
+<div class="page body-sign">
+	
+	<!-- 로그인 버튼 클릭시 validate 하는 함수는 /template/admin/smc/js/custom.js 에 있습니다. -->
+	<script>
+        /*window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '242170023096073',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));*/
+
+		/*(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/client:plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();*/
+
+	</script>
+
+	<div class="page-inner p-none no-border">
+
+		<section class="section-big">
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+					<div class="smart-wrap">
+						<div class="smart-forms smart-container wrap-2 login">
+
+							<div class="form-header header-primary">
+								<h4><i class="fa fa-sign-in"></i><?=Lang::main_4;?></h4>
+							</div><!-- end .form-header section -->
+
+							<form method="post" name="authform" id="authform" action="<!--{config_basic.ssl_port}--><!--{_SERVER.SCRIPT_NAME}-->">
+							<input type="hidden" name="pg_mode" value="auth" />
+							<input type="hidden" name="ret_url" value="<!--{_GET.ret_url}-->" />
+							<input type="hidden" name="googleYn" value="N" />
+								<div class="form-body">
+
+								<div class="frm-row">
+
+									<div class="colm colm12 pad-l30">
+
+										<div class="spacer-b30">
+											<div class="tagline"><span><?=Lang::main_4;?> </span></div><!-- .tagline -->
+										</div>
+
+										<div class="section">
+											<label class="field prepend-icon">
+											<input type="text" name="userid" id="userid" class="gui-input" placeholder="<?=Lang::main_member9;?>">
+											<span class="field-icon"><i class="fa fa-user"></i></span>
+											</label>
+										</div><!-- end section -->
+
+										<div class="section">
+											<label class="field prepend-icon">
+											<input type="password" name="userpw" id="userpw" class="gui-input" placeholder="<?=Lang::main_95;?>">
+											<span class="field-icon"><i class="fa fa-lock"></i></span>
+											</label>
+										</div><!-- end section -->
+
+										<div class="section">
+											<label class="switch block">
+												<input type="checkbox" name="remember" id="remember" checked>
+												<span class="switch-label" data-on="<?=Lang::main_basic11;?>" data-off="<?=Lang::main_basic12;?>"></span>
+												<span> <?=Lang::main_52;?></span>
+											</label>
+										</div><!-- end section -->
+
+									</div><!-- end .colm section -->
+
+								</div><!-- end .frm-row section -->
+
+								</div><!-- end .form-body section -->
+								<div class="pb-10">
+
+									<div class="INput-group">
+										<button type="submit" class="btn btn-gold fs-20"><?=Lang::main_4;?></button>
+									</div>
+									<div class="section spacer-t10">
+										<div class="pr-50 text-right">
+											<a href="/join"><?=Lang::main_75;?></a> |
+											<a href="/findinfo"><?=Lang::main_76;?></a>
+										</div>
+									</div>
+								</div>
+
+							</form>
+							<!-- 카카오 로그인 잠시 숨깁니다. 아이디 가입 회원과 따로 분리되어 가입되서 혼돈이 있어 중지합니다. -->
+							<div class="social-login" style="display:none">
+								<div class="kakao-talk">
+									<button class="kakao-login" name="btn-kakao-login"><img src="../img/kakao-talk.png" /> 카카오로 로그인</button>
+								</div>
+							</div>
+
+
+
+
+						</div><!-- end .smart-forms section -->
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

@@ -1,0 +1,308 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('#jsform').submit(function() {
+		myeditor.outputBodyHTML();
+	});
+});
+//-->
+</script>
+
+<script type="text/javascript">
+<!-- 
+var myeditor = new cheditor("myeditor");
+var myeditor2 = new cheditor("myeditor2");
+var myeditor3 = new cheditor("myeditor3");
+var myeditor4 = new cheditor("myeditor4");
+var myeditor5 = new cheditor("myeditor5");
+var myeditor6 = new cheditor("myeditor6");
+
+function adminAjaxSubmit(obj,tabs_idx) {
+	obj.ajaxSubmit({
+		success: function (data, statusText) {
+			if(data['bool']) {
+				alert(__('12'));
+				location.replace('?tabs_idx='+tabs_idx);
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert(__('10'));
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert(__('11'));
+				}
+			}
+		},
+		dataType:'json',
+		resetForm: false
+	});
+}
+
+$(function() {
+
+	$('#jsfrm1').submit(function() {
+		if(!confirm(__('9'))) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsfrm2').submit(function() {
+		if(!confirm(__('9'))) {
+			return false;
+		}
+		var chk_option = [
+			{ 'target':'license_company', 'name':'상호', 'type':'blank', 'msg':__('8') },
+			{ 'target':'license_ceo', 'name':'대표자명', 'type':'blank', 'msg':__('13') },
+			{ 'target':'license_no', 'name':'사업자등록번호', 'type':'blank', 'msg':__('14') },
+			{ 'target':'license_sale', 'name':'통신판매신고번호', 'type':'blank', 'msg':__('15') },
+			{ 'target':'license_address', 'name':'사업장주소', 'type':'blank', 'msg':__('16') },
+			{ 'target':'license_uptae', 'name':'업태', 'type':'blank', 'msg':__('17') },
+			{ 'target':'license_jongmok', 'name':'종목', 'type':'blank', 'msg':__('18') }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+
+	});
+
+	$('#jsfrm3').submit(function() {
+		myeditor.outputBodyHTML();
+		if(!confirm(__('9'))) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsfrm4').submit(function() {
+		myeditor2.outputBodyHTML();
+		if(!confirm(__('9'))) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+	$('#jsfrm5').submit(function() {
+		myeditor3.outputBodyHTML();
+		if(!confirm(__('9'))) {
+			return false;
+		}
+		adminAjaxSubmit($(this),this.tabs_idx.value);
+		return false;
+	});
+
+});
+
+$(function() {
+	//첫번째 탭은 활성화
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">기본정보설정</span></h1></div>
+<ul class="tab_menu">
+	<li <!--{? empty(_GET.tabs_idx)}-->class="selected"<!--{/}-->><a href="#basic_form_1">기본정보</a></li>
+	<li <!--{? _GET.tabs_idx ==1}-->class="selected"<!--{/}-->><a href="#basic_form_2">회사정보</a></li>
+	<!-- <li <!--{? _GET.tabs_idx ==2}-->class="selected"<!--{/}-->><a href="#basic_form_3">이용안내</a></li> -->
+	<li <!--{? _GET.tabs_idx ==3}-->class="selected"<!--{/}-->><a href="#basic_form_4">이용약관</a></li>
+	<li <!--{? _GET.tabs_idx ==4}-->class="selected"<!--{/}-->><a href="#basic_form_5">개인정보취급방침</a></li>
+</ul>
+
+<div class="tab_container">
+	<div id="basic_form_1" class="tab_content" <!--{? !empty(_GET.tabs_idx)}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">기본정보</div>
+		<form id="jsfrm1" name="jsfrm1" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="code" value="basic" />
+		<input type="hidden" name="tabs_idx" value="0" />
+		<table class="form_table">
+			<colgroup>
+				<col width="20%"></col>
+				<col width="30%"></col>
+				<col width="20%"></col>
+				<col width="30%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>회사명</th>
+				<td><input type="text" name="shop_name" value="<!--{shop_name}-->" class="frm_input" style="width:215px" /></td>
+				<th>영문명</th>
+				<td><input type="text" name="shop_ename" value="<!--{shop_ename}-->" class="frm_input" style="width:215px" /></td>
+			</tr>
+			<tr>
+				<th>URL</th>
+				<td>http://<input type="text" name="shop_url" value="<!--{shop_url}-->" class="frm_input" style="width:178px" /></td>
+				<th>Email</th>
+				<td><input type="text" name="shop_admin_email" value="<!--{shop_admin_email}-->" class="frm_input" style="width:215px" /></td>
+			</tr>
+			<tr>
+				<th>전화</th>
+				<td><input type="text" name="shop_phone" value="<!--{shop_phone}-->" class="frm_input" style="width:100px" /></td>
+				<th>팩스</th>
+				<td><input type="text" name="shop_fax" value="<!--{shop_fax}-->" class="frm_input" style="width:100px" /></td>
+			</tr>
+			<tr>
+				<th>개인정보담당자</th>
+				<td><input type="text" name="shop_private_clerk" value="<!--{shop_private_clerk}-->" class="frm_input" style="width:100px" /></td>
+				<th>개인정보담당자 Email</th>
+				<td><input type="text" name="shop_clerk_email" value="<!--{shop_clerk_email}-->" class="frm_input" style="width:215px" /></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td colspan="3"><input type="text" name="shop_address" value="<!--{shop_address}-->" class="frm_input" style="width:615px" /></td>
+			</tr>
+			<tr>
+				<th>웹페이지 타이틀</th>
+				<td colspan="3"><input type="text" name="site_title" value="<!--{site_title}-->" class="frm_input" style="width:615px" /></td>
+			</tr>
+			<tr>
+				<th>웹페이지 키워드</th>
+				<td colspan="3"><input type="text" name="site_keyword" value="<!--{site_keyword}-->" class="frm_input" style="width:615px" /></td>
+			</tr>
+			<tr class="last_row">
+				<th>웹페이지 설명</th>
+				<td colspan="3"><input type="text" name="site_description" value="<!--{site_description}-->" class="frm_input" style="width:615px" /></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="basic_form_2" class="tab_content" <!--{? _GET.tabs_idx !=1}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">회사정보</div>
+		<form id="jsfrm2" name="jsfrm2" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="code" value="basic" />
+		<input type="hidden" name="tabs_idx" value="1" />
+		<table class="form_table">
+			<colgroup>
+				<col width="20%"></col>
+				<col width="30%"></col>
+				<col width="20%"></col>
+				<col width="30%"></col>
+			</colgroup>
+			<tbody>
+			<tr>
+				<th>회사명</th>
+				<td><input type="text" name="license_company" value="<!--{license_company}-->" class="frm_input" style="width:215px" /></td>
+				<th>대표명</th>
+				<td><input type="text" name="license_ceo" value="<!--{license_ceo}-->" class="frm_input" style="width:215px	" /></td>
+			</tr>
+			<tr>
+				<th>사업자등록번호</th>
+				<td><input type="text" name="license_no" value="<!--{license_no}-->" class="frm_input" style="width:215px" /></td>
+				<th>통신판매신고번호</th>
+				<td><input type="text" name="license_sale" value="<!--{license_sale}-->" class="frm_input" style="width:215px" /></td>
+			</tr>
+			<tr>
+				<th>업태</th>
+				<td><input type="text" name="license_uptae" value="<!--{license_uptae}-->" class="frm_input" style="width:215px" /></td>
+				<th>종목</th>
+				<td><input type="text" name="license_jongmok" value="<!--{license_jongmok}-->" class="frm_input" style="width:215px" /></td>
+			</tr>
+			<tr class="last_row">
+				<th>주소 및 안내</th>
+				<td colspan="3"><input type="text" name="license_address" value="<!--{license_address}-->" class="frm_input" style="width:615px" /></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="basic_form_3" class="tab_content" <!--{? _GET.tabs_idx !=2}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">이용안내</div>
+		<form id="jsfrm3" name="jsfrm3" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="code" value="basic" />
+		<input type="hidden" name="tabs_idx" value="2" />
+		<div class="wrap_textarea"><textarea name="clause_information" id="clause_information" style="width:800px;height:300px;"><!--{clause_information}--></textarea></div>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="basic_form_4" class="tab_content" <!--{? _GET.tabs_idx !=3}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">이용약관</div>
+		<form id="jsfrm4" name="jsfrm4" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="code" value="basic" />
+		<input type="hidden" name="tabs_idx" value="3" />
+		<div class="wrap_textarea"><textarea name="clause_agreement" id="clause_agreement" style="width:800px;height:300px;"><!--{clause_agreement}--></textarea></div>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+	<div id="basic_form_5" class="tab_content" <!--{? _GET.tabs_idx !=4}-->style="display:none"<!--{/}-->>
+		<div class="title_d2"><img src="../images/bullet.gif">개인정보취급방침</div>
+		<form id="jsfrm5" name="jsfrm5" action="?" method="post">
+		<input type="hidden" name="pg_mode" value="edit" />
+		<input type="hidden" name="code" value="basic" />
+		<input type="hidden" name="tabs_idx" value="4" />
+		<div class="wrap_textarea"><textarea name="clause_private" id="clause_private" style="width:800px;height:300px;"><!--{clause_private}--></textarea></div>
+		<div class="button_area">
+			<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+		</div>
+		</form>
+	</div>
+
+
+</div>
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'clause_information';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+
+myeditor2.config.editorHeight = '300px'; 
+myeditor2.config.editorWidth = '100%';
+myeditor2.inputForm = 'clause_agreement';
+myeditor2.config.imgMaxWidth = 670;
+myeditor2.run();
+
+myeditor3.config.editorHeight = '300px'; 
+myeditor3.config.editorWidth = '100%';
+myeditor3.inputForm = 'clause_private';
+myeditor3.config.imgMaxWidth = 670;
+myeditor3.run();
+
+myeditor4.config.editorHeight = '300px'; 
+myeditor4.config.editorWidth = '100%';
+myeditor4.inputForm = 'clause_information01';
+myeditor4.config.imgMaxWidth = 670;
+myeditor4.run();
+
+myeditor5.config.editorHeight = '300px'; 
+myeditor5.config.editorWidth = '100%';
+myeditor5.inputForm = 'clause_information02';
+myeditor5.config.imgMaxWidth = 670;
+myeditor5.run();
+
+//-->
+</script>

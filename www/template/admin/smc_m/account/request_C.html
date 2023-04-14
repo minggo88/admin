@@ -1,0 +1,79 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+//-->
+</script>
+
+
+<div class="hide">
+	<h1>입출금</h1>
+</div>
+
+<div class="request">
+
+	<div class="ssub_nav">
+		<ul>
+			<li><a href="/krwdeposit">KRW 입금</a></li>
+			<li><a href="/krwwithdraw">KRW 출금</a></li>
+			<li class="select"><a href="/btcdeposit">비트코인 입금</a></li>
+			<li class="last"><a href="/btcwithdraw">비트코인 출금</a></li>
+		</ul>
+	</div>
+
+
+	<div class="ssub_contents select">
+		<div class="ssub_contentsT">
+			<p>비트코인을 매도하기 위해서는 먼저 고객님의 비트코인 계좌에 매도할 비트코인을 직접 입금하시거나 거래를 통해 다른 거래고객으로부터 비트코인을 매수해야 합니다.</p>
+			<p>회원님께 할당된 아래 비트코인 주소로 비트코인을 전송하시면 자동으로 지갑에 반영됩니다.<br/><span class="co2">(반영시점 : 비트코인 네트워크에서 입금거래가 3 confimation 발생한 이후 자동으로 반영됩니다.)</span></p>
+			<p>3 confimation 이 지난 후에도 스마트코인 한국거래소에서 반영이 안되었을 경우,<br/><a href="/mypage/mtom.php"><span class="co1">1:1문의</span></a>를 통해 알려주시면 감사하겠습니다.</p>
+		</div>
+		<div class="ssub_contentsB">
+			<table summary="계좌 정보" style="margin:15px auto">
+				<caption>계좌 정보<caption>
+				<tbody>
+					<tr class="top">
+						<th class="tl bR0 " scope="row"><span class="co1"><!--{USER_NAME}--></span> 님의 비트코인 계좌주소:</th>
+					</tr>
+					<tr>
+						<td class="bitcoinaddr"><!--{WALLET_BTC_ADDRESS}--></td>
+					</tr>
+					<tr class="bottom">
+						<td class="bitcoinaddr_qrcode pcenter" style="text-align:center"><a href="bitcoin:<!--{WALLET_BTC_ADDRESS}-->"><img src="http://chart.apis.google.com/chart?chf=bg,s,ffffff&chs=120x120&cht=qr&chld=|0&chl=<!--{WALLET_BTC_ADDRESS}-->" style="width:200px;height:200px;padding:0px;margin:0px auto;"/></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<span style="line-height:30px;">과거 입출금 내역은</span> <a href="/account/myinfo.php?&gnb_code=BV55632&cate_code=TP12873"><span style="line-height:30px;color:#ff0000;">개인거래내역</span></a> <span style="line-height:30px;">페이지에서 확인 가능 합니다.</span>
+	</div>
+
+	<!--{*
+	<div class="content">
+		<P>
+			비트코인을 매도하기 위해서는 먼저 회원님의 지갑(비트코인 계좌)에 매도할 비트코인을 직접 입금하시거나  <br/>
+			다른 회원으로부터 비트코인을 매수하셔야 합니다.<br/>
+			<br/>
+			회원님께 할당된 아래 비트코인 주소로 application을 통해 비트코인을 전송하시면 자동으로 지갑에 반영됩니다. <br/>
+			(반영시점 : 비트코인 네트워크에서 입금거래가 3 confirmation 발생한 이후 자동으로 반영됩니다) <br/>
+			<br/>
+			주의사항 : 하나의 비트코인 transaction안에 다수의 비트코인한국거래소회원의 비트코인 주소가  <br/>
+			3 confirmation이 지난 후에도 비트코인한국거래소에 반영이 안되었으면 관리자에게 회원님의 계정 아이디를<br/>
+			포함하여 알려주시면 감사하겠습니다.
+		</P>
+	</div>
+
+	<div class="clear_box pcenter"></div>
+
+	<div class="pleft">
+		<div style="display:inline; float:left; width:50%; border-top:1px solid; border-bottom:1px solid; border-left:1px groove; border-right:1px groove; padding:10px;">
+			<span class="OrangeRed"><!--{USER_NAME}-->님</span>의 비트코인 계좌주소 : <br/>
+		    <!--{WALLET_BTC_ADDRESS}-->
+		</div>
+	</div>
+	*}-->
+</div>

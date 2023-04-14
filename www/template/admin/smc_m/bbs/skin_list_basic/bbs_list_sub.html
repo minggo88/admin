@@ -1,0 +1,114 @@
+<div class="container">
+	<div class="row">
+		<div class="hidden-md-down Rectangle-6-copy-8">
+			<div class="Rectangle-6-copy-4 first">
+				<label class="Rectangle-Text"><a href="/faq"><?=Lang::main_31;?></a></label>
+			</div>
+			<div class="layer"></div>
+			<div class="Rectangle-6-copy-4 active">
+				<label class="Rectangle-Text active"><a href="/notice" class="active"><?=Lang::main_32;?></a></label>
+			</div>
+			<div class="layer active"></div>
+			<div class="Rectangle-6-copy-4">
+				<label class="Rectangle-Text"><a href="/mtom"><?=Lang::main_33;?></a></label>
+			</div>
+			<div class="layer"></div>
+		</div>
+		<div class="col-lg-9 col-md-12 col-sm-12 ">
+		   <div class="row">
+
+
+			<div class="col-sm-12 mb-0">
+			   <nav class="pull-right">
+				 <ol class="breadcrumb">
+				   <li><a href="/">Home</a></li>
+				   <li><a href="/faq">Support</a></li>
+				   <li class="active"><?=Lang::main_6;?></li>
+				 </ol>
+			   </nav>
+			</div>
+
+			<div class="col-sm-12 right-side-sidebar">
+
+				<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_6;?></span></h3>
+
+			<!--{? info_bbs.bool_notice}-->
+			<!--{@ loop_bbs_notice}-->
+			<!--{/}-->
+			<!--{/}-->
+			<!--{@ loop_bbs_main}-->
+			<article class="v_blog-item">
+				<div class="v_blog-item-inner row">
+					<!--{? .bool_thumb}-->
+						<div class="v_blog-item-media col-md-5">
+							<a href="#">
+								<img src="<!--{.img}-->" width="<!--{.img_width}-->" alt="<!--{.subject}-->"  />
+							</a>
+						</div>
+						<div class="v_blog-item-content col-md-7">
+					<!--{:}-->
+						<div class="v_blog-item-content col-md-12">
+					<!--{/}-->
+				
+						<div class="v_blog-item-header">
+							<ul class="v_blog-item-meta">
+								<li class="v_blog-item-author">
+									<span>By </span> <a href="#"><!--{.author}--></a>
+								</li>
+								<li class="v_blog-item-date">
+									<time class="" datetime="2018-06-30T10:47:48+00:00">
+										<!--{=date('M d, Y',.regdate)}-->
+									</time>
+								</li>
+								<li class="v_blog-item-comments"><!--{? empty(.cnt_comment)}-->0<!--{:}--><!--{.cnt_comment}--><!--{/}--> Comments</li>
+								<li class="v_blog-item-like"><!--{.hit}--></li>
+							</ul>
+
+							<!--{? .bool_secret}-->
+							<a href="javascript:showBbsPopup('/notice/view/<!--{.idx}-->')" rel="bookmark">
+								<h2 class="v_blog-item-title" itemprop="name headline"><!--{=cutStr(.subject,40)}-->
+							<!--{:}-->
+							<a href="/notice/view/<!--{.idx}-->" rel="bookmark">
+								<h2 class="v_blog-item-title" itemprop="name headline"><!--{=cutStr(.subject,70)}-->
+							<!--{/}-->
+							&nbsp; 
+							<!--{? .bool_icon_new}--><img src="../images/icon_new.gif" alt="icon_new" /><!--{/}-->
+							<!--{? .bool_icon_hot}--><img src="../images/icon_hot.gif" alt="icon_hot" /><!--{/}-->
+							<!--{? .bool_icon_secret}--><img src="../images/icon_secret.gif" alt="icon_secret" /><!--{/}-->
+							<!--{? .bool_icon_file}--><img src="../images/icon_file.gif" alt="icon_file" /><!--{/}-->
+							</h2></a>
+						</div>
+
+						<div itemprop="articleBody">
+						<p>
+							<!--{=cutStr(.contents,160)}-->
+						</p>
+						<a class="v_blog-item-read-more" href="#">
+							<span>Read more</span>
+						</a>
+						</div>
+					</div>
+				</div>
+			</article>
+			<!--{:}-->
+			<article class="v_blog-item">
+				<div class="v_blog-item-inner row">
+					There is no Aticle.
+				</div>
+			</article>
+			<!--{/}-->
+
+			<div class="row">
+				<div class="col-md-12">
+
+					<nav aria-label="Page navigation example">
+						<!--{navi_page}-->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+		</div>
+
+	</div>
+</div>

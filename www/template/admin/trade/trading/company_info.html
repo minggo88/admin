@@ -1,0 +1,109 @@
+<div class="title_bg" style="height: auto;">
+  <div class="container">
+    <div class="row">
+
+    <input type="hidden" name="symbol" id="symbol" value="<!--{_GET.pg_mode}-->" />
+    <input type="hidden" name="user_no" id="user_no" value="<!--{_SESSION.USER_NO}-->" />
+
+      <div class="col-lg-1 col-md-1 col-sm-12"></div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        
+        <div class="table-responsive">
+            <table class="table table-bordered mt-0" style="border:0px solid #ccc;">
+                <tbody name="company_info">
+                    <tr name="empty" style="border:0px solid #ccc;display:none">
+                        <td class="text-center">회사 정보가 없습니다.</td>
+                    </tr>
+                    <tr name="loading">
+                        <td class="text-center" style="border:0px solid #ccc;"><img src="/template/admin/images/loading-buffering.gif" style="width:21px;margin-right:1rem"></td>
+                    </tr>
+                    <tr style="display:none">
+                        <td name="tpl" style="border:0px solid #ccc;">
+                            <h4 class="section-title body-font text-left">
+                                <img src={spot.icon_url} alt="logo"  style="display: block;max-height: 75px;max-width: 100%;"/> {spot.name}
+                            </h4>
+                            <p class="fs-30 text-blue" style="display: inline-block;margin-right: 0.5rem;">{spot.price_close}원</p> 
+                            <p class="fs-20 text-blue" style="display: inline-block;"><img src="/template/admin/trade/img/e-rate_down.png" /> {spot.gap}(1.01%)</p>
+                            <!-- <p class="fs-18">기업가치 <img src="/template/admin/trade/img/info-icon.png" /> <strong>{spot.market_cap}</strong></p> -->
+                            <div class="smart-forms">
+                                <button type="button" class="fs-20 btn btn-primary" data-toggle="modal" data-target="#sellStock">팝니다</button>
+                                <button type="button" class="fs-20 btn btn-danger" data-toggle="modal" data-target="#buyStock">삽니다</button>
+                                <button type="button" class="fs-20 btn btn-default" data-toggle="modal" id="btnShowChart" style="color: #000;padding: 8px;"><i class="fa fa-line-chart" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal inmodal" id="sellStock" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <form role="form" id="sellform">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">팝니다</h4>
+                            <small class="fs-14 font-bold">판매하고자 하는 금액과 수량을 입력해 주세요</small>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group"><label>판매가능수량</label><input type="text" name="sell_available" placeholder="0" class="form-control text-right" value="<!--{login_user_wallet.confirmed*1}-->" readonly disabled></div>
+                            <div class="form-group"><label>매도가격</label><input type="text" name="sell_price" placeholder="0" value="0" class="form-control text-right" required><p name="box_trade_price_range" class="text-right">가격 범위: <!--{trade_min_price}--> ~ <!--{trade_max_price}--></p></div>
+                            <div class="form-group"><label>매도수량</label><input type="text" name="sell_volume" placeholder="0" class="form-control text-right" required></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="fs-16 btn btn-md btn-primary sellstock" style="width:100%;">매도 주문하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="buyStock" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <form role="form" id="buyform">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">삽니다</h4>
+                            <small class="fs-14 font-bold">구매하고자 하는 금액과 수량을 입력해 주세요</small>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group"><label>구매가능금액</label><input type="text" name="sell_available" placeholder="0" class="form-control text-right" value="<!--{login_user_wallet_krw.confirmed*1}-->" readonly disabled></div>
+                            <div class="form-group"><label>매수가격</label><input type="text" name="buy_price" placeholder="0" value="0" class="form-control text-right" required><p name="box_trade_price_range" class="text-right">가격 범위: <!--{trade_min_price}--> ~ <!--{trade_max_price}--></p></div>
+                            <div class="form-group"><label>매수수량</label><input type="text" name="buy_volume" placeholder="0" class="form-control text-right" required></div>
+                            <!-- <div class="form-group"><label>최소수량</label><input type="text" name="buy_minimum" placeholder="0" class="form-control text-right" readonly disabled></div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="fs-16 btn btn-md btn-danger buystock" style="width:100%;">매수 주문하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+      </div>
+      <div id="box_chart" class="col-lg-6 col-md-6 col-sm-12 pt-50 text-center">
+          <div class="flot-chart">
+            <span id="sparkline" style="width:100%"></span>
+            <!-- <div class="flot-chart-content" id="flot-line-chart-moving" style="height:230px;"></div> -->
+        </div>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-12"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container white_bg">
+  <div class="wrapper wrapper-content wrap-analysis">
+    <div class="row">
+
+      <!-- <div class="col-lg-1 col-md-1 col-sm-12"></div> -->
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <!--{# js_tpl_main_sub}-->
+          </div>
+      </div>
+      <!-- <div class="col-lg-1 col-md-1 col-sm-12"></div> -->
+    </div>
+  </div>
+</div>

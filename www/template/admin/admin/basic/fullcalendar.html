@@ -1,0 +1,407 @@
+<style type='text/css'>
+#calendar { width: 800px; margin: 0 auto 10px auto; }
+</style>
+<script type='text/javascript'>
+var event_id;
+var event_start;
+var event_end;
+
+$(function() {
+	$('#frmcalendar').submit(function() {
+		var chk_option = [
+			{ 'target':'start_year', 'name':'시작년도', 'type':'select', 'msg':'시작년도를 선택하여 주세요.!' },
+			{ 'target':'start_month', 'name':'시작월', 'type':'select', 'msg':'시작월을 선택하여 주세요.!' },
+			{ 'target':'start_day', 'name':'시작일', 'type':'select', 'msg':'시작일을 선택하여 주세요.!' },
+			{ 'target':'title', 'name':'일정', 'type':'blank', 'msg':'일정을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	var calendar = $('#calendar').fullCalendar({
+		monthNames:['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월'],
+		monthNamesShort:['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월'],
+		dayNames:['일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일'],
+		dayNamesShort:['일', '월', '화', '수', '목', '금', '토'],
+		buttonText: {
+			today: '오늘',
+			month: '월',
+			week: '주',
+			day: '일'
+		},
+		titleFormat:{
+			month: 'yyyy년 M월',
+			week: "yyyy년 M월 d일{ '~' d일}",
+			day: 'yyyy년 M월 d일'
+		},
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end, allDay) {
+			$('select[name=start_year]').val($.fullCalendar.formatDate(start,'yyyy'));
+			$('select[name=start_month]').val($.fullCalendar.formatDate(start,'MM')).change();
+			$('select[name=start_day]').val($.fullCalendar.formatDate(start,'d'));
+			$('select[name=start_hour]').val($.fullCalendar.formatDate(start,'HH'));
+			$('select[name=start_min]').val($.fullCalendar.formatDate(start,'mm'));
+			$('select[name=end_year]').val($.fullCalendar.formatDate(end,'yyyy'));
+			$('select[name=end_month]').val($.fullCalendar.formatDate(end,'MM')).change();
+			$('select[name=end_day]').val($.fullCalendar.formatDate(end,'d'));
+			$('select[name=end_hour]').val($.fullCalendar.formatDate(end,'HH'));
+			$('select[name=end_min]').val($.fullCalendar.formatDate(end,'mm'));
+			$('#btn_del').hide();
+			if(confirm('선택하신 일자 또는 시간에 일정을 추가하시겠습니까?')) {
+				showPopup('drag_popup_fullcalendar',{kind_pos:'center'});
+			}
+		},
+		eventClick: function(calEvent, jsEvent, view) {
+			event_id = calEvent.id;
+			event_start = calEvent.start;
+			event_end = calEvent.end;
+
+			$('select[name=start_year]').val($.fullCalendar.formatDate(calEvent.start,'yyyy'));
+			$('select[name=start_month]').val($.fullCalendar.formatDate(calEvent.start,'MM')).change();
+			$('select[name=start_day]').val($.fullCalendar.formatDate(calEvent.start,'d'));
+			$('select[name=start_hour]').val($.fullCalendar.formatDate(calEvent.start,'HH'));
+			$('select[name=start_min]').val($.fullCalendar.formatDate(calEvent.start,'mm'));
+			$('select[name=end_year]').val($.fullCalendar.formatDate(calEvent.end,'yyyy'));
+			$('select[name=end_month]').val($.fullCalendar.formatDate(calEvent.end,'MM')).change();
+			$('select[name=end_day]').val($.fullCalendar.formatDate(calEvent.end,'d'));
+			$('select[name=end_hour]').val($.fullCalendar.formatDate(calEvent.end,'HH'));
+			$('select[name=end_min]').val($.fullCalendar.formatDate(calEvent.end,'mm'));
+			$('input[name=title]').val(calEvent.title);
+			$('#btn_del').show();
+			showPopup('drag_popup_fullcalendar',{kind_pos:'center'});
+		},
+		editable: true,
+		eventDragStop: function( event, jsEvent, ui, view ) {
+			return;
+		},
+		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+			if (!confirm("일정을 변경하시겠습니까?")) {
+				revertFunc();
+			}
+			else {
+				$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=edit_drag&idx='+event.id
+				+'&start_date='+$.fullCalendar.formatDate(event.start,'u')
+				+'&end_date='+$.fullCalendar.formatDate(event.end,'u'), function(data) {
+					if(data['bool']) {
+						alert('일정이 변경 되었습니다.!');
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						if(data['msg'] == 'err_access') {
+							alert('비정상적인 접근입니다.');
+						}
+						else if(data['msg'] == 'err_sess') {
+							location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+						}
+						else {
+							alert('재시도 해주세요.!');
+						}
+					}
+				},'json');
+			}
+		},
+		eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+			if (!confirm("일정을 변경하시겠습니까?")) {
+				revertFunc();
+			}
+			else {
+			}
+		},
+		events: [
+			<!--{@loop_event}-->
+			{
+				id: <!--{.idx}-->,
+				title: '<!--{.title}-->',
+				<!--{? .bool_allday > 0}-->
+				start: new Date(<!--{=date('Y', .start_date)}-->,<!--{=date('n', .start_date)-1}-->,<!--{=date('j', .start_date)}-->),
+				<!--{:}-->
+				start: new Date(<!--{=date('Y', .start_date)}-->,<!--{=date('n', .start_date)-1}-->,<!--{=date('j', .start_date)}-->,<!--{=date('G', .start_date)}-->,<!--{=date('i', .start_date)}-->),
+				<!--{/}-->
+				<!--{? !empty(.end_date)}-->
+				end: new Date(<!--{=date('Y', .end_date)}-->,<!--{=date('n', .end_date)-1}-->,<!--{=date('j', .end_date)}-->,<!--{=date('G', .end_date)}-->,<!--{=date('i', .end_date)}-->),
+				<!--{/}-->
+				allDay: <!--{? .bool_allday > 0}-->true<!--{:}-->false<!--{/}-->
+			}<!--{? .size_ > .index_+1}-->,<!--{/}-->
+			<!--{/}-->
+		]
+	});
+});
+
+Date.getLastDay = function(Y,M) {
+	return new Date(Y,M,0).getDate();
+}
+
+$(function() {
+	//년도 셀렉트 박스 구성
+	var cdate = new Date();
+	var cyear = cdate.getFullYear();
+	$('select#start_year, select#end_year').append('<option value="">::년도::</option>');
+	for (var i=cyear; i<cyear+5; i++) {
+		$('select#start_year, select#end_year').append('<option value="'+i+'">'+i+'</option>');
+	}
+	$('select#start_year, select#end_year').val(cyear);
+	//월에 따른 마지막 날짜를 구해서 셀렉트 박스를 만든다.
+	$('select[name=start_month]').change(function() {
+		var select_month_idx = $(this)[0].selectedIndex;
+		var select_year = $('select#start_year option:selected').val();
+		var select_month = $('option:selected',this).val();
+		if(select_month_idx == 0) {
+			//alert('월을 선택하여 주세요.!');
+			return false;
+		}
+		$('select#start_day').empty();
+		var last_day = Date.getLastDay(select_year,select_month);
+
+		$('select#start_day').append('<option value="" selected="selected">::일::</option>');
+		for (var i=1; i<=last_day; i++) {
+			$('select#start_day').append('<option value="'+i+'">'+i+'일</option>');
+		}
+	});
+	$('select[name=start_month]').val("<!--{=date('m')}-->").change();
+
+	$('select[name=end_month]').change(function() {
+		var select_month_idx = $(this)[0].selectedIndex;
+		var select_year = $('select#end_year option:selected').val();
+		var select_month = $('option:selected',this).val();
+		if(select_month_idx == 0) {
+			//alert('월을 선택하여 주세요.!');
+			return false;
+		}
+		$('select#end_day').empty();
+		var last_day = Date.getLastDay(select_year,select_month);
+
+		$('select#end_day').append('<option value="" selected="selected">::일::</option>');
+		for (var i=1; i<=last_day; i++) {
+			$('select#end_day').append('<option value="'+i+'">'+i+'일</option>');
+		}
+	});
+	$('select[name=end_month]').val("<!--{=date('m')}-->").change();
+});
+
+$(function() {
+	$('#popup_fullcalendar').dragPopup({
+		popup_id: 'drag_popup_fullcalendar',
+		popup_title: '일정관리',
+		popup_width: 400,
+		popup_height: 250,
+		bool_today_close:false
+	});
+});
+
+function addSchedule() {
+	showPopup('drag_popup_fullcalendar',{kind_pos:'center'});
+}
+
+
+function eventDel() {
+	if(event_id) {
+		if(!confirm('선택한 일정을 삭제하시겠습니까?')) {
+			return false;
+		}
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx='+event_id, function(data) {
+			if(data['bool']) {
+				alert('삭제되었습니다.!');
+				location.replace('<!--{_SERVER.REQUEST_URI}-->');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},'json');
+	}
+	else {
+		alert('일정을 선택하여 주세요.!');
+	}
+}
+
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">일정관리</span></h1></div>
+<div class="area_right" style="margin:10px 0"><span class="button black"><a href="javascript:;" onclick="addSchedule()">일정추가</a></span></div>
+<div id='calendar'></div>
+<div class="area_right" style="margin:10px 0"><span class="button black"><a href="javascript:;" onclick="addSchedule()">일정추가</a></span></div>
+<div id="popup_fullcalendar" style="display:none;padding:10px;">
+	<form method="post" name="frmcalendar" id="frmcalendar" action="<!--{_SERVER.SCRIPT_NAME}-->">
+	<input type="hidden" name="pg_mode" value="write" />
+	<table class="form_table" style="width:100%">
+		<colgroup>
+			<col width="30%"></col>
+			<col width="70%"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+			<th>시작일</th>
+			<td>
+				<select name="start_year" id="start_year">
+				</select>&nbsp;
+				<select name="start_month" id="start_month">
+					<option value="" selected="selected">::월::</option>
+					<option value="01">1월</option>
+					<option value="02">2월</option>
+					<option value="03">3월</option>
+					<option value="04">4월</option>
+					<option value="05">5월</option>
+					<option value="06">6월</option>
+					<option value="07">7월</option>
+					<option value="08">8월</option>
+					<option value="09">9월</option>
+					<option value="10">10월</option>
+					<option value="11">11월</option>
+					<option value="12">12월</option>
+				</select>&nbsp;
+				<select name="start_day" id="start_day">
+					<option value="" selected="selected">::일::</option>
+				</select>&nbsp;
+				<select name="start_hour" id="start_hour">
+					<option value="" selected="selected">::시::</option>
+					<option value="00">00</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+				</select>&nbsp;
+				<select name="start_min" id="start_min">
+					<option value="" selected="selected">::분::</option>
+					<option value="00">00</option>
+					<option value="30">30</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>종료일</th>
+			<td>
+				<select name="end_year" id="end_year">
+				</select>&nbsp;
+				<select name="end_month" id="end_month">
+					<option value="" selected="selected">::월::</option>
+					<option value="01">1월</option>
+					<option value="02">2월</option>
+					<option value="03">3월</option>
+					<option value="04">4월</option>
+					<option value="05">5월</option>
+					<option value="06">6월</option>
+					<option value="07">7월</option>
+					<option value="08">8월</option>
+					<option value="09">9월</option>
+					<option value="10">10월</option>
+					<option value="11">11월</option>
+					<option value="12">12월</option>
+				</select>&nbsp;
+				<select name="end_day" id="end_day">
+					<option value="" selected="selected">::일::</option>
+				</select>&nbsp;
+				<select name="end_hour" id="end_hour">
+					<option value="" selected="selected">시간</option>
+					<option value="00">00</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+				</select>&nbsp;
+				<select name="end_min" id="end_min">
+					<option value="" selected="selected">::분::</option>
+					<option value="00">00</option>
+					<option value="30">30</option>
+				</select>
+			</td>
+		</tr>
+		<!--{*
+		<tr>
+			<th>시간지정</th>
+			<td>
+				<input type="radio" name="bool_allday" id="bool_allday_y"  checked="checked" /><label for="bool_allday_y"> 사용함</label>
+				<input type="radio" name="bool_allday" id="bool_allday_n" /><label for="bool_allday_n">사용안함</label>
+			</td>
+		</tr>
+		*}-->
+		<tr>
+			<th>제목</th>
+			<td><input type="text" name="title" value="" class="frm_input" style="width:200px" /></td>
+		</tr>
+		</tbody>
+	</table>
+	<div class="button_area">
+		<span class="button black"><input type="submit" value="저장" /></span>&nbsp;
+		<span id="btn_del" class="button black" style="display:none"><a href="javascript:;" onclick="eventDel()">삭제</a></span>
+	</div>
+	</form>
+</div>

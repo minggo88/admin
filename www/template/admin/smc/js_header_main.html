@@ -1,0 +1,338 @@
+<!--{*
+<!-- main_modal -->
+<div id="main_modal" class="main_modal">
+    <!-- modal_con -->
+    <div class="modal_con">
+        <srtong class="md_tit">거래소 이용 주의사항</srtong>
+        <div class="modal_txt">
+            안녕하십니까.<br /><br />
+
+            TeaPlat입니다.<br />
+            저희 거래소는 명의 및 계좌를 대여하거나 불법적인 거래 의심 회원일 경우 주문 거부 등의 조치를 취하고 있습니다.<br />
+            또한 안전한 거래를 위해 회원님들의 추가 신원확인 및 거래 증빙을 요구하고 있습니다.<br />
+            SAM중소기업비상장거래에서는 자금 세탁을 비롯한 부정한 목적의 불법적인 외환 거래 및 차익거래를 할 수 없으며, 추가로 보이스피싱 가담, 통장 대여 등의 목적으로 계정 정보를 타인에게 노출하는 경우 민형사상의 책임이 발생할 수 있습니다.<br />
+            어떠한 경우에도 타인에게 개인 정보를 양도 및 노출하시면 안되며, SAM중소기업비상장거래는 회원님의 계정, 비밀번호 등 일체의 개인정보를 요청하지 않으며 금융 대출과도 관련이 없습니다.<br />
+            이용에 참고 부탁드리며, 안전한 거래소가 될 수 있도록 최선을 다하겠습니다.<br />
+            감사합니다.<br /><br />
+
+            <span> * 보이스 피싱 방지를 위해 암호화폐 출금 시 출금 하시려는 암호화폐 마지막 거래 후 120시간 동안 출금이 제한됩니다.</span><br /><br />
+        </div>
+        <div class="modal_ft">
+            <div class="nop_box">
+                <input type="checkbox" id="nop01"> <label for="nop01">24시간 동안 열지 않기</label>
+            </div>
+            <a href="#a" onClick="close_pop01();" > 닫기</a>
+        </div>
+
+    </div>
+    <!-- // modal_con -->
+</div>
+<!-- // main_modal -->
+    <!-- main_modal -->
+    <div id="main_modal02" class="main_modal">
+    <!-- modal_con -->
+    <div class="modal_con">
+        <srtong class="md_tit">거래소 이용 주의사항</srtong>
+        <div class="modal_txt">
+            <ol>
+                    암호화폐(가상통화)는 법정화폐가 아닙니다.
+                <li>1. SAM중소기업비상장거래에서 거래 가능한 모든 암호화폐는 법정통화(Ex. 대한민국-원(USD))가 아닙니다.<br />
+                        따라서, 누구도 그 가치를 보증하지 않으며 상황에 따라 언제든지 상대방에 의해 거래가 거절될 수 있어 실질적 가치가 언제든지 0으로 평가될 수 있습니다.</li>
+                <li>2. 다른 일반적인 자산에 비하여 매매에 따르는 위험이 매우 큽니다.<br />
+                        암호화폐는 그 특성상, 365일 24시간 거래가 진행되며 가격변동에 제한 폭이 없고, 각 국가의 규제내용이나 기술적 결함 발견 등 예측하기 어려운 각종 이슈에 따라 시세가 급변할 수 있습니다.<br />
+                        암호화폐의 이러한 특성은 상품이나 채권 등 일반적인 투자자산에 비하여 확연히 높은 변동성(위험성)을 가진다는 것을 의미합니다.</li>
+                <li>3. 무리한 투자를 지양하시고, 신중한 투자를 부탁드립니다.<br />
+                        가치 변동으로 인한 손실 발생 가능성 등을 유념하시어 암호화폐 투자 판단은 투자자 본인에게 책임이 귀속되며 암호화폐 투자에 따른 이득 및 손실은 본인에게 귀속되므로 무리한 투자를 지양하시고, 신중한 투자를 부탁드립니다.<br />
+                        본인은 위 암호화폐 거래 유의사항을 이해하였고 숙지 및 동의 확인하였으며, 투자하고자 하는 암호화폐의 주요 특징이나 내용, 그리고 투자의 위험성을 이해하고 투자를 하는 것입니다.</li>
+                </ol>
+        </div>
+        <div class="modal_ft">
+            <div class="nop_box">
+                <input type="checkbox" id="nop02"> <label for="nop02">24시간 동안 열지 않기</label>
+            </div>
+            <a href="#a" onClick="close_pop02();" > 닫기</a>
+        </div>
+
+    </div>
+    <!-- // modal_con -->
+</div>
+<!-- // main_modal -->
+*}-->
+
+<!--Header-->
+<header id="header" class="header-narrow header-full-width" >
+    <!-- smc/js_header_main.html _GET.device_type : <!--{ _GET.device_type }--> -->
+    <!--{*
+    <!--{? _GET.device_type=='app'}-->
+    <div class="header-body app" id="menu-app">
+        <div class="header-container container">
+            <div class="header-row">
+                <div class="header-logo">
+                    <a href="/home">홈</a>
+                </div>
+                <div class="header-column  justify-content-center" >
+                    <div class="header-search search_box">
+                        <form id="searchForm" action="/trade/total" method="get" novalidate="novalidate">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                                <input type="text" class="form-control" name="name" id="q" placeholder="실시간 인기종목 보러가기..." required="" style="width: 100%;" value="<!--{=_GET.name}-->">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="header-menu">
+                    <!--{? _SESSION.USER_ID}-->
+                    <a href="/logout">로그아웃</a>
+                    <!--{:}-->
+                    <a href="/login">로그인</a>
+                    <!--{/}-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--{/}-->
+    *}-->
+    <!--{? _GET.device_type!='app'}--> <!--{/}-->
+    <div class="header-body">
+        <div class="header-container container">
+            <div class="header-row">
+                <div class="header-column  justify-content-left logo_box" >
+                    <div class="header-row">
+                        <div class="header-logo">
+                            <!-- <a href="/home"><img alt="KMCSE" src="img/main/kmcse-stock-logo.png"></a> -->
+                            <a href="/home">
+                                <picture>
+                                    <source media="(max-width: 991px)" srcset="img/main/kmcse-stock-logo-small.png">
+                                    <img src="img/main/kmcse-stock-logo.png" alt="KMCSE" >
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-search search_box">
+                    <form id="searchForm" action="/trade/total" method="get" novalidate="novalidate">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" class="form-control" name="name" id="q" placeholder="실시간 인기종목 보러가기..." required="" value="<!--{=_GET.name}-->">
+                        </div>
+                    </form>
+                </div>
+                <div class="header-column justify-content-center nav_box">
+                    <div class="header-row">
+                        <div class="header-nav header-nav-dark-dropdown header-nav-top-line justify-content-end">
+                            <div class="header-nav-main header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                <nav class="gnb-menu collapse">
+                                    <ul class="nav nav-pills" id="mainNav">
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle <!--{? _SERVER.SCRIPT_NAME =='/index.php'}-->active<!--{/}-->" href="/trade/total"> 전체종목 </a>
+                                        </li>
+                                        <!-- <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle <!--{? strpos(_SERVER.SCRIPT_NAME,'/spo')!==false}-->active<!--{/}-->" href="/spo"> 공모주청약</a>
+                                        </li> -->
+                                        <!-- <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle <!--{? strpos(_SERVER.SCRIPT_NAME,'/nft')!==false}-->active<!--{/}-->" href="/nft"> NFT</a>
+                                        </li> -->
+                                        <!--{*
+                                        <li class="dropdown dropdown-mega dropdown-mega-column-3">
+                                            <a class="dropdown-item dropdown-toggle" href="/trade/btc"><img src="./img/m_trade.png" class="img_menu" /><?=Lang::main_0;?></a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <div class="dropdown-mega-content">
+                                                        <div class="row">
+                                                        <!--{@ menu_currency}-->
+                                                            <div class="col">
+                                                                <a class="dropdown-item" href="/trade/<!--{=strtolower(.symbol)}-->"><span class="icon-24 menu icon-24-<!--{=strtolower(.symbol)}-->"></span> <!--{=___('main',.name)}--></a>
+                                                            </div>
+                                                            <!--{? .index_ == .size_-1 && .index_%4 < 3 }-->
+                                                                <!--{? .index_%4 < 3 }--><div class="col"></div><!--{/}-->
+                                                                <!--{? .index_%4 < 2 }--><div class="col"></div><!--{/}-->
+                                                                <!--{? .index_%4 < 1 }--><div class="col"></div><!--{/}-->
+                                                            <!--{/}-->
+                                                        <!--{? .index_ % 4 == 3 }-->
+                                                        </div>
+                                                        <div class="row">
+                                                        <!--{/}-->
+                                                        <!--{/}-->
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        *}-->
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle" href="/trade/wallet"> 자산</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/trade/wallet"><?=Lang::main_12;?></a></li>
+                                                <li><a class="dropdown-item" href="/trade/deposit"><?=Lang::main_13;?></a></li>
+                                                <!--<li><a class="dropdown-item" href="/trade/exchange">Exchange</a></li>-->
+                                                <li><a class="dropdown-item" href="/trade/withdrawal"><?=Lang::main_14;?></a></li>
+                                                <li><a class="dropdown-item" href="/trade/analysis"><?=Lang::main_analysis;?></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle <!--{? _SERVER.SCRIPT_NAME =='/cscenter/faq.php' || _GET.bbscode =='PY395' || _GET.bbscode =='CN719' || _GET.bbscode =='PT038' || _GET.bbscode =='NW620' || _SERVER.SCRIPT_NAME =='/mypage/mtom.php' || _SERVER.SCRIPT_NAME =='/docs/index.php'}-->active<!--{/}-->" href="/faq"> 고객지원</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/faq"><?=Lang::main_31;?></a></li>
+                                                <li><a class="dropdown-item" href="/notice"><?=Lang::main_32;?></a></li>
+                                                <!-- <li><a class="dropdown-item" href="/mbnews"><?=Lang::main_125;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item" href="/coinnews"><?=Lang::main_126;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item" href="/gallery"><?=Lang::main_127;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item" href="/mtom"><?=Lang::main_33;?></a></li> -->
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle <!--{? _SERVER.SCRIPT_NAME =='/member/memberEdit.php' || _SERVER.SCRIPT_NAME =='/account/myinfo.php'}-->active<!--{/}-->" href="/certification"> 계정관리 </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/edit"><?=Lang::main_35;?></a></li>
+                                                <li><a class="dropdown-item" href="/certification"><?=Lang::main_36;?></a></li>
+                                                <li><a class="dropdown-item" href="/editpin"><?=Lang::main_37;?></a></li>
+                                                <li><a class="dropdown-item" href="/histories"><?=Lang::main_38;?></a></li>
+                                                <!--{? _SESSION.USER_ID}-->
+                                                <li><a class="dropdown-item" href="/withdraw"><?=Lang::main_51;?></a></li>
+                                                <!--{/}-->
+                                            </ul>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">|</a></li>
+                                        <!--{? _SESSION.USER_ID}-->
+                                        <li><a class="dropdown-item" href="/logout/<!--{=base64_encode(_SERVER.REQUEST_URI)}-->"> 로그아웃</a></li>
+                                        <!--{:}-->
+                                        <li><a class="dropdown-item <!--{? _SERVER.SCRIPT_NAME =='/member/memberAuth.php' }-->active<!--{/}-->" href="<!--{_SERVER.LOGIN_PAGE}-->"> 로그인</a></li>
+                                        <li><a class="dropdown-item <!--{? _SERVER.SCRIPT_NAME =='/member/memberAuth.php' }-->active<!--{/}-->" href="/join?ret_url=<!--{=_SERVER.RET_URL}-->"> 회원가입</a></li>
+                                        <!--{/}-->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-column justify-content-end hidden-lg">
+                    <div class="header-row">
+                        <div class="header-nav header-nav-top-line justify-content-end">
+                            <!--{*
+                            <div class="clearfix pull-right">
+                                <ul id="chlang" class="list-inline mb-0">
+                                    <li><a href="/en" data-lang="en"><div class="flag flag-us"></div></a> </li>
+                                    <li><a href="/cn" data-lang="cn"><div class="flag flag-cn"></div></a> </li>
+                                    <li><a href="/kr" data-lang="kr"><div class="flag flag-kr"></div></a> </li>
+                                </ul>
+                            </div>
+                            <div class="header-nav-main header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                <nav class="collapse">
+                                    <ul class="nav nav-pills" id="mainNav">
+                                        <li class="dropdown header-search-wrap">
+                                            <a class="dropdown-item dropdown-toggle pr-5" href="#"><i class="fa fa-search3 fs-18"></i> </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <div class="header-search">
+                                                        <form id="searchForm" action="pages-search-result.html" method="get" novalidate="novalidate">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="q" id="q" placeholder="Search..." required="">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+                                                                </span>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop"></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            *}-->
+                            <div class="header-nav-main header-nav-mobile">
+                                <ul class="nav">
+                                    <li class="mega-shop" style="display:none;">
+                                        <a class="dropdown-item" href="/message">
+                                            <i class="fa fa-credit-card fs-18"></i>
+                                            <span class="cart-items"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <div class="btn-area">
+                                            <button class="btn header-btn-collapse-nav minimalize-styl-2 navbar-toggle collapsed" id="showRight">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <nav class="cbp-spmenu-dim" id="hideNav">
+                                </nav>
+                                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+                                    <div class="nav_close">
+                                            <h3 id="closeMenu" style="cursor:pointer"><i class="fa fa-arrow-right"></i> </h3>
+                                    </div>
+                                    <div class="nav_username">
+                                        <!--{_SESSION.USER_NAME}-->
+                                    </div>
+                                    <div class="top_button">
+                                        <!--{? _SESSION.USER_ID}-->
+                                        <a href="/logout" class="btn btn-primary"><img src="./img/logout.png" class="m_menu" /> <?=Lang::main_29;?></a>
+                                        <!--{:}-->
+                                        <a href="<!--{_SERVER.LOGIN_PAGE}-->" class="btn btn-primary"><img src="/template/admin/smc/img/login.png" class="m_menu" /> <?=Lang::main_4;?></a>
+                                        <a href="/join?ret_url=<!--{=_SERVER.RET_URL}-->" class="btn btn-primary"><img src="/template/admin/smc/img/m_join.png" class="m_menu" /> <?=Lang::main_5;?></a>
+                                        <!--{/}-->
+                                        <!-- <a href="#" class="btn btn-primary downApp"><img src="./img/app.png" class="m_menu" /> App</a> -->
+                                    </div>
+                                    <div class="nav_menu">
+                                        <a class="page-scroll" href="/home"> Home</a>
+                                        <a class="page-scroll" href="/trade/total"> 전체종목</a>
+                                        <!-- <a class="page-scroll" href="/spo"> 공모주청약</a> -->
+                                        <!-- <a class="page-scroll" href="/nft"> NFT</a> -->
+                                        <li class="dropdown header-search-wrap dropdown-li">
+                                            <a class="dropdown-item dropdown-toggle pr-5 dropdown-a" href="#"> 자산</a>
+                                            <ul class="dropdown-menu dropdown-ul">
+                                                <li><a class="dropdown-item subMenu_m" href="/trade/wallet"><?=Lang::main_12;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/trade/deposit"><?=Lang::main_13;?></a></li>
+                                                <!--<li><a class="dropdown-item subMenu_m" href="/trade/exchange">Exchange</a></li>-->
+                                                <li><a class="dropdown-item subMenu_m" href="/trade/withdrawal"><?=Lang::main_14;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/trade/analysis"><?=Lang::main_analysis;?></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown header-search-wrap dropdown-li">
+                                            <a class="dropdown-item dropdown-toggle pr-5 dropdown-a" href="#"> <?=Lang::main_2;?> </a>
+                                            <ul class="dropdown-menu dropdown-ul">
+                                                <li><a class="dropdown-item subMenu_m" href="/faq"><?=Lang::main_31;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/notice"><?=Lang::main_32;?></a></li>
+                                                <!-- <li><a class="dropdown-item subMenu_m" href="/mbnews"><?=Lang::main_125;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item subMenu_m" href="/coinnews"><?=Lang::main_126;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item subMenu_m" href="/gallery"><?=Lang::main_127;?></a></li> -->
+                                                <!-- <li><a class="dropdown-item subMenu_m" href="/mtom"><?=Lang::main_33;?></a></li> -->
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown header-search-wrap dropdown-li">
+                                            <a class="dropdown-item dropdown-toggle pr-5 dropdown-a" href="#"> <?=Lang::main_3;?></a>
+                                            <ul class="dropdown-menu dropdown-ul">
+                                                <li><a class="dropdown-item subMenu_m" href="/edit"><?=Lang::main_35;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/certification"><?=Lang::main_36;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/editpin"><?=Lang::main_37;?></a></li>
+                                                <li><a class="dropdown-item subMenu_m" href="/histories"><?=Lang::main_38;?></a></li>
+                                                <!--{? _SESSION.USER_ID}-->
+                                                <li><a class="dropdown-item subMenu_m" href="/withdraw"><?=Lang::main_51;?></a></li>
+                                                <!--{/}-->
+                                            </ul>
+                                        </li>
+                                        <!--<a class="page-scroll &lt;!&ndash;{? _SERVER.SCRIPT_NAME =='/member/memberEdit.php' || _SERVER.SCRIPT_NAME =='/account/myinfo.php'}&ndash;&gt;active&lt;!&ndash;{/}&ndash;&gt;" href="/edit">  MyAccount</a>-->
+                                    </div>
+
+                                    <footer>
+                                        <p class="mcopyright">Copyright © 2022 KMCSE</p>
+                                    </footer>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</header>
+<!--End Header-->

@@ -1,0 +1,80 @@
+<script type="text/javascript">
+<!--
+
+function listLoad(id,url) {
+	$('#'+id).load(url);
+}
+
+function crolling_now() {
+	var _url = '/analysis/cronjob/analysis.php?site_name=crolling_<!--{_GET.site_name}-->';
+	$.post(_url, function(r){
+		window.location.href=window.location.href;
+	});
+}
+
+function excel_download() {
+	var date_s = $('#date_s').val();
+	var date_e = $('#date_e').val();
+	var _url = '?pg_mode=list_xls&site_name=<!--{_GET.site_name}-->&date_s='+date_s+'&date_e='+date_e;
+	$('#hiddenframe').attr('url', _url);
+	return false;
+}
+
+$(function() {
+	$("#date_s, #date_e").kendoDatePicker({
+		culture: "ko-KR"
+	});
+});
+
+$(function() {
+	$(":button, input:submit").button();
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Grid.png') 0px 0px no-repeat;">비트거래관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"><!--{_GET.site_name}--> 회원계좌현황 </div>
+
+<table class="list_table">
+	<colgroup>
+		<col width=""/>
+		<col width=""/>
+		<col width=""/>
+		<col width=""/>
+		<col width=""/>
+		<col width=""/>
+		<col width=""/>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>회원번호</th>
+		<th>회원이름</th>
+		<th>보유KRW</th>
+		<th>보유BTC(USD)</th>
+		<th>매도BTC(USD)</th>
+		<th>매수BTC(USD)</th>
+		<th>수수료(USD)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr class="loop">
+		<td></td>
+		<td class="pcenter"></td>
+		<td class="pright"></td>
+		<td class="pright"></td>
+		<td class="pright"></td>
+		<td class="pright"></td>
+		<td class="pright"></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="7" id="empty">Empty!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<!-- Page Navigation -->
+<div class="navipage"><!--{navi_page}--></div>
+<iframe name="hiddenframe" id="hiddenframe" style="width:0;height:0;display:none;"></iframe>

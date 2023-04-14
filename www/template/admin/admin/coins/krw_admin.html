@@ -1,0 +1,336 @@
+<link rel="stylesheet" type="text/css" href="/template/css/style.css" media="screen"/>
+
+<script type="text/javascript">
+    <!--
+
+    function listLoad(id,url) {
+        $('#'+id).load(url);
+    }
+
+    function crolling_now() {
+        var _url = '/analysis/cronjob/analysis.php?site_name=crolling_<!--{_GET.site_name}-->';
+        $.post(_url, function(r){
+            window.location.href=window.location.href;
+        });
+    }
+
+    function excel_download() {
+        var date_s = $('#date_s').val();
+        var date_e = $('#date_e').val();
+        var _url = '?pg_mode=list_xls&site_name=<!--{_GET.site_name}-->&date_s='+date_s+'&date_e='+date_e;
+        $('#hiddenframe').attr('url', _url);
+        return false;
+    }
+
+	function check_user_info() {
+		if($('#krw_user_id').val() == '') {
+			alert("회원ID를 입력하세요.");
+			$('#krw_user_id').focus();
+			return false;
+		}
+		$.post("/bitcoin/admin/krwAdmin.php?type=seach", $( "#form_krw" ).serialize(), function(data){
+			if(data != null) {
+				
+			} else {
+				alert("회원ID가 없습니다.");
+			}
+		});
+	}
+
+	function update_krw() {
+		var _userid = $.trim($('#krw_user_id').val());
+		if(_userid == '') {
+			alert("회원ID를 입력하세요.");
+			$('#krw_user_id').focus();
+			return false;
+		}
+		$.post("/bitcoin/admin/krwAdmin.php?type=search", $( "#form_krw" ).serialize(), function(data){
+			if(data) {
+				var _amount = $('#krw_amount').val();
+				if(_amount == '') {
+					$('#krw_amount').text(0);
+					return false;
+				}
+				if(!$.isNumeric(_amount)) {
+					alert('입금금액은 숫자만 입력하세요');
+					$('#krw_amount').val(0);
+					$('#krw_amount').focus();
+					return false;
+				}
+				if(confirm(_userid+" 회원님에게 "+number_format(_amount)+'원을 입금처리하시겠습니까?')){
+					$.post("/bitcoin/admin/krwAdmin.php?type=update", $( "#form_krw" ).serialize(), function(data){
+						if(data == 'success') {
+							alert('입금했습니다.');
+						}
+						location.reload();
+					});
+				}
+			} else {
+				alert("회원ID가 없습니다. 올바른 회원아이디인지 확인해주세요.");
+			}
+		});
+
+	}
+
+	function confirm_krw(idx) {
+
+		var answer = confirm("출금확인을 하시겠습니까?");
+		if(answer) {
+			$.post("/bitcoin/admin/krwAdmin.php?type=confirm", {idx:idx}, function(data){
+				if(data == "success") {
+					alert("확인완료했습니다.");
+				}
+				location.reload();
+			});
+		}
+
+	}
+
+	function reset_krw(idx) {
+
+		var answer = confirm("우리은행에 출금을 재요청을 하시겠습니까?");
+		if(answer) {
+			$.post("/bitcoin/admin/krwAdmin.php?type=reset", {idx:idx}, function(data){
+				if(data == "success") {
+					alert("재요청했습니다.");
+				}
+				location.reload();
+			});
+		}
+
+	}
+//	function confirm_input_krw(idx) {
+//		var $tr = $('tr.loop[loopno='+idx+']')
+//		var _amount = '';
+//	}
+
+//    $(function() {
+//        $("#date_s, #date_e").kendoDatePicker({
+//            culture: "ko-KR"
+//        });
+//    });
+
+//    $(function() {
+//        $(":button, input:submit").button();
+//    });
+
+    //-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Grid.png') 0px 0px no-repeat;">비트거래관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">USD 입출금관리</div>
+
+<table class="list_table">
+    <colgroup>
+        <col width="100"/>
+        <col width="60"/>
+        <col width="80"/>
+        <col width=""/>
+        <col width="180"/>
+        <col width="160"/>
+        <col width="100"/>
+    </colgroup>
+    <thead>
+    <!--{*<tr>
+        <th class="pred">거래일시</th>
+        <th>회원아이디</th>
+        <th>회원이름</th>
+        <th>입금KRW</th>
+        <th>충전KRW</th>
+        <th>출금신청KRW</th>
+        <th>출금KRW</th>
+        <th>출금확인</th>
+        <th>잔고KRW</th>
+    </tr>*}-->
+    <tr>
+        <th>거래일시</th>
+        <th>구분</th>
+        <th>상태</th>
+        <th>금액(USD)</th>
+        <th>회원정보</th>
+        <th>계좌정보</th>
+        <th>확인</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--{@loop_krw_info}-->
+    <!--{*<tr class="loop">
+        <td><!--{=cutStr(.regdate,19,'')}--></td>
+        <td class="pcenter"><!--{.userid}--></td>
+        <td class="pcenter"><!--{.name}--></td>
+        <td class="pright"><!--{=number_format(.amount1)}--></td>
+        <td class="pright pblue">
+            <!--{? .status1 == 'C1'}-->
+            입금요청
+            <!--{: .status1 == 'C2' }-->
+            입금취소
+            <!--{: .status1 == 'C3' }-->
+            입금중
+            <!--{: .status1 == 'C4' }-->
+            입금실패
+            <!--{: .status1 == 'C5' }-->
+            입금완료
+            <!--{:}-->
+
+            <!--{/}-->
+        </td>
+        <td class="pright"><!--{=number_format(.amount2)}--></td>
+        <td class="pright pred">
+            <!--{? .status2 == 'D1'}-->
+            출금요청
+            <!--{: .status2 == 'D2' }-->
+            출금취소
+            <!--{: .status2 == 'D3' }-->
+            출금중
+            <!--{: .status2 == 'D4' }-->
+            출금실패
+            <!--{: .status2 == 'D5' }-->
+            출금완료
+            <!--{:}-->
+
+            <!--{/}-->
+        </td>
+        <td class="pcenter">
+		<!--{? .status2 == 'D1'}-->
+		<button onclick="confirm_krw(<!--{.idx}-->);">출금확인</button>
+		<!--[:]-->
+		<!--{/}-->
+		</td>
+        <td class="pright"><!--{=number_format(.amount)}--></td>
+    </tr>*}-->
+    <tr class="loop" loopno="<!--{.idx}-->">
+        <td><!--{=cutStr(.regdate,19,'')}--></td>
+		<!--{?.amount1>0}-->
+        <td class="pcenter pblue">입금</td>
+        <td class="pcenter pblue">
+            <!--{? .status1 == 'C1'}-->
+            입금요청
+            <!--{: .status1 == 'C2' }-->
+            입금취소
+            <!--{: .status1 == 'C3' }-->
+            입금중
+            <!--{: .status1 == 'C4' }-->
+            입금실패
+            <!--{: .status1 == 'C5' }-->
+            입금완료
+            <!--{:}-->
+            <!--{/}-->
+        </td>
+        <td class="pright pblue"><!--{=number_format(.amount1)}--></td>
+		<!--{:}-->
+        <td class="pcenter pred">출금</td>
+        <td class="pcenter pred">
+            <!--{? .status2 == 'D0'}-->
+            이메일 인증
+            <!--{: .status2 == 'D1'}-->
+            출금요청
+            <!--{: .status2 == 'D2' }-->
+            출금취소
+            <!--{: .status2 == 'D3' }-->
+            출금중(<!--{.wooribank_last_date}-->)
+            <!--{: .status2 == 'D4' }-->
+            출금실패
+            <!--{: .status2 == 'D5' }-->
+            출금완료
+            <!--{:}-->
+			출금신청
+            <!--{/}-->
+        </td>
+        <td class="pright pred"><!--{=number_format(.amount2)}--></td>
+		<!--{/}-->
+        <td class="pleft"><span class="pbold">아이디</span> : <!--{.userid}--><br /><span class="pbold">이름</span> : <!--{.name}--><br /><span class="pbold">잔고(USD)</span> : <span class="pred"><!--{=number_format(.current_amount)}--></span></td>
+        <td class="pleft"><!--{.bank_info}--></td>
+        <td class="pcenter">
+		<!--{? .status2 == 'D1'}-->
+		<span class="button middle red"><button onclick="confirm_krw(<!--{.idx}-->);">오류시 수동출금</button></span>
+		<!--{/}-->
+		<!--{? .status2 == 'D3' }-->
+		<span class="button middle red"><button onclick="reset_krw(<!--{.idx}-->);">출금 재요청</button></span>
+		<!--{/}-->
+		<!--{? .status1 == 'C1'}-->
+		<span class="button middle blue"><button onclick="confirm_input_krw(<!--{.idx}-->);">입금확인</button></span>
+		<!--{/}-->
+		</td>
+    </tr>
+    <!--{:}-->
+    <tr>
+        <td colspan="9" id="empty">Empty!</td>
+    </tr>
+    <!--{/}-->
+    </tbody>
+</table>
+<div id="navipage2"/>
+
+</div>
+
+
+<!--<script type="text/javascript" src="/template/script/jquery-1.3.2.js"></script>-->
+<script src="/template/script/jquery.paginate.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        var loop_page = <!--{loop_page}-->;
+        loop_page = Math.round(loop_page / 20) <= 0 ? 1 : Math.ceil(loop_page / 20);
+        var page = <!--{page}-->;
+        $("#navipage2").paginate({
+            count 		: loop_page,
+            start 		: page,
+            display       : 10,
+            border				: false,
+            text_color  			: '#333333',
+            background_color    	: 'none',
+            text_hover_color  		: 'none',
+            background_hover_color	: 'none',
+            images		: false,
+            mouse		: 'press',
+            onChange      : function() {
+                var getPage = $('.jPag-current').html();
+                var minusPage = getPage - 1;
+                l = document.location.href;
+                t = l.split('?');
+                location.href = t[0] + "?page=" + getPage;
+            }
+        });
+
+    });
+</script>
+
+<a name="write_input_info"></a>
+<div class="title_d2"><img src="../images/bullet.gif">USD 충전 - 수동으로 회원에게 USD 충전하는 기능입니다.</div>
+<table class="form_table">
+	<colgroup>
+		<col width="100"></col>
+		<col width=""></col>
+	</colgroup>
+	<tbody>
+	<form id="form_krw">
+		<tr>
+			<th>아이디 *</th>
+			<td><input type="text" style="width:200px" class="frm_input pleft" id="krw_user_id" name="krw_user_id" value=""/></td>
+		</tr>
+		<tr>
+			<th>입금액 *</th>
+			<td><input type="text" style="width:200px" class="frm_input pright" id="krw_amount" name="krw_amount" value="<?=$_GET['krw_amount']?>"/></td>
+		</tr>
+		<tr>
+			<th>은행명</th>
+			<td>
+				<select name="bank_name" id="bank_name">
+					<!--{=loopBankName(_GET.bank_name)}-->
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>계좌번호</th>
+			<td><input type="text" style="width:200px" class="frm_input pleft" id="account" name="account" value="<?=$_GET['account']?>"/></td>
+		</tr>
+		<tr>
+			<th>입금자</th>
+			<td><input type="text" style="width:200px" class="frm_input pleft" id="bankowner" name="bankowner" value="<?=$_GET['bankowner']?>"/></td>
+		</tr>
+	</form>
+	</tbody>
+</table>
+<div class="button_area">
+	<button onclick="update_krw();" class="grad"/> USD 충전 </button>
+</div>
+<iframe name="hiddenframe" id="hiddenframe" style="width:0;height:0;display:none;"></iframe>

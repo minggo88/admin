@@ -1,0 +1,120 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#searchform').submit(function() {
+		var s_val = $('input[name=s_val]').val();
+		if(s_val == '') {
+			alert('검색어를 입력하여 주세요');
+			return false;
+		}	
+	});
+
+	$('#all_check').click(function() {
+		if(this.checked) {
+			$("#list_form table tbody :checkbox").attr('checked','checked');
+		}
+		else {
+			$("#list_form table tbody :checkbox").removeAttr('checked');
+		}
+	});
+
+	$("#list_form>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function checkDel() {
+	var num_checked = $('#list_form input[name=codes[]]:checked').length;
+	if(num_checked == 0) {
+		alert('선택된 항목이 없습니다.!');
+		return false;
+	}
+
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->',$('#list_form').serialize(),function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1>이벤트 </h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">이벤트관리</div>
+<div class="clear_box"></div>
+<form id="list_form">
+<input type="hidden" name="pg_mode" value="del_multi" />
+<table class="list_table">
+	<col width="30">
+	<col width="40">
+	<col width="100">
+	<col width="*">
+	<col width="120">
+	<col width="120">
+	<col width="80">
+	<thead>
+	<tr>
+		<th><input type="checkbox" id="all_check" /></th>
+		<th>번호</th>
+		<th colspan="2">제목</th>
+		<th>사용여부/기간</th>
+		<th class="pcenter">이벤트제품관리</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@ loop_event}-->
+	<tr>
+		<td><input type="checkbox" name="codes[]" value="<!--{.event_code}-->" /></td>
+		<td><!--{.no}--></td>
+		<td><img src="<!--{? empty(.img_goods_a)}-->/template/images/no_img.gif<!--{:}-->/data/event/<!--{.img_event_a}--><!--{/}-->" width="40" height="40" /></td>
+		<td style="text-align: left;"><!--{.subject}--></td>
+		<td>
+			<ul>
+				<li class="underline line pcenter"><!--{? .bool_event > 0}--><span class="bool_y">사용함</span><!--{:}--><span class="bool_n">사용안함</span><!--{/}--></li>
+				<li class="underline dotted pcenter">시작일 : <!--{.start_date}--></li>
+				<li class="underline dotted pcenter">종료일 : <!--{.end_date}--></li>
+			</ul>
+		</td>
+		<td class="pcenter">
+			<ul>
+				<li class="underline none pcenter">등록제품수 : <!--{.cnt_event_goods}--></li>
+				<li class="underline none pcenter"><span class="button small black"><a href="?pg_mode=form_event&event_code=<!--{.event_code}-->">이벤트제품관리</a></span></li>
+			</ul>
+		</td>
+		<td><span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_edit&event_code=<!--{.event_code}--><!--{srch_url}-->">수정</a></span></td>
+	</tr>
+	<!--{:}-->
+	<tr> 
+		<td colspan="7" class="ctext">등록된 이벤트가 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_both">
+	<div class="button_left"><span class="button black"><a href="javascript:;" onclick="checkDel()">선택삭제</a></span></div>
+	<div class="button_right"><span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=form_new">새로작성</a></span></div>
+</div>
+<form name="searchform" id="searchform" method="get" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<div class="search_area pcenter">
+	<input type="text" name="s_val" value="<!--{_GET.s_val}-->" class="frm_input" style="width:150px" />&nbsp;
+	<span class="button black"><input type="submit" value="검색"/></span>&nbsp;
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->">취소</a></span>
+</div>
+</form>
+<div id="navipage"><!--{navi_page}--></div>

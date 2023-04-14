@@ -1,0 +1,306 @@
+<div class="wrapper wrapper-content">
+    <section class="section" style="min-height: 580px;">
+        <div id="root"></div>
+        <div id="root1">
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="pl-3">
+                                <div class="v-heading-v3">
+                                    <h3 class="mt-50 mb-10">
+                                        <span class="span_under big">체결/미체결</span>
+                                        <span class="hidden-xs hidden-sm" id="trade">&nbsp;</span>
+                                        <span class="hidden-md hidden-lg" id="trade_m">&nbsp;</span>
+                                    </h3>
+                                </div>
+                                <div class="tabs-container mt-25 mb-15">
+                                    <ul class="nav nav-tabs nav-new mb-15">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1" id="tradeClose" class="myOrder tab1" aria-expanded="true">체결</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2" id="tradeOpen" class="myOrder tab2" aria-expanded="false">미체결</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="pull-right mb-15">
+                                                <div class="smart-forms pt-none">
+                                                    <select class="select tab-select">
+                                                        <option value="">거래전체</option>
+                                                        <option value="">체결</option>
+                                                        <option value="">미체결</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body minHeightPanel" style="min-height: 426px;">
+                                                <div class="table-responsive historyTb">
+                                                    <table class="table table-bordered mb-none">
+                                                        <colgroup>
+                                                            <col width="10%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="10%" />
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center">주문 시각</th>
+                                                            <th class="text-center">구 분</th>
+                                                            <th class="text-center">주문 수량</th>
+                                                            <th class="text-center">체결 수량</th>
+                                                            <th class="text-center">주문 가격</th>
+                                                            <th class="text-center">현재 가격</th>
+                                                            <th class="text-center">상 태</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="7" class="pcenter text-center no-data-row">
+                                                                    거래 내역이 없습니다 (최대 100건 까지 조회 가능합니다)
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="pull-right mb-15">
+                                                <div class="smart-forms pt-none">
+                                                    <select class="select tab-select">
+                                                        <option value="">거래전체</option>
+                                                        <option value="">체결</option>
+                                                        <option value="">미체결</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body minHeightPanel" style="min-height: 426px;">
+                                                <div class="table-responsive historyTb">
+                                                    <table class="table table-bordered mb-none">
+                                                        <colgroup>
+                                                            <col width="10%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="15%" />
+                                                            <col width="10%" />
+                                                        </colgroup>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center">주문 시각</th>
+                                                            <th class="text-center">구 분</th>
+                                                            <th class="text-center">주문 수량</th>
+                                                            <th class="text-center">체결 수량</th>
+                                                            <th class="text-center">주문 가격</th>
+                                                            <th class="text-center">현재 가격</th>
+                                                            <th class="text-center">상 태</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pcenter text-center">
+                                                                <div>2018-07-24</div>
+                                                                <div>11:04:24</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                KRW/BTC
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">0.05</div>
+                                                                <div class="symbol_div">BTC</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,000,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center numberDiv">
+                                                                <div class="number_div">2,200,000</div>
+                                                                <div class="symbol_div">KRW</div>
+                                                            </td>
+                                                            <td class="pcenter text-center mergeTd">
+                                                                -
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="custom_paging mt-40 mb-none">
+                                                        <ul class="pagination">
+                                                            <li class="page_prev">
+                                                                <img src="../../smc/img/new/page_prev.png" />
+                                                            </li>
+                                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                                                            <li class="page_next">
+                                                                <img src="../../smc/img/new/page_next.png" />
+                                                            </li>
+                                                        </ul>
+                                                        &lt;!&ndash;<nav aria-label="Page navigation example">
+                                                            &lt;!&ndash;{navi_page}&ndash;&gt;
+                                                        </nav>&ndash;&gt;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

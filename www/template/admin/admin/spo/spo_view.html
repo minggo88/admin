@@ -1,0 +1,142 @@
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+				<h2>공모주관리</h2>
+				<ol class="breadcrumb">
+						<li>
+								<a href="index.html">Home</a>
+						</li>
+						<li>
+								<a href="/kspo/admin/spoAdmin.php">공모주관리</a>
+						</li>
+						<li class="active">
+								<strong>공모주관리</strong>
+						</li>
+				</ol>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+	
+	<div class="wrapper search-wrapper-content animated fadeInRight">
+		<div class="row">
+				<div class="col-lg-12">
+	
+	
+					<div class="ibox ">
+						<div class="ibox-title">
+								<h5> 공모주관리 </h5>
+						</div>
+						<div class="ibox-content">
+							<div class="table-responsive">
+
+								<table class="form_table table table-striped table-bordered table-hover">
+									<colgroup>
+										<col width="15%"></col>
+										<col width="35%"></col>
+										<col width="15%"></col>
+										<col width="35%"></col>
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>진행상황</th>
+											<td><!--{?process=='p'}-->진행중<!--{:process=='f'}-->종료<!--{:process=='r'}-->환불중<!--{/}--></td>
+											<th>목록이미지</th>
+											<td><img src="<!--{list_img}-->" alt="list_img" style="height:50px;"/></td>
+										</tr>
+										<tr>
+											<th>회사명</th>
+											<td><!--{company}--></td>
+											<th>공모주수</th>
+											<td><!--{spo_cnt}--></td>
+										</tr>
+										<tr>
+											<th>청약기간</th>
+											<td><!--{spo_startdate}--> ~ <!--{spo_enddate}--></td>
+											<th>상장예정일</th>
+											<td><!--{spo_date}--></td>
+										</tr>
+										<tr>
+											<th>공모가</th>
+											<td><!--{spo_price}--></td>
+											<th>액면가</th>
+											<td><!--{basic_price}--></td>
+										</tr>
+										<tr>
+											<th>청약증거금률</th>
+											<td><!--{spo_margin_rate}--></td>
+											<th>최대청약주수</th>
+											<td><!--{spo_max_number}--></td>
+										</tr>
+										<tr>
+											<th>환불일</th>
+											<td><!--{refund_date}--></td>
+											<th>출금일</th>
+											<td><!--{withdrawal_date}--></td>
+										</tr>
+										<tr>
+											<th>내용</th>
+											<td colspan="3"><!--{contents}--></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="col-md-12 text-right">
+									<a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->" class="btn btn-primary btn-md" >목록</a>
+									<input type="button" value="삭제" onclick="spoDel(<!--{idx}-->)"  class="btn btn-danger btn-md" />
+								</div>
+
+
+								<p><!--{company}--> 공모주 신청 명단</p>
+								
+								<table class="table table-striped table-bordered table-hover dataTables-mtom">
+									<colgroup>
+										<col width="60"></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+										<col></col>
+									</colgroup>
+									<thead>
+									<tr>
+										<th class="text-center">No</th>
+										<th class="text-center">아이디</th>
+										<th class="text-center">회원이름</th>
+										<th class="text-center">신청주수</th>
+										<th class="text-center">청약신청금액</th>
+										<th class="text-center">청약신청일</th>
+										<th class="text-center">청약결과</th>
+										<th class="text-center">환불여부</th>
+										<th class="text-center">환불일자</th>
+									</tr>
+									</thead>
+									<tbody>
+									<!--{@ loop_spo_apply}-->
+									<tr>
+										<td class="text-center"><!--{.no}--></td>
+										<td class="text-center"><!--{.userid}--></a></td>
+										<td class="text-center"><!--{.username}--></a></td>
+										<td class="text-center"><!--{.spo_cnt}--></td>
+										<td class="text-center"><!--{.spo_price}--></td>
+										<td class="text-center"><!--{.spo_apply_date}--></td>
+										<td class="text-center"><!--{?.spo_result==1}-->당첨<!--{:}-->환불<!--{/}--></td>
+										<td class="text-center"><!--{?.refund_yn==1}-->환불완료<!--{:}-->환불전<!--{/}--></td>
+										<td class="text-center"><!--{.refund_date}--></td>
+									</tr>
+									<!--{:}-->
+									<tr> 
+										<td colspan="8" class="ctext">등록된 공모주가 없습니다.</td>
+									</tr>
+									<!--{/}-->
+									</tbody>
+								</table>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+</div>

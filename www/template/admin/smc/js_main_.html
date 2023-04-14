@@ -1,0 +1,99 @@
+<div class="page">
+    <div class="main_contents">
+        <section class="section">
+
+            <div class="container">
+                <div class="row">
+                    <div class="box_bn col-lg-12 col-md-12 col-sm-12 col-12 ">
+
+                        <h2 class="text-blue">한국중소기업증권거래소의 새출발</h2>
+                        <h1 class="pb-10"><img src="/template/admin/smc/img/main/kmcse_logo-big.png"></h1>
+                        <!-- <h1 class="pb-10">수수료 0%로 시작하는<br />비상장 상품 거래</h1> -->
+                        <!-- <p class="fs-20">SAM중소기업비상장거래에서<br />쉽고 간편하게 시작해보세요.</p> -->
+
+                        <!--{? _GET.device_type!='app'}-->
+                        <button class="btn btn-md"><img src="img/main/apple.png"> App Store</button>
+                        <a href="https://play.google.com/store/apps/details?id=com.scs.kmces"><button class="btn btn-md"><img src="img/main/google.png"> Google Play</button></a>
+                        <!--{/}-->
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <div class="page-inner p-none">
+        <section class="section">
+
+            <div class="container main-chart-container2">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 pl-30 pt-50">
+                        <h2>실시간 인기종목</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="root"></div>
+            <div class="container main-chart-container2">
+                <script>
+                    window.main_item = '<!--{=implode(',', main_symbol)}-->';
+                    window.chart_preload = <!--{main_symbol_json}-->;
+                </script>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 pl-30 pt-50 text-center">
+                        <span class="view_all">
+                            <a href="/trade/total/" class="text-white">종목 전체보기</a>
+                          </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section> 
+            <div class="main-banner-container">
+                <img src="img/main/invalid-name.png">
+            </div>
+        </section>
+
+        
+        <section class="section">
+
+            <div class="container main-chart-container2 pb-30">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 pl-30 pt-50">
+                        <h2><a href="/">신규 등록 종목</a></h2>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <!--{? new_item}-->
+                        <!--{@ new_item}-->
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2" style="background:url(<!--{.icon_url}-->)  no-repeat 50% 50%/contain transparent;margin:10px 0.5% 20px;flex: 0 0 24%;max-width: 24%;border: 1px solid #ddd;border-radius: 10px;z-index: auto;background-origin: content-box;padding: 5px;">
+                            <a href="/trade/<!--{.symbol}-->"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAACgCAQAAAACuKlaAAABKUlEQVR42u3SsQ0AAAzCsPL/052ZWe0TouRgFAkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESbCRGAiTISJMBGYCBNhIkwEJsJEmAgTgYkwESYCE2EiTISJwESYCBNhIjARJsJEmAhMhIkwESYCE2EiTISJwESYCBNhIjARJsJEmAjaA6FtAKG9b8JJAAAAAElFTkSuQmCC" style="width:100%;height:100%"></a>
+                        </div>
+                        <!--{/}-->
+                        <!--{:}-->
+                        <div class="col-lg-12 mini_chart_container2 text-center">
+                            신규 종목이 없습니다.
+                        </div>
+                        <!--{/}-->
+                        <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2">
+                            <img src="img/company/company-01.png">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2">
+                            <img src="img/company/company-02.png">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2">
+                            <img src="img/company/company-03.png">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2">
+                            <img src="img/company/company-04.png">
+                        </div> -->
+                        <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-6 mini_chart_container2">
+                            <img src="img/company/company-08.png">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{# js_tpl_footer}-->
+</div>

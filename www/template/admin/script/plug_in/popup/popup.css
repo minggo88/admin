@@ -1,0 +1,57 @@
+
+@charset "utf-8";
+
+div.drag_popup {	display: none;position: absolute;border:1px solid #ccc;z-index: 1000; *zoom:1;}
+/* div.drag_popup div.drag_popup_handle {width: 100%; height:30px; margin:0px; padding:0px; background:#393A4B url('/template/user/images/common/top_menu_bg.gif') 0px 0px repeat-x !important ; border-bottom:1px solid #292930; }*/
+div.drag_popup div.drag_popup_handle {width: 100%; height:30px; margin:0px; padding:0px; background:#838383; border-bottom:1px solid #292930; }
+div.drag_popup div.drag_popup_handle div.drag_popup_title { position:relative; float: left;width: 70%;cursor: move;font-size:12px;font-weight:bold;line-height: 30px;padding-left:10px;color: #fff;}
+div.drag_popup div.drag_popup_handle div.drag_popup_title:hover {font-weight:normal;color: #dedede;letter-spacing:0.2px;}
+div.drag_popup div.drag_popup_handle div.drag_popup_control { padding-right: 10px;position:relative; float: right;width:30px;line-height:30px;text-align: right;color: #fff;cursor: pointer;}
+div.drag_popup div.drag_popup_handle div.drag_popup_control span{color: #e4e4e4;font-size:30px;font-weight:normal;line-height:24px;vertical-align:middle;}
+div.drag_popup div.drag_popup_handle div.drag_popup_control span:hover{color: #ffffff;}
+div.drag_popup div.drag_popup_contents {padding:0px;margin: 0px;background-color: #FFF; }
+div.drag_popup div.drag_popup_footer { line-height:25px; font-size:9pt;height:25px;border-top:1px solid #929292;margin: 0px;background-color: none;padding: 0px 10px;text-align:right; }
+
+.main_modal {
+  display: none;
+  position: fixed; 
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.main_modal02 {
+  display: none;
+  position: fixed; 
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal_con { width:568px; margin: 7% auto;  background-color: #fefefe; }
+
+.modal_con .md_tit{ display: block;  padding:16px 0 14px 0; background:#033282; text-align: center; font-size: 20px; color: #fff; }
+.modal_con .modal_txt{ padding:20px; font-size:15px; }
+.modal_con .modal_txt ol{ margin: 0 0 15px 0;
+  padding: 20px 10px;
+  background: #f2f2f2; }
+
+.modal_con .modal_txt span{ display:block; color:#f00; }
+
+
+.modal_ft{ overflow:hidden; padding: 10px 20px; background: #f8f8f8; }
+.modal_ft .nop_box{ margin: 8px 0 0; float:left; }
+.modal_ft .nop_box input{ display: inline-block; width: 15px; height: 15px; margin: 0 5px 0 0; vertical-align: -5px; }
+.modal_ft .nop_box label{ font-size: 14px; vertical-align: middle; }
+.modal_ft a{  display: inline-block; float:right;  padding: 8px 20px; background:#dddddd; font-size: 13px; font-weight: 400;  color: #000;}
+

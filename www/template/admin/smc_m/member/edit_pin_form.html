@@ -1,0 +1,127 @@
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="v-page-heading v-fancy-heading light-style v-fancy-image v-fancy-top-header myacc-pinnumber" style="display: block;">
+		<div class="container z-index-1">
+			<div class="row">
+				<div class="col-sm-12 text-center text-white">
+					<h2 class="section-title body-font fs-50 lh-70 fw-7">
+							<?=Lang::main_3;?>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner no-border">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="hidden-md-down Rectangle-6-copy-8">
+					<div class="Rectangle-6-copy-4 first">
+						<label class="Rectangle-Text "><a href="/edit"><?=Lang::main_35;?></a></label>
+					</div>
+					<div class="layer"></div>
+					<div class="Rectangle-6-copy-4 ">
+						<label class="Rectangle-Text"><a href="/certification"><?=Lang::main_36;?></a></label>
+					</div>
+					<div class="layer "></div>
+					<div class="Rectangle-6-copy-4 large active">
+						<label class="Rectangle-Text small active"><a href="/editpin"  class="active"><?=Lang::main_54;?></a></label>
+					</div>
+					<div class="layer active"></div>
+					<div class="Rectangle-6-copy-4">
+						<label class="Rectangle-Text"><a href="/histories"><?=Lang::main_38;?></a></label>
+					</div>
+					<div class="layer"></div>
+				</div>
+
+				<div class="col-lg-9 col-md-12 col-sm-12 ">
+
+					<div class="row">
+						<div class="col-sm-12 mb-0">
+							<nav class="pull-right">
+								<ol class="breadcrumb">
+									<li><a href="/">Home</a></li>
+									<li><a href="/certification">My Account</a></li>
+									<li class="active"><?=Lang::main_37;?></li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-sm-12 right-side-sidebar">
+
+						<h3 class="xspecial-heading v2 fs-18"><span><?=Lang::main_37;?></span></h3>
+
+						<div class="smart-wrap">
+							<div class="smart-forms smart-container wrap">
+
+								<form method="post" name="frmEdit" id="frmEdit"  action="/editpin">
+									<input type="hidden" name="pg_mode" value="edit_pin" />
+									<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+
+									<div class="form-body">
+
+										<div class="special-heading word-underline">
+											<h4 class="special-heading-inner"><span> <?=Lang::main_101;?> : <!--{? empty(pin)}--><?=Lang::main_103;?><!--{:}--><!--{=cutStr(pin,2,'****')}--><!--{/}--> </span></h4>
+										</div>
+
+										<div class="section">
+											<label class="field-label"><?=Lang::main_102;?></label>
+										</div>
+
+
+										<div class="spacer-t30 spacer-b30">
+											<div class="tagline"><span><?=Lang::main_37;?> </span></div>
+										</div>
+
+										<div class="frm-row">
+											<div class="colm colm6">
+
+												<div class="section">
+													<label for="pin" class="field-label"><?=Lang::main_104;?></label>
+													<label class="field prepend-icon">
+														<input type="password" name="pin" id="pin" maxLength="6" class="gui-input" placeholder="<?=Lang::main_104;?>..." onKeyUp="return_num(this,1)">
+														<span class="field-icon"><i class="fa fa-lock"></i></span>
+													</label>
+													<label className="field-label text-danger" id="validateLabel" style="display:none; color:#FF0000;" >1</label>
+												</div><!-- end section -->
+
+											</div>
+											<div class="colm colm6">
+
+												<div class="section">
+
+													<div class="section">
+														<label for="pin_b" class="field-label"><?=Lang::main_105;?></label>
+														<label class="field prepend-icon">
+															<input type="password" name="pin_b" id="pin_b" maxLength="6" class="gui-input" placeholder="<?=Lang::main_105;?>..." onKeyUp="return_num(this,2)">
+															<span class="field-icon"><i class="fa fa-lock"></i></span>
+														</label>
+														<label className="field-label text-danger" id="validateLabel_b" style="display:none; color:#FF0000;" >1</label>
+													</div><!-- end section -->
+
+												</div><!-- end section -->
+
+											</div>
+										</div>
+
+									</div><!-- end .form-body section -->
+									<div class="form-footer">
+										<button type="submit" class="button btn-primary"><?=Lang::main_37;?></button>
+									</div><!-- end .form-footer section -->
+								</form>
+
+							</div><!-- end .smart-forms section -->
+						</div><!-- end .smart-wrap section -->
+					
+					<div></div><!-- end section -->
+					</div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

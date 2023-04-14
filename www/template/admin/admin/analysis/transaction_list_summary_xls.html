@@ -1,0 +1,67 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 12">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+x\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<style>
+table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.89in .33in .7in .33in;
+	mso-header-margin:.67in;
+	mso-footer-margin:.28in;
+	mso-horizontal-page-align:center;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:8.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:나눔고딕,맑은고딕, monospace;
+	mso-font-charset:129;
+	mso-char-type:none;
+	display:none;}
+
+table {border:1px dotted #ccc;border-collapse: collapse;}
+table thead tr th {border:1px dotted #ccc;height:30px;background:#c3c3c3;font-weight:bold;text-align:center;}
+table tbody tr td {border:1px dotted #ccc;height:24px;background:#ffffff;font-weight:normal;text-align:center;}
+table tbody tr td.pleft {text-align:left;}
+
+</style>
+
+</head>
+
+<table>
+	<colgroup>
+		<col width="130" /><!--{* 채결날짜 *}-->
+		<col width="100" /><!--{* 평균채결가(USD) *}-->
+		<col width="100" /><!--{* 평균거래량(BTC) *}-->
+	</colgroup>
+	<thead>
+	<tr>
+		<th>채결날짜</th>
+		<th>평균채결가(USD)</th>
+		<th>평균거래량(BTC)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td><!--{.date_conclusion}--></td>
+		<td><!--{=number_format(.avg_price_conclusion)}--></td>
+		<td><!--{=number_format(.avg_volume_btc, 5)}--></td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>

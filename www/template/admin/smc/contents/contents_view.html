@@ -1,0 +1,20 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	//첫번째 탭은 활성화
+	$('div.tab>ul>li').click(function(event){
+		$('div.tab>ul>li').removeClass("on");
+		$(this).addClass("on");
+		$('div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		$(this).blur();
+		return false;
+	});
+});
+
+//-->
+</script>
+
+<div>
+<!--{=htmlspecialchars_decode(contents)}-->
+</div>

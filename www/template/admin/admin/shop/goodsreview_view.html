@@ -1,0 +1,64 @@
+<script language="JavaScript">
+ <!--
+function reviewDel() {
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx=<!--{_GET.idx}-->',function (data) {
+		if(data['bool']) {
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+//-->
+</script>
+
+<div class="title_d1"><h1>상품후기 관리</h1></div>
+
+<div class="title_d2"><img src="../images/bullet.gif">상품후기관리</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>작성자</th>
+		<td><!--{name}--> / <!--{userid}--></td>
+		<th>작성시간</th>
+		<td><!--{regdate}--></td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><!--{goods_name}--></td>
+		<th>후기점수</th>
+		<td><span class="star_rating"><span style="width:<!--{score}-->%"><!--{score}-->점</span></span> <span><!--{score}--> 점</span></td>
+	</tr>
+	<tr>
+		<th>후기제목</th>
+		<td colspan="3"><!--{subject}--></td>
+	</tr>
+	<tr>
+		<th>후기내용</th>
+		<td colspan="3"><!--{contents}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록</a></span>
+	<span class="button black"><input type="button" value="삭제" onclick="reviewDel()" /></span>
+</div>

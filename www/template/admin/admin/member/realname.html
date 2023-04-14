@@ -1,0 +1,102 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	//검색값 지정
+	$('select[name=phoneCorp]').val('<!--{_GET.phoneCorp}-->');
+	$('select[name=loop_scale]').val('<!--{_GET.loop_scale}-->');
+
+	$('input[name=start_regdate]').val('<!--{_GET.start_regdate}-->');
+	$('input[name=end_regdate]').val('<!--{_GET.end_regdate}-->');
+	$('input[name=start_birthDay]').val('<!--{_GET.start_birthDay}-->');
+	$('input[name=end_birthDay]').val('<!--{_GET.end_birthDay}-->');
+
+	$('#srchform').submit(function() {
+		if($('*').is('select[name=loop_scale]')) {
+			var loop_scale = $('select[name=loop_scale]').val();
+			$('input[name=loop_scale]').val(loop_scale);
+		}
+	});
+
+	$('input[name=nation]').val(['<!--{_GET.nation}-->']);
+	$('input[name=gender]').val(['<!--{_GET.gender}-->']);
+	$('input[name=plusInfo]').val(['<!--{_GET.plusInfo}-->']);
+	
+
+	$("input[name=start_regdate], input[name=end_regdate], input[name=start_birthDay], input[name=end_birthDay]").kendoDatePicker({
+		culture: "ko-KR"
+	});
+
+});
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_03.png') 0px 0px no-repeat;">회원관리</span> / <span class="title02">실명인증 리스트관리</h1></span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 실명인증 검색폼</div>
+<form method="get" name="srchform" id="srchform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden"  name="loop_scale" value="" />
+<table class="form_table">
+	<colgroup>
+		<col width="140" />
+		<col width="37%" />
+		<col width="140" />
+		<col width="*" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>통신사</th>
+		<td>
+			<select name="phoneCorp">
+				<option value="" selected="selected">:: 통신사 선택 ::</option>
+				<option value='SKT'>SKT</option>
+				<option value='KTF'>KTF</option>
+				<option value='LGT'>LGT</option>
+				<option value='KTM'>KTM</option>
+			</select>
+		</td>
+		<th>휴대전화</th>
+		<td>
+                                            <select name="mobile_a" style="width:60px;">
+                                                    <option value="">선택</option>
+                                                    <option value='010'>010</option>
+                                                    <option value='011'>011</option>
+                                                    <option value='016'>016</option>
+                                                    <option value='017'>017</option>
+                                                    <option value='018'>018</option>
+                                                    <option value='019'>019</option>
+                                                    <option value='0130'>0130</option>
+                                            </select> - 
+                                            <input type="text" name="mobile_b" value="<!--{_GET.mobile_b}-->" class="frm_input" style="width:60px;" /> - 
+                                            <input type="text" name="mobile_c" value="<!--{_GET.mobile_c}-->" class="frm_input" style="width:60px;" />		
+		</td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="username" value="<!--{_GET.username}-->" class="frm_input" style="width:100px;" /></td>
+		<th>국적</th>
+		<td><input type="radio" name="nation" value="" id="nation_all" /><label for="nation_all">All</label>&nbsp;  <input type="radio" name="nation" value="0" id="nation_0"/><label for="nation_0">내국인</label>&nbsp;<input type="radio" name="nation" value="1" id="nation_1" /><label for="nation_1">외국인</label></td>
+	</tr>
+	<tr>
+		<th>성별</th>
+		<td><input type="radio" name="gender" value="" id="gender_all" /><label for="gender_all">All</label>&nbsp;  <input type="radio" name="gender" value="0" id="gender_0"/><label for="gender_0">남성</label>&nbsp;<input type="radio" name="gender" value="1" id="gender_1" /><label for="gender_1">여성</label></td>
+		<th>회원구분</th>
+		<td><input type="radio" name="plusInfo" value="" id="plusInfo_all"/><label for="plusInfo_all">All</label>&nbsp;<input type="radio" name="plusInfo" value="user" id="plusInfo_0" /><label for="plusInfo_0">일반</label>&nbsp;<input type="radio" name="plusInfo" value="fc" id="plusInfo_1" /><label for="plusInfo_1">설계사</label></td>
+	</tr>
+	<tr>
+		<th>생년월일</th>
+		<td>
+			<input type="text" name="start_birthDay" value="<!--{start_birthDay}-->" readonly="readonly" style="width:150px;" /> ~ 
+			<input type="text" name="end_birthDay" value="<!--{end_birthDay}-->"  readonly="readonly" style="width:150px;" />
+		</td>
+		<th>등록일</th>
+		<td>
+			<input type="text" name="start_regdate" value="<!--{start_regdate}-->" readonly="readonly" style="width:150px;" /> ~ 
+			<input type="text" name="end_regdate" value="<!--{end_regdate}-->"  readonly="readonly" style="width:150px;" />
+		</td>
+	</tr>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="검색"/></span>
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->">초기화</a></span>
+</div>
+</form>
+<div id="main_contents"><!--{# js_tpl_main_sub}--></div>

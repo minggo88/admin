@@ -1,0 +1,75 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$('#popup_passwd').dragPopup({
+		popup_id: 'drag_popup_passwd',
+		popup_title: '패스워드 입력',
+		popup_width: 200,
+		popup_height: 200,
+		bool_today_close:false
+	});
+});
+
+$(function() {
+	$('#passform').submit(function() {
+		if(this.passwd.value == '') {
+			alert('글 작성시 입력한 비밀번호를 입력하세요.!');
+			this.passwd.focus();
+			return false;
+		}
+		if(this.mode.value == 'comment') {
+			//$('#'+this.load_id.value).css({'height':'50px','background-color':'#F0F0F0'}).load(this.go_url.value +'&passwd='+md5(this.passwd.value));
+			$('#'+this.load_id.value).load(this.go_url.value +'&passwd='+md5(this.passwd.value));
+		}
+		else {
+			location.href = this.go_url.value +'&passwd='+md5(this.passwd.value);
+		}
+		return false;
+	});
+});
+
+function showBbsPopup(go_url) {
+	$('#passform input[name=go_url]').val(go_url);
+	showPopup('drag_popup_passwd');
+}
+
+function showCommentPopup(load_id,go_url) {
+	$('#passform input[name=go_url]').val(go_url);
+	$('#passform input[name=load_id]').val(load_id);
+	$('#passform input[name=mode]').val('comment');
+	showPopup('drag_popup_passwd');
+}
+
+function hideBbsPopup() {
+	$('#passform input[name=passwd]').val('');;
+	$('#drag_popup').hide();
+}
+
+//-->
+</script>
+<div id="popup_passwd" style="display:none">
+	<form name="passform" id="passform">
+	<input type="hidden" name="go_url" value="" />
+	<input type="hidden" name="load_id" value="" />
+	<input type="hidden" name="mode" value="bbs" />
+	<table>
+		<tr>
+			<td>글작성시 설정하신 <br />암호를 입력하여 주세요.</td>
+		</tr>
+		<tr> 
+			<td><input type="password" name="passwd" id="passwd" class="frm_input" class="width:100px" title="비밀번호입력" /></td>
+		</tr>
+		<tr> 
+			<td>
+				<button class="grad_bbs"  id="btn_passwd_confirm" >확인</button>
+				<button class="grad_bbs" onclick="hideBbsPopup()" >취소</button>
+				{*
+				<input type="submit" value="확인"/>&nbsp;
+				<input type="button" value="취소" onclick="hideBbsPopup()" />
+				*}
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>

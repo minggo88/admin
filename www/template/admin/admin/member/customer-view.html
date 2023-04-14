@@ -1,0 +1,472 @@
+<script language="JavaScript">
+<!--
+	function memberDel(userid) {
+		if(!confirm('회원정보만 삭제되며 구매정보 및 게시판에 해당회원 글은 삭제 되지 않습니다.!\n\n삭제 하시겠습니까?')) {
+			return false;
+		}
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&userid='+userid,function(data) {
+			if(data['bool']) {
+				alert('회원정보가 삭제되었습니다.');
+				location.replace('<!--{_SERVER.SCRIPT_NAME}-->');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},'json');
+	}
+
+	<!--{? mode == 'withdraw'}-->
+	function memberRollback(userid) {
+		if(!confirm('회원정보로 다시 복원하시겠습니까?')) {
+			return false;
+		}
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=rollback&userid='+userid,function(data) {
+			if(data['bool']) {
+				alert('회원정보가 복원되었습니다.');
+				location.replace('/member/admin/memberAdmin.php');
+			}
+			else {
+				if(data['msg'] == 'err_access') {
+					alert('비정상적인 접근입니다.');
+				}
+				else if(data['msg'] == 'err_sess') {
+					location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+				}
+				else {
+					alert('재시도 해주세요.!');
+				}
+			}
+		},'json');
+	}
+	<!--{/}-->
+//-->
+</script>
+
+
+<div class="col-lg-12 col-md-12  col-sm-12 m-b-md">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="m-b-md">
+                            <!--{?!empty(email)}-->
+                            <button type="button" class="btn btn-warning btn-sm pull-right m-l-sm" data-toggle="modal" data-target="#emailModal">
+                                메일 전송
+                            </button>
+                            <!--{/}-->
+                            <!--{?!empty(mobile)}-->
+                            <button type="button" class="btn btn-success btn-sm pull-right m-l-sm" data-toggle="modal" data-target="#smsModal">
+                                SMS 전송
+                            </button>
+                            <!--{/}-->
+                            <!--{*
+                            <a href="javascript:;" onclick="popupMail('<!--{email}-->','<!--{nickname}-->')" class="btn btn-warning btn-sm pull-right m-l-sm">메일 전송</a>
+                            <a href="javascript:;" onclick="popupSms('<!--{email}-->','<!--{mobile}-->')" class="btn btn-success btn-sm pull-right">SMS 전송</a>
+                            *}-->
+                            <h2><!--{userid}--></h2>
+                            
+                            <div class="modal inmodal" id="smsModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title"><i class="fa fa-mobile"></i> SMS 전송</h4>
+                                            <small class="font-bold"><!--{nickname}-->고객에게 <!--{mobile}-->로 SMS를 보냅니다.</small>
+                                        </div>
+                                        <form method="post" name="frmSms" id="frmSms" action="/admin/sms.php">
+                                            <input type="hidden" name="pg_mode" value="send_sms" />
+                                            <input type="hidden" name="userid" value="<!--{email}-->" />
+                                            <div class="modal-body">
+                                                <p>SMS는 <strong>80 Byte</strong>만 발송할 수 있습니다.</p>
+                                                <div class="form-group">
+                                                    <label>휴대폰번호</label> 
+                                                    <input type="text" name="tran_phone" value="<!--{mobile}-->" placeholder="mobile" class="form-control" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>전송내용</label> 
+                                                    <textarea type="text" name="tran_msg" rows="5" placeholder="Enter your content" class="form-control" onclick="DoClear(this)" onselect="DoClear(this)" onkeydown="CalByte(this)" onchange="CalByte(this)" onkeyup="CalByte(this)"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>글자수</label> 
+                                                    <input type="text" name="byte" value="0" size="3" maxlength="3" readonly> byte &nbsp;
+                                                    <a href="javascript:;" onclick="ClearMsg()" class="btn btn-xs btn-primary">지우기</a>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Send message</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal inmodal fade" id="emailModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content animated bounceInLeft">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title"><i class="fa fa-envelope-o"></i> E-mail 전송</h4>
+                                            <small class="font-bold"><!--{nickname}-->고객에게 <!--{email}-->로 메일을 발송합니다.</small>
+                                        </div>
+                                        <form method="post" name="frmMail" id="frmMail"  action="/lib/sendEmail.php" enctype="multipart/form-data">
+                                            <input type="hidden" name="mail_to_name" value="<!--{nickname}-->" />
+                                            <input type="hidden" name="mail_to" value="<!--{email}-->" />
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>제목</label> 
+                                                    <input type="text" name="mail_subject" value="" placeholder="Enter your subject" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>메일발송내용</label> 
+                                                    <textarea type="text" name="mail_body" id="mail_body" rows="8" placeholder="Enter your content" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Send email</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>활동여부:</dt> <dd><span class="label label-primary">Active</span></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <dl class="dl-horizontal">
+                            <dt>이름 :</dt> <dd><!--{name}--></dd>
+                            <dt>휴대폰 :</dt> <dd><!--{mobile}--></dd>
+                        </dl>
+                    </div>
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal" >
+
+                            <dt>최근업데이트 :</dt> <dd><!--{updated_at}--></dd>
+                            <dt>회원가입일 :</dt> <dd><!--{created_at}--></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="dl-horizontal">
+                            <dt>SMARTCOIN 활동지표 :</dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: 80%;" class="progress-bar"></div>
+                                </div>
+                                <small>SMARTCOIN 활동지표 <strong>80%</strong>. 비교적 적극적인 활동.</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-heading">
+                                <div class="panel-options">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab-1" data-toggle="tab">SmartCoin Request Histories</a></li>
+                                        <li class=""><a href="#tab-2" data-toggle="tab">Login Histories</a></li>
+                                        <li class=""><a href="#tab-3" data-toggle="tab">SMS Histories</a></li>
+                                        <li class=""><a href="#tab-4" data-toggle="tab">E-mail Histories</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>SCC</th>
+                                            <th>Method</th>
+                                            <th>Amount</th>
+                                            <th>Regdate</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--{@loop_buysmartcoinhistories}-->
+                                        <tr>
+                                            <td class="text-center">
+                                                <!--{?.process==0}-->
+                                                <span class="label label-warning"><i class="fa fa-times"></i> Before</span>
+                                                <!--{:.process==1}-->
+                                                <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
+                                                <!--{:.process==2}-->
+                                                <span class="label label-danger"><i class="fa fa-check"></i> Refund</span>
+                                                <!--{/}-->
+
+                                            </td>
+                                            <td class="text-right">
+                                                <!--{=number_format(.scc)}--> SCC
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{?.method==1}-->BTC
+                                                <!--{:.method==2}-->ETH
+                                                <!--{:.method==3}-->LTC
+                                                <!--{:.method==4}-->USD
+                                                <!--{:}-->USD
+                                                <!--{/}-->
+                                            </td>
+                                            <td class="text-right">
+                                                <!--{?.method==1 || .method==2 || .method==3}-->
+                                                <!--{=number_format(.amount,8)}-->
+                                                <!--{:}-->
+                                                <!--{=number_format(.amount,2)}-->
+                                                <!--{/}-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{=date('Y-m-d H:i:s',.regdate)}-->
+                                            </td>
+                                        </tr>
+                                        <!--{:}-->
+                                        <tr>
+                                            <td colspan="5" class="text-center">게시글 목록이 없습니다.</td>
+                                        </tr>
+                                        <!--{/}-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="tab-2">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>UserId</th>
+                                            <th>Type</th>
+                                            <th>Time</th>
+                                            <th>Result</th>
+                                            <th>Regdate</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--{@loop_activity}-->
+                                        <tr>
+                                            <td>
+                                                <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
+                                            </td>
+                                            <td>
+                                            <!--{.title}-->
+                                            </td>
+                                            <td>
+                                                    2017.09.19 12:30:30
+                                            </td>
+                                            <td>
+                                                    2017.09.19 12:30:30
+                                            </td>
+                                            <td>
+                                            <p class="small">
+                                                Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
+                                            </p>
+                                            </td>
+
+                                        </tr>
+                                        <!--{:}-->
+                                        <tr>
+                                            <td colspan="5" class="text-center">활동이력이 없습니다.</td>
+                                        </tr>
+                                        <!--{/}-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="tab-3">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Mobile</th>
+                                            <th>Send Date</th>
+                                            <th>Result</th>
+                                            <th>Regdate</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--{@loop_activity}-->
+                                        <tr>
+                                            <td>
+                                                <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
+                                            </td>
+                                            <td>
+                                            <!--{.title}-->
+                                            </td>
+                                            <td>
+                                                    2017.09.19 12:30:30
+                                            </td>
+                                            <td>
+                                                    2017.09.19 12:30:30
+                                            </td>
+                                            <td>
+                                            <p class="small">
+                                                Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
+                                            </p>
+                                            </td>
+
+                                        </tr>
+                                        <!--{:}-->
+                                        <tr>
+                                            <td colspan="5" class="text-center">SMS 발송 이력이 없습니다.</td>
+                                        </tr>
+                                        <!--{/}-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="tab-4">
+                                    <table class="table table-striped table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">UserId</th>
+                                                <th class="text-center">Nickname</th>
+                                                <th class="text-center">subject</th>
+                                                <th class="text-center">Result</th>
+                                                <th class="text-center">Regdate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--{@loop_emailhistory}-->
+                                        <tr>
+                                            <td class="text-center">
+                                                <!--{.no}-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{.mail_to}-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{.mail_to_name}-->
+                                            </td>
+                                            <td>
+                                                <!--{.mail_subject}-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{?.mail_result==1}-->완료<!--{:}-->실패<!--{/}-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!--{=date('Y-m-d H:i:s',.regdate)}-->
+                                            </td>
+
+                                        </tr>
+                                        <!--{:}-->
+                                        <tr>
+                                            <td colspan="6" class="text-center">이메일 발송 이력이 없습니다.</td>
+                                        </tr>
+                                        <!--{/}-->
+                                        </tbody>
+                                    </table>
+                                    <div class="navipage"><!--{navi_page}--></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--{*
+
+	<div class="title_d2"><img src="../images/bullet.gif"> 회원정보</div>
+	<table class="form_table">
+		<colgroup>
+			<col width="140"></col>
+			<col width="37%"></col>
+			<col width="140"></col>
+			<col width="*"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+				<th>아이디</th>
+				<td><b><!--{userid}--></b> &nbsp;<span class="button small black"><a href="javascript:;" onclick="popupMail('<!--{email}-->','<!--{name}-->')">메일 전송</a></span></td>
+				<th>회원가입일</th>
+				<td><!--{regdate}--></td>
+		</tr>
+		<tr>
+				<th>성명</th>
+				<td><b><!--{name}--></b> (<!--{nick}-->)</td>
+				<th>회원레벨</th>
+				<td><!--{level_name}--></td>
+		</tr>
+		<tr>
+				<th>휴대전화</th>
+				<td><!--{tel}-->&nbsp;<span class="button small black"><a href="javascript:;"  onclick="popupSms('<!--{userid}-->','<!--{tel}-->')">SMS 전송</a></span></td>
+				<th>지역</th>
+				<td><!--{area1}--> <!--{area2}--></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<!--{? member_level=='110' || member_level=='115' || member_level=='120' || member_level=='130' || member_level=='140' }-->
+	<div class="title_d2"><img src="../images/bullet.gif">FC 정보</div>
+	<table class="form_table" >
+		<colgroup>
+			<col width="140"></col>
+			<col width="37%"></col>
+			<col width="140"></col>
+			<col width="*"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+				<th>회원레벨</th>
+				<td><span class="font700"><!--{?member_level=='110'}-->White<!--{:member_level=='115'}-->Yellow<!--{:member_level=='120'}-->Green<!--{:member_level=='130'}-->Blue<!--{/}--></span></td>
+				<th>신청기간</th>
+				<td><!--{payment_day}--></td>
+		</tr>
+		<tr>
+				<th>기준금액</th>
+				<td colspan="3"><!--{=number_format(payment_vmoney)}-->원</td>
+		</tr>
+		<tr>
+				<th>결제금액</th>
+				<td><!--{=number_format(payment_money)}-->원</td>
+				<th>사용기간</th>
+				<td><span class="font700 red"><!--{=date('Y-m-d',expire_date)}--></span></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="title_d2"><img src="../images/bullet.gif">FC 추가정보</div>
+	<table class="form_table" >
+		<colgroup>
+			<col width="140"></col>
+			<col width="37%"></col>
+			<col width="140"></col>
+			<col width="*"></col>
+		</colgroup>
+		<tbody>
+		<tr>
+				<th>소속사 전화번호</th>
+				<td><!--{company_tel}--></td>
+				<th>소속사명</th>
+				<td><!--{company}--></td>
+		</tr>
+		</tbody>
+	</table>
+	<!--{/}-->
+
+    <div id="popup_email" style="display:none;padding:10px;">
+        <iframe id="iframe_email"  frameborder="0" style="width:628px;height:528px;border:0px;"></iframe>
+    </div>
+
+    <div id="popup_sms" style="display:none;padding:10px;">
+        <iframe id="iframe_sms"  frameborder="0" style="width:280px;height:248px;border:0px;"></iframe>
+    </div>
+
+*}-->

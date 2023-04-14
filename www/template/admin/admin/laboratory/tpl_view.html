@@ -1,0 +1,167 @@
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>템플릿노출</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/laboratory/admin/labAdmin.php?pg_mode=kpi_joinnsave">통계그래프</a>
+            </li>
+            <li class="active">
+                <strong>템플릿노출</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+            <!--{*
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Search <small>상세조건별 검색</small></h5>
+                        </div>
+                        <div class="ibox-content">
+                        
+                            <form method="get" name="srchform" id="srchform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+                            <input type="hidden"  name="pg_mode" value="stat_published" />    
+                            <input type="hidden"  name="loop_scale" value="" />     
+                            <input type="hidden"  name="start_published_at" value="<!--{_GET.start_published_at}-->" />     
+                            <input type="hidden"  name="end_published_at" value="<!--{_GET.end_published_at}-->" />  
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-sm-8 col-xs-12" style="margin:0px 0px 10px 0px;">
+                                    <div id="reportrange" class="form-control">
+                                        <i class="fa fa-calendar"></i>
+                                        <span></span> <b class="caret"></b>
+                                    </div>
+        
+                                </div>
+                                <div class="col-md-6 col-sm-4 col-xs-12">
+                                    <input class="btn btn-primary" type="submit" value="Search">
+                                    <a href="javascript:;" class="btn btn-white" onclick="location.href='/laboratory/admin/labAdmin.php?pg_mode=stat_published'">초기화</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            </form>
+        
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            *}-->
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <!--{*
+                        <div class="ibox-title">
+                                <h5>섹션별 판매가능 플래너 Chart</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <canvas id="sellable_sections"></canvas>
+                            </div>
+                        </div>
+                        *}-->
+                        <div class="ibox-content">
+                                
+                            <h4>섹션별 판매가능 플래너 수</h4>
+                            <p>
+                                표안의 숫자는 판매가능한 플래너 수 입니다.<br />
+                                판매가능한 플래너 수 많을수록 배경색은 짙어 집니다.
+                            </p>
+                            <div class="table-responsive">                   
+                                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                    <thead>
+                                        <tr>
+                                            <!--{@loop_sellable_section}-->
+                                            <!--{?.index_==0}--> 
+                                            <th class="text-center"><div style="width:40px;">구 분</div></th>
+                                            <!--{@loop_insurers}--> 
+                                            <th class="text-center"><div class="text-center" style="width:30px;padding:0px;margin:0px;"><!--{..name}--></div></th>
+                                            <!--{/}-->
+                                            <!--{/}-->                                   
+                                            <!--{/}-->                                   
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{@loop_sellable_section}-->   
+                                        <tr class="gradeA">
+                                            <td class="text-center"><div style="width:40px;"><!--{.name}--></div></td>
+                                            <!--{@loop_insurers}-->  
+                                            <td class="text-center" style="background:rgba(23,148,123,<!--{(..count%10)/10}-->);color:<!--{..fontcolor}-->;"><!--{=number_format(..count)}--></td>
+                                            <!--{/}-->  
+                                        </tr>
+                                        <!--{/}-->  
+                                    </tbody>
+                                </table>
+
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 m-t-md m-b-md">
+                    <div class="ibox float-e-margins">
+                        <!--{*
+                        <div class="ibox-title">
+                            <h5>질의 섹션</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="text-center">
+                                <div id="inquired_sections"></div>
+                            </div>
+                        </div>
+                        *}-->
+                        <div class="ibox-content">
+                            
+                            <h4>질의 섹션수 및 해당상품 판매가능 플래너 존재 유무 (<span class="label"> 플래너 존재함</span>)</h4>
+                            <p>
+                                표안의 숫자는 질의 수 입니다.<br />
+                                질의 수 많을수록 배경색은 짙어 집니다.<br />
+                                숫자의 회색박스로 설계가능한 유료 플래너가 존재함을 나타냅니다.<br />
+                            </p>
+                                
+                            <div class="table-responsive">                
+                                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                    <thead>
+                                        <tr>
+                                            <!--{@loop_inquired_section}-->
+                                            <!--{?.index_==0}--> 
+                                            <th class="text-center"><div style="width:40px;">구 분</div></th>
+                                            <!--{@loop_insurers}--> 
+                                            <th class="text-center"><div class="text-center" style="width:30px;padding:0px;margin:0px;"><!--{..name}--></div></th>
+                                            <!--{/}-->
+                                            <!--{/}-->                                   
+                                            <!--{/}-->                                   
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--{@loop_inquired_section}-->   
+                                        <tr class="gradeA">
+                                            <td class="text-center"><div style="width:40px;"><!--{.name}--></div></td>
+                                            <!--{@loop_insurers}-->  
+                                            <td class="text-right" style="background:rgba(12,135,72,<!--{(..count%10000)/10000*10}-->);color:<!--{..fontcolor}-->"><!--{?..planner=='O'}--><span class="label"><!--{=number_format(..count)}--></span><!--{:}--><!--{=number_format(..count)}--><!--{/}--> </td>
+                                            <!--{/}-->  
+                                        </tr>
+                                        <!--{/}-->  
+                                    </tbody>
+                                </table>
+        
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

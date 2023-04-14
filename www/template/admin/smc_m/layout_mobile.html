@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>Asia Payment Alliance Conference</title>
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="./participant/css/swiper.css">
+  <link rel="stylesheet" href="./participant/css/mobile_190822.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,500,700|Roboto:300,500,700&display=swap&subset=korean" rel="stylesheet">
+  <!-- Swiper JS -->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="./participant/js/swiper.js"></script>
+
+</head>
+
+<body>
+   <!--{# js_tpl_contents}-->
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        autoHeight : true,
+        navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+        },
+      });
+    </script>
+
+   <!--{? _SERVER.SCRIPT_NAME =='/participant/index.php'}-->
+   <script src="js/participant.js"></script>
+   <!--{/}-->
+
+    <!--{@ loop_script}-->
+    <script src="<!--{.value_}-->" charset="utf-8" type="text/javascript"></script>
+    <!--{/}-->
+    
+</body>
+</html>

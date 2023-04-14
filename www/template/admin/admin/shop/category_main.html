@@ -1,0 +1,73 @@
+<style type="text/css">
+<!--
+div.tab_content p {width:578px; margin:0px; margin-top:10px; padding:10px; border:1px solid #ccc; }	
+//-->
+</style>
+<script type="text/javascript">
+<!--
+$(function() {
+	//첫번째 탭은 활성화
+	$('ul.tab_menu>li').click(function(event){
+		$('ul.tab_menu>li').removeClass("selected");
+		$(this).addClass("selected");
+		$('div.tab_container>div.tab_content').hide();
+		$($(this).find(">a").attr("href")).show();
+		return false;
+	});
+});
+
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">카테고리 관리</div>
+<ul class="tab_menu">
+	<li class="selected"><a href="#category_guide_1">일차생성</a></li>
+	<li><a href="#category_guide_2">하위생성</a></li>
+	<li><a href="#category_guide_3">선택수정</a></li>
+	<li><a href="#category_guide_4">선택삭제</a></li>
+	<li><a href="#category_guide_5">선택복사</a></li>
+	<li><a href="#category_guide_6">선택이동</a></li>
+</ul>
+<div class="tab_container">
+	<!--{* 일차생성 *}-->
+	<div id="category_guide_1" class="tab_content">
+		<p>일차 카테고리를 생성하는 버튼 입니다. <button>일차생성</button> 버튼을 클릭하면 카테고리 상세입력폼이 나옵니다.</p>
+		<div class="button_area">
+			<span class="button large red strong"><button class="btn_tree_create_root">일차생성</button></span>
+		</div>
+	</div>
+	<!--{* 하위생성 *}-->
+	<div id="category_guide_2" class="tab_content" style="display:none">
+		<p>하위카테고리를 생성하는 버튼 입니다. <button> 하위생성 </button>  버튼을 클릭하면 카테고리 상세입력폼이 나옵니다.</p>
+		<div class="button_area">
+			<span class="button large red strong"><button class="btn_tree_create_child">하위생성</button></span>
+		</div>
+	</div>
+	<!--{* 선택수정 *}-->
+	<div id="category_guide_3" class="tab_content" style="display:none">
+		<p>카테고리 이름을 변경하고자 할때 변경하고자 하는 카테고리를 선택후 반전되면 <button> 선택수정 </button> 버튼을 클릭하고 입력박스가 나오면 변경합니다.</p>
+		<div class="button_area">
+			<span class="button large red strong"><button class="btn_tree_edit">선택수정</button></span>
+		</div>
+	</div>
+	<!--{* 선택삭제 *}-->
+	<div id="category_guide_4" class="tab_content" style="display:none">
+		<p>제거(삭제) 하고자 하는 카테고리를 선택후 반전되면 <button> 선택삭제 </button> 버튼을 클릭하여 제거(삭제)합니다. 이때 하위카테고리가 있는경우 하위 카테고리까지 모두 제거(삭제)됩니다</p>
+		<div class="button_area">
+			<span class="button large red strong"><button class="btn_tree_remove">선택삭제</button></span>
+		</div>
+	</div>
+	<!--{* 선택복사 *}-->
+	<div id="category_guide_5" class="tab_content" style="display:none">
+		<p>복사하고자 하는 대상을 선택 후 <button> 선택복사 </button>  버튼을 클릭하고 복사하고자 하는 위치에 <button>붙여넣기 </button> 버튼을 클릭하여 붙여넣기합니다.</p>
+		<div class="button_area">
+			<span class="button large black strong"><button class="btn_tree_copy">선택복사</button></span>
+		</div>	
+	</div>
+	<!--{* 선택이동 *}-->
+	<div id="category_guide_6" class="tab_content" style="display:none">
+		<p>이동에 관련된 설명이 들어가는 자리</p>
+		<div class="button_area">
+			<span class="button large black strong"><button class="btn_tree_move">선택이동</button></span>
+		</div>
+	</div>
+</div>

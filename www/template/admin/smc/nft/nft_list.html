@@ -1,0 +1,88 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12 mb-0">
+		<div class="container">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					NFT 전체보기
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 pl-30 pr-30 ">
+				   <div class="row">
+
+					  <div class="col-sm-12">
+							<div class="table-responsive mb-20">
+
+								<table class="table table-bordered table-striped" style="min-width: 668px;">
+									<colgroup>
+										<col width="*" />
+										<col width="100" />
+										<col width="100" />
+										<col width="100" />
+										<col width="150" />
+										<col width="150" />
+										<col width="150" />
+									</colgroup>
+									<thead>
+									<tr class="top">
+										<th class="text-center fs-16">회사</th>
+										<th class="text-center fs-16">조회</th>
+										<th class="text-center fs-16">분할</th>
+										<th class="text-center fs-16">좋아요</th>
+										<th class="text-center fs-16">현재가격</th>
+										<th class="text-center fs-16">구매</th>
+										<th class="text-center fs-16">입찰</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><a href="/nft/view/75"><img src="https://kmcse-trade.s3.ap-northeast-2.amazonaws.com/202204/da2dcf07550a0420d418e9298f0946ef07152621c3480f8d36fc29ff8e015996.png"> 두나무 </a></td>
+											<td class="text-center">20</td>
+											<td class="text-center">500</td>
+											<td class="text-center">100</td>
+											<td class="text-center">10ETH</td>
+											<td class="text-center"><button type="button" onClick="buy('75');">구매(10ETH)</button></td>
+											<td class="text-center"><button type="button" onClick="bid('75');">입찰(10ETH)</button></td>
+										</tr>
+										<!--{@loop_nft}-->
+										<tr>
+											<td><a href="/nft/view/<!--{.idx}-->"><img src="https://kmcse-trade.s3.ap-northeast-2.amazonaws.com/202204/da2dcf07550a0420d418e9298f0946ef07152621c3480f8d36fc29ff8e015996.png"> <!--{.subject}--></a></td>
+											<td class="text-center"><!--{.hit}--></a></td>
+											<td class="text-center"><!--{.divide}--></a></td>
+											<td class="text-center"><!--{.like_cnt}--></a></td>
+											<td class="text-center"><!--{.price}--></td>
+											<td class="text-center"><button type="button" onClick="buy('75');">구매(10ETH)</button></td>
+											<td class="text-center"><button type="button" onClick="bid('75');">입찰(10ETH)</button></td>
+										</tr>
+										<!--{:}-->
+										<tr>
+											<td colspan="7" class="text-center">등록된 NFT 목록이 없습니다</td>
+										</tr>
+										<!--{/}-->
+									</tbody>
+								</table>
+
+								<nav aria-label="Page navigation" class="pt-md">
+									<!--{navi_page}-->
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

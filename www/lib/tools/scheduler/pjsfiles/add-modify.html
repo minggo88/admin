@@ -1,0 +1,291 @@
+<div align="center" class="tcenter"><center>
+
+<table cellSpacing="1" bgcolor="#008000" cellpadding="4" width="1100">
+  <tr align="center" class="tcenter">
+    <th align="center" class="tcenter" bgcolor="#94CE94"><strong id="btitle">신규 작업 추가</strong></th>
+  </tr>
+  <tr>
+    <th align="center" class="tcenter" bgcolor="#FFFFFF" width="90%">
+	<form action="add-modify.php" method="POST" NAME="I_F" align="center" class="tcenter">
+      <input type="hidden" name="id" value="0">
+	  <input type="hidden" name="time_last_fired" value="0">
+	  <div align="center" class="tcenter"><center>
+	  <table class="cborder" cellSpacing="4" cellPadding="2" width="90%">
+      <TBODY>
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right"><b>실행파일:</b></td>
+          <td align="left" colspan="2"><input class="box" size="100" value="" name="scriptpath">
+		  <font size="2"><strong> <a href="javascript:testpath();">경로 확인[^]</a></strong></font><br>
+          실행할 파일의 위치를 적어주세요.
+		  <script language="JavaScript"><!--
+			function testpath()
+			{
+			 if (confirm("적어주신 실행 파일이 새창으로 실행됩니다.\n\n계속 진행 할까요?")) 
+			 {
+			  var tWindow = null;
+			  if(tWindow != null) if(!tWindow.closed) tWindow.close()
+			  tWindow=open(document.I_F.scriptpath.value,'tWin'); 
+			 }
+			}
+			// -->
+		  </script>
+          <strong>- <a href="http://www.dwalker.co.uk/forum/viewtopic.php?p=2759" target="_blank">help and more detail here[^]</a></strong></font><br />
+		  현재 위치 : <span id="current_path"></span>
+		  </td>
+        </tr>
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right"><b>작업 이름:</b></td>
+          <td align="left" colspan="2"><input class="box" size="50" name="name" value="사이트 상태를 보스에게 이메일로 보고하기"><br>
+          작업 이름을 적어주세요.</td>
+        </tr>
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right"><b>시작 일시:</b></td>
+          <td align="left" colspan="2">
+		  <input class="box" size="50" name="fire_time" value="">
+		  <br />작업을 새로 시작할 날짜와 시간을 적어 주세요. 예) 2012-02-01 23:01:01
+		  <br />시작 일시에 적힌 시간부터 작업이 시작됩니다.
+		  <br />입력하지 않으면 마지막 실행 시간이나 저장되는 시간부터 작업 실행 간격에 맞게 다음 실행 일시를 계산하여 추가 됩니다.
+          </td>
+        </tr>
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right" rowspan="4"><b><br>
+          <br>
+          작업 실행 간격:</b></td>
+          <td align="left" bgcolor="#E9E9E9" width="80"><div align="right" class="tright wfull"><font color="#000000"><strong>분 별</strong></font></div></td>
+          <td align="left" bgcolor="#E9E9E9">- 매  
+            <select class="button" name="minutes"
+          onchange="disable_others()" size="1" value="0" >
+            <option selected value="-1">0</option>
+            <option value="1">1 </option>
+            <option value="2">2 </option>
+            <option value="3">3 </option>
+            <option value="4">4 </option>
+            <option value="5">5 </option>
+            <option value="6">6 </option>
+            <option value="7">7 </option>
+            <option value="8">8 </option>
+            <option value="9">9 </option>
+            <option value="10">10 </option>
+            <option value="11">11 </option>
+            <option value="12">12 </option>
+            <option value="13">13 </option>
+            <option value="14">14 </option>
+            <option value="15">15 </option>
+            <option value="16">16 </option>
+            <option value="17">17 </option>
+            <option value="18">18 </option>
+            <option value="19">19 </option>
+            <option value="20">20 </option>
+            <option value="21">21 </option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30 </option>
+            <option value="31">31 </option>
+            <option value="32">32 </option>
+            <option value="33">33 </option>
+            <option value="34">34 </option>
+            <option value="35">35 </option>
+            <option value="36">36 </option>
+            <option value="37">37 </option>
+            <option value="38">38 </option>
+            <option value="39">39 </option>
+            <option value="40">40 </option>
+            <option value="41">41 </option>
+            <option value="42">42 </option>
+            <option value="43">43 </option>
+            <option value="44">44 </option>
+            <option value="45">45 </option>
+            <option value="46">46 </option>
+            <option value="47">47 </option>
+            <option value="48">48 </option>
+            <option value="49">49 </option>
+            <option value="50">50 </option>
+            <option value="51">51</option>
+            <option value="52">52</option>
+            <option value="53">53 </option>
+            <option value="54">54 </option>
+            <option value="55">55 </option>
+            <option value="56">56 </option>
+            <option value="57">57 </option>
+            <option value="58">58 </option>
+            <option value="59">59 </option>
+          </select> 분마다 실행</td>
+        </tr>
+        <tr>
+          <td align="left" bgcolor="#E9E9E9"><div align="right" class="tright"><font color="#FF0000"><strong>시간별</strong></font></div></td>
+          <td align="left" bgcolor="#E9E9E9">- 매 
+            <select class="button" name="hours"
+          onchange="disable_others()" size="1" value="0" >
+            <option selected value="-1">0</option>
+            <option value="1">1 </option>
+            <option value="2">2 </option>
+            <option value="3">3 </option>
+            <option value="4">4 </option>
+            <option value="5">5 </option>
+            <option value="6">6 </option>
+            <option value="7">7 </option>
+            <option value="8">8 </option>
+            <option value="9">9 </option>
+            <option value="10">10 </option>
+            <option value="11">11 </option>
+            <option value="12">12 </option>
+            <option value="13">13 </option>
+            <option value="14">14 </option>
+            <option value="15">15 </option>
+            <option value="16">16 </option>
+            <option value="17">17 </option>
+            <option value="18">18 </option>
+            <option value="19">19 </option>
+            <option value="20">20 </option>
+            <option value="21">21 </option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+          </select> 시간마다 실행</td>
+        </tr>
+        <tr align="center" class="tcenter">
+          <td align="left" bgcolor="#E9E9E9"><div align="right" class="tright"><font color="#FF8000"><strong>일별</strong></font></div></td>
+          <td align="left" bgcolor="#E9E9E9">- 매 
+            <select class="button" name="days"  onchange="disable_others()"  >
+            <option selected value="-1">0</option>
+            <option value="1">1 </option>
+            <option value="2">2 </option>
+            <option value="3">3 </option>
+            <option value="4">4 </option>
+            <option value="5">5 </option>
+            <option value="6">6 </option>
+          </select> 번째 일마다 실행</td>
+        </tr>
+        <tr align="center" class="tcenter">
+          <td align="left" bgcolor="#E9E9E9"><div align="right" class="tright"><font color="#C00000"><strong>주별</strong></font></div></td>
+          <td align="left" bgcolor="#E9E9E9">- 매
+            <select class="button" name="weeks"  onchange="disable_others()" >
+            <option selected value="-1">0</option>
+            <option value="1">1 </option>
+            <option value="2">2 </option>
+            <option value="3">3 </option>
+            <option value="4">4 </option>
+            <option value="5">5 </option>
+            <option value="6">6 </option>
+            <option value="7">7 </option>
+            <option value="8">8 </option>
+            <option value="9">9 </option>
+            <option value="10">10 </option>
+            <option value="11">11 </option>
+            <option value="12">12 </option>
+            <option value="13">13 </option>
+            <option value="14">14 </option>
+            <option value="15">15 </option>
+            <option value="16">16 </option>
+            <option value="17">17 </option>
+            <option value="18">18 </option>
+            <option value="19">19 </option>
+            <option value="20">20 </option>
+            <option value="21">21 </option>
+            <option value="22">22 </option>
+            <option value="23">23 </option>
+            <option value="24">24 </option>
+            <option value="25">25 </option>
+            <option value="26">26 </option>
+            <option value="27">27 </option>
+            <option value="28">28 </option>
+            <option value="29">29 </option>
+            <option value="30">30 </option>
+            <option value="31">31 </option>
+            <option value="32">32 </option>
+            <option value="33">33 </option>
+            <option value="34">34 </option>
+            <option value="35">35 </option>
+            <option value="36">36 </option>
+            <option value="37">37 </option>
+            <option value="38">38 </option>
+            <option value="39">39 </option>
+            <option value="40">40 </option>
+            <option value="41">41 </option>
+            <option value="42">42 </option>
+            <option value="43">43 </option>
+            <option value="44">44 </option>
+            <option value="45">45 </option>
+            <option value="46">46 </option>
+            <option value="47">47 </option>
+            <option value="48">48 </option>
+            <option value="49">49 </option>
+            <option value="50">50 </option>
+            <option value="51">51</option>
+            <option value="52">52</option>
+          </select> 번째 주마다 실행
+		  </td>
+        </tr>
+		
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right"></td>
+          <td align="left" colspan="2">30일마다 실행해야 한다면 4주와 2일을 선택하세요.  4 * 7 + 2 = 30 </td>
+        </tr>
+		
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td vAlign="top" align="right"><b>종료 방법:</b></td>
+          <td align="left" colspan="2"><select class="button" name="run_only_once" >
+            <option selected value="0">관리자 수동 종료(무한 반복)</option>
+            <option value="1">한번만 실행(자동 종료)</option>
+          </select> 
+           <br /> <strong>한번만 실행</strong>을 선택하면 한번 실행 후 작업이 자동 삭제됩니다.</td>
+        </tr>
+		
+        <tr bgColor="#ffffff" align="center" class="tcenter">
+          <td align="left" colspan="3"><div align="center" class="tcenter"><center><p>&nbsp;<input class="button" type="button"
+          onclick="add()" value="작업 추가" name="button"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+          class="button" type="button" onclick="javascript:document.location='index.php'"
+          value="취소" name="cancel"></p>
+          </center></div></td>
+        </tr>
+		</TBODY>
+      </table>
+      </center></div>
+    </form>
+    </th>
+  </tr>
+</table>
+</center></div><script language="JavaScript"><!--
+original_minutes=0;
+original_hours=0;
+original_days=0;
+original_weeks=0;
+
+the_link=self.location.hostname+self.location.pathname.replace("pjsfiles/","eg_email_site_stats_to_boss.php");
+document.I_F.scriptpath.value="http://"+the_link;
+
+function disable_others()
+{
+return false;
+ validcount=0;
+ with (document.I_F)
+ {
+  if (minutes.options[minutes.selectedIndex].value<0) validcount=validcount+minutes.options[minutes.selectedIndex].value *1; 
+  if (hours.options[hours.selectedIndex].value<0) validcount=validcount+hours.options[hours.selectedIndex].value *1; 
+  if (days.options[days.selectedIndex].value<0) validcount=validcount+days.options[days.selectedIndex].value *1;
+  if (weeks.options[weeks.selectedIndex].value<0) validcount=validcount+weeks.options[weeks.selectedIndex].value *1; 
+  if (validcount!=-3) 
+  {
+   minutes.value=-1;
+   minutes.value=-1;
+   hours.value=-1;
+   days.value=-1;
+   weeks.value=-1;
+   alert("Only one can carry a value!  Please re-select.");
+  }
+ }
+}
+function add()
+{
+ with (document.I_F)
+ {
+  if ( (minutes.options[minutes.selectedIndex].value<0) & (hours.options[hours.selectedIndex].value<0) &(days.options[days.selectedIndex].value<0) & (weeks.options[weeks.selectedIndex].value<0) ) alert("작업 실행 간격을 다음 항목에서 선택해 주세요:\n\n 분별, 시간별, 일별 또는 주별");
+  else submit();
+ }
+}
+// --></script>

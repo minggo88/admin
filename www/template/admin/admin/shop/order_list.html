@@ -1,0 +1,330 @@
+<script language="JavaScript">
+<!--
+
+$(function() {
+	$("#list_form>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function () {
+	$('#search_period').change(function() {
+		if(this.selectedIndex == 0) {
+			$("input[name=search_start_date]").val('');
+			$("input[name=search_end_date]").val('');
+		}
+		else {
+			var today = new Date();
+			var yyyy, mm, dd;
+			yyyy = today.getFullYear();
+			mm = today.getMonth()+1;
+			dd = today.getDate();
+			$("input[name=search_end_date]").val(yyyy + '-' + str_pad(mm,2,'0','STR_PAD_LEFT') + '-' + str_pad(dd,2,'0','STR_PAD_LEFT'));
+			var t = $(this).val();
+			if(t != 1) {
+				var startDate = new Date(Date.parse(today) - t * 1000 * 60 * 60 * 24);
+				yyyy = startDate.getFullYear();
+				mm = startDate.getMonth()+1;
+				dd = startDate.getDate();
+			}
+			$("input[name=search_start_date]").val(yyyy + '-' + str_pad(mm,2,'0','STR_PAD_LEFT') + '-' + str_pad(dd,2,'0','STR_PAD_LEFT'));	
+		}
+	});
+
+	//검색값 지정
+	$('select[name=process]').val('<!--{_GET.process}-->');
+	$('select[name=search_period_target]').val('<!--{_GET.search_period_target}-->');
+	$('select[name=payment_method]').val('<!--{_GET.payment_method}-->');
+
+	$('#btn_order_total').click(function () {
+		location.href = '/shop/admin/orderAdmin.php?pg_mode=list<!--{url_btn_total}-->';
+	});
+
+	<!--{? _GET.mode=='a'}-->
+	$('#btn_order_aa').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_aa}-->';
+	});
+	$('#btn_order_ab').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_ab}-->';
+	});
+	$('#btn_order_ac').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_ac}-->';
+	});
+	$('#btn_order_ad').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_ad}-->';
+	});
+	$('#btn_order_ae').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_ae}-->';
+	});
+	$('#btn_order_ax').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=a<!--{url_btn_ax}-->';
+	});
+	<!--{: _GET.mode=='b'}-->
+	$('#btn_order_ba').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=b<!--{url_btn_ba}-->';
+	});
+	$('#btn_order_bb').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=b<!--{url_btn_bb}-->';
+	});
+	$('#btn_order_be').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=b<!--{url_btn_be}-->';
+	});
+	$('#btn_order_bx').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=b<!--{url_btn_bx}-->';
+	});
+	<!--{: _GET.mode=='e'}-->
+	$('#btn_order_ea').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=e<!--{url_btn_ea}-->';
+	});
+	$('#btn_order_eb').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=e<!--{url_btn_eb}-->';
+	});
+	$('#btn_order_ec').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=e<!--{url_btn_ec}-->';
+	});
+	$('#btn_order_ee').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=e<!--{url_btn_ee}-->';
+	});
+	$('#btn_order_ex').click(function () {
+		location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list&mode=e<!--{url_btn_ex}-->';
+	});
+	<!--{/}-->
+});	
+
+function multiControl() {
+	var num_checked = $('#list_form input[name=order_codes[]]:checked').length;
+	if(num_checked == 0) {
+		alert('선택된 항목이 없습니다.!');
+		return false;
+	}
+	if(!confirm('선택된 주문을 삭제하시겠습니까?')) {
+		return false;
+	}
+	$.post('/shop/admin/orderAdmin.php',$('#list_form').serialize(),function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.');
+			location.href = '<!--{_SERVER.REQUEST_URI}-->';
+		}
+		else {
+			alert('재시도 해주세요!');
+		}
+	},'json');
+}
+
+function showSearchForm() {
+	$.cookie('hide_order_search',{ expires: -1});
+	$('#search_area').show();
+}
+
+function hideSearchForm() {
+	$.cookie('hide_order_search', 'y', { expires: 1});
+	$('#search_area').hide();
+}
+
+$(function() {
+	if($.cookie('hide_order_search') == 'y') {
+		$('#search_area').hide();
+	}
+});
+//-->
+</script>
+
+<div class="title_d1"><h1>주문리스트<!--{? !empty(_GET.process)}--> ( <!--{process_desc}--> )<!--{/}--></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 주문검색폼</div>
+<div class="button_area_right">
+	<span class="button small black"><input type="button" value="보이기" onclick="showSearchForm()" /></span>
+	<span class="button small black"><input type="button" value="감추기" onclick="hideSearchForm()" /></span>
+</div>
+<div id="search_area">
+<form name="search_form" id="search_form" method="get" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>주문번호</th>
+		<td><input type="text" name="order_code" value="<!--{_GET.order_code}-->" class="frm_input" style="width:100px" /></td>
+		<th>회원아이디</th>
+		<td><input type="text" name="userid" value="<!--{_GET.userid}-->" class="frm_input" style="width:100px" /></td>
+	</tr>
+	<tr>
+		<th>주문자명</th>
+		<td><input type="text" name="order_name" value="<!--{_GET.order_name}-->" class="frm_input" style="width:100px" /></td>
+		<th>수령자명</th>
+		<td><input type="text" name="rsv_name" value="<!--{_GET.rsv_name}-->" class="frm_input" style="width:100px" /></td>
+	</tr>
+	<tr>
+		<th>입금자명</th>
+		<td><input type="text" name="payment_name" value="<!--{_GET.payment_name}-->" class="frm_input" style="width:100px" /></td>
+		<th>결제방법</th>
+		<td>
+			<select name="payment_method">
+				<option value="" selected="selected">::결제방법::</option>
+				<option value="cash">무통장입금</option>
+				<option value="card">카드결제</option>
+				<option value="accounttrans">계좌이체</option>
+				<option value="vaccount">가상계좌</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>기간검색</th>
+		<td colspan="3">
+			<select name="search_period_target">
+				<option value="" selected="selected">::검색대상::</option>
+				<option value="regdate">주문일자</option>
+				<option value="payment_date">입금일자</option>
+				<option value="delivery_date">배송일자</option>
+				<option value="cancel_date">취소일자</option>
+				<option value="exchange_request_date">교환요청일자</option>
+				<option value="back_request_date">반품요청일자</option>
+			</select>
+			<input type="text" name="search_start_date" value="<!--{_GET.search_start_date}-->" class="frm_input" style="width:80px" /> ~ 
+			<input type="text" name="search_end_date" value="<!--{_GET.search_end_date}-->" class="frm_input" style="width:80px" />
+			<select id="search_period">
+				<option value="" selected="selected">전체</option>
+				<option value="1">금일</option>
+				<option value="7">7일</option>
+				<option value="15">15일</option>
+				<option value="30">30일</option>
+				<option value="60">60일</option>
+				<option value="90">90일</option>
+				<option value="365">1년</option>
+			</select>
+		</td>
+	<tr>
+		<th>진행상황</th>
+		<td colspan="3">
+			<select name="process">
+				<option value="" selected="selected">::진행상황::</option>
+				<option value="aa">결제대기</option>
+				<option value="ab">결제완료</option>
+				<option value="ac">배송대기</option>
+				<option value="ad">배송중</option>
+				<option value="ae">배송완료</option>
+				<option value="ax">주문취소</option>
+				<option value="ba">반품요청</option>
+				<option value="bb">반품대기</option>
+				<option value="be">반품완료</option>
+				<option value="bx">반품취소</option>
+				<option value="ea">교환요청</option>
+				<option value="eb">교환대기</option>
+				<option value="ec">교환배송</option>
+				<option value="ee">교환완료</option>
+				<option value="ex">교환취소</option>
+			</select>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="검 색"/></span>
+</div>
+</form>
+</div>
+<div class="title_d2"><img src="../images/bullet.gif"> 주문리스트 </div>
+<!--{? !empty(_GET.mode)}-->
+<!--{? _GET.mode != 't'}-->
+<ul class="tab_menu">
+	<!--{? _GET.mode=='a'}-->
+	<li id="btn_order_aa" <!--{?_GET.process=='aa'}-->class="selected"<!--{/}-->><a href="javascript:;">결제대기</a></li>
+	<li id="btn_order_ab" <!--{?_GET.process=='ab'}-->class="selected"<!--{/}-->><a href="javascript:;">결제완료</a></li>
+	<li id="btn_order_ac" <!--{?_GET.process=='ac'}-->class="selected"<!--{/}-->><a href="javascript:;">배송대기</a></li>
+	<li id="btn_order_ad" <!--{?_GET.process=='ad'}-->class="selected"<!--{/}-->><a href="javascript:;">배송중</a></li>
+	<li id="btn_order_ae" <!--{?_GET.process=='ae'}-->class="selected"<!--{/}-->><a href="javascript:;">배송완료</a></li>
+	<li id="btn_order_ax" <!--{?_GET.process=='ax'}-->class="selected"<!--{/}-->><a href="javascript:;">주문취소</a></li>
+	<!--{: _GET.mode=='b'}-->
+	<li id="btn_order_ba" <!--{?_GET.process=='ba'}-->class="selected"<!--{/}-->><a href="javascript:;">반품요청</a></li>
+	<li id="btn_order_bb" <!--{?_GET.process=='bb'}-->class="selected"<!--{/}-->><a href="javascript:;">반품대기</a></li>
+	<li id="btn_order_be" <!--{?_GET.process=='be'}-->class="selected"<!--{/}-->><a href="javascript:;">반품완료</a></li>
+	<li id="btn_order_bx" <!--{?_GET.process=='bx'}-->class="selected"<!--{/}-->><a href="javascript:;">반품취소</a></li>
+	<!--{: _GET.mode=='e'}-->
+	<li id="btn_order_ea" <!--{?_GET.process=='ea'}-->class="selected"<!--{/}-->><a href="javascript:;">교환요청</a></li>
+	<li id="btn_order_eb" <!--{?_GET.process=='eb'}-->class="selected"<!--{/}-->><a href="javascript:;">교환대기</a></li>
+	<li id="btn_order_ec" <!--{?_GET.process=='ec'}-->class="selected"<!--{/}-->><a href="javascript:;">교환배송</a></li>
+	<li id="btn_order_ee" <!--{?_GET.process=='ee'}-->class="selected"<!--{/}-->><a href="javascript:;">교환완료</a></li>
+	<li id="btn_order_ex" <!--{?_GET.process=='ex'}-->class="selected"<!--{/}-->><a href="javascript:;">교환취소</a></li>
+	<!--{/}-->
+</ul>
+<!--{/}-->
+<!--{/}-->
+<div class="button_area_left">
+	<span class="button black"><input type="button" value="선택삭제" onClick="multiControl()" /></span>
+</div>
+<form id="list_form">
+<input type="hidden" name="pg_mode" value="del_multi" />
+<table class="list_table">
+	<colgroup>
+		<col width="30"></col>
+		<col width="120"></col>
+		<col width="*"></col>
+		<col width="100"></col>
+		<col width="150"></col>
+		<col width="80"></col>
+		<col width="65"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>No</th>
+		<th>주문코드</th>
+		<th>주문상품</th>
+		<th>결제정보</th>
+		<th>배송정보</th>
+		<th>진행상황</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_order}-->
+	<tr>
+		<td><!--{.no}--><br /><input type="checkbox" name="order_codes[]" value="<!--{.order_code}-->" /></td>
+		<td>
+			<ul>
+				<li class="underline orange pcenter"><!--{.order_code}--></li>
+				<li class="underline dotted pcenter"><!--{.regdate}--></li>
+				<li class="underline dotted pcenter"><!--{.order_name}--> (<!--{.userid}-->)</li>
+			</ul>
+		</td>
+		<td>
+			<!--{@loop_goods}-->
+			<ul>
+				<li class="underline dotted subject"><span><!--{..goods_name}--></span> ( 수량 : <!--{..order_qty}--> )</li>
+				<li class="underline none"><!--{..goods_option}--></li>
+			</ul>
+			<!--{/}-->
+		</td>
+		<td>
+			<ul>
+				<li class="underline orange pcenter"><!--{=number_format(.pay_amount)}--> 원</li>
+				<li class="underline none pcenter">( <!--{.payment_method_desc}--> )</li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li class="underline dotted"><span class="subject">받는사람</span> : <!--{.rsv_name}--></li>
+				<li class="underline dotted"><span class="subject">연락처</span> : <!--{.rsv_mobile}--></li>
+				<li class="underline none"><span class="subject">주소</span> : <!--{.rsv_region}--></li>
+			</ul>
+		</td>
+		<td><!--{.process_desc}--></td>
+		<td>
+			<span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=order_view&order_code=<!--{.order_code}--><!--{srch_url}-->">상세보기</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="7" class="ctext">주문 내역이 없습니다.!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_left">
+	<span class="button black"><input type="button" value="선택삭제" onClick="multiControl()" /></span>
+</div>
+<div class="navipage"><!--{navi_page}--></div>

@@ -1,0 +1,166 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("table.list_table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+$(function() {
+	$('#jsfrm').submit(function() {
+		var chk_option = [
+			{ 'target':'class_title', 'name':'반명', 'type':'blank', 'msg':'반명을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+function editForm(code) {
+	var class_title = $('#class_title'+code).text();
+	$('input[name=pg_mode]').val('edit');
+	$('input[name=class_name]').val(code);
+	$('input[name=class_title]').val(class_title);
+}
+
+function listDel(code) {
+	if(!confirm('삭제하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&class_name='+code,function(data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/member/memberAuth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+
+
+//테이블 드래그
+$(function() {
+	$("#drag_table").tableDnD({
+		onDragClass: "dndover "
+	});
+});
+
+function saveRanking() {
+	if(!confirm('순서를 적용하시겠습니까?')) {
+		return;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=save_ranking<!--{srch_url}-->&'+$('#drag_table').tableDnDSerialize(),function(data) {
+		if(data['bool']) {
+			alert('순서가 저장되었습니다.!');
+			location.replace('<!--{_SERVER.REQUEST_URI}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}	
+
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">반설정</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">반입력폼</div>
+<form method="post" name="jsfrm" id="jsfrm" action="<!--{_SERVER.SCRIPT_NAME}-->" >
+<input type="hidden"  name="pg_mode" value="write" />
+<input type="hidden"  name="class_name" value="" />
+<table class="form_table">
+	<colgroup>
+		<col width="20%" />
+		<col width="50%" />
+		<col width="30%" />
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>반명</th>
+		<td><input type="text" name="class_title" value="" class="frm_input" style="width:100px" /></td>
+		<td><span class="button black"><input type="submit" value="저 장" /></span></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+<div class="clear_box"></div>
+<form id="list_form">
+<table id="drag_table" class="list_table">
+	<colgroup>
+		<col width="50" />
+		<col width="*" />
+		<col width="150" />
+	</colgroup>
+	<thead>
+	<tr class="nodrop nodrag">
+		<th>순번</th>
+		<th>반명</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr class="tr_list" id="<!--{.class_name}-->">
+		<td><!--{.index_+1}--></td>
+		<td><span id="class_title<!--{.class_name}-->"><!--{.class_title}--></span></td>
+		<td>
+			<span class="button small black"><a href="javascript:;" onclick="editForm('<!--{.class_name}-->')">수 정</a></span>
+			<span class="button small black"><a href="javascript:;" onclick="listDel('<!--{.class_name}-->')">삭 제</a></span>
+		</td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="3">등록된 글이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+</form>
+<div class="button_area_left">
+	<span class="button black"><a href="javascript:;" onclick="saveRanking()">순서저장</a></span>
+</div>

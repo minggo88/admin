@@ -1,0 +1,39 @@
+/* Sortable
+----------------------------------*/
+
+/* item_tabs gallery type
+----------------------------------*/
+.ui-state-highlight_item_tabs {
+	border-top: 1px dotted #a60000;
+	border-right: 1px dotted #a60000;
+	border-bottom: 1px dotted #a60000;
+	border-left: 1px dotted #a60000;
+	background:#FFDFDF;
+	width:80px;
+	height:122px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+
+/* item_tabs gallery_a type
+----------------------------------*/
+.ui-state-highlight_item_tabs_gallery_a {
+	border-top: 1px dotted #a60000;
+	border-right: 1px dotted #a60000;
+	border-bottom: 1px dotted #a60000;
+	border-left: 1px dotted #a60000;
+	background:#FFDFDF;
+	width:80px;
+	height:122px;
+	color: #a60000;
+	text-align:center;
+	padding:3px;
+	margin:3px 3px 3px 3px;
+	float:left;
+	z-index:1000;
+}
+

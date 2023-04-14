@@ -1,0 +1,95 @@
+<script type="text/javascript">
+<!--
+
+$(function() {
+	$('#jsform').submit(function() {
+		var chk_option = [
+			{ 'target':'coupon_name', 'name':'쿠폰명', 'type':'blank', 'msg':'쿠폰명을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					<!--{? _GET.pg_mode == 'form_new'}-->
+					alert('등록되었습니다.!');
+					location.replace('?pg_mode=list');
+					<!--{:}-->
+					if(confirm("등록되었습니다.!\n\n계속 수정하시겠습니까?")) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->';
+					}
+					<!--{/}-->
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	$('input[name=bool_coupon]').val(['<!--{bool_coupon}-->']);
+	$('input[name=kinds_period]').val(['<!--{kinds_period}-->']);
+});
+
+//-->
+</script>
+<div class="title_d1"><h1>쿠폰관리</h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">쿠폰<!--{? _GET.pg_mode == 'form_new'}-->등록<!--{:}-->수정<!--{/}-->하기</div>
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new'}-->write<!--{:}-->edit<!--{/}-->" />
+<input type="hidden" name="coupon_code" value="<!--{coupon_code}-->" />	
+<table class="form_table">
+	<colgroup>
+		<col width="15%">
+		<col width="85%">
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>쿠폰사용여부</th>
+		<td>
+			<input type="radio" name="bool_coupon" id="bool_coupon_y" value="1" /> <label for="bool_coupon_y">사용함</label>
+			<input type="radio" name="bool_coupon" id="bool_coupon_n" value="0" /> <label for="bool_coupon_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>쿠폰명</th>
+		<td><input type="text" name="coupon_name" value="<!--{coupon_name}-->" class="frm_input" style="width:200px" /></td>
+	</tr>
+	<tr>
+		<th>쿠폰금액</th>
+		<td><input type="text" name="discount_price" value="<!--{discount_price}-->" class="frm_input" style="width:100px" /> 원</td>
+	</tr>
+	<tr>
+		<th>쿠폰사용기간</th>
+		<td>
+			<input type="radio" name="kinds_period" id="kinds_period_always" value="always" /> <label for="kinds_period_always">기간제한없음</label>
+			<input type="radio" name="kinds_period" id="kinds_period_validity" value="validity" /> <label for="kinds_period_validity">발급후 <input type="text" name="validity_day" value="<!--{validity_day}-->" class="frm_input" style="width:50px" /> 일간 사용가능</label>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="저 장" /></span>&nbsp;
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록</a></span>
+</div>
+</form>

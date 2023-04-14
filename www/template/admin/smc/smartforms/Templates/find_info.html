@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Smart Forms - Contact Form </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body class="woodbg">
+
+    <div class="smart-wrap">
+        <div class="smart-forms smart-container pb-50">
+
+            <div class="form-header header-primary">
+                <h4><i class="fa fa-comments"></i><!--{224}--></h4>
+            </div><!-- end .form-header section -->
+
+            <form method="post" name="email_resend" id="email_resend" action="/findinfo">
+                <input type="hidden" name="pg_mode" value="find_pw" />
+                <input type="hidden" name="trans_method" value="email" />
+                <div class="form-body">
+
+                    <div class="section">
+                        <!--{225}-->
+                    </div>
+
+                    <div class="section">
+                        <label for="email" class="field-label"><!--{226}--></label>
+                        <label class="field prepend-icon">
+                            <input type="email" name="email" id="email" class="gui-input"
+                                placeholder="example@domain.com...">
+                            <span class="field-icon"><i class="fa fa-envelope"></i></span>
+                        </label>
+                    </div><!-- end section -->
+
+                    <!--<div class="section">
+                            <label for="telephone" class="field-label">Your mobile phone number </label>
+                            <label class="field prepend-icon">
+                                <input type="tel" name="telephone" id="telephone" class="gui-input" placeholder="Enter your mobile phone number...">
+                                <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                            </label>
+                        </div>-->
+                    <!-- end section -->
+
+                </div><!-- end .form-body section -->
+                <div class="input-froup">
+                    <button type="submit" class="btn btn-gold fs-20"><!--{227}--></button>
+                </div><!-- end .form-footer section -->
+            </form>
+
+        </div><!-- end .smart-forms section -->
+    </div><!-- end .smart-wrap section -->
+
+    <div></div><!-- end section -->
+
+</body>
+
+</html>

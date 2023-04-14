@@ -1,0 +1,80 @@
+<div class="sub_title_bg">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="container">
+			<div class="row">
+				<h2 class="section-title body-font text-left fs-24 pt-50 pb-10">
+					NFT
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page has-sidebar has-left-sidebar bordered">
+
+	<div class="page-inner no-border">
+
+		<div class="container white_bg">
+
+			<div class="row">
+				<div class="col-lg-10 col-md-12 col-sm-12 pl-30 pr-30 ">
+				   <div class="row">
+
+					 <div class="col-sm-12">
+							
+						 <div class="smart-forms smart-container">
+	
+							<form method="post" name="nftform" id="nftform" action="/nft">
+								<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode =='form_new' }-->write<!--{:}-->edit<!--{/}-->" />
+								<input type="hidden" name="start" value="<!--{_GET.start}-->" />
+								<input type="hidden" name="idx" value="<!--{_GET.idx}-->" />
+								<input type="hidden" name="userid" value="<!--{_SESSION.USER_ID}-->" />
+								<input type="hidden" name="author" value="<!--{_SESSION.USER_NAME}-->" />
+											
+								<div class="form-body">
+
+									<div class="frm-row">
+
+										<div class="section">
+											<label for="subject" class="field-label" style="font-weight:600"><?=Lang::main_Title;?> <em> * </em> </label>
+											<label class="field prepend-icon">
+												<input type="text" name="subject" id="subject" class="gui-input" value="<!--{subject}-->">
+												<span class="field-icon"><i class="fa fa-document-text"></i></span>
+											</label>
+										</div><!-- end section -->
+
+										<div class="section">
+												<label for="contents" class="field-label" style="font-weight:600"><?=Lang::main_Qustion;?> <em> * </em> </label>
+												<label class="field prepend-icon">
+													<textarea class="gui-textarea" name="contents" id="contents" ><!--{contents}--></textarea>
+													<span class="field-icon"><i class="fa fa-document-text"></i></span>
+												</label>
+											</div><!-- end section -->
+											
+										</div><!-- end .form-body section -->
+										
+									</div>
+									<div class="form-footer">
+										<!--{? subject}-->
+										<button type="submit" class="button btn-primary"  onclick="checkAgree()"><?=Lang::main_206;?></button>
+										<!--{:}-->
+										<button type="submit" class="button btn-primary"  onclick="checkAgree()"><?=Lang::main_205;?></button>
+										<!--{/}-->
+									</div><!-- end .form-footer section -->
+									
+								</div><!-- end .form-body section -->
+							</form>
+							
+						</div><!-- end .smart-forms section -->
+					</div><!-- end .smart-wrap section -->
+					
+					<div></div><!-- end section -->
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--{# js_tpl_footer}-->
+
+</div>

@@ -1,0 +1,10 @@
+Options -Indexes
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+php_value short_open_tag 0
+php_value post_max_size 100M
+php_value upload_max_filesize 100M
+php_value error_reporting E_ERROR|E_WARNING|E_PARSE
+#php_value request_order P

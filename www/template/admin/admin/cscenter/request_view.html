@@ -1,0 +1,67 @@
+<script language="JavaScript">
+ <!--
+function requestDel() {
+	if(!confirm('삭제하시겠습니까?')) {
+		return false;
+	}
+	$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=del&idx=<!--{idx}-->',function (data) {
+		if(data['bool']) {
+			alert('삭제되었습니다.!');
+			location.replace('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->');
+		}
+		else {
+			if(data['msg'] == 'err_access') {
+				alert('비정상적인 접근입니다.');
+			}
+			else if(data['msg'] == 'err_sess') {
+				location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+			}
+			else {
+				alert('재시도 해주세요.!');
+			}
+		}
+	},'json');
+}
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/PanelBar.png') 0px 0px no-repeat;">센터관리</span> / <span class="title02">교육센터 및 지사모집 신청서</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">교육센터 및 지사모집 신청서</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>회사명</th>
+		<td><!--{comname}--></td>
+		<th>담당직위</th>
+		<td><!--{position}--></td>
+	</tr>
+	<tr>
+		<th>성명</th>
+		<td><!--{author}--></td>
+		<th>연락처</th>
+		<td><!--{phone}--></td>
+	</tr>
+	<tr>
+		<th>담당자 이메일</th>
+		<td colspan="3"><!--{email}--></td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td colspan="3"><!--{subject}--></td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td colspan="3"><!--{contents}--></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록</a></span>&nbsp;
+	<span class="button large black"><a href="javascript:;" onclick="requestDel()">삭제</a></span>
+</div>

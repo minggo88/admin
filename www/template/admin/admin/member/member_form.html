@@ -1,0 +1,263 @@
+<script type="text/javascript">
+<!--
+
+
+$(function() {
+	$('#memform').submit(function() {
+		var chk_option = [
+			{ 'target':'address_a', 'name':'주소', 'type':'blank', 'msg':'주소를 입력하여 주세요.!' },
+			{ 'target':'phone_a', 'name':'지역번호', 'type':'select', 'msg':'지역번호를 선택하여 주세요.!' },
+			{ 'target':'phone_b', 'name':'전화국번', 'type':'digit', 'msg':'전화국번을 입력하여 주세요.!' },
+			{ 'target':'phone_c', 'name':'전화번호', 'type':'digit', 'msg':'전화번호을 입력하여 주세요.!' },
+			{ 'target':'mobile_a', 'name':'인식번호', 'type':'select', 'msg':'인식번호를 선택하여 주세요.!' },
+			{ 'target':'mobile_b', 'name':'휴대전화국번', 'type':'digit', 'msg':'휴대전화국번을 입력하여 주세요.!' },
+			{ 'target':'mobile_c', 'name':'휴대전화번호', 'type':'digit', 'msg':'휴대전화번호를 입력하여 주세요.!' },
+			{ 'target':'email_a', 'name':'이메일아이디', 'type':'blank', 'msg':'이메일 아이디를 입력하여 주세요.!' },
+			{ 'target':'email_b', 'name':'이메일도메인', 'type':'blank', 'msg':'이메일 도메인을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					if(confirm("저장되었습니다.\n\n계속 수정하시겠습니까?")) {
+						location.replace('<!--{_SERVER.REQUEST_URI}-->');
+					}
+					else {
+						location.href = '<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->';
+					}
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('select[name=member_level]').val('<!--{member_level}-->');
+	$('select[name=phone_a]').val('<!--{phone_a}-->');
+	$('select[name=mobile_a]').val('<!--{mobile_a}-->');
+	$('select[name=level_code]').val('<!--{level_code}-->');
+	$('select[name=area1]').val('<!--{area1}-->');
+
+	$('input[name=bool_email]').val(['<!--{bool_email}-->']);
+	$('input[name=bool_sms]').val(['<!--{bool_sms}-->']);
+
+	$('select[name=company_tel_a]').val('<!--{company_tel_a}-->');
+
+});
+
+$(function() {
+        
+        $('#area1').change(function() {
+		var area1 = $(this).val();
+		$.get('<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=gugun&area1='+$(this).val(),function(data) {
+			data = '<option value="" selected="selected">::: 시/군/구 선택 :::</option>'+data;
+			$('#area2').html(data);
+		},'html');
+	});
+        
+        $("input[name=expire_date]").kendoDatePicker({
+		culture: "ko-KR"
+	});
+
+});
+
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/32x32/icon_03.png') 0px 0px no-repeat;">회원관리</span> / <span class="title02">회원정보수정</h1></span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif">회원정보수정</div>
+<form method="post" id="memform" name="memform" action="/member/admin/memberAdmin.php">
+<input type="hidden" name="pg_mode" value="edit" />
+<input type="hidden" name="userid" value="<!--{userid}-->" />
+<table class="form_table">
+	<colgroup>
+		<col width="140"></col>
+		<col width="37%"></col>
+		<col width="140"></col>
+		<col width="*"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>아이디</th>
+		<td><!--{userid}--></td>
+		<th>회원가입일</th>
+		<td><!--{regdate}--></td>
+	</tr>
+	<tr>
+		<th>성명</th>
+		<td><input type="text" name="name" value="<!--{name}-->" class="frm_input" /></td>
+		<th>닉네임</th>
+		<td><input type="text" name="nick" value="<!--{nick}-->" class="frm_input" /></td>
+	</tr>
+	<tr>
+		<th>비밀번호</th>
+		<td <!--{? member_level=='110' || member_level=='115' || member_level=='120' || member_level=='130' || member_level=='140' }-->colspan="3"<!--{/}-->><input type="text" name="passwd" class="frm_input" /> 변경만 가능 합니다.	</td>
+		<!--{? member_level!='110' && member_level!='115' && member_level!='120' && member_level!='130' && member_level!='140' }-->
+		<th>회원레벨</th>
+		<td>
+			<select name="member_level">
+				<option value="" selected="selected">::레벨선택::</option>
+				<!--{@loop_level}-->
+				<option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+				<!--{/}-->
+			</select>		
+		</td>
+		<!--{/}-->
+	</tr>
+	<tr>
+		<th>휴대전화</th>
+		<td>
+			<select name="mobile_a" style="width:60px;">
+				<!--{=loopMobileA()}-->
+			</select> - 
+			<input type="text" name="mobile_b" value="<!--{mobile_b}-->" maxlength="4" class="frm_input" style="width:60px" /> -
+			<input type="text" name="mobile_c" value="<!--{mobile_c}-->" maxlength="4" class="frm_input" style="width:60px" />
+		</td>
+		<th>지역</th>
+		<td>
+                    <!--{area}-->  &nbsp; 
+                    <select name="area1" id="area1" style="width:120px;">
+                        <!--{=loopCodelist(15)}-->
+                    </select>
+                    <select name="area2" id="area2" class="area2" style="min-width:120px;">
+                        <option value="" selected="selected">::: 시/군/구 선택 :::</option>
+                    </select>
+		</td>
+	</tr>
+	</tbody>
+</table><br />
+
+<!--{? member_level=='110' || member_level=='115' || member_level=='120' || member_level=='130' || member_level=='140' }-->
+<div class="title_d2"><img src="../images/bullet.gif">FC 정보</div>
+<table class="form_table" >
+    <colgroup>
+		<col width="140"></col>
+		<col width="37%"></col>
+		<col width="140"></col>
+		<col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>회원레벨</th>
+            <td colspan="3">
+                <select name="member_level">
+                    <option value="" selected="selected">::레벨선택::</option>
+                    <!--{@loop_level}-->
+                    <option value="<!--{.level_code}-->"><!--{.level_name}--></option>
+                    <!--{/}-->
+                </select>		
+            </td>
+	</tr>
+	<tr>
+            <th>신청기간</th>
+            <td colspan="3">
+                <select name="payment_day">
+                    <option value="0">신청기간을 선택하세요</option>
+                    <option value="30">1개월</option>
+                    <option value="60">2개월</option>
+                    <option value="90">3개월</option>
+                </select>
+            </td>
+	</tr>
+	<tr>
+            <th>기준금액</th>
+            <td colspan="3"><input type="text" id="payment_vmoney" name="payment_vmoney" value="<!--{payment_vmoney}-->" class="frm_input" style="width:100px;text-align:right;" />원,  - 기준값 100000, 200000,300000,400000,600000</td>
+	</tr>
+	<tr>
+            <th>결제금액</th>
+            <td><input type="text" id="payment_money" name="payment_money" value="<!--{payment_money}-->" class="frm_input" style="width:100px;text-align:right;" />원</td>
+            <th>사용기간</th>
+            <td><input type="text" id="expire_date" name="expire_date" value="<!--{expire_date}-->"  readonly="readonly" class="frm_input" style="width:150px;" /> <!--{expire_date}--></td>
+	</tr>
+    </tbody>
+</table>
+
+<div class="title_d2"><img src="../images/bullet.gif">FC 추가정보</div>
+<table class="form_table" >
+    <colgroup>
+		<col width="140"></col>
+		<col width="37%"></col>
+		<col width="140"></col>
+		<col width="*"></col>
+    </colgroup>
+    <tbody>
+	<tr>
+            <th>소속사 전화번호</th>
+            <td>
+                <select name="company_tel_a" style="width:60px;">
+                    <!--{=loopTelA()}-->
+                </select> - 
+                <input type="text" name="company_tel_b" value="<!--{company_tel_b}-->" maxlength="4" class="frm_input" style="width:60px" /> -
+                <input type="text" name="company_tel_c" value="<!--{company_tel_c}-->" maxlength="4" class="frm_input" style="width:60px" />
+            </td>
+            <th>소속사명</th>
+            <td><input type="text" id="company" name="company" value="<!--{company}-->"  readonly="readonly" class="frm_input" style="width:150px;" /> </td>
+	</tr>
+    </tbody>
+</table>
+<!--{/}-->
+
+
+<div class="button_area">
+    <span class="button large black strong"><input type="submit" value="정보수정" /></span>
+    <span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list<!--{srch_url}-->">목록보기</a></span>
+</div>
+</form>
+<!--상품목록 끝-->
+<script type="text/javascript">
+<!--
+$(function() {
+	$('#popup_zipcode').dragPopup({
+		popup_id: 'drag_popup_zipcode',
+		popup_title: '우편번호검색',
+		popup_width: 350,
+		popup_height: 400,
+		bool_today_close:false
+	});
+
+	$('#popup_comzipcode').dragPopup({
+		popup_id: 'drag_popup_comzipcode',
+		popup_title: '우편번호검색',
+		popup_width: 350,
+		popup_height: 400,
+		bool_today_close:false
+	});
+});
+
+function srchZipcode(target_zipcode,target_addr) {
+	$('#iframe_zipcode').attr('src','/zipcode/zipcode.php?target_zipcode='+target_zipcode+'&target_addr='+target_addr);
+	showPopup('drag_popup_zipcode',{kind_pos:'center'});
+}
+
+function srchComzipcode(target_zipcode,target_addr) {
+	$('#iframe_comzipcode').attr('src','/zipcode/zipcode.php?target_zipcode='+target_zipcode+'&target_addr='+target_addr);
+	showPopup('drag_popup_comzipcode',{kind_pos:'center'});
+}
+//-->
+</script>
+
+<div id="popup_zipcode" style="display:none;padding:10px;">
+	<iframe id="iframe_zipcode"  frameborder="0" style="width:330px;height:350px;border:0px;"></iframe>
+</div>
+
+<div id="popup_comzipcode" style="display:none;padding:10px;">
+	<iframe id="iframe_comzipcode"  frameborder="0" style="width:330px;height:350px;border:0px;"></iframe>
+</div>

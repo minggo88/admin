@@ -1,0 +1,91 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('ul.tab_menu li:eq(1)').addClass('selected');
+});
+//-->
+</script>
+<div class="title_d2"><img src="../images/bullet.gif">회원정보</div>
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>아이디</th>
+		<td><b><!--{userid}--></b></td>
+		<th>회원가입일</th>
+		<td><!--{regdate}--></td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td><!--{phone}--></td>
+		<th>휴대전화</th>
+		<td><!--{mobile}--></td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td colspan="3" class="pleft"><!--{email}--></td>
+	</tr>
+	<tr>
+		<th>주문건수</th>
+		<td><b><!--{cnt_order}--></b> 건</td>
+		<th>보유적립금</th>
+		<td><b><!--{=number_format(total_emoney)}--></b> ⓟ</td>
+	</tr>
+	<tr>
+	<tr>
+		<th>총주문금액</th>
+		<td><b><!--{=number_format(total_order_amount)}--></b> 원</td>
+		<th>총결제금액</th>
+		<td><b><!--{=number_format(total_pay_amount)}--></b> 원</td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif">주문목록</div>
+<table class="list_table">
+	<colgroup>
+		<col width="40"></col>
+		<col width="120"></col>
+		<col width="80"></col>
+		<col width="80"></col>
+		<col width="*"></col>
+		<col width="80"></col>
+		<col width="80"></col>
+		<col width="80"></col>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>No</th>
+		<th>주문일</th>
+		<th>주문번호</th>
+		<th>수령자</th>
+		<th>수령지</th>
+		<th>진행상황</th>
+		<th>결제금액</th>
+		<th>상세보기</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop_order}-->
+	<tr class="loop">
+		<td><!--{.no}--></td>
+		<td><!--{.regdate}--></td>
+		<td><!--{.order_code}--></td>
+		<td><!--{.rsv_name}--></td>
+		<td><!--{.rsv_region}--></td>
+		<td><!--{.process_desc}--></td>
+		<td><!--{=number_format(.pay_amount)}--></td>
+		<td><span class="button small black"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=order_view&userid=<!--{_GET.userid}-->&order_code=<!--{.order_code}-->">상세보기</a></span></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="8" id="empty">주문내역이 없습니다.!</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="navipage"><!--{navi_page}--></div>

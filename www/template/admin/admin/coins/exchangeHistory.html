@@ -1,0 +1,111 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>교환내역확인</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>거래소 관리</a>
+            </li>
+            <li>
+                <a>교환내역확인</a>
+            </li>
+            <li class="active">
+                <strong><!--{=_GET.symbol}-->-<!--{=_GET.exchange}--></strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 m-b-md">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>교환내역확인</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="form-horizontal" id="srchform">
+                            <div class="col-sm-12 col-md-2 m-t-sm">
+                                <label class="col-form-label" for="s_div">기준</label>
+                                <select id="s_div" name="s_div" class="form-control">
+                                    <option value="regdate" selected>체결날짜</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-md-2 m-t-sm">
+                            <label class="col-form-label" for="s_year">년</label>
+                                <select id="s_year" name="s_year" class="form-control">
+                                    <option value="" <!--{? _GET.s_year==''}-->selected<!--{/}-->>전체</option>
+                                    <?php for($y=2021; $y<=date('Y'); $y++) {
+                                        echo '<option value="'.$y.'" '.($_GET['s_year']==$y ? 'selected':'').'>'.$y.'</option>';
+                                    }?>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-md-2 m-t-sm">
+                                <label class="col-form-label" for="s_month">월</label>
+                                <select id="s_month" name="s_month" class="form-control">
+                                    <option value="" <!--{? _GET.s_month==''}-->selected<!--{/}-->>전체</option>
+                                    <?php for($m=1; $m<=12; $m++) {
+                                        $m2 = $m<10 ? '0'.$m : $m;
+                                        echo '<option value="'.$m2.'" '.($_GET['s_month']==$m2 ? 'selected':'').'>'.$m.'</option>';
+                                    }?>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-md-2 m-t-sm">
+                                <label class="col-form-label" for="s_day">일</label>
+                                <select id="s_day" name="s_day" class="form-control">
+                                    <option value="" <!--{? _GET.s_day==''}-->selected<!--{/}-->>전체</option>
+                                    <?php for($d=1; $d<=31; $d++) {
+                                        $d2 = $d<10 ? '0'.$d : $d;
+                                        echo '<option value="'.$d2.'" '.($_GET['s_day']==$d2 ? 'selected':'').'>'.$d.'</option>';
+                                    }?>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-2 m-t-sm">
+                                <button class="btn btn-md btn-primary m-t-md" id="btn-search">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top:10px"><strong>종목 : </strong> <!--{= strtoupper(_GET.symbol) }--></p>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-customers">
+                            <thead>
+                                <tr>
+                                    <!-- <th>No</th> -->
+                                    <th class="text-center">거래번호</th>
+                                    <th class="text-center">거래날짜</th>
+                                    <th class="text-center">구매자(<!--{_GET.exchange}-->)</th>
+                                    <th class="text-center">판매자(<!--{_GET.symbol}-->)</th>
+                                    <th class="text-center">교환비(<!--{_GET.exchange}-->/<!--{_GET.symbol}-->)</th>
+                                    <th class="text-center"><!--{_GET.symbol}-->수량</th>
+                                    <th class="text-center">수수료</th>
+                                    <!-- <th class="text-center">Transaction Tax</th> -->
+                                    <!-- <th class="text-center">Income Tax</th> -->
+                                    <th class="text-center">증감</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <!-- <th>No</th> -->
+                                    <th class="text-center">거래번호</th>
+                                    <th class="text-center">거래날짜</th>
+                                    <th class="text-center">구매자(<!--{_GET.exchange}-->)</th>
+                                    <th class="text-center">판매자(<!--{_GET.symbol}-->)</th>
+                                    <th class="text-center">교환비(<!--{_GET.exchange}-->/<!--{_GET.symbol}-->)</th>
+                                    <th class="text-center"><!--{_GET.symbol}-->수량</th>
+                                    <th class="text-center">수수료</th>
+                                    <!-- <th class="text-center">Transaction Tax</th> -->
+                                    <!-- <th class="text-center">Income Tax</th> -->
+                                    <th class="text-center">증감</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

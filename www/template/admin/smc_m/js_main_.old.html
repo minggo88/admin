@@ -1,0 +1,311 @@
+<div class="page">
+
+    <section class="section">
+        <div class="container main-chart-container pt-30 pb-10">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="clearfix">
+                        <div class="float-left main-coin-icon"><img src="img/main/main_coin_icon1.png" /></div>
+                        <div class="NotoSansCJKkr pt-23 float-left"><b>AllpassCoin</b></div>
+                        <!--<div class="NotoSansCJKkr float-right main-coin-icon-krw">KRW</div>*/}-->
+                        <div class="NotoSansCJKkr pt-23 float-right" id="apcPrice"><b></b></div>                            
+                    </div>       
+                    <div class="clearfix mb-5">                            
+                        <div class="NotoSansCJKkr float-right main-coin-history" ></div>
+                        <div class="NotoSansCJKkr float-right main-coin-name">KMCSE</div>                            
+                    </div>     
+                    <div class="chart_container" style="width:100%;">
+                        <div class="vertical-line">&nbsp;</div>
+                        <div class="vertical-line">&nbsp;</div>
+                        <div class="vertical-line">&nbsp;</div>                                                        
+                        <div class="trend-chart"></div>                                     
+                    </div>   
+                    <div class="clearfix">
+                        <div class="float-left"><span class="today_line"> </span>Today</div>
+                        <div class="float-left"><span class="yesterday_box"> </span>Yesterday</div>                                
+                    </div>                                                                     
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="clearfix">
+                            <div class="float-left main-coin-icon"><img src="img/main/main_coin_icon2.png" /></div>
+                            <div class="NotoSansCJKkr pt-23 float-left"><b>Bitcoin</b></div>
+                            <!--<div class="NotoSansCJKkr float-right main-coin-icon-krw">KRW</div>-->
+                            <div class="NotoSansCJKkr pt-23 float-right" id="btcPrice"><b></b></div>                            
+                        </div>       
+                        <div class="clearfix mb-5">                            
+                            <div class="NotoSansCJKkr float-right main-coin-history"></div>
+                            <div class="NotoSansCJKkr float-right main-coin-name">KMCSE</div>                            
+                        </div>     
+                        <div class="chart_container" style="width:100%;">
+                            <div class="vertical-line">&nbsp;</div>
+                            <div class="vertical-line">&nbsp;</div>
+                            <div class="vertical-line">&nbsp;</div>                                                        
+                            <div class="trend-chart"></div>                                     
+                        </div> 
+                        <div class="clearfix">
+                            <div class="float-left"><span class="today_line"> </span>Today</div>
+                            <div class="float-left"><span class="yesterday_box"> </span>Yesterday</div>                                
+                        </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                        <div class="row">
+                            <div class="NotoSansCJKkr pt-23 pl-5"><b>Coin Price</b></div>                       
+                        </div>
+                        <div class="row">
+                            <table class="table main-coin-price-table" id="main-coin-price-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Allpass Coin</td>
+                                        <td class="main-coin-price"></td>
+                                        <td class="main-coin-price-per"></td>                                            
+                                    </tr>
+                                    <tr>
+                                        <td>bitcoin</td>
+                                        <td class="main-coin-price"></td>
+                                        <td class="main-coin-price-per"></td>                                            
+                                    </tr>                    
+                                    <tr>
+                                        <td>Etherium</td>
+                                        <td class="main-coin-price"></td>
+                                        <td class="main-coin-price-per"></td>                                            
+                                    </tr>  
+                                    <tr>
+                                        <td>Ethereum Classic</td>
+                                        <td class="main-coin-price"></td>
+                                        <td class="main-coin-price-per"></td>                                            
+                                    </tr>
+                                    <tr>
+                                        <td>Litecoin</td>
+                                        <td class="main-coin-price"></td>
+                                        <td class="main-coin-price-per"></td>                                            
+                                    </tr>                   
+                                </tbody>
+                            </table>                                
+                        </div>                            
+                </div>
+            </div>
+        </div>
+    </section>                
+
+    <div class="slider-container rev_slider_wrapper hidden-md-down" style="height: 220px;">
+        <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1353, 'gridheight': 220}">
+            <ul>
+                <li data-transition="fade">
+                    <img src="img/main/main_bg.png" alt="" data-bgposition="left center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg">
+                    <!--{*
+                    <div class="tp-caption font-white fw-7 ls-2" data-x="['left','left','left','left']" data-hoffset="['80','80','80','80']" data-y="['center','center','center','center']" data-voffset="['-100','-100','-100','-100']" data-start="500" data-paddingleft="['0', '0', '0', '0']" style="z-index: 5; font-size: 24px;" data-transform_in="y:[-300%];opacity:0;s:500;">Welcome To</div>
+                    <h1 class="tp-caption font-orange fw-7" data-x="['left','left','left','left']" data-hoffset="['75','75','75','75']" data-y="['center','center','center','center']" data-voffset="['-45','-45','-45','-45']" data-fontsize="['60', '60', '50', '40']" data-start="800" data-paddingleft="['0', '0', '0', '0']" style="z-index: 5; font-size: 50px;" data-transform_in="y:[-300%];opacity:0;s:500;">
+					CEXSTOCK
+					</h1>
+                    <div class="tp-caption font-orange" data-x="['left','left','left','left']" data-hoffset="['85','85','85','85']" data-y="['center','center','center','center']" data-voffset="['25','25','25','25']" data-start="1500" data-paddingleft="['0', '0', '0', '0']" data-fontsize="26" style="z-index: 5;" data-transform_in="y:[-300%];opacity:0;s:500;">Crypto Currency Exchange</div>
+                    <div class="tp-caption font-green" data-x="['left','left','left','left']" data-hoffset="['80','80','80','80']" data-y="['center','center','center','center']" data-voffset="['55','55','55','55']" data-start="1500" data-paddingleft="['0', '0', '0', '0']" data-fontsize="['16', '16', '16', '18']" data-lineheight="['12', '12', '12', '22']" style="z-index: 5; color: #54a4ec;" data-transform_in="y:[-300%];opacity:0;s:500;">We will create a new culture and society. Smart Coin will be a history of cryptocurrency</div>
+                    <div class="tp-caption text-uppercase" data-x="['right','right','right','right']" data-hoffset="['80','80','80','80']" data-y="['center','center','center','center']" data-voffset="['-40','-40','-40','-40']" data-start="1500" style="z-index: 5;" data-transform_in="opacity:0;s:500;">
+                    </div>
+                    *}-->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-inner p-none">
+        <!--{*
+        <section class="section bg-white text-center t-bordered pt-15 pb-15">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 mb-0">
+                        <span class="m-none fs-14">
+                       <span class="label label-primary mr-10">NEW</span> [ Completion ] Server check guide
+                        <!--  ( Adjusting the number of encryption payout confirms ) -->
+                        <!-- <a class="fs-14 mb-none ml-10" href="#">+ More</a> -->
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tiny bg-white-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-white text-center mb-0">
+                        <p class="section-sub-title mb-0 lh-18">
+                            <span class="icon-32 icon-32-btc"></span>
+                            <span class="text-orange lh-32">Promotion Banner</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        *}-->
+        <section class="section bg-dark-blue" id="BannerText">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12 text-white text-center mt-5 mb-5 pd-box2" style="text-align:center !important">
+                        <ul class="i-list mb-5">
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <!--<li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>-->
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--<div class="col-12 col-sm-6 text-white text-center mb-10 pd-box2">
+                        <ul class="i-list mb-0">
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                            <li class="text-left">
+                                <span class="list-item">- :</span>
+                                <span class="list-item text-warning">$ -</span>
+                            </li>
+                        </ul>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+
+        <!--<section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="v-heading-v3"><h3 class="mt-20"><span>Coin Market </span></h3></div>                         
+                        <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Coin</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Volume</th>
+                                <th class="text-center">Supply</th>
+                                <th class="text-center">Market Cap</th>
+                                <th class="text-center">Trend</th>
+                                <th class="text-center">Buy / Sell</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> Bit coin</td>
+                                <td class="text-right">7,092,000 $</td>
+                                <td class="text-right">7,092,000 $</td>
+                                <td class="text-right font-azul">-11,000 $(-0.15%)<i class="fa fa-play" aria-hidden="true"></i></td>
+                                <td class="text-right">7,092,000 $</td>
+                                <td class="text-right"><a class="btn-chart" href="/trade/btc"><img src="img/main/btn-chart.png" width="27px" alt=""></a></td>
+                                <td class="text-center">
+                                    <a class="btn btn-primary btn-xs btn-radius" href="/trade/btc">Trade</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr class="tiny">
+            </div>
+        </section>-->
+
+        <section class="section">
+            <div id="root"></div>
+        </section>
+        <!--<section class="section">
+            <div class="container hidden-sm-down">
+                pc
+                <div id="root"></div>
+                <hr class="tiny tiny-main" />
+            </div>
+            <div class="container row hidden-md-up">
+                mobile
+                <div class="row">
+                    <div class="v-heading-v3"><h3 class="mt-20 ml-20"><span>Coin Market </span></h3></div>                         
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Coin<br />Charge</th>
+                                <th class="text-center">REALTIME TICKER<br />TRANSACTION</th>
+                                <th class="text-center">Charts<br />Buy / Sell</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center symbolTd">
+                                    <a class="coin-name pl-10" href="#"><span class="icon-24 icon-24-btc"></span><span class="name-con">
+                                    <h4 class="mt-15 ml-10"><span>Bitcoin</span></h4></span></a>
+                                    <h4 class="ml-10">$ 8,392.00</h4>
+                                </td>
+                                <td class="text-right">
+                                    <h4 class="mt-15 ml-10"><span class="text-primary">$ 15.00 (0.00%) <i class="fa fa-arrow-up"></i></span></h4>
+                                    <h4 class="mt-15 ml-10">$ 9,701,152.00</h4>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn-chart" href="#"><img src="img/main/btn-chart.png" width="27px" alt=""></a><br />
+                                    <a class="btn btn-primary btn-xs btn-radius mt-15 " href="/trade/btc">Trade</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="root_main"></div>
+                <hr class="tiny tiny-main" />
+            </div>
+        </section>-->
+        
+        <!--<section class="section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-sm-12 mt-30">
+                        &lt;!&ndash;{? _SESSION.USER_ID}&ndash;&gt;
+                        <a class="btn btn-xlg standard primary br-3 m-none" href="/trade/jin">
+                            <span class="text">Trade</span>
+                        </a>
+                        &lt;!&ndash;{:}&ndash;&gt;
+                        <a class="btn btn-xlg standard primary br-3 m-none" href="/join">
+							<span class="text">SIgn Up</span>
+						</a>
+                        &lt;!&ndash;{/}&ndash;&gt;
+                    </div>
+                </div>
+                <hr class="invisible medium" />
+            </div>
+        </section>-->
+    </div>
+    <!--{# js_tpl_footer}-->
+</div>

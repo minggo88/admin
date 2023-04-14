@@ -1,0 +1,47 @@
+<script type="text/javascript">
+<!--
+$(function() {
+	$("#memberEmoney>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+
+});
+
+//-->
+</script>
+
+
+<div class="member_view_title"><img src="../images/bullet.gif"> 적립금내역</div>
+<table>
+	<col width="40">
+	<col width="100">
+	<col width="80">
+	<col>
+	<col width="80">
+	<thead>
+	<tr>
+		<th>No</th>
+		<th>발행일시</th>
+		<th>코드</th>
+		<th>상세내역</th>
+		<th>금액</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!--{@loop}-->
+	<tr>
+		<td><!--{.no}--></td>
+		<td><!--{.regdate}--></td>
+		<td><!--{.emoney_code}--></td>
+		<td class="pleft"><!--{.title}--></td>
+		<td class="pright price"><!--{.emoney}--></td>
+	</tr>
+	<!--{:}-->
+	<tr>
+		<td colspan="5">적립금액이 없습니다.</td>
+	</tr>
+	<!--{/}-->
+	</tbody>
+</table>
+<div class="navipage"><!--{navi_page}--></div>

@@ -1,0 +1,136 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+var myeditor = new cheditor("myeditor");
+$(function() {
+	$('#jsform').submit(function() {
+		myeditor.outputBodyHTML();
+		var chk_option = [
+			{ 'target':'author', 'name':'성명', 'type':'blank', 'msg':'성명을 입력하여 주세요.!' },
+			{ 'target':'phone_a', 'name':'전화번호', 'type':'select', 'msg':'전화번호를 입력하여 주세요.!' },
+			{ 'target':'phone_b', 'name':'전화번호', 'type':'digit', 'msg':'전화번호를 입력하여 주세요.!' },
+			{ 'target':'phone_c', 'name':'전화번호', 'type':'digit', 'msg':'전화번호를 입력하여 주세요.!' },
+			{ 'target':'email_a', 'name':'이메일', 'type':'blank', 'msg':'이메일아이디를 입력하여 주세요.!' },
+			{ 'target':'email_b', 'name':'이메일', 'type':'blank', 'msg':'이메일도메인을 입력하여 주세요.!' },
+			{ 'target':'subject', 'name':'제목', 'type':'blank', 'msg':'제목을 입력하여 주세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		<!--{? !config_basic.bool_ssl}-->
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+		<!--{/}-->
+	});
+
+	$('#email_domain').change(function() {
+		var select_idx = this.selectedIndex;
+		var domain = $(this).val();
+		if(select_idx > 0) {
+			if(domain == 'etc') {
+				$('#email_b').val('');
+			}
+			else {
+				$('#email_b').val(domain);
+			}
+		}
+	});
+});
+
+//-->
+</script>
+
+<div class="contents">
+<span class="sub_title"><!--{config_basic.shop_name}--></span><span class="sub_title_b">에 교육센터 및 지사모집을 원하시는 업체 혹은 개인은</span><br />
+<span class="sub_title_g">아래 입력내용에 상담하고자 하는 내용을  남겨 주시기 바랍니다.</span><br />
+<span class="sub_title">전화문의는 Tel :</span><a href="tel:<!--{config_basic.shop_phone}-->"><span class="sub_title"><!--{config_basic.shop_phone}--></span></a><span class="sub_title_g"> 으로 근무시간에는 언제든 가능 합니다.</span><br /><br />
+</div>
+
+<form method="post" name="jsform" id="jsform" action="<!--{config_basic.ssl_port}--><!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="write" />
+<table class="form_table">
+<colgroup>
+	<col width="15%"></col>
+	<col width="35%"></col>
+	<col width="15%"></col>
+	<col width="35%"></col>
+</colgroup>
+<tbody>
+<tr>
+	<th>회사명</th>
+	<td><input type="text" name="comname" value="" class="frm_input" style="width:100px" /></td>
+	<th>담당직위</th>
+	<td><input type="text" name="position" value="" class="frm_input" style="width:100px" /></td>
+</tr>
+<tr>
+	<th>성명</th>
+	<td colspan="3"><input type="text" name="author" value="" class="frm_input" style="width:100px" /></td>
+</tr>
+<tr>
+	<th>전화번호</th>
+	<td>
+		<select name="phone_a" style="width:60px;">
+			<!--{=loopPhoneA()}-->
+		</select> - 
+		<input type="text" name="phone_b" maxlength="4" value="" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled;width:50px" /> -
+		<input type="text" name="phone_c" maxlength="4" value="" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled;width:50px" />
+	</td>
+	<th>휴대폰번호</th>
+	<td>
+		<select name="mobile_a" style="width:60px;">
+			<!--{=loopPhoneA()}-->
+		</select> - 
+		<input type="text" name="mobile_b" maxlength="4" value="" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled;width:50px" /> -
+		<input type="text" name="mobile_c" maxlength="4" value="" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled;width:50px" />
+	</td>
+</tr>
+<tr>
+	<th>이메일</th>
+	<td colspan="3"><input type="text" name="email_a" value="" class="frm_input" style="width:100px" /> @ <input type="text" name="email_b" id="email_b"  class="frm_input" style="width:100px" />
+		<select name='email_domain' id='email_domain'>
+			<!--{=loopMailDomain()}-->
+		</select>
+	</td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td colspan="3"><input type="text" name="subject" value="" class="frm_input" style="width:300px" /></td>
+</tr>
+</tbody>
+</table><br />
+<textarea id="contents" name="contents" id="contents"  title="온라인상담내용" style="width:100%;height:300px;"><!--{contents}--></textarea>
+<div class="button_area">
+	<input type="submit" value="확인" class="grad"/>
+</div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+myeditor.config.editorHeight = '300px'; 
+myeditor.config.editorWidth = '100%';
+myeditor.inputForm = 'contents';
+myeditor.config.imgMaxWidth = 670;
+myeditor.run();
+//-->
+</script>

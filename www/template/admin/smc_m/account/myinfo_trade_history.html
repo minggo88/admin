@@ -1,0 +1,143 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+-->
+</script>
+
+
+<div id="contents">
+	<div class="_contents">
+
+		<div class="sub_contents">
+
+			<div class="sub_contents_box second">
+				<div class="sub_contents_boxL">
+					<table summary="보유포인트">
+						<caption>보유포인트<caption>
+						<colgroup>
+							<col class="bit_table1_col1"/>
+						</colgroup>
+						<colgroup>
+							<col class="bit_table1_col2"/>
+						</colgroup>
+						<tbody>
+							<tr class="top">
+								<th scope="row">보유 KRW 포인트</th>
+								<td class="pright"><!--{=number_format(WALLET_KRW_AMOUNT)}--> KRW</td>
+							</tr>
+							<!--{*
+							<tr>
+								<th scope="row">적립 KRW 포인트</th>
+								<td class="pright"><!--{=number_format(WALLET_KRW_POINT)}--> KRW</td>
+							</tr>
+							*}-->
+							<tr>
+								<th scope="row">비트코인 보유액</th>
+								<td class="pright"><!--{=number_format(WALLET_BTC_AMOUNT, strlen(strrchr(WALLET_BTC_AMOUNT, '.') * 1)-2)}--> BTC</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="sub_contents_boxR">
+					<table summary="개인정보">
+						<caption>개인정보<caption>
+						<colgroup>
+							<col class="bit_table1_col1"/>
+						</colgroup>
+						<colgroup>
+							<col class="bit_table1_col2"/>
+						</colgroup>
+						<tbody>
+							<tr class="top">
+								<th scope="row">회원이름</th>
+								<td><!--{USER_NAME}--></td>
+							</tr>
+							<tr>
+								<th scope="row">전화번호</th>
+								<td><!--{USER_MOBILE}--> <a href="/edit">(변경하기)</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="sub_contents_box1">
+
+				<div class="ssub_nav">
+					<ul>
+						<li><a href="/total">종합내역</a></li>
+						<li class="select"><a href="/trade_history">거래내역</a></li>
+						<li><a href="/btc_history">비트코인 입출금 내역</a></li>
+
+						<!--{*
+						<li><a href="/account/myinfo.php?type=total&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">종합내역</a></li>
+						<li class="select"><a href="/account/myinfo.php?type=trade_history&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">거래내역</a></li>
+						<li><a href="/account/myinfo.php?type=btc_history&gnb_code=<!--{_GET.gnb_code}-->&cate_code=<!--{_GET.cate_code}-->">비트코인 입출금 내역</a></li>
+						*}-->
+					</ul>
+				</div>
+
+
+				<div class="sub_contents_boxL_">
+					<table summary="거래내역">
+						<caption>거래내역<caption>
+						<colgroup>
+							<col width="100" />
+							<col width="*" />
+							<col width="80" />
+							<col width="80" />
+							<col width="100" />
+							<col width="100" />
+							<col width="100" />
+							<col width="60" />
+						</colgroup>
+						<thead>
+							<tr class="top">
+								<th scope="col">종류</th>
+								<th scope="col">완료시각</th>
+								<th scope="col">주문량<br />BTC</th>
+								<th scope="col">완료분<br />BTC</th>
+								<th scope="col">평균체결가<br />KRW</th>
+								<th scope="col">체결총액<br />KRW</th>
+								<th scope="col">수수료</th>
+								<th class="tr bR0" scope="col">비고</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--{@loop_user_trade}-->
+							<tr>
+								<td class="pcenter pbold <!--{?.type_krw_inout=='+'||.type_btc_inout=='+'}-->pblue<!--{:}-->pred<!--{/}-->"><!--{.type_str}--></td>
+								<td class="pcenter"><span class="tbold"><!--{.date_str}--></span><br /><span class="tnormal"><!--{.time_str}--></span></td>
+								<td class="pright"><span class="tnormal"><!--{=clean_float_number(.btc_amount_str)}--></span></td>
+								<td class="pright"><span class="tbold"><!--{=clean_float_number(.btc_sum_amount_str)}--></span></td>
+								<td class="pright"><!--{.krw_amount_str}--></td>
+								<td class="pright"><span class="tbold"><!--{.krw_sum_amount_str}--></span></td>
+								<td class="pright"><!--{=.fee_str}--></td>
+								<td class="pcenter"><!--{?.txnid!=''}--><span title="<!--{.txnid}-->" class="grad_tip" style="width:50px;">거래정보</span><!--{/}--></td>
+							</tr>
+							<!--{:}-->
+							<tr>
+								<td colspan="8" class="pcenter">거래 내역이 없습니다.</td>
+							</tr>
+							<!--{/}-->
+						</tbody>
+					</table>
+				</div>
+				<div id="navipage">	
+					<!--{navi_page}-->
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+</div>

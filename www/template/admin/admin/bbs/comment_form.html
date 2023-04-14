@@ -1,0 +1,66 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$('#commentForm').submit(function() { 
+		var chk_option = [
+			{ 'target':'author', 'name':'이름', 'type':'blank', 'msg':'작성자 이름을 입력하세요.!' },
+			{ 'target':'passwd', 'name':'비밀번호', 'type':'blank', 'msg':'비밀번호를 입력하세요.!' },
+			{ 'target':'contents', 'name':'댓글', 'type':'blank', 'msg':'댓글을 입력하세요.!' }
+		];
+
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) { 
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: true
+		}); 
+		return false; 
+	}); 
+});
+
+//-->
+</script>
+<div class="comment_form">
+	<form name="commentForm" id="commentForm" action="/bbs/admin/commentAdmin.php" method="post">
+	<input type="hidden" name="bbscode" id="bbscode" value="<!--{_GET.bbscode}-->" />
+	<input type="hidden" name="pg_mode" id="pg_mode" value="write" />
+	<input type="hidden" name="link_idx" id="link_idx" value="<!--{_GET.idx}-->" />
+	<table class="form_table">
+		<colgroup>
+			<col width="15%"></col>
+			<col width="35%"></col>
+			<col width="15%"></col>
+			<col width="35%"></col>
+		</colgroup>
+		<tr>
+			<th>이름</th>
+			<td><input type="text" name="author"  value="" class="frm_input" style="width:100px" /></td>
+			<th>비번</th>
+			<td><input type="password" name="passwd" class="frm_input" style="width:100px" /></td>
+		</tr>
+		<tr>
+			<td colspan="4" class="pcenter"><textarea name="contents" id="contents" class="frm_input" style="width:700px;height:70px"></textarea></td>
+		</tr>
+	</table>
+	<div class="button_area">
+		<span class="button black"><input type="submit" value="확인"/></span>
+	</div>
+	</form>
+</div>

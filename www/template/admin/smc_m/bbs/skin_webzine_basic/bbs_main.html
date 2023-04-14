@@ -1,0 +1,25 @@
+<!-- 1: style.webzine.html -->
+<div class="review_list">
+	<!--{@ loop_bbs_recent}-->
+	<div class="review">
+		<div class="figure">
+			<div class="photo">
+			<a href="<!--{? .bool_secret}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=list<!--{:}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0<!--{/}-->"><img src="<!--{? .bool_thumb}--><!--{.img}--><!--{:}-->../images/no_img.gif<!--{/}-->" width="75" height="75" alt="<!--{.subject}-->" /></a>
+			</div>
+		</div>
+		<div class="figure2">
+			 <div class="subject"><a href="<!--{? .bool_secret}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=list<!--{:}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0<!--{/}-->"><b><!--{=cutStr(.subject,15)}--></b></a><!--{? .bool_comment}-->(<!--{.cnt_comment}-->)<!--{/}--></div>
+			<div class="author"><!--{.author}--></div>
+			<div class="date"><!--{=date('y/m/d',.regdate)}--></div>
+			<div class="hit">조회수 <!--{.hit}--></div>
+			<div class="summary"><a href="<!--{? .bool_secret}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=list<!--{:}-->/bbs/bbs.php?bbscode=<!--{.bbscode}-->&pg_mode=view&idx=<!--{.idx}-->&list_cnt=<!--{.index_}-->&start=0<!--{/}-->"><!--{=cutStr(.contents,50)}--></a></div>
+		</div>
+	</div>
+	<!--{:}-->
+	<div class="review">
+		<div class="figure">
+			<div class="photo">등록된 이미지가 없습니다.</div>
+		</div>
+	</div>
+	<!--{/}-->
+</div>

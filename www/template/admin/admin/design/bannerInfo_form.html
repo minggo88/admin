@@ -1,0 +1,89 @@
+<script language="JavaScript">
+<!--
+$(function() {
+	$('#jsform').submit(function() {
+		var chk_option = [
+			{ 'target':'title', 'name':'타이틀', 'type':'blank', 'msg':'타이틀을 입력하세요.!' },
+			{ 'target':'size_x', 'name':'이미지가로사이즈', 'type':'blank', 'msg':'이미지 가로사이즈를 입력하세요.!' },
+			{ 'target':'size_y', 'name':'이미지세로사이즈', 'type':'blank', 'msg':'이미지 세로사이즈를 입력하세요.!' }
+		];
+		if(!jsForm(this,chk_option)) {
+			return false;
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.href='<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list_info';
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else { alert('재시도 해주세요!'); }
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+});
+
+$(function() {
+	$('input[name=bool_slide]').val(['<!--{bool_slide}-->']);
+});
+
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/Slider.png') 0px 0px no-repeat;">디자인관리</span> / <span class="title02">배너항목관리</span></h1></div>
+<div class="title_d2"><img src="../images/bullet.gif"> 배너항목관리 </div>
+<form method="post" name="jsform" id="jsform" action="<!--{_SERVER.SCRIPT_NAME}-->">
+<input type="hidden" name="pg_mode" value="<!--{? _GET.pg_mode == 'form_new_info'}-->write_info<!--{:}-->edit_info<!--{/}-->" />
+<!--{? _GET.pg_mode == 'form_edit_info'}-->
+<input type="hidden" name="bannercode" value="<!--{_GET.bannercode}-->" />
+<!--{/}-->
+<table class="form_table">
+	<colgroup>
+		<col width="15%"></col>
+		<col width="35%"></col>
+		<col width="15%"></col>
+		<col width="35%"></col>
+	</colgroup>
+	<tbody>
+	<tr> 
+		<th>타이틀</th>
+		<td colspan="3"><input type="text" name="title" value="<!--{title}-->" class="frm_input" style="width:650px" /></td>
+	</tr>
+	<tr> 
+		<th>가로사이즈</th>
+		<td><input type="text" name="size_x" value="<!--{size_x}-->" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled; width:50px" />px</td>
+		<th>세로사이즈</th>
+		<td><input type="text" name="size_y" value="<!--{size_y}-->" class="frm_input" onKeyDown = "onlyNumber(event)" style="IME-MODE: disabled; width:50px" />px</td>
+	</tr>
+	<tr>
+		<th>슬라이드</th>
+		<td colspan="3">
+			<input type="radio" name="bool_slide" id="bool_slide_n" value="0" /> <label for="bool_slide_n">사용안함</label>
+			<input type="radio" name="bool_slide" id="bool_slide_y" value="1" /> <label for="bool_slide_y">사용함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>항목설명</th>
+		<td colspan="3"><textarea name="remark" class="frm_input" style="width:650px;height:100px"><!--{remark}--></textarea></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black strong"><input type="submit" value="확 인" /></span>&nbsp;
+	<span class="button large black strong"><a href="<!--{_SERVER.SCRIPT_NAME}-->?pg_mode=list_info">취 소</a></span>
+</div>
+</form>

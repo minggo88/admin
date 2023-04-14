@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-05 11:17+0900\n"
+"PO-Revision-Date: 2019-08-05 11:25+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: lib/SimpleRestful.php:207 ../lib/SimpleRestful.php:255
+#: ../lib/SimpleRestful.php:260 ../lib/SimpleRestful.php:258
+#: ../lib/SimpleRestful.php:263 ../lib/SimpleRestful.php:276
+msgid "Failed to create folders. path: {dir}"
+msgstr "无法生成文件夹. 路径: {dir}"
+
+#: lib/SimpleRestful.php:211 ../lib/SimpleRestful.php:259
+#: ../lib/SimpleRestful.php:264 ../lib/SimpleRestful.php:262
+#: ../lib/SimpleRestful.php:267 ../lib/SimpleRestful.php:280
+msgid ""
+"The folder does not have write permission. Please specify write permission. "
+"path: {dir}"
+msgstr "文件夹没有写入权限. 请指定写入权限. 路径: {dir}"
+
+#: lib/SimpleRestful.php:307 ../lib/SimpleRestful.php:355 ../lib/test.php:36
+#: ../lib/SimpleRestful.php:360 ../lib/SimpleRestful.php:358
+#: ../lib/SimpleRestful.php:363 ../lib/SimpleRestful.php:376
+msgid "Mysql Connection Error: Failed connecting to database server"
+msgstr "MySQL连接错误: 连接数据库服务器失败。"
+
+#: lib/SimpleRestful.php:369 ../lib/SimpleRestful.php:417
+#: ../lib/SimpleRestful.php:422 ../lib/SimpleRestful.php:420
+#: ../lib/SimpleRestful.php:425 ../lib/SimpleRestful.php:438
+msgid "Mysql Query Error: Failed executing database query"
+msgstr "MySQL 查询错误: 数据库查询执行失败。"
+
+#: lib/SimpleRestful.php:1064 ../lib/SimpleRestful.php:1112 ../lib/test.php:39
+#: ../lib/SimpleRestful.php:1117 ../lib/SimpleRestful.php:1122
+#: ../lib/SimpleRestful.php:1129 ../lib/SimpleRestful.php:1142
+#: ../lib/SimpleRestful.php:1169 ../lib/SimpleRestful.php:1182
+msgid "Please fill in {name}."
+msgstr "{name} 请输入项目。"
+
+#: lib/SimpleRestful.php:1072 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1125 ../lib/SimpleRestful.php:1130
+#: ../lib/SimpleRestful.php:1137 ../lib/SimpleRestful.php:1150
+#: ../lib/SimpleRestful.php:1177 ../lib/SimpleRestful.php:1190
+msgid "Please enter a number greater than zero."
+msgstr "请输入比0大的数字。"
+
+#: lib/SimpleRestful.php:1080 lib/TradeApi.php:514 lib/TradeApi.php:538
+#: ../lib/SimpleRestful.php:1128 ../lib/TradeApi.php:514
+#: ../lib/TradeApi.php:538 ../lib/SimpleRestful.php:1133
+#: ../lib/SimpleRestful.php:1138 ../lib/TradeApi.php:513
+#: ../lib/SimpleRestful.php:1145 ../lib/TradeApi.php:515
+#: ../lib/TradeApi.php:540 ../lib/SimpleRestful.php:1158
+#: ../lib/SimpleRestful.php:1185 ../lib/TradeApi.php:519
+#: ../lib/TradeApi.php:544 ../lib/SimpleRestful.php:1198
+#: ../lib/TradeApi.php:631 ../lib/TradeApi.php:656
+msgid "Please enter the number."
+msgstr "请输入数字。"
+
+#: lib/TradeApi.php:161 ../lib/TradeApi.php:161 ../lib/TradeApi.php:163
+#: ../lib/TradeApi.php:213 ../lib/TradeApi.php:221
+msgid "Please login."
+msgstr "请登录。"
+
+#: lib/TradeApi.php:217 lib/TradeApi.php:227 lib/TradeApi.php:237
+#: lib/TradeApi.php:247 lib/TradeApi.php:258 lib/TradeApi.php:269
+#: lib/TradeApi.php:327 lib/TradeApi.php:337 ../lib/TradeApi.php:217
+#: ../lib/TradeApi.php:227 ../lib/TradeApi.php:237 ../lib/TradeApi.php:247
+#: ../lib/TradeApi.php:258 ../lib/TradeApi.php:269 ../lib/TradeApi.php:327
+#: ../lib/TradeApi.php:337 ../lib/TradeApi.php:219 ../lib/TradeApi.php:229
+#: ../lib/TradeApi.php:239 ../lib/TradeApi.php:249 ../lib/TradeApi.php:260
+#: ../lib/TradeApi.php:271 ../lib/TradeApi.php:329 ../lib/TradeApi.php:339
+#: ../lib/TradeApi.php:283 ../lib/TradeApi.php:293 ../lib/TradeApi.php:303
+#: ../lib/TradeApi.php:313 ../lib/TradeApi.php:324 ../lib/TradeApi.php:335
+#: ../lib/TradeApi.php:393 ../lib/TradeApi.php:403
+msgid "Failed to connect to coin server. details: "
+msgstr "无法连接代币服务器。 详细信息: "
+
+#: lib/TradeApi.php:1909 ../lib/TradeApi.php:1909 ../lib/TradeApi.php:1911
+#: ../lib/TradeApi.php:1921 ../lib/TradeApi.php:1957 ../lib/TradeApi.php:2111
+msgid "Please enter the correct return type."
+msgstr "请输入正确的返还形式。"
+
+#: lib/TradeApi.php:1916 lib/TradeApi.php:1951 ../lib/TradeApi.php:1916
+#: ../lib/TradeApi.php:1951 ../lib/TradeApi.php:1918 ../lib/TradeApi.php:1953
+#: ../lib/TradeApi.php:1928 ../lib/TradeApi.php:1963 ../lib/TradeApi.php:1964
+#: ../lib/TradeApi.php:1999 ../lib/TradeApi.php:2118 ../lib/TradeApi.php:2153
+msgid "Please enter the correct symbol."
+msgstr "请输入正确的符号值。"
+
+#: lib/TradeApi.php:1925 ../lib/TradeApi.php:1925 ../lib/TradeApi.php:1927
+#: ../lib/TradeApi.php:1937 ../lib/TradeApi.php:1973 ../lib/TradeApi.php:2127
+msgid "Please enter the correct action value."
+msgstr "请输入正确的操作值。"
+
+#: lib/TradeApi.php:1931 ../lib/TradeApi.php:1931 ../lib/TradeApi.php:1933
+#: ../lib/TradeApi.php:1943 ../lib/TradeApi.php:1979 ../lib/TradeApi.php:2133
+msgid "You can only view your personal information."
+msgstr "仅可查询本人信息。"
+
+#: lib/TradeApi.php:1942 ../lib/TradeApi.php:1942 ../lib/TradeApi.php:1944
+#: ../lib/TradeApi.php:1954 ../lib/TradeApi.php:1990 ../lib/TradeApi.php:2144
+msgid "Please enter the correct UUID."
+msgstr "请输入正确的UUID。"
+
+#: lib/TradeApi.php:1960 ../lib/TradeApi.php:1960 ../lib/TradeApi.php:1962
+#: ../lib/TradeApi.php:1972 ../lib/TradeApi.php:2008 ../lib/TradeApi.php:2162
+msgid "Please enter the correct date."
+msgstr "请输入正确的日期。"
+
+#: lib/TradeApi.php:1970 ../lib/TradeApi.php:1970 ../lib/TradeApi.php:1972
+#: ../lib/TradeApi.php:1982 ../lib/TradeApi.php:2017 ../lib/TradeApi.php:2171
+msgid "Please enter the price according to the quotation unit({quote_unite})."
+msgstr "请按照报价({quote_unite})输入价格。"
+
+#: v1.0/buy/index.php:65 ../v1.0/buy/index.php:65 ../v1.0/buy/index.php:66
+#: ../v1.0/buy/index.php:68 ../v1.0/buy/index_bms.php:71
+#: ../v1.0/buy/index.php:72 ../v1.0/buy/index_static_price.php:68
+msgid "There is not enough balance to buy."
+msgstr "余额不足无法购买。"
+
+#: v1.0/buy/index.php:183 v1.0/cancel/index.php:56
+#: v1.0/checkReceive/index.php:109 v1.0/deposit/index.php:37
+#: v1.0/putFCM/index.php:32 v1.0/sell/index.php:170 ../v1.0/buy/index.php:183
+#: ../v1.0/cancel/index.php:56 ../v1.0/checkReceive/index.php:109
+#: ../v1.0/deposit/index.php:37 ../v1.0/putFCM/index.php:32
+#: ../v1.0/sell/index.php:170 ../v1.0/buy/index.php:184
+#: ../v1.0/checkReceive/index.php:117 ../v1.0/sell/index.php:171
+#: ../v1.0/buy/index.php:194 ../v1.0/buy/index_bms.php:234
+#: ../v1.0/sell/index.php:180 ../v1.0/sell/index_bms.php:216
+#: ../v1.0/buy/index.php:235 ../v1.0/buy/index_static_price.php:194
+#: ../v1.0/deposit/index.php:42 ../v1.0/sell/index.php:217
+#: ../v1.0/sell/index_static_price.php:180
+msgid "A system error has occurred."
+msgstr "发生系统错误。"
+
+#: v1.0/cancel/index.php:23 ../v1.0/cancel/index.php:23
+msgid "You can only process your own orders."
+msgstr "只能处理本人的订单。"
+
+#: v1.0/cancel/index.php:28 ../v1.0/cancel/index.php:28
+msgid "You can not cancel because already completed an order."
+msgstr "交易已完成，无法取消。"
+
+#: v1.0/createNewAddress/index.php:30 ../v1.0/createNewAddress/index.php:30
+msgid "Failed to create new address. "
+msgstr "未生成新地址。"
+
+#: v1.0/getTransactionList/index.php:23 ../v1.0/getTransactionList/index.php:23
+msgid "Wallet address is missing. Please create an address."
+msgstr "钱包地址不存在，请生成地址。"
+
+#: v1.0/getTransactionList/index.php:26 ../v1.0/getTransactionList/index.php:26
+msgid "Please enter the correct address."
+msgstr "请输入正确的地址。"
+
+#: v1.0/getVersion/index.php:20 ../v1.0/getVersion/index.php:20
+msgid "There is no version information."
+msgstr "没有版本信息。"
+
+#: v1.0/join/index.php:24 v1.0/join/index.php:29 v1.0/login/index.php:24
+#: v1.0/login/index.php:29 ../v1.0/join/index.php:24 ../v1.0/join/index.php:29
+#: ../v1.0/login/index.php:24 ../v1.0/login/index.php:29
+#: ../v1.0/login/index.php:28 ../v1.0/login/index.php:33
+#: ../v1.0/login/index.php:27 ../v1.0/login/index.php:32
+#: ../v1.0/loginAdmin/index.php:23
+msgid "The information does not match. Please check your ID!"
+msgstr "输入的信息不符. 请确认ID。"
+
+#: v1.0/join/index.php:34 v1.0/login/index.php:34 ../v1.0/join/index.php:34
+#: ../v1.0/login/index.php:34 ../v1.0/login/index.php:38
+#: ../v1.0/login/index.php:37
+msgid "You did not verify your email. Please check your email verification!"
+msgstr "邮箱认证未完成. 请完成邮箱认证。"
+
+#: v1.0/join/index.php:46 v1.0/login/index.php:46 ../v1.0/join/index.php:46
+#: ../v1.0/login/index.php:46 ../v1.0/login/index.php:50
+#: ../v1.0/login/index.php:49
+msgid "Login failed."
+msgstr "登录失败。"
+
+#: v1.0/putFCM/index.php:22 ../v1.0/putFCM/index.php:22
+msgid "The UUID that is already registered."
+msgstr "已注册的UUID。"
+
+#: v1.0/sell/index.php:52 ../v1.0/sell/index.php:52 ../v1.0/sell/index.php:53
+#: ../v1.0/sell/index.php:55 ../v1.0/sell/index_bms.php:58
+#: ../v1.0/sell/index.php:59 ../v1.0/sell/index_static_price.php:55
+msgid "There is not enough balance to sell."
+msgstr "余额不足, 不能销售。"
+
+#: v1.0/withdraw/index.php:23 ../v1.0/withdraw/index.php:23
+msgid "Please enter a value larger than the minimum withdrawal amount."
+msgstr "请输入大于最低提现额的金额。"
+
+#: v1.0/withdraw/index.php:29 ../v1.0/withdraw/index.php:29
+msgid "Please enter the correct PIN number."
+msgstr "请输入正确的交易安全号码。"
+
+#: v1.0/withdraw/index.php:37 ../v1.0/withdraw/index.php:37
+msgid "Please enter the member's withdrawal address."
+msgstr "请输入会员所有的提现地址。"
+
+#: v1.0/withdraw/index.php:43 ../v1.0/withdraw/index.php:43
+msgid "You can not withdraw more than your balance."
+msgstr "提现金额不能超过余额。"
+
+#: v1.0/withdraw/index.php:50 ../v1.0/withdraw/index.php:50
+msgid "Withdrawal amount is less than the fee."
+msgstr "请输入大于提现手续费的提现金额。"
+
+#: v1.0/withdraw/index.php:55 ../v1.0/withdraw/index.php:55
+msgid "Member requested withdrawal."
+msgstr "会员申请提现。"
+
+#: ../lib/SimpleRestful.php:1216 ../lib/SimpleRestful.php:1120
+#: ../lib/SimpleRestful.php:1127 ../lib/SimpleRestful.php:1140
+#: ../lib/SimpleRestful.php:1167 ../lib/SimpleRestful.php:1180
+msgid "the required fields"
+msgstr "请填写必填项。"
+
+#: ../v1.0/checkReceive/index.php:28
+msgid "Symbole 정보가 없습니다."
+msgstr "没有Symbole的信息。"
+
+#: ../v1.0/checkReceive/index.php:52
+msgid "이미 처리했습니다."
+msgstr "已处理。"
+
+#: ../v1.0/checkReceive/index.php:70
+msgid "입금 정보에서 입금자와 입금액을 찾지 못했습니다."
+msgstr "充值信息中无法找到充值者和充值金额的相关信息。"
+
+#: ../v1.0/logout/index.php:10
+msgid "Please enter the token value."
+msgstr ""
+
+#: ../v1.0/join/index.php:10
+msgid "Enter your first name!"
+msgstr "请输入您的名字。"
+
+#: ../v1.0/join/index.php:14
+msgid "Enter your last name!"
+msgstr "请输入您的姓。"
+
+#: ../v1.0/join/index.php:21
+msgid "Please enter your member ID."
+msgstr "请输入会员账号。"
+
+#: ../v1.0/join/index.php:34 ../v1.0/join/index.php:39
+#: ../v1.0/join/index.php:49
+msgid "Enter your password!"
+msgstr "请输入密码。"
+
+#: ../v1.0/join/index.php:51 ../v1.0/join/index.php:56
+#: ../v1.0/join/index.php:66
+msgid "Please enter another ID that is not duplicated."
+msgstr "请输入未重复的账号。"
+
+#: ../v1.0/join/index.php:75 ../v1.0/join/index.php:79
+#: ../v1.0/join/index.php:88 ../v1.0/join/index.php:92
+#: ../v1.0/join/index.php:98 ../v1.0/join/index.php:102
+msgid ""
+"There was an error processing your subscription. Please contact "
+"administrator."
+msgstr "没有注册会员。 请咨询管理员。"
+
+#: ../v1.0/buy/index_bms.php:77 ../v1.0/buy/index_bms.php:82
+#: ../v1.0/sell/index_bms.php:64 ../v1.0/sell/index_bms.php:69
+#: ../v1.0/buy/index.php:78 ../v1.0/buy/index.php:83 ../v1.0/sell/index.php:65
+#: ../v1.0/sell/index.php:70
+msgid "There is no fee account information."
+msgstr "没有版本信息。"
+
+#: ../v1.0/getCountry/index.php:12
+msgid "Korea (the Republic of)"
+msgstr "韩国"
+
+#: ../v1.0/getCountry/index.php:13
+msgid "China"
+msgstr "中国"
+
+#: ../v1.0/getCountry/index.php:14
+msgid "Hong Kong"
+msgstr "香港"
+
+#: ../v1.0/getCountry/index.php:15
+msgid "Macau"
+msgstr "澳门"
+
+#: ../v1.0/getCountry/index.php:16
+msgid "Singapore"
+msgstr "新加坡"
+
+#: ../v1.0/getCountry/index.php:17
+msgid "Malaysia"
+msgstr "马来西亚"
+
+#: ../v1.0/getCountry/index.php:18
+msgid "Indonesia"
+msgstr "印度尼西亚"
+
+#: ../v1.0/getCountry/index.php:19
+msgid "Mongolia"
+msgstr "蒙古"
+
+#: ../v1.0/getCountry/index.php:20
+msgid "Thailand"
+msgstr "泰国"
+
+#: ../v1.0/getCountry/index.php:21
+msgid "Australia"
+msgstr "澳大利亚"
+
+#: ../v1.0/getCountry/index.php:22
+msgid "United States"
+msgstr "美国"
+
+#: ../v1.0/getCountry/index.php:23
+msgid "United Kingdom"
+msgstr "英国"
+
+#: ../v1.0/getCountry/index.php:24
+msgid "Canada"
+msgstr "加拿大"
+
+#: ../v1.0/getCountry/index.php:25
+msgid "Japan"
+msgstr "日本"
+
+#: ../lib/TradeApi.php:2025 ../lib/TradeApi.php:2179
+msgid "Please enter the correct email."
+msgstr "请输入有效的邮箱地址。"
+
+#: ../v1.0/join/index.php:26
+msgid "The member ID must contain a country code in uppercase letters."
+msgstr "会员ID必须包含大写字母的国家/地区代码。"
+
+#: ../v1.0/join/index.php:30
+msgid "Please enter your phone number."
+msgstr "请输入电话号码。"
+
+#: ../v1.0/join/index.php:36
+msgid "Please enter the mobile value."
+msgstr "请输入正确的手机号码。"
+
+#: ../lib/TradeApi.php:228
+msgid "You do not have permission."
+msgstr "你没有许可。"
+
+#: ../v1.0/buy/index.php:18 ../v1.0/sell/index.php:18
+msgid "Please enter only 4 decimal places for quantity."
+msgstr "请输入数量仅4位小数。"
+
+#: ../v1.0/buy/index.php:57 ../v1.0/sell/index.php:54
+msgid "Your payment amount is too low. Please raise the quantity."
+msgstr "您的付款金额太低。 请提高数量。"

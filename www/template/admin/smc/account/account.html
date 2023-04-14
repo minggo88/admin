@@ -1,0 +1,494 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+$(function() {
+	$("#mtom_list_inner>table>tbody>tr").hover(
+		function () { $(this).css('background-color','#FFF2F0'); }, 
+		function () { $(this).css('background-color','#FFF'); }
+	);
+});
+
+function checkBuyBitcoin() {
+	if($('#bitcoin_buy_amount').val().indexOf('.')>-1) {
+		var _t = $.trim($('#bitcoin_buy_amount').val()).split('.');
+		_t[0] = _t[0]*1;
+		$('#bitcoin_buy_amount').val( _t.join('.') ) ; 
+	} else {
+		$('#bitcoin_buy_amount').val($.trim($('#bitcoin_buy_amount').val())*1);
+	}
+//	$('#bitcoin_buy_amount').val($.trim($('#bitcoin_buy_amount').val()));
+	if($('#bitcoin_buy_amount').val() != '' && !$.isNumeric($('#bitcoin_buy_amount').val())) {
+//		alert('비트코인 매수 수량은 숫자만 입력하세요');
+		$('#bitcoin_buy_amount').val($('#bitcoin_buy_amount').val().replace(/[^0-9.]/g,''));
+//		$('#bitcoin_buy_amount').focus();
+		return false;
+	}
+	$('#bitcoin_buy_amount').val($('#bitcoin_buy_amount').val().replace(/[^0-9.]/g,''));
+	calBuyInfo();
+}
+
+function checkBuyPrice() { 
+	$('#bitcoin_buy_price').val($.trim($('#bitcoin_buy_price').val())*1);
+	if($('#bitcoin_buy_price').val() != '' && !$.isNumeric( $('#bitcoin_buy_price').val())) {
+//		alert('주문가는 숫자만 입력하세요');
+		$('#bitcoin_buy_price').val($('#bitcoin_buy_price').val().replace(/[^0-9.]/g,''));
+//		$('#bitcoin_buy_price').focus();
+		return false;
+	}
+	$('#bitcoin_buy_price').val($('#bitcoin_buy_price').val().replace(/[^0-9.]/g,''));
+	calBuyInfo();
+}
+
+function calBuyInfo() {
+
+	var buyFee = new Number(($('#bitcoin_buy_amount').val() * $('#bitcoin_buy_fee').val()) / 100).toFixed(8); 
+	var buyKrw = Math.floor(new Number($('#bitcoin_buy_amount').val() * $('#bitcoin_buy_price').val()).toFixed(1) * 1); // 소숫점 절삭.
+	var resultBuyAmount = $('#bitcoin_buy_amount').val() - buyFee;
+	var cnt_decimal_point = (resultBuyAmount+'').indexOf('.')>-1 ? (resultBuyAmount+'').substr((resultBuyAmount+'').indexOf('.')+1).length : 0;
+//	$('#buy_fee').text(buyFee);
+	buyFee = '0';
+	$('#buy_fee').text(number_format(buyFee));
+	$('#krw_buy_amount').text(number_format(buyKrw));
+	$('#bitcoin_buy_result').text(number_format(resultBuyAmount, cnt_decimal_point));	
+}
+
+function sendBuyBitcoin() {
+	if($('#bitcoin_buy_amount').val() == '' ) {
+		alert('비트코인 매수량을 입력하세요');
+		$('#bitcoin_buy_amount').focus();
+		return false;
+	}
+
+	if($('#bitcoin_buy_price').val() == '' ) {
+		alert('주문가를 입력하세요');
+		$('#bitcoin_buy_price').focus();
+		return false;
+	}
+
+	if($('#bitcoin_buy_amount').val()*1 < $('#min_bitcoin_amount').val()*1) {
+		alert("최소주문량("+$('#min_bitcoin_amount').val()+"BTC)보다 작습니다.");
+		$('#bitcoin_buy_amount').focus();
+		return false;
+	}
+
+	if(  $('#bitcoin_buy_price').val()*1 < $('#min_price_amount').val()*1) {
+		alert("최소주문가("+$('#min_price_amount').val()+"원)보다 작습니다.");
+		$('#bitcoin_buy_amount').val(0);
+		$('#bitcoin_buy_amount').focus();
+		return false;
+	}
+
+	var buyKrw = new Number($('#bitcoin_buy_amount').val() * $('#bitcoin_buy_price').val()).toFixed(0);
+	if(parseFloat(buyKrw) > $('#useable_krw_amount').val()) {
+		alert("충분한 계좌잔액을 갖고 계시지 않거나 거래제한을 초과하셨습니다. \n 사용가능액 : " + number_format($('#useable_krw_amount').val().replace(/[^0-9.]/g,'')) );
+		return false;
+	}
+
+	var answer = confirm(""+number_format($('#bitcoin_buy_amount').val(), ($('#bitcoin_buy_amount').val()+'').indexOf('.')>-1 ? ($('#bitcoin_buy_amount').val()+'').substr(($('#bitcoin_buy_amount').val()+'').indexOf('.')+1).length : 0 )+"비트코인을 "+number_format($('#bitcoin_buy_price').val().replace(/[^0-9.]/g,''))+" 원의 가격으로 매수 하시겠습니까? \n\nKRW 지출액: "+number_format($('#krw_buy_amount').text().replace(/[^0-9.]/g,''))+" 원 \n");
+
+	if(answer) {
+		$.post("/order/order.php?type=B", $( "#buy_bitcoin_form" ).serialize(), function(data){
+			if(typeof data != typeof undefined && data.result) {
+				alert('매수요청을 했습니다.');
+				location.reload();
+			} else {
+				var msg = '매수요청처리를 하지 못했습니다.';
+				if(typeof data!= typeof undefined && data.desc!='') {
+					msg = data.desc;
+				}
+				alert(msg);
+			}
+		}, 'json');
+	}
+}
+
+function checkSellBitcoin() {
+	if($('#bitcoin_sell_amount').val().indexOf('.')>-1) {
+		var _t = $.trim($('#bitcoin_sell_amount').val()).split('.');
+		_t[0] = _t[0]*1;
+		$('#bitcoin_sell_amount').val( _t.join('.') ) ; 
+	} else {
+		$('#bitcoin_sell_amount').val($.trim($('#bitcoin_sell_amount').val())*1);
+	}
+	if($('#bitcoin_sell_amount').val() != '' && !$.isNumeric($('#bitcoin_sell_amount').val())) {
+//		alert('비트코인 매도 수량은 숫자만 입력하세요');
+		$('#bitcoin_sell_amount').val($('#bitcoin_sell_amount').val().replace(/[^0-9.]/g,''));
+//		$('#bitcoin_sell_amount').focus();
+		return false;
+	}
+	$('#bitcoin_sell_amount').val( $('#bitcoin_sell_amount').val().replace(/[^0-9.]/g,'') );
+	calSellInfo();
+}
+
+function checkSellPrice() { 
+	$('#bitcoin_sell_price').val($.trim($('#bitcoin_sell_price').val())*1);
+	if($('#bitcoin_sell_price').val() != '' && !$.isNumeric( $('#bitcoin_sell_price').val())) {
+//		alert('주문가는 숫자만 입력하세요');
+		$('#bitcoin_sell_price').val($('#bitcoin_sell_price').val().replace(/[^0-9]/g,''));
+//		$('#bitcoin_sell_price').focus();
+		return false;
+	}
+	$('#bitcoin_sell_price').val($('#bitcoin_sell_price').val().replace(/[^0-9]/g,''));
+	calSellInfo();
+}
+
+function calSellInfo() {
+
+	var bitcoin_sell_amount = $('#bitcoin_sell_amount').val() * 1;
+	var sellKrw = Math.floor(new Number(bitcoin_sell_amount * $('#bitcoin_sell_price').val()).toFixed(1) * 1); // 소숫점 절삭.
+	var sellFee = new Number(sellKrw * $('#bitcoin_sell_fee').val() / 100).toFixed(8); 
+	var resultSellAmount = sellKrw - sellFee;
+	var cnt_decimal_point = (bitcoin_sell_amount+'').indexOf('.')>-1 ? (bitcoin_sell_amount+'').substr((bitcoin_sell_amount+'').indexOf('.')+1).length : 0;
+	$('#sell_fee').text(number_format(sellFee));
+	$('#krw_sell_amount').text(number_format(resultSellAmount));
+	$('#bitcoin_sell_result').text(number_format(bitcoin_sell_amount, cnt_decimal_point));	
+}
+
+function sendSellBitcoin() {
+	if($('#bitcoin_sell_amount').val() == '' ) {
+		alert('비트코인 매도 수량을 입력하세요');
+		$('#bitcoin_sell_amount').focus();
+		return false;
+	}
+
+	if($('#bitcoin_sell_price').val() == '' ) {
+		alert('매도주문가를 입력하세요');
+		$('#bitcoin_sell_price').focus();
+		return false;
+	}
+
+	if($('#bitcoin_sell_amount').val()*1 < $('#min_bitcoin_amount').val()*1) {
+		alert("최소주문량("+$('#min_bitcoin_amount').val()+"BTC)보다 작습니다.");
+		$('#bitcoin_sell_amount').focus();
+		return false;
+	}
+
+	if(  $('#bitcoin_sell_price').val()*1 < $('#min_price_amount').val()*1) {
+		alert("최소주문가("+$('#min_price_amount').val()+"원)보다 작습니다.");
+		$('#bitcoin_sell_price').val(0);
+		$('#bitcoin_sell_price').focus();
+		return false;
+	}
+
+    if($('#wallet_btc_amount').val()*1 <= 0) {
+        alert('충분한 비트코인을 갖고 계시지 않거나 거래 제한을 초과하셨습니다.');
+        return false;
+    }
+
+	if($('#bitcoin_sell_amount').val()*1 > $('#useable_btc_amount').val()*1 ) {
+		var useable_btc_amount = $('#useable_btc_amount').val().replace(/[^0-9.]/g,'') * 1;
+		var str_useable_btc_amount = number_format(useable_btc_amount, (useable_btc_amount+'').indexOf('.')>-1 ? (useable_btc_amount+'').substr((useable_btc_amount+'').indexOf('.')+1).length : 0 )
+		alert("충분한 비트코인을 갖고 계시지 않거나 거래 제한을 초과하셨습니다.\n 판매가능 코인 : " + str_useable_btc_amount);
+		return false;
+	}
+
+	var answer = confirm(""+number_format($('#bitcoin_sell_amount').val(), ($('#bitcoin_sell_amount').val()+'').indexOf('.')>-1 ? ($('#bitcoin_sell_amount').val()+'').substr(($('#bitcoin_sell_amount').val()+'').indexOf('.')+1).length : 0 )+"비트코인을 "+number_format($('#bitcoin_sell_price').val().replace(/[^0-9.]/g,''))+" 원의 가격으로 매도 하시겠습니까? \n\nKRW 수령액: "+number_format($('#krw_sell_amount').text().replace(/[^0-9.]/g,''))+" 원 \n수수료: "+number_format($('#sell_fee').text().replace(/[^0-9.]/g,''))+" 원 \n");
+	if(answer) {
+		$.post("/order/order.php?type=A", $( "#sell_bitcoin_form" ).serialize(), function(data){
+			if(typeof data != typeof undefined && data.result) {
+				alert('매도요청을 했습니다.');
+				location.reload();
+			} else {
+				var msg = '매도요청처리를 하지 못했습니다.';
+				if(typeof data!= typeof undefined && data.desc!='') {
+					msg = data.desc;
+				}
+				alert(msg);
+			}
+		}, 'json');
+	}
+}
+
+function sendCancleBitcoin(type, idx, btc, krw) {
+
+	var question = "주문을 취소하시겠습니까?\n";
+	if(type=='T') {
+		question = "전체 주문을 취소하시겠습니까?";
+	} else {
+		question += "BTC: "+btc+", USD: "+krw;
+	}
+
+	var answer = confirm(question);
+
+	if(answer) {
+		$.post("/order/order_cancle.php?type="+type, 'idx='+idx, function(data){
+			if(typeof data != typeof undefined && data.result) {
+				alert('취소 했습니다.');
+				location.reload();
+			} else {
+				var msg = '취소 하지 못했습니다.';
+				if(typeof data != typeof undefined) {
+					
+					if(data.msg=='err_sess') {
+						msg += " 로그인을 다시 해주세요.";
+					}
+					if(data.desc) {
+						msg = data.desc;
+					}
+				}
+				alert(msg);
+			}
+		}, 'json');
+	}
+}
+
+
+//-->
+</script>
+
+
+<div class="wallet">
+
+	<div style="width:49%;padding:0px;float:left;">
+		<table class="form_table">
+			<colgroup>
+				<col width="*"></col>
+				<col width="140"></col>
+				<col width="140"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="pcenter"></th>
+					<th class="pcenter">비트코인</th>
+					<th class="pcenter">USD 포인트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="entry">총잔액</span></td>
+					<td class="pright"><!--{=number_format(WALLET_BTC_AMOUNT, strlen(strrchr(WALLET_BTC_AMOUNT, '.') * 1)-2)}--> BTC</td>
+					<td class="pright"><!--{=number_format(WALLET_KRW_AMOUNT)}--> USD</td>
+				</tr>
+				<tr>
+					<td><span class="entry">주문할당액</span></td>
+					<td class="pright"><span id="btc_ord_amount"><!--{=number_format(TRADING_BTC_AMOUNT, strlen(strrchr(TRADING_BTC_AMOUNT, '.') * 1)-2)}--></span> BTC</td>
+					<td class="pright"><span id="krw_ord_amount"><!--{=number_format(TRADING_KRW_AMOUNT)}--></span > USD</td>
+				</tr>
+				<tr>
+					<td><span class="entry">사용가능액</span></td>
+					<td class="pright"><span id="btc_use_amount"><!--{=number_format(USEABLE_BTC_AMOUNT, strlen(strrchr(USEABLE_BTC_AMOUNT, '.') * 1)-2)}--></span> BTC</td>
+					<td class="pright"><span id="krw_use_amount"><!--{=number_format(USEABLE_KRW_AMOUNT)}--></span> USD</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="width:49%;padding:0px;float:right;">
+		<input type="hidden" id="useable_krw_amount" name="useable_krw_amount" value="<!--{USEABLE_KRW_AMOUNT}-->" />
+		<input type="hidden" id="useable_btc_amount" name="useable_btc_amount" value="<!--{USEABLE_BTC_AMOUNT}-->" />
+		<input type="hidden" id="min_bitcoin_amount" name="min_bitcoin_amount" value="0.001" />
+		<input type="hidden" id="min_price_amount" name="min_price_amount" value="1000" />
+		<!--{*
+		<span class="pblack">보유 </span><span class="pred"> USD</span> : <!--{=number_format(WALLET_KRW_AMOUNT)}--> 원 <span class="pspace">|</span> <span class="pblack">보유 </span> <span class="pblue"> BTC</span> : <!--{WALLET_BTC_AMOUNT}--> BTC
+		*}-->
+	</div>
+
+</div>
+
+<div class="account">
+
+	<div style="width:49%;padding:0px;float:left;">
+		<table class="form_table">
+			<colgroup>
+				<col width="140"></col>
+				<col width="*"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="pcenter">비트코인 매수</th>
+				</tr>
+			</thead>
+			<tbody><form id="buy_bitcoin_form">
+				<tr>
+					<td><span class="entry">비트코인 매수량</span></td>
+					<td class="pright">
+						<input type="text" id="bitcoin_buy_amount" name="bitcoin_buy_amount" onkeyup="checkBuyBitcoin();" value="0" class="frm_input" style="width:170px;text-align:right;padding-right:3px;;" /><label class="btc_label">BTC</label> 
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">주문가 (1BTC당가격)</span></td>
+					<td class="pright">
+						<input type="text" id="bitcoin_buy_price" name="bitcoin_buy_price" onkeyup="checkBuyPrice();" value="0" class="frm_input" style="width:170px;text-align:right;padding-right:3px;" /><label class="krw_label">KRW</label>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">USD 지출액</span></td>
+					<td class="pright"><span id="krw_buy_amount">0</span> USD</td>
+				</tr>
+				<tr>
+					<td><span class="entry">수수료(0%)</span></td>
+					<td class="pright"><span id="buy_fee">0</span> USD
+						<input type="hidden" id="bitcoin_buy_fee" name="bitcoin_buy_fee" value="0" class="frm_input" />
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">비트코인 수령액</span></td>
+					<td class="pright" style="padding-right:10px"><span id="bitcoin_buy_result">0</span> BTC</td>
+				</tr>
+			</form></tbody>
+		</table>
+		<div class="button_area">
+			<!--{*<button onclick="sendBuyBitcoin_();" class="grad"/>쿠폰적용</button>*}--> <button onclick="sendBuyBitcoin();" class="grad"/>Buy BTC</button>
+		</div>
+	</div>
+	<div style="width:49%;padding:0px;float:right;">
+		<table class="form_table">
+			<colgroup>
+				<col width="140"></col>
+				<col width="*"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="pcenter">비트코인 매도</th>
+				</tr>
+			</thead>
+			<tbody><form id="sell_bitcoin_form">
+				<tr>
+					<td><span class="entry">비트코인 매도량</span></td>
+					<td class="pright">
+						<input type="text" id="bitcoin_sell_amount" name="bitcoin_sell_amount" onkeyup="checkSellBitcoin();" value="0" class="frm_input" style="width:160px;text-align:right;padding-right:3px;;" /><label class="btc_label">BTC</label> 
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">주문가 (1BTC당가격)</span></td>
+					<td class="pright">
+						<input type="text" id="bitcoin_sell_price" name="bitcoin_sell_price" onkeyup="checkSellPrice();" value="0" class="frm_input" style="width:160px;text-align:right;padding-right:3px;;" /><label class="krw_label">KRW</label>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">USD 수령액</span></td>
+					<td class="pright"><span id="krw_sell_amount">0</span> USD</td>
+				</tr>
+				<tr>
+					<td><span class="entry">수수료(<!--{SITE_TRADING_RATE}-->%)</label></td>
+					<td class="pright"><span id="sell_fee">0</span> USD
+						<input type="hidden" id="bitcoin_sell_fee" name="bitcoin_sell_fee" value="<!--{SITE_TRADING_RATE}-->" class="frm_input" />
+					</td>
+				</tr>
+				<tr>
+					<td><span class="entry">비트코인 지출액</span></td>
+					<td class="pright" style="padding-right:10px"><span id="bitcoin_sell_result">0</span> BTC</td>
+				</tr>
+			</form></tbody>
+		</table>
+		<div class="button_area">
+			<button onclick="sendSellBitcoin();" class="grad"/>Sell BTC</button>
+		</div>
+	</div>
+</div>
+<div class="clear_box pcenter"></div>
+
+<div class="button red large" style="margin:0px 0px 10px 0px;float:right;">
+	<button onclick="sendCancleBitcoin('T');" >주문전부취소</button>
+</div>
+
+<div class="account">
+	<div style="width:49%;padding:0px;float:left;">
+		<table class="list_table">
+			<colgroup>
+				<col width="100"></col>
+				<col width="100"></col>
+				<col width="100"></col>
+				<col width="*"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="4" class="pcenter ptitle">나의 매수 주문</th>
+				</tr>
+			</thead>
+			<tbody>
+                <tr>
+                    <th class="pcenter">KRW</th>
+                    <th class="pcenter">BTC</th>
+                    <th class="pcenter">금액</th>
+                    <th class="pcenter">취소</th>
+                </tr>
+				<!--{@loop_user_trade_buy}-->
+				<tr>
+                    <td class="pright"><!--{=number_format(.price)}--></td>
+                    <td class="pright"><!--{=number_format(.remain_amount, strlen(strrchr(.remain_amount, '.') * 1)-2)}--></td>
+                    <td class="pright"><!--{=number_format(.price * .remain_amount)}--></td>
+                    <td class="pcenter">
+						<!--{? .status=='A1' || .status=='A3'}--><span id="btn_cancel_buy" onclick="sendCancleBitcoin('B','<!--{.idx}-->','<!--{=number_format(.remain_amount, strlen(strrchr(.remain_amount, '.') * 1)-2)}-->','<!--{=number_format(.price * .remain_amount)}-->');" class="button middle red" style="display:"><a>주문취소</a></span><!--{/}-->
+						<!--{*<!--{? .status=='A3'}-->거래중<!--{/}-->*}-->
+					</td>
+				</tr>
+				<!--{:}-->
+				<tr>
+					<td colspan="4" class="pcenter">매수 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+	<div style="width:49%;padding:0px;float:right;">
+		<table class="list_table">
+			<colgroup>
+				<col width="100"></col>
+				<col width="100"></col>
+				<col width="100"></col>
+				<col width="*"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="4" class="pcenter ptitle">나의 매도 주문</th>
+				</tr>
+			</thead>
+			<tbody>
+                <tr>
+                    <th class="pcenter">KRW</th>
+                    <th class="pcenter">BTC</th>
+                    <th class="pcenter">금액</th>
+                    <th class="pcenter">취소</th>
+                </tr>
+				<!--{@loop_user_trade_sell}-->
+				<tr>
+                    <td class="pright"><!--{=number_format(.price)}--></td>
+                    <td class="pright"><!--{=number_format(.remain_amount, strlen(strrchr(.remain_amount, '.') * 1)-2)}--></td>
+                    <td class="pright"><!--{=number_format(.price * .remain_amount)}--></td>
+                    <td class="pcenter">
+						<!--{? .status=='B1' ||  .status=='B3'}--><span id="btn_cancel_sell" onclick="sendCancleBitcoin('A','<!--{.idx}-->','<!--{=number_format(.remain_amount, strlen(strrchr(.remain_amount, '.') * 1)-2)}-->','<!--{=number_format(.price * .remain_amount)}-->');" class="button middle red" style="display:"><a>주문취소</a></span><!--{/}-->
+						<!--{*<!--{? .status=='B3'}-->거래중<!--{/}-->*}-->
+					</td>
+				</tr>
+				<!--{:}-->
+				<tr>
+					<td colspan="4" class="pcenter">매도 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="clear_box pcenter"></div>
+<div class="account">
+	<div style="width:100%;float:left;">
+		<table class="list_table">
+			<colgroup>
+				<col width="*"></col>
+				<col width="185"></col>
+				<col width="185"></col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="pcenter">체결시각</th>
+					<th class="pcenter">1BTC당 체결가 USD</th>
+					<th class="pcenter">거래량 BTC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--{@loop_user_complete_trade}-->
+				<tr>
+					<td class="pcenter"><span class="tnormal"><!--{.date_str}--></span> <span class="tbold"><!--{.time_str}--></span></td>
+					<td class="pright"><!--{.krw_amount_str}--></td>
+					<td class="pright"><!--{=clean_float_number(.btc_amount_str)}--></td>
+				</tr>
+				<!--{:}-->
+				<tr>
+					<td colspan="3" class="pcenter">체결 내역이 없습니다.</td>
+				</tr>
+				<!--{/}-->
+			</tbody>
+		</table>
+		<div id="navipage"><!--{navi_page}--></div>
+	</div>
+</div>

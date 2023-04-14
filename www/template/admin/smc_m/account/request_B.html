@@ -1,0 +1,225 @@
+<script type="text/javascript" language="JavaScript">
+<!--
+	$(function() {
+		$("#mtom_list_inner>table>tbody>tr").hover(
+				function() {
+					$(this).css('background-color', '#FFF2F0');
+				},
+				function() {
+					$(this).css('background-color', '#FFF');
+				}
+		);
+	});
+
+	function setRequestKRW() {
+		
+		var _amount = $.trim($('#amount').val().replace(/[^0-9.]/,''));
+		var _withdrawal_fee = $.trim($('#withdrawal_fee').val().replace(/[^0-9.]/,''));
+		var _wallet_krw_amount = $.trim($('#wallet_krw_amount').val().replace(/[^0-9.]/,''));
+		
+		if (_amount == '') {
+			$('#request_krw').val(0);
+			$('#str_request_krw').text(0);
+			return false;
+		}
+
+		if (_amount < _withdrawal_fee) {
+			$('#str_request_krw').val(0);
+			$('#request_krw').val(0);
+			return false;
+		}
+		
+		if (!$.isNumeric($('#amount').val())) {
+			alert('수령액은 숫자만 입력하세요');
+			$('#str_request_krw').text(0);
+			$('#request_krw').val(0);
+			$('#amount').focus();
+			return false;
+		}
+		
+		var _request_krw = _amount*1 + _withdrawal_fee*1;
+		if (_request_krw <= 0) {
+			_request_krw = 0;
+		}
+		$('#str_request_krw').text(number_format(_request_krw));
+		$('#request_krw').val(_request_krw);
+		
+		var _remain_krw = _wallet_krw_amount*1 - _amount*1 - _withdrawal_fee*1;
+		if (_remain_krw <= 0) {
+//			alert('수령액을 출금 가능액('+number_format(_wallet_krw_amount)+' 원)까지만 입력해주세요');
+//			$('#str_request_krw').text(0);
+//			$('#request_krw').val(0);
+//			$('#amount').focus();
+			_remain_krw = 0;
+		}
+		$('#str_remain_krw').text(number_format(_remain_krw));
+		
+	}
+
+	function requestKRW() {
+		if (!$.isNumeric($('#amount').val())) {
+			alert('실 수령액은 숫자만 입력하세요');
+			$('#requestKRW').focus();
+			return false;
+		}
+
+		if ($('#request_krw').val() * 1 > $('#wallet_krw_amount').val() * 1) {
+//		if ($('#amount').val() * 1 > $('#wallet_krw_amount').val() * 1) {
+			alert('출금하시려는 금액이 잔액을 초과합니다.');
+			return false;
+		}
+
+		if ($('#request_krw').val() * 1 > $('#able_request_krw_amount').val() * 1) {
+//		if ($('#amount').val() * 1 > $('#able_request_krw_amount').val() * 1) {
+			alert('출금하시려는 금액이 1일한도 초과입니다.');
+			return false;
+		}
+
+		//if ($('#request_krw').val() * 1 < $('#min_request_amount').text().replace(/[^0-9]/g, '') * 1) {
+		if ($('#amount').val() * 1 < $('#min_request_amount').text().replace(/[^0-9]/g, '') * 1) {
+			alert('출금하시려는 금액이 최소금액 미만입니다.');
+			return false;
+		}
+
+		if ($('#request_krw').val() * 1 > $('#max_request_amount').text().replace(/[^0-9]/g, '') * 1) {
+//		if ($('#amount').val() * 1 > $('#max_request_amount').text().replace(/[^0-9]/g, '') * 1) {
+			alert('출금하시려는 금액이 최대금액 초과입니다.');
+			return false;
+		}
+
+		if ($('#bank_name').val() == '') {
+			alert('은행정보를 입력하세요');
+			$('#bank_name').focus();
+			return false;
+		}
+
+		if (!$.isNumeric($('#account_number').val())) {
+			alert('계좌번호는 숫자만 입력하세요');
+			$('#account_number').focus();
+			return false;
+		}
+
+		if ($('#account_number').val() == '') {
+			alert('계좌번호를 입력하세요');
+			$('#account_number').focus();
+			return false;
+		}
+
+		$.post("/account/request.php?type=B&request=krw", $("#request_krw_form").serialize(), function(data) {
+			if(data=='success') {
+				alert("출금요청을 했습니다.\n회원님의 이메일로 발송된 출금확인 이메일을 확인하시고 출금확인을 해주세요.");
+				location.reload();
+			} else {
+				alert(data);
+			}
+		});
+	}
+//-->
+</script>
+
+
+<div class="hide">
+	<h1>입출금</h1>
+</div>
+
+<div class="request">
+
+	<div class="ssub_nav">
+		<ul>
+			<li><a href="/krwdeposit">KRW 입금</a></li>
+			<li class="select"><a href="/krwwithdraw">KRW 출금</a></li>
+			<li><a href="/btcdeposit">비트코인 입금</a></li>
+			<li class="last"><a href="/btcwithdraw">비트코인 출금</a></li>
+		</ul>
+	</div>
+
+
+	<div class="ssub_contents select">
+		<div class="ssub_contentsT">
+			<p>스마트코인 한국거래소에 입금된 <span class="co1">KRW</span> 포인트를 고객님 명의의 은행계좌에 원화로 출금 받을 수 있습니다.<br/>출금은 본인 명의의 계좌로만 가능합니다.(본인 명의가 아닐 경우 출금되지 않습니다.)</p>
+			<p>모든 출금은 관리자 확인 후 실행됩니다.</p>
+			<p>출금 수수료 : 1,000 원<br/>출금 최소 금액 : 3,000원<br/>출금 최대 금액(1일 기준) : <span class="co3">8,000,000 원(팔백만원) *UTC +9 기준 0시~24시</span><br />
+				반영시점 : <span class="co3">최대 30분 이내로 고객님 계좌에 반영 됩니다.</span><br />
+				<span class="co4">* 23:30~0:30분 신청건은 00:30분 이후에 처리됩니다. </span><br />
+				<span class="co4">* 1일(0시-24시) 한도잔액을 기준으로 1일 누적한도 8백만원임 </span></p>
+		</div>
+		<div class="ssub_contentsB">
+			<form id="request_krw_form">
+				<input type="hidden" id="request_type" name="request_type" value="D"/>
+				<table class="table1" summary="출금 정보">
+					<caption>출금 정보</caption>
+					<colgroup>
+						<col class="bit_table1_col1"/>
+					</colgroup>
+					<colgroup>
+						<col class="bit_table1_col2"/>
+					</colgroup>
+					<tbody>
+						<tr class="top">
+							<th scope="row">1일 출금한도</th>
+							<td><!--{ABLE_KRW_AMOUNT_VIEW}--> 원
+								<input type="hidden" id="able_request_krw_amount" name="able_request_krw_amount" value="<!--{ABLE_KRW_AMOUNT}-->" /></td>
+						</tr>
+						<tr>
+							<th scope="row"><span class="OrangeRed">출금</span> 가능액</th>
+							<td>
+								<!--{USEABLE_KRW_AMOUNT_VIEW}--> 원
+								<input type="hidden" id="wallet_krw_amount" name="wallet_krw_amount" value="<!--{USEABLE_KRW_AMOUNT}-->" />
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">실 수령액</th>
+							<td>
+								<input type="text" class="frm_input pright tbold" style="font-size:14px;color:#317BCB;font-weight:bold" id="amount" name="amount" onkeyup="setRequestKRW();" value="0" onfocus="$(this).val('');"/> <span class="co1">원</span>
+								<br /><br />
+								<span style="text-align:left;color:#ff0000;float:left;">최소 <span id="min_request_amount"><!--{MIN_KRW_WITHDRAW_VIEW}--></span>원 (1회당)<br /> 최대 <span id="max_request_amount">8,000,000</span>원 (1일 누적 : 0시~24시 기준)</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">수수료</th>
+							<td>
+								<span id="fee"><!--{=number_format(WITHDRAWAL_FEE)}--></span> 원
+								<input type="hidden" id="withdrawal_fee" name="withdrawal_fee" value="<!--{WITHDRAWAL_FEE}-->"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">출금액</th>
+							<td>
+								<span id="str_request_krw" class="tbold" style="color:#317BCB">0</span> 원
+								<input type="hidden" id="request_krw" name="request_krw" value="0"/>
+								<br /><br />
+								<span style="text-align:left;color:#ff0000;float:left;">거래내역에는 출금액이 표시됩니다.</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">출금후 잔액</th>
+							<td>
+								<span id="str_remain_krw" class="tbold" style="color:#317BCB"><!--{USEABLE_KRW_AMOUNT_VIEW}--></span> 원
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">은행명</th>
+							<td class="tl">
+								<select name="bank_name" id="bank_name">
+									<!--{=loopBankName()}-->
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">계좌번호(숫자만 입력)</th>
+							<td class="tl"><input type="text" class="frm_input" id="account_number" name="account_number" value=""/></td>
+						</tr>
+						<tr class="bottom">
+							<th scope="row">예금주</th>
+							<td class="tl"><!--{USER_NAME}--><input type="hidden" name="bankowner" value="<!--{USER_NAME}-->"/></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+			</form>
+			<div class="button_area">
+				<button onclick="requestKRW();" class="grad" />출금요청</button>
+			</div>
+		</div>
+	</div>
+</div>

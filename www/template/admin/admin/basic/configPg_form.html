@@ -1,0 +1,143 @@
+<script type="text/javascript">
+<!-- 
+$(function() {
+
+	$('#frmpg').submit(function() {
+
+		if(this.bool_pg.checked) {
+			var chk_option = [
+				{ 'target':'pg_id', 'name':'PG 아이디', 'type':'blank', 'msg':'PG 아이디를 입력하여 주세요.!' },
+				{ 'target':'pg_key', 'name':'PG key', 'type':'blank', 'msg':'PG key를 입력하여 주세요.!' }
+			];
+			if(!jsForm(this,chk_option)) {
+				return false;
+			}		
+		}
+		if(!confirm('저장하시겠습니까?')) {
+			return false;
+		}
+		$(this).ajaxSubmit({
+			success: function (data, statusText) {
+				if(data['bool']) {
+					alert('저장되었습니다.!');
+					location.replace('<!--{_SERVER.REQUEST_URI}-->');
+				}
+				else {
+					if(data['msg'] == 'err_access') {
+						alert('비정상적인 접근입니다.');
+					}
+					else if(data['msg'] == 'err_sess') {
+						location.replace('/admin/auth.php?ret_url=<!--{=base64_encode(_SERVER.REQUEST_URI)}-->');
+					}
+					else {
+						alert('재시도 해주세요.!');
+					}
+				}
+			},
+			dataType:'json',
+			resetForm: false
+		});
+		return false;
+	});
+
+	$('input[name=kind_svc]').val(['<!--{kind_svc}-->']);
+	$('input[name=bool_pg]').val(['<!--{bool_pg}-->']);
+	$('input[name=bool_card]').val(['<!--{bool_card}-->']);
+	$('input[name=bool_vaccount]').val(['<!--{bool_vaccount}-->']);
+	$('input[name=bool_accounttrans]').val(['<!--{bool_accounttrans}-->']);
+	$('input[name=bool_no_interest]').val(['<!--{bool_no_interest}-->']);
+	$('input[name=bool_escrow]').val(['<!--{bool_escrow}-->']);
+
+});
+//-->
+</script>
+
+<div class="title_d1"><h1><span class="title01" style="background:url('/template/admin/images/16x16/TabStrip.png') 0px 0px no-repeat;">기본관리</span> / <span class="title02">PG 설정</span></h1></div>
+<form method="post" name="frmpg" id="frmpg"  action="<!--{_SERVER.SCRIPT_NAME}-->" >
+<input type="hidden" name="pg_mode" value="edit" />
+<div class="title_d2"><img src="../images/bullet.gif">PG 설정</div>
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>PG 사용</th>
+		<td>
+			<input type="radio" name="bool_pg" id="bool_pg_y" value="1" /> <label for="bool_pg_y">사용함</label>
+			<input type="radio" name="bool_pg" id="bool_pg_n" value="0" /> <label for="bool_pg_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>서비스구분</th>
+		<td>
+			<input type="radio" name="kind_svc" id="kind_svc_test" value="test" /> <label for="kind_svc_test">테스트</label>
+			<input type="radio" name="kind_svc" id="kind_svc_service" value="service" /> <label for="kind_svc_service">실서비스</label>
+		</td>
+	</tr>
+	<tr>
+		<th>PG 아이디</th>
+		<td><input type="text" name="pg_id" value="<!--{pg_id}-->" class="frm_input" style="width:120px" /></td>
+	</tr>
+	<tr>
+		<th>PG 비밀번호</th>
+		<td><input type="text" name="pg_pw" value="<!--{pg_pw}-->" class="frm_input" style="width:120px" /></td>
+	</tr>
+	<tr>
+		<th>PG key</th>
+		<td><input type="text" name="pg_key" value="<!--{pg_key}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>결제수단선택</th>
+		<td>
+			<input type="checkbox" name="bool_card" value="1" /> <label for="bool_card">카드</label>
+			<input type="checkbox" name="bool_vaccount" value="1" /> <label for="bool_vaccount">가상계좌</label>
+			<input type="checkbox" name="bool_accounttrans" value="1" /> <label for="bool_accounttrans">계좌이체</label>
+		</td>
+	</tr>
+	<tr>
+		<th>할부개월설정</th>
+		<td><input type="text" name="pg_quota" value="<!--{pg_quota}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	<tr>
+		<th>무이자할부사용</th>
+		<td>
+			<input type="radio" name="bool_no_interest" id="bool_no_interest_y" value="1" /> <label for="bool_no_interest_y">사용함</label>
+			<input type="radio" name="bool_no_interest" id="bool_no_interest_n" value="0" /> <label for="bool_no_interest_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>무이자할부개월설정</th>
+		<td><input type="text" name="no_interest_quota" value="<!--{no_interest_quota}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="title_d2"><img src="../images/bullet.gif">에스크로 설정</div>
+<table class="form_table">
+	<colgroup>
+		<col width="20%"></col>
+		<col width="80%"></col>
+	</colgroup>
+	<tbody>
+	<tr>
+		<th>에스크로 사용</th>
+		<td>
+			<input type="radio" name="bool_escrow" id="bool_escrow_y" value="1" /> <label for="bool_escrow_y">사용함</label>
+			<input type="radio" name="bool_escrow" id="bool_escrow_n" value="0" /> <label for="bool_escrow_n">사용안함</label>
+		</td>
+	</tr>
+	<tr>
+		<th>에스크로 아이디</th>
+		<td><input type="text" name="escrow_id" value="<!--{escrow_id}-->" class="frm_input" style="width:120px" /></td>
+	</tr>
+	<tr>
+		<th>에스크로 키</th>
+		<td><input type="text" name="escrow_key" value="<!--{escrow_key}-->" class="frm_input" style="width:300px" /></td>
+	</tr>
+	</tbody>
+</table>
+<div class="button_area">
+	<span class="button large black"><input type="submit" value=" 확 인 " /></span>
+</div>
+</form>
