@@ -10,6 +10,7 @@ include_once $_SERVER["DOCUMENT_ROOT"].'/lib/tpl/Template_.class.php';
 
 $tpl = new Template_;
 $tpl->template_dir = ROOT_DIR.'/template/'.getSiteCode();
+echo $tpl->template_dir;
 $tpl->compile_dir = ROOT_DIR.'/../compile/'.getSiteCode();
 $tpl->prefilter = 'adjustPath';
 $tpl->postfilter = 'arrangeSpace';
