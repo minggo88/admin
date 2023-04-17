@@ -4,9 +4,9 @@ switch(__API_RUNMODE__) {
     case 'loc' :
         $db_master = array(
             'db_host' => 'localhost',
-            'db_name' =>  'kkikda2',
+            'db_name' =>  'kkikda',
             'db_user' =>  'kkikda',
-            'db_pass' =>  'k$d^39@34',
+            'db_pass' =>  'KKe8IuK28Due82A',
             'db_charset' =>  'utf8'
         );
         $db_slave = $db_master;
