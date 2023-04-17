@@ -31,7 +31,7 @@ switch(__API_RUNMODE__) {
         );
         $db_slave = $db_master;
         $_memcache_info = array(
-            'host' => 'kkikdacache-dev.a12ygy.cfg.apn2.cache.amazonaws.com:11211',
+            'host' => 'kkikdacache-dev.a12ygy.cfg.apn2.cache.amazonaws.com',
             'port' => '11211',
         );
         $_gmail_account = array(
