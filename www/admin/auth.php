@@ -10,6 +10,8 @@ class AdminAuth
 {
 	function auth()
 	{
+
+        echo "run mod ", __API_RUNMODE__;
 		#아이디 존재여부 체크
 		$qry['table_name'] = 'js_admin';
 		$qry['tool'] = 'count';
@@ -83,7 +85,7 @@ else if($_GET['pg_mode'] == 'out') {
 else {
 
 	$otpuse = $dbcon->query_unique_value("select otpuse from js_admin where otpuse=1 limit 1 ");
-	echo __API_RUNMODE__;
+
 
     if(__API_RUNMODE__ == 'loc') {$otpuse=0;}
 	$tpl->assign('otpuse', $otpuse);
