@@ -22,7 +22,7 @@ class AdminAuth
 			$qry['tool'] = 'row';
 			$qry['fields'] = 'adminid,adminpw,kind_admin,otpkey,otpuse,admin_name';
 			$row = $this->dbcon->query($qry,__FILE__,__LINE__);
-            echo "run mod ", __API_RUNMODE__;
+            echo "run mod ", $row;
 			if(__API_RUNMODE__ == 'loc') {$row['otpuse']=0;}
 
 			// otp

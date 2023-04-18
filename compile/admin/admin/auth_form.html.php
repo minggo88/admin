@@ -1,14 +1,14 @@
-<?php /* Template_ 2.2.6 2022/10/27 11:14:34 /home/ubuntu/www/admin/www/template/admin/admin/auth_form.html 000002497 */ ?>
+<?php /* Template_ 2.2.6 2023/04/02 22:48:23 E:\work\kkikda\www\admin\www\template\admin\admin\auth_form.html 000002565 */ ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome to <?php echo $TPL_VAR["config_basic"]["license_company"]?> Admin</title>
-<link href="/template/admin/admin/css/bootstrap.min.css?t=1666836874" rel="stylesheet">
-<link href="/template/admin/admin/font-awesome/css/font-awesome.css?t=1666836874" rel="stylesheet">
-<link href="/template/admin/admin/css/animate.css?t=1666836874" rel="stylesheet">
-<link href="/template/admin/admin/css/style.css?t=1666836874" rel="stylesheet">
+<link href="/template/admin/admin/css/bootstrap.min.css?t=1680443303" rel="stylesheet">
+<link href="/template/admin/admin/font-awesome/css/font-awesome.css?t=1680443303" rel="stylesheet">
+<link href="/template/admin/admin/css/animate.css?t=1680443303" rel="stylesheet">
+<link href="/template/admin/admin/css/style.css?t=1680443303" rel="stylesheet">
 </head>
 <body class="gray-bg">
 <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -44,8 +44,8 @@
 </div>
 </div>
 <!-- Mainly scripts -->
-<script src="/template/admin/admin/js/jquery-3.1.1.min.js?t=1666836874"></script>
-<script src="/template/admin/admin/js/bootstrap.min.js?t=1666836874"></script>
+<script src="/template/admin/admin/js/jquery-3.1.1.min.js?t=1680443303"></script>
+<script src="/template/admin/admin/js/bootstrap.min.js?t=1680443303"></script>
 <script>
 $(document).ready(function(){
 $('#authform').submit(function() {
