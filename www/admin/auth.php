@@ -88,9 +88,9 @@ else {
 
 	$otpuse = $dbcon->query_unique_value("select otpuse from js_admin where otpuse=1 limit 1 ");
 
-    echo "run mod ", __API_RUNMODE__ , "otpuse : ",$otpuse;
     if(__API_RUNMODE__ == 'loc') {$otpuse=0;}
 	$tpl->assign('otpuse', $otpuse);
+    echo "run mod ", __API_RUNMODE__ , "<br> otpuse : ",$otpuse;
 
 	$tpl->define('layout','auth_form.html');
 
