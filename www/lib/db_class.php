@@ -6,6 +6,9 @@ comment : SmartCoin Index
 --------------------------------------------*/
 class DB
 {
+
+    public function __construct(){ /* nothing */ }
+
 	var $db_host;
 	var $db_name;
 	var $db_user;

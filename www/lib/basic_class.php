@@ -17,6 +17,7 @@ class BASIC
 	var $json;
 	var $total;
 
+    public function __construct(){ /* nothing */ }
 	function BASIC(&$config,&$tpl)
 	{
 		$this->config = &$config;

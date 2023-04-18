@@ -16,6 +16,7 @@
 if(strpos($_SERVER['HTTP_HOST'], 'admin.')!==false) {
 	header('Location: /admin/'); exit('<script>window.location.replace("/admin/");</script>');
 }
+
 /*--------------------------------------------
 Date : 2018-04-27
 Author : Danny Hwang, Kenny Han
