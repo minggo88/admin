@@ -17,7 +17,7 @@ class AdminAuth
 		$qry['tool'] = 'count';
 		$qry['where'] = 'where adminid=\''.$_POST['adminid'].'\'';
 		$cnt = $this->dbcon->query($qry,__FILE__,__LINE__);
-        echo "run mod ", __API_RUNMODE__;
+
         if(!empty($cnt)) {
 			$qry['tool'] = 'row';
 			$qry['fields'] = 'adminid,adminpw,kind_admin,otpkey,otpuse,admin_name';
@@ -88,7 +88,7 @@ else {
 
 	$otpuse = $dbcon->query_unique_value("select otpuse from js_admin where otpuse=1 limit 1 ");
 
-
+    echo "run mod ", __API_RUNMODE__;
     if(__API_RUNMODE__ == 'loc') {$otpuse=0;}
 	$tpl->assign('otpuse', $otpuse);
 
