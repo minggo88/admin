@@ -17,7 +17,8 @@ class AdminAuth
 		$qry['tool'] = 'count';
 		$qry['where'] = 'where adminid=\''.$_POST['adminid'].'\'';
 		$cnt = $this->dbcon->query($qry,__FILE__,__LINE__);
-		if(!empty($cnt)) {
+        echo "run mod ", __API_RUNMODE__;
+        if(!empty($cnt)) {
 			$qry['tool'] = 'row';
 			$qry['fields'] = 'adminid,adminpw,kind_admin,otpkey,otpuse,admin_name';
 			$row = $this->dbcon->query($qry,__FILE__,__LINE__);
