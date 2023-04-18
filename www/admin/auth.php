@@ -10,6 +10,7 @@ class AdminAuth
 {
 	function auth()
 	{
+        echo __API_RUNMODE__;
 		#아이디 존재여부 체크
 		$qry['table_name'] = 'js_admin';
 		$qry['tool'] = 'count';
@@ -83,10 +84,12 @@ else if($_GET['pg_mode'] == 'out') {
 else {
 
 	$otpuse = $dbcon->query_unique_value("select otpuse from js_admin where otpuse=1 limit 1 ");
-	if(__API_RUNMODE__ == 'loc') {$otpuse=0;}
+
+
+    if(__API_RUNMODE__ == 'loc') {$otpuse=0;}
 	$tpl->assign('otpuse', $otpuse);
 
-	$tpl->define('layout','auth_form.html');
+	$tpl->define('layout','/admin/auth_form.html');
 
 	if(empty($_GET['ret_url'])) {
 		$ret_url = base64_encode('/admin/index.php');
