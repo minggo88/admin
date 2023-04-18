@@ -10,7 +10,7 @@ class AdminAuth
 {
 	function auth()
 	{
-        echo __API_RUNMODE__;
+        echo "api mode", __API_RUNMODE__;
 		#아이디 존재여부 체크
 		$qry['table_name'] = 'js_admin';
 		$qry['tool'] = 'count';
