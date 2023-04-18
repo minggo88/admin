@@ -587,7 +587,7 @@ function getSiteCode($domain='')
 	$code = $_SESSION['__SITECODE__'];
 	if(! $_SESSION['__SITECODE__']) {
 		$domain = $domain ? $domain : $_SERVER['HTTP_HOST'];
-        echo "domain : ",$domain,"<br>";
+        echo "domain : ",$domain,"<br>" ,$dbcon;
 		$query = "select code from js_config_site where domain='".$dbcon->escape($domain)."' ";
 		$code = $dbcon->query_unique_value($query,__FILE__,__LINE__);
 	}
