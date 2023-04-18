@@ -25,6 +25,8 @@ if(! defined ('__API_RUNMODE__')) {
 		$runmode = 'stage';
 	}
 	define('__API_RUNMODE__', $runmode);
+
+    echo "run mode ", $runmode;
 }
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE); // 개발시 오류 메시지표시용.
