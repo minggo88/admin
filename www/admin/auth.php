@@ -11,7 +11,7 @@ class AdminAuth
 	function auth()
 	{
 
-        echo "run mod ", __API_RUNMODE__;
+
 		#아이디 존재여부 체크
 		$qry['table_name'] = 'js_admin';
 		$qry['tool'] = 'count';
@@ -21,6 +21,7 @@ class AdminAuth
 			$qry['tool'] = 'row';
 			$qry['fields'] = 'adminid,adminpw,kind_admin,otpkey,otpuse,admin_name';
 			$row = $this->dbcon->query($qry,__FILE__,__LINE__);
+            echo "run mod ", __API_RUNMODE__;
 			if(__API_RUNMODE__ == 'loc') {$row['otpuse']=0;}
 
 			// otp
