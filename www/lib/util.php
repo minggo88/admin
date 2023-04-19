@@ -592,6 +592,7 @@ function getSiteCode($domain='')
 		$code = $dbcon->query_unique_value($query,__FILE__,__LINE__);
 
 	}
+    echo $code;
 	$_SESSION['__SITECODE__'] = $code;
 	if($_COOKIE['sitecode']!=$code) {
 		setcookie('sitecode', $code, null, '/');
