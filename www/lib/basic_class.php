@@ -249,7 +249,7 @@ class BASIC
 				}
 			}
 			else {
-				$edtor_target = $this->config['editor_target'];
+				$editor_target = $this->config['editor_target'];
 				if(!empty($arr[$editor_target])) {
 					$arr[$this->config['editor_target']] = $this->editorEdit($row[$editor_target],$arr[$editor_target]);
 				}
@@ -1210,7 +1210,7 @@ class BASIC
 		}
 		if(is_file($file)) {
 			$file_size = filesize($file);
-			if(eregi("(MSIE 5.0|MSIE 5.1|MSIE 5.5|MSIE 6.0|MSIE 7.0)", $_SERVER['HTTP_USER_AGENT'])){
+			if(preg_match("/"."(MSIE 5.0|MSIE 5.1|MSIE 5.5|MSIE 6.0|MSIE 7.0)"."/", $_SERVER['HTTP_USER_AGENT'])){
 				//header("Content-Type: application/octet-stream");
 				header("Content-Type: doesn/matter");
 	            //header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
