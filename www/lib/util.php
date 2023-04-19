@@ -228,7 +228,8 @@ function checkAdmin($kind_right='',$ret_url='')
 
 function checkRight($kind_right) {
 	global $dbcon;
-	$kind_right = preg_replace('/[a-zA-Z1-0_]/','',$kind_right);
+    $re = "/[a-zA-Z1-9_]/";
+	$kind_right = preg_replace($re,'',$kind_right);
 	$adminid = $_SESSION['ADMIN_ID'];
 	$right_value = $dbcon->query_unique_value("select {$kind_right} from js_admin where adminid='{$dbcon->escape($adminid)}' ");
 	if($right_value != 1){
@@ -374,7 +375,7 @@ function chkSid($sid1,$sid2)
 	if ($len <> 13) {
 		$ret = 0;
 	}
-	if (!ereg('^[[:digit:]]{6}[1-4][[:digit:]]{6}$', $sid)) {
+	if (!preg_match("/".'^[[:digit:]]{6}[1-4][[:digit:]]{6}$'."/", $sid)) {
 		$ret = 0;
 	}
 	$birth_year = ('3' < $sid[6]) ? '19' : '20';
@@ -592,7 +593,7 @@ function getSiteCode($domain='')
 		$code = $dbcon->query_unique_value($query,__FILE__,__LINE__);
 
 	}
-    echo $code;
+    echo "code ::: ",$code;
 	$_SESSION['__SITECODE__'] = $code;
 	if($_COOKIE['sitecode']!=$code) {
 		setcookie('sitecode', $code, null, '/');
