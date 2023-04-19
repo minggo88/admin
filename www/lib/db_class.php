@@ -28,7 +28,7 @@ class DB
 		// var_dump($this->db_host,$this->db_user,$this->db_pass); exit;
 
 		$this->connect	= mysqli_connect($this->db_host,$this->db_user,$this->db_pass);
-        echo $this->connect;
+        print_r( $this->connect);
 		if(! $this->connect) {
 			echo "Mysql Connection Error: Failed connecting to database server\r\n\r\n" . mysqli_connect_error() . "";
 			exit;
