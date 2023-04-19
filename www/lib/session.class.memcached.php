@@ -27,6 +27,12 @@ class SessionMemCached {
 					'port' => '11211',
 				);
 			break;
+            case 'dev' :
+				$this->memcache_info = array(
+					'host' => 'kkikdacache-dev.a12ygy.cfg.apn2.cache.amazonaws.com',
+					'port' => '11211',
+				);
+			break;
 			case 'live' :
 				$this->memcache_info = array(
 					'host' => 'kkikdacache.a12ygy.cfg.apn2.cache.amazonaws.com',
